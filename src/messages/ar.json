@@ -22,7 +22,9 @@
       "style": "الأسلوب",
       "model": "النموذج"
     },
-    "empty": "لا توجد نتائج مطابقة"
+    "empty": "لا توجد نتائج مطابقة",
+    "browseByCategory": "تصفح حسب الفئة",
+    "categoryCount": "{count} برومبت"
   },
   "prompt": {
     "copy": "نسخ البرومبت",

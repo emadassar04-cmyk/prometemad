@@ -16,6 +16,25 @@ export async function getCategories() {
   return data ?? [];
 }
 
+export async function getCategoriesWithCounts() {
+  const supabase = await createSupabaseServerClient();
+  const [{ data: categories }, { data: promptRows }] = await Promise.all([
+    supabase.from("categories").select("*").order("sort_order", { ascending: true }),
+    supabase.from("prompts").select("category_id").eq("status", "published"),
+  ]);
+
+  const counts = new Map<string, number>();
+  for (const row of promptRows ?? []) {
+    if (!row.category_id) continue;
+    counts.set(row.category_id, (counts.get(row.category_id) ?? 0) + 1);
+  }
+
+  return (categories ?? []).map((category) => ({
+    ...category,
+    promptCount: counts.get(category.id) ?? 0,
+  }));
+}
+
 export async function getPrompts(filters: PromptListFilters = {}) {
   const supabase = await createSupabaseServerClient();
   let query = supabase

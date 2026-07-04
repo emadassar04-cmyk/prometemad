@@ -22,7 +22,9 @@
       "style": "Style",
       "model": "Model"
     },
-    "empty": "No matching results"
+    "empty": "No matching results",
+    "browseByCategory": "Browse by category",
+    "categoryCount": "{count} prompts"
   },
   "prompt": {
     "copy": "Copy prompt",

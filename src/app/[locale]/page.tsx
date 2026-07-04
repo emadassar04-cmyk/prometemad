@@ -1,12 +1,14 @@
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import {
   getCategories,
+  getCategoriesWithCounts,
   getDistinctStylesAndModels,
   getPrompts,
 } from "@/lib/data/prompts";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 import { PromptCard } from "@/components/prompt-card";
 import { LibraryFilters } from "@/components/library-filters";
+import { CategoryGrid } from "@/components/category-grid";
 
 export default async function HomePage({
   params,
@@ -27,11 +29,13 @@ export default async function HomePage({
     data: { user },
   } = await supabase.auth.getUser();
 
-  const [prompts, categories, { styles, models }] = await Promise.all([
-    getPrompts(filters),
-    getCategories(),
-    getDistinctStylesAndModels(),
-  ]);
+  const [prompts, categories, categoriesWithCounts, { styles, models }] =
+    await Promise.all([
+      getPrompts(filters),
+      getCategories(),
+      getCategoriesWithCounts(),
+      getDistinctStylesAndModels(),
+    ]);
 
   let favoritedIds = new Set<string>();
   if (user) {
@@ -51,6 +55,13 @@ export default async function HomePage({
           {t("heroTitle")}
         </h1>
         <p className="mx-auto mt-4 max-w-2xl text-muted">{t("heroSubtitle")}</p>
+      </section>
+
+      <section className="mb-10">
+        <h2 className="mb-4 text-sm font-semibold text-muted">
+          {t("browseByCategory")}
+        </h2>
+        <CategoryGrid categories={categoriesWithCounts} activeSlug={filters.category} />
       </section>
 
       <section className="mb-8">

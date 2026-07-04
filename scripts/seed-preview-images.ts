@@ -8,6 +8,8 @@
  *   SUPABASE_SERVICE_ROLE_KEY
  *
  * Run with: npm run seed:images
+ * Pass --all to regenerate every published prompt's preview, even ones that
+ * already have an image (e.g. after editing prompt_text_en): npm run seed:images -- --all
  */
 import { createClient } from "@supabase/supabase-js";
 
@@ -32,12 +34,16 @@ async function main() {
   );
 
   const supabase = createClient(url, serviceRoleKey);
+  const regenerateAll = process.argv.includes("--all");
 
-  const { data: prompts, error } = await supabase
+  let query = supabase
     .from("prompts")
     .select("id, slug, prompt_text_en")
-    .eq("status", "published")
-    .is("preview_image_url", null);
+    .eq("status", "published");
+  if (!regenerateAll) {
+    query = query.is("preview_image_url", null);
+  }
+  const { data: prompts, error } = await query;
 
   if (error) {
     console.error("Failed to read prompts from Supabase:");
@@ -53,7 +59,9 @@ async function main() {
     return;
   }
 
-  console.log(`Generating previews for ${prompts.length} prompt(s)...`);
+  console.log(
+    `${regenerateAll ? "Regenerating" : "Generating"} previews for ${prompts.length} prompt(s)...`,
+  );
 
   for (const prompt of prompts) {
     const imageUrl = `https://image.pollinations.ai/prompt/${encodeURIComponent(

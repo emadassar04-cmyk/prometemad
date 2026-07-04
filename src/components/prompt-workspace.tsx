@@ -3,7 +3,7 @@
 import { useMemo, useState } from "react";
 import Image from "next/image";
 import { useLocale, useTranslations } from "next-intl";
-import { Check, Copy, Loader2, Sparkles } from "lucide-react";
+import { Check, Copy, ExternalLink, Loader2, Sparkles } from "lucide-react";
 import { createSupabaseBrowserClient } from "@/lib/supabase/client";
 import {
   parsePromptVariables,
@@ -39,6 +39,7 @@ export function PromptWorkspace({
     Object.fromEntries(variables.map((v) => [v.key, v.default ?? ""])),
   );
   const [copied, setCopied] = useState(false);
+  const [openedInGemini, setOpenedInGemini] = useState(false);
   const [generating, setGenerating] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [resultImageUrl, setResultImageUrl] = useState<string | null>(null);
@@ -53,6 +54,13 @@ export function PromptWorkspace({
     await supabase.rpc("increment_prompt_copy_count", {
       p_prompt_id: prompt.id,
     });
+  }
+
+  async function handleOpenInGemini() {
+    await navigator.clipboard.writeText(finalPromptEn);
+    setOpenedInGemini(true);
+    setTimeout(() => setOpenedInGemini(false), 2500);
+    window.open("https://gemini.google.com/app", "_blank", "noopener,noreferrer");
   }
 
   async function handleGenerate() {
@@ -175,18 +183,32 @@ export function PromptWorkspace({
             <h2 className="text-sm font-semibold text-muted">
               {t("finalPreview")}
             </h2>
-            <button
-              type="button"
-              onClick={handleCopy}
-              className="flex items-center gap-1.5 text-sm text-accent-2 hover:text-accent"
-            >
-              {copied ? (
-                <Check className="h-4 w-4" />
-              ) : (
-                <Copy className="h-4 w-4" />
-              )}
-              {copied ? t("copied") : t("copy")}
-            </button>
+            <div className="flex items-center gap-4">
+              <button
+                type="button"
+                onClick={handleCopy}
+                className="flex items-center gap-1.5 text-sm text-accent-2 hover:text-accent"
+              >
+                {copied ? (
+                  <Check className="h-4 w-4" />
+                ) : (
+                  <Copy className="h-4 w-4" />
+                )}
+                {copied ? t("copied") : t("copy")}
+              </button>
+              <button
+                type="button"
+                onClick={handleOpenInGemini}
+                className="flex items-center gap-1.5 text-sm text-accent-2 hover:text-accent"
+              >
+                {openedInGemini ? (
+                  <Check className="h-4 w-4" />
+                ) : (
+                  <ExternalLink className="h-4 w-4" />
+                )}
+                {openedInGemini ? t("copied") : t("openInGemini")}
+              </button>
+            </div>
           </div>
           <p dir="rtl" className="text-sm leading-relaxed">
             {finalPromptAr}

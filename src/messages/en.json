@@ -27,6 +27,7 @@
   "prompt": {
     "copy": "Copy prompt",
     "copied": "Copied",
+    "openInGemini": "Open in Gemini",
     "displayAr": "Arabic display",
     "sourceEn": "Text sent to the model (English)",
     "variables": "Customize variables",

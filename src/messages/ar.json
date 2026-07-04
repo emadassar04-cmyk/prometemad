@@ -27,6 +27,7 @@
   "prompt": {
     "copy": "نسخ البرومبت",
     "copied": "تم النسخ",
+    "openInGemini": "افتح في Gemini",
     "displayAr": "العرض بالعربية",
     "sourceEn": "النص المرسل للنموذج (إنجليزي)",
     "variables": "خصّص المتغيرات",

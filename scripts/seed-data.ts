@@ -48,9 +48,9 @@ export const seedCategories: SeedCategory[] = [
         description_ar: "صورة منتج نظيفة لصفحات المتجر والكتالوجات",
         description_en: "Clean e-commerce style product photo for store listings",
         prompt_text_en:
-          "professional studio product photography of {{product}}, centered composition, pure white seamless background, soft diffused lighting, subtle shadow beneath the product, high detail, commercial e-commerce style, 4k",
+          "professional studio product photography of {{product}}, centered composition following the rule of thirds, pure white seamless backdrop, three-point studio lighting with a large softbox key light and subtle fill, gentle contact shadow beneath the product, macro-level surface detail, sharp focus throughout, photorealistic, commercial e-commerce quality, 8k resolution",
         prompt_display_ar:
-          "تصوير منتج احترافي في استوديو لـ {{product}}، تكوين مركزي، خلفية بيضاء ناصعة بلا حواف، إضاءة ناعمة موزعة، ظل خفيف أسفل المنتج، تفاصيل عالية، أسلوب تجاري للمتاجر الإلكترونية، دقة 4K",
+          "تصوير منتج احترافي في استوديو لـ {{product}}، تكوين مركزي وفق قاعدة الأثلاث، خلفية بيضاء ناصعة متصلة بلا حواف، إضاءة استوديو ثلاثية الاتجاه بمصدر رئيسي softbox كبير وإضاءة تعبئة خفيفة، ظل تلامس ناعم أسفل المنتج، تفاصيل سطحية دقيقة جداً، تركيز حاد بالكامل، واقعية فوتوغرافية، جودة تجارية للمتاجر الإلكترونية، دقة 8K",
         variables: [
           { key: "product", label_ar: "المنتج", label_en: "Product", default: "a glass perfume bottle" },
         ],
@@ -66,9 +66,9 @@ export const seedCategories: SeedCategory[] = [
         description_ar: "منتج ضمن بيئة واقعية تعكس استخدامه اليومي",
         description_en: "Product placed in a realistic everyday setting",
         prompt_text_en:
-          "lifestyle product photography, {{product}} placed on a {{surface}}, natural window light, warm cozy atmosphere, shallow depth of field, editorial commercial photography, realistic textures",
+          "lifestyle product photography, {{product}} placed naturally on a {{surface}}, soft directional natural window light with gentle falloff, warm cozy color grading, shallow depth of field with creamy bokeh, 50mm lens perspective, editorial commercial photography, true-to-life textures and materials, magazine-quality composition",
         prompt_display_ar:
-          "تصوير منتج بأسلوب حياتي، {{product}} موضوع على {{surface}}، إضاءة نافذة طبيعية، أجواء دافئة ومريحة، عمق ميدان ضحل، تصوير تجاري تحريري، خامات واقعية",
+          "تصوير منتج بأسلوب حياتي، {{product}} موضوع بشكل طبيعي على {{surface}}، إضاءة نافذة طبيعية موجهة بتلاشٍ ناعم، تدرج ألوان دافئ ومريح، عمق ميدان ضحل مع بوكيه ناعم، منظور عدسة 50 مم، تصوير تجاري تحريري، خامات وملمس واقعي تماماً، تكوين بجودة المجلات",
         variables: [
           { key: "product", label_ar: "المنتج", label_en: "Product", default: "a ceramic coffee cup" },
           { key: "surface", label_ar: "السطح", label_en: "Surface", default: "wooden breakfast table" },
@@ -84,9 +84,9 @@ export const seedCategories: SeedCategory[] = [
         description_ar: "منتج يطفو في الهواء بتأثير بصري جذاب للإعلانات",
         description_en: "Eye-catching floating product effect for ads",
         prompt_text_en:
-          "{{product}} levitating in mid-air, zero gravity effect, dynamic scattered elements around it, dramatic studio lighting, gradient {{background_color}} background, high-end advertising photography, sharp focus",
+          "{{product}} levitating in mid-air frozen at the peak of motion, zero gravity effect, dynamic scattered elements orbiting around it, dramatic multi-point studio lighting with rim light separation, smooth gradient {{background_color}} background, high-end advertising photography, crisp sharp focus on the product, motion-frozen precision, premium campaign quality",
         prompt_display_ar:
-          "{{product}} يطفو في الهواء، تأثير انعدام الجاذبية، عناصر متناثرة ديناميكية حوله، إضاءة استوديو درامية، خلفية متدرجة باللون {{background_color}}، تصوير إعلاني راقٍ، تركيز حاد",
+          "{{product}} يطفو في الهواء متجمداً في ذروة الحركة، تأثير انعدام الجاذبية، عناصر متناثرة ديناميكية تدور حوله، إضاءة استوديو درامية متعددة الاتجاهات مع فصل بضوء حافة (rim light)، خلفية متدرجة ناعمة باللون {{background_color}}، تصوير إعلاني راقٍ، تركيز حاد جداً على المنتج، دقة تجميد الحركة، جودة حملة إعلانية فاخرة",
         variables: [
           { key: "product", label_ar: "المنتج", label_en: "Product", default: "a sneaker" },
           { key: "background_color", label_ar: "لون الخلفية", label_en: "Background color", default: "deep purple" },
@@ -102,9 +102,9 @@ export const seedCategories: SeedCategory[] = [
         description_ar: "تنسيق أنيق للمنتجات من زاوية علوية لمنشورات السوشيال ميديا",
         description_en: "Elegant top-down arrangement for social media posts",
         prompt_text_en:
-          "flat lay photography from directly above, {{product}} arranged neatly with {{props}}, {{background_color}} background, soft natural light, minimal aesthetic, symmetrical composition, high resolution",
+          "flat lay photography shot directly from above at 90 degrees, {{product}} arranged neatly alongside {{props}}, soft {{background_color}} surface, diffused natural light with no harsh shadows, minimal balanced aesthetic, precise symmetrical composition with generous negative space, high resolution, styled editorial flat lay quality",
         prompt_display_ar:
-          "تصوير من الأعلى مباشرة (Flat Lay)، {{product}} مرتب بعناية مع {{props}}، خلفية {{background_color}}، إضاءة طبيعية ناعمة، تصميم بسيط أنيق، تكوين متماثل، دقة عالية",
+          "تصوير من الأعلى مباشرة بزاوية 90 درجة (Flat Lay)، {{product}} مرتب بعناية مع {{props}}، سطح بلون {{background_color}}، إضاءة طبيعية موزعة بلا ظلال قاسية، تصميم بسيط متوازن، تكوين متماثل دقيق مع مساحات فارغة كافية، دقة عالية، جودة تحريرية منسقة",
         variables: [
           { key: "product", label_ar: "المنتج", label_en: "Product", default: "skincare bottles" },
           { key: "props", label_ar: "إكسسوارات مرافقة", label_en: "Props", default: "dried flowers and a linen towel" },
@@ -121,9 +121,9 @@ export const seedCategories: SeedCategory[] = [
         description_ar: "لقطة قريبة تُظهر حجم المنتج وملمسه بشكل واقعي",
         description_en: "Close-up shot showing the product's scale and texture",
         prompt_text_en:
-          "close-up photo of a hand holding {{product}}, natural skin tones, soft daylight, blurred background, authentic unboxing style, high detail texture",
+          "close-up macro photo of a hand naturally holding {{product}}, realistic skin texture and natural tones, soft diffused daylight, gently blurred background with shallow depth of field, authentic unboxing moment, fine surface detail on both hand and product, sharp focal point, high-end lifestyle commercial quality",
         prompt_display_ar:
-          "لقطة قريبة ليد تمسك {{product}}، ألوان بشرة طبيعية، ضوء نهار ناعم، خلفية ضبابية، أسلوب فتح الصندوق الواقعي، تفاصيل خامة عالية",
+          "لقطة قريبة ماكرو ليد تمسك {{product}} بشكل طبيعي، ملمس بشرة واقعي وألوان طبيعية، ضوء نهار ناعم موزع، خلفية ضبابية خفيفة بعمق ميدان ضحل، لحظة فتح صندوق أصيلة، تفاصيل سطحية دقيقة لليد والمنتج معاً، نقطة تركيز حادة، جودة تجارية حياتية راقية",
         variables: [
           { key: "product", label_ar: "المنتج", label_en: "Product", default: "a smartphone box" },
         ],
@@ -138,9 +138,9 @@ export const seedCategories: SeedCategory[] = [
         description_ar: "تأثير بصري قوي لمنتجات المشروبات ومستحضرات التجميل",
         description_en: "Dramatic splash effect for beverages and cosmetics",
         prompt_text_en:
-          "{{product}} with dynamic {{liquid}} splash frozen in motion around it, dark studio background, dramatic rim lighting, high speed photography, crisp water droplets, commercial quality",
+          "{{product}} with dynamic {{liquid}} splash frozen at 1/8000th of a second, dramatic dark studio background, high-contrast rim lighting sculpting the droplets, ultra high speed photography, crisp crystal-clear droplets with realistic refraction, commercial beverage/cosmetics campaign quality, tack-sharp focus",
         prompt_display_ar:
-          "{{product}} مع تناثر {{liquid}} متجمد أثناء الحركة حوله، خلفية استوديو داكنة، إضاءة حافة درامية، تصوير عالي السرعة، قطرات ماء واضحة، جودة تجارية",
+          "{{product}} مع تناثر {{liquid}} متجمد بسرعة تصوير فائقة (1/8000 ثانية)، خلفية استوديو داكنة درامية، إضاءة حافة عالية التباين تُبرز شكل القطرات، تصوير عالي السرعة احترافي، قطرات واضحة تماماً كالكريستال مع انكسار ضوئي واقعي، جودة حملة تجارية للمشروبات ومستحضرات التجميل، تركيز حاد جداً",
         variables: [
           { key: "product", label_ar: "المنتج", label_en: "Product", default: "a cosmetic jar" },
           { key: "liquid", label_ar: "السائل", label_en: "Liquid", default: "milk" },
@@ -156,9 +156,9 @@ export const seedCategories: SeedCategory[] = [
         description_ar: "عرض واقعي لعلبة أو تغليف المنتج قبل الطباعة",
         description_en: "Realistic mockup of product packaging before printing",
         prompt_text_en:
-          "realistic packaging mockup of {{product}} box, {{color}} design, placed on a clean surface, soft studio lighting, subtle reflection, front-facing angle, high resolution product render",
+          "photorealistic 3D packaging mockup of a {{product}} box, {{color}} label design with clean typography space, resting on a neutral matte surface, soft studio lighting with a subtle reflection below, precise front-facing angle, physically accurate materials and print texture, high resolution product render, retail-ready presentation quality",
         prompt_display_ar:
-          "موك أب واقعي لعلبة تغليف {{product}}، تصميم بلون {{color}}، موضوعة على سطح نظيف، إضاءة استوديو ناعمة، انعكاس خفيف، زاوية أمامية، عرض منتج بدقة عالية",
+          "موك أب ثلاثي الأبعاد واقعي لعلبة تغليف {{product}}، تصميم ملصق بلون {{color}} مع مساحة خط واضحة، موضوعة على سطح مطفي محايد، إضاءة استوديو ناعمة مع انعكاس خفيف أسفلها، زاوية أمامية دقيقة، خامات وطباعة واقعية فيزيائياً، عرض منتج بدقة عالية، جودة عرض جاهزة للتجزئة",
         variables: [
           { key: "product", label_ar: "المنتج", label_en: "Product", default: "a snack" },
           { key: "color", label_ar: "اللون الأساسي", label_en: "Primary color", default: "green and gold" },
@@ -174,9 +174,9 @@ export const seedCategories: SeedCategory[] = [
         description_ar: "منتج بمظهر طبيعي خارجي يناسب منتجات العناية والطبيعة",
         description_en: "Natural outdoor look, suited for organic and wellness products",
         prompt_text_en:
-          "{{product}} placed among natural elements like stones and green leaves, outdoor golden hour lighting, organic earthy tones, shallow depth of field, editorial nature photography",
+          "{{product}} placed among natural elements like weathered stones, moss, and green leaves, warm outdoor golden hour side lighting, organic earthy color palette, shallow depth of field with a softly blurred natural backdrop, editorial nature photography, authentic textures, serene wellness-brand mood",
         prompt_display_ar:
-          "{{product}} موضوع وسط عناصر طبيعية كالحجارة وأوراق الشجر، إضاءة الساعة الذهبية الخارجية، ألوان ترابية طبيعية، عمق ميدان ضحل، تصوير طبيعي تحريري",
+          "{{product}} موضوع وسط عناصر طبيعية كحجارة متآكلة، طحالب، وأوراق شجر خضراء، إضاءة جانبية دافئة من الساعة الذهبية الخارجية، لوحة ألوان ترابية عضوية، عمق ميدان ضحل مع خلفية طبيعية ضبابية ناعمة، تصوير طبيعي تحريري، خامات أصيلة، أجواء هادئة تناسب علامات العناية والصحة",
         variables: [
           { key: "product", label_ar: "المنتج", label_en: "Product", default: "an organic soap bar" },
         ],
@@ -191,9 +191,9 @@ export const seedCategories: SeedCategory[] = [
         description_ar: "زاوية كتالوجية كلاسيكية تُظهر أبعاد المنتج",
         description_en: "Classic catalog angle showing the product's dimensions",
         prompt_text_en:
-          "three-quarter angle product photo of {{product}}, light gray gradient background, even studio lighting, sharp focus, no harsh shadows, catalog ready, professional retouching",
+          "three-quarter angle product photo of {{product}}, light gray seamless gradient background, even soft-box studio lighting eliminating harsh shadows, tack-sharp focus with crisp edge definition, professional retouching, color-accurate rendering, catalog-ready commercial quality, consistent with multi-angle product sets",
         prompt_display_ar:
-          "صورة منتج بزاوية ثلاثة أرباع لـ {{product}}، خلفية متدرجة رمادية فاتحة، إضاءة استوديو متساوية، تركيز حاد، بلا ظلال قاسية، جاهزة للكتالوج، معالجة احترافية",
+          "صورة منتج بزاوية ثلاثة أرباع لـ {{product}}، خلفية متدرجة رمادية فاتحة متصلة، إضاءة استوديو softbox متساوية تلغي الظلال القاسية، تركيز حاد جداً مع حواف واضحة، معالجة احترافية، ألوان دقيقة، جودة تجارية جاهزة للكتالوج، متسقة مع مجموعات الزوايا المتعددة",
         variables: [
           { key: "product", label_ar: "المنتج", label_en: "Product", default: "a leather handbag" },
         ],
@@ -208,9 +208,9 @@ export const seedCategories: SeedCategory[] = [
         description_ar: "عرض منظم لتدرجات ألوان المنتج المتوفرة",
         description_en: "Organized display of the product's available color options",
         prompt_text_en:
-          "clean grid layout showing {{product}} in three different color variants, consistent studio lighting, plain white background, evenly spaced arrangement, e-commerce variant showcase style",
+          "clean grid layout showing {{product}} in three distinct color variants, consistent identical studio lighting across all three, plain seamless white background, evenly spaced precise arrangement, sharp product-level detail on each variant, e-commerce variant showcase style, high resolution catalog quality",
         prompt_display_ar:
-          "تخطيط شبكي نظيف يعرض {{product}} بثلاثة تدرجات ألوان مختلفة، إضاءة استوديو ثابتة، خلفية بيضاء بسيطة، ترتيب متساوي المسافات، أسلوب عرض خيارات المتجر الإلكتروني",
+          "تخطيط شبكي نظيف يعرض {{product}} بثلاثة تدرجات ألوان مختلفة، إضاءة استوديو متطابقة تماماً على الثلاثة، خلفية بيضاء بسيطة متصلة، ترتيب متساوي المسافات دقيق، تفاصيل واضحة على مستوى المنتج لكل تدرج، أسلوب عرض خيارات المتجر الإلكتروني، جودة كتالوج بدقة عالية",
         variables: [
           { key: "product", label_ar: "المنتج", label_en: "Product", default: "a wireless earbuds case" },
         ],
@@ -234,9 +234,9 @@ export const seedCategories: SeedCategory[] = [
         description_ar: "تصميم إعلاني جذاب بمقاس مربع لمنشورات إنستغرام",
         description_en: "Bold square-format ad visual for Instagram feed",
         prompt_text_en:
-          "square format social media advertisement for {{business}}, bold {{color}} color scheme, large empty space for text overlay, modern flat design, high contrast, eye-catching, marketing poster style",
+          "square 1:1 format social media advertisement for {{business}}, bold {{color}} color scheme with strong visual hierarchy, generous empty space reserved for text overlay, modern flat design, high contrast, scroll-stopping composition, clean vector-quality shapes, marketing poster precision, crisp print-ready resolution",
         prompt_display_ar:
-          "إعلان سوشيال ميديا بمقاس مربع لـ {{business}}، ألوان جريئة بلون {{color}}، مساحة فارغة كبيرة لإضافة نص، تصميم مسطح عصري، تباين عالٍ، لافت للنظر، أسلوب بوستر تسويقي",
+          "إعلان سوشيال ميديا بمقاس مربع 1:1 لـ {{business}}، ألوان جريئة بدرجة {{color}} مع تسلسل بصري واضح، مساحة فارغة واسعة مخصصة للنص، تصميم مسطح عصري، تباين عالٍ، تكوين يوقف التمرير فوراً، أشكال بجودة فيكتور نظيفة، دقة بوستر تسويقي، دقة طباعة عالية",
         variables: [
           { key: "business", label_ar: "النشاط التجاري", label_en: "Business", default: "a coffee shop" },
           { key: "color", label_ar: "اللون الأساسي", label_en: "Primary color", default: "orange and cream" },
@@ -253,9 +253,9 @@ export const seedCategories: SeedCategory[] = [
         description_ar: "بانر إعلاني حماسي لعروض التخفيضات الموسمية",
         description_en: "Energetic banner design for seasonal discount campaigns",
         prompt_text_en:
-          "vibrant sale banner design, big bold '{{discount}}' text placeholder area, dynamic diagonal shapes, {{color}} gradient background, confetti and burst elements, exciting retail promotion style",
+          "vibrant sale banner design, large bold '{{discount}}' text placeholder as the clear focal point, dynamic diagonal shapes guiding the eye, smooth {{color}} gradient background, confetti and motion-burst elements, exciting high-energy retail promotion style, crisp vector precision, print and digital-ready quality",
         prompt_display_ar:
-          "تصميم بانر تخفيضات نابض بالحياة، مساحة نصية كبيرة وجريئة لنسبة الخصم '{{discount}}'، أشكال قطرية ديناميكية، خلفية متدرجة بلون {{color}}، عناصر قصاصات ورقية واحتفالية، أسلوب ترويجي حماسي للتجزئة",
+          "تصميم بانر تخفيضات نابض بالحياة، مساحة نصية كبيرة وجريئة لنسبة الخصم '{{discount}}' كنقطة تركيز واضحة، أشكال قطرية ديناميكية توجّه النظر، خلفية متدرجة ناعمة بلون {{color}}، عناصر قصاصات ورقية وانفجار حركي، أسلوب ترويجي عالي الطاقة للتجزئة، دقة فيكتور نظيفة، جودة جاهزة للطباعة والرقمي",
         variables: [
           { key: "discount", label_ar: "نسبة الخصم", label_en: "Discount", default: "50% OFF" },
           { key: "color", label_ar: "لون الخلفية", label_en: "Background color", default: "red and yellow" },
@@ -271,9 +271,9 @@ export const seedCategories: SeedCategory[] = [
         description_ar: "عرض واجهة تطبيق على شاشة هاتف بأسلوب تسويقي أنيق",
         description_en: "Elegant marketing display of an app screen on a phone mockup",
         prompt_text_en:
-          "modern smartphone mockup floating at an angle, displaying a clean {{app_type}} app interface, soft gradient {{color}} background, subtle shadow, tech marketing style, minimal and premium",
+          "modern smartphone mockup floating at a slight 3D angle, displaying a pixel-precise clean {{app_type}} app interface, soft smooth gradient {{color}} background, realistic drop shadow beneath the device, premium tech marketing style, minimal and polished, product-launch quality render",
         prompt_display_ar:
-          "موك أب هاتف ذكي عصري معلق بزاوية، يعرض واجهة تطبيق {{app_type}} نظيفة، خلفية متدرجة ناعمة بلون {{color}}، ظل خفيف، أسلوب تسويقي تقني، بسيط وراقٍ",
+          "موك أب هاتف ذكي عصري معلق بزاوية ثلاثية أبعاد خفيفة، يعرض واجهة تطبيق {{app_type}} نظيفة ودقيقة البكسل، خلفية متدرجة ناعمة بلون {{color}}، ظل واقعي أسفل الجهاز، أسلوب تسويقي تقني فاخر، بسيط ومصقول، جودة رندر إطلاق منتج",
         variables: [
           { key: "app_type", label_ar: "نوع التطبيق", label_en: "App type", default: "food delivery" },
           { key: "color", label_ar: "لون الخلفية", label_en: "Background color", default: "blue and white" },
@@ -289,9 +289,9 @@ export const seedCategories: SeedCategory[] = [
         description_ar: "تصميم مقسوم يعرض نتائج الخدمة أو المنتج بوضوح",
         description_en: "Split-screen design clearly showcasing service or product results",
         prompt_text_en:
-          "split screen comparison image, left side showing {{before}}, right side showing {{after}}, clean dividing line, bright even lighting, professional before-and-after marketing layout",
+          "clean split-screen comparison image, left half showing {{before}}, right half showing {{after}}, sharp precise dividing line, bright even lighting matched identically on both sides, professional before-and-after marketing layout, high-detail realism on both halves, trustworthy commercial quality",
         prompt_display_ar:
-          "صورة مقارنة مقسومة الشاشة، الجانب الأيسر يُظهر {{before}}، الجانب الأيمن يُظهر {{after}}، خط فاصل نظيف، إضاءة ساطعة ومتساوية، تخطيط تسويقي احترافي لقبل وبعد",
+          "صورة مقارنة نظيفة مقسومة الشاشة، النصف الأيسر يُظهر {{before}}، النصف الأيمن يُظهر {{after}}، خط فاصل دقيق وحاد، إضاءة ساطعة متطابقة تماماً في الجانبين، تخطيط تسويقي احترافي لقبل وبعد، واقعية عالية التفاصيل في الجانبين، جودة تجارية موثوقة",
         variables: [
           { key: "before", label_ar: "الحالة قبل", label_en: "Before state", default: "a dull faded car exterior" },
           { key: "after", label_ar: "الحالة بعد", label_en: "After state", default: "the same car, polished and glossy" },
@@ -307,9 +307,9 @@ export const seedCategories: SeedCategory[] = [
         description_ar: "بطاقة أنيقة لعرض تقييمات وآراء العملاء",
         description_en: "Elegant card layout for displaying customer reviews",
         prompt_text_en:
-          "elegant testimonial card background design, soft {{color}} pastel tones, large quotation mark graphic, star rating icons, minimal clean layout with space for text, professional social proof style",
+          "elegant testimonial card background design, soft {{color}} pastel gradient, large refined quotation mark graphic, five gold star rating icons, minimal clean layout with clearly reserved space for text, professional social-proof marketing style, crisp vector precision, premium finish",
         prompt_display_ar:
-          "خلفية بطاقة تقييم عملاء أنيقة، درجات لون {{color}} هادئة، رمز علامة اقتباس كبيرة، أيقونات تقييم بالنجوم، تخطيط بسيط ونظيف مع مساحة للنص، أسلوب احترافي لعرض الثقة الاجتماعية",
+          "خلفية بطاقة تقييم عملاء أنيقة، تدرج لوني ناعم {{color}} باستيل، رمز علامة اقتباس كبيرة وراقية، خمس نجوم تقييم ذهبية، تخطيط بسيط ونظيف مع مساحة محجوزة بوضوح للنص، أسلوب احترافي لعرض الثقة الاجتماعية، دقة فيكتور نظيفة، لمسة نهائية فاخرة",
         variables: [
           { key: "color", label_ar: "اللون", label_en: "Color", default: "soft blue" },
         ],
@@ -324,9 +324,9 @@ export const seedCategories: SeedCategory[] = [
         description_ar: "تصميم ستوري رأسي مثير يعلن عن اقتراب إطلاق جديد",
         description_en: "Vertical story design building excitement for a new launch",
         prompt_text_en:
-          "vertical story format design, dramatic countdown timer graphic, dark {{color}} background with glowing particles, teaser text space, futuristic launch announcement style, high energy",
+          "vertical 9:16 story format design, dramatic glowing countdown timer graphic as the centerpiece, dark {{color}} background with softly glowing particle bokeh, clear teaser text space, futuristic launch-announcement style, high-energy anticipation mood, crisp premium render quality",
         prompt_display_ar:
-          "تصميم ستوري بصيغة رأسية، رسم عداد تنازلي درامي، خلفية داكنة بلون {{color}} مع جزيئات متوهجة، مساحة نص تشويقي، أسلوب إعلان إطلاق مستقبلي، طاقة عالية",
+          "تصميم ستوري بصيغة رأسية 9:16، رسم عداد تنازلي متوهج درامي كنقطة مركزية، خلفية داكنة بلون {{color}} مع جزيئات بوكيه متوهجة ناعمة، مساحة نص تشويقي واضحة، أسلوب إعلان إطلاق مستقبلي، أجواء ترقب عالية الطاقة، جودة رندر فاخرة نظيفة",
         variables: [
           { key: "color", label_ar: "لون الخلفية", label_en: "Background color", default: "midnight blue" },
         ],
@@ -341,9 +341,9 @@ export const seedCategories: SeedCategory[] = [
         description_ar: "تصميم شريحة موحدة لمنشورات الكاروسيل التعليمية",
         description_en: "Cohesive slide design for educational carousel posts",
         prompt_text_en:
-          "clean educational carousel slide design, bold number '{{number}}' graphic element, {{color}} background with soft geometric shapes, generous text space, modern infographic style",
+          "clean educational carousel slide design, bold oversized number '{{number}}' as the dominant graphic element, {{color}} background with soft geometric accent shapes, generous clearly organized text space, modern infographic style with strong visual hierarchy, crisp flat-design precision",
         prompt_display_ar:
-          "تصميم شريحة كاروسيل تعليمية نظيفة، عنصر رقم '{{number}}' بارز، خلفية بلون {{color}} مع أشكال هندسية ناعمة، مساحة نص واسعة، أسلوب إنفوجرافيك عصري",
+          "تصميم شريحة كاروسيل تعليمية نظيفة، رقم '{{number}}' كبير وبارز كعنصر رسومي مهيمن، خلفية بلون {{color}} مع أشكال هندسية ناعمة مساندة، مساحة نص واسعة ومنظمة بوضوح، أسلوب إنفوجرافيك عصري بتسلسل بصري قوي، دقة تصميم مسطح نظيفة",
         variables: [
           { key: "number", label_ar: "الرقم", label_en: "Number", default: "1" },
           { key: "color", label_ar: "لون الخلفية", label_en: "Background color", default: "teal" },
@@ -359,9 +359,9 @@ export const seedCategories: SeedCategory[] = [
         description_ar: "تصميم يحفّز الشراء الفوري بشعور الندرة",
         description_en: "Design that drives urgency and immediate purchase action",
         prompt_text_en:
-          "urgent retail promotion design, '{{message}}' bold typography placeholder, warning stripe pattern accents, {{color}} high alert color scheme, dynamic energetic composition",
+          "urgent retail promotion design, bold '{{message}}' typography placeholder as the dominant focal point, sharp warning-stripe pattern accents, high-alert {{color}} color scheme, dynamic energetic diagonal composition, scroll-stopping impact, crisp print and digital-ready precision",
         prompt_display_ar:
-          "تصميم ترويجي عاجل للتجزئة، مساحة نصية بارزة لعبارة '{{message}}'، لمسات نمط خطوط تحذيرية، تدرج ألوان {{color}} عالي التنبيه، تكوين ديناميكي حيوي",
+          "تصميم ترويجي عاجل للتجزئة، مساحة نصية بارزة ومهيمنة لعبارة '{{message}}'، لمسات نمط خطوط تحذيرية حادة، تدرج ألوان {{color}} عالي التنبيه، تكوين قطري ديناميكي حيوي، تأثير يوقف التمرير فوراً، دقة نظيفة جاهزة للطباعة والرقمي",
         variables: [
           { key: "message", label_ar: "الرسالة", label_en: "Message", default: "LAST CHANCE" },
           { key: "color", label_ar: "اللون", label_en: "Color", default: "red and black" },
@@ -377,9 +377,9 @@ export const seedCategories: SeedCategory[] = [
         description_ar: "تصميم دافئ يعرض تشكيلة هدايا لمناسبة معينة",
         description_en: "Warm design showcasing a curated gift collection",
         prompt_text_en:
-          "cozy gift guide advertisement featuring {{items}} arranged elegantly, warm {{color}} festive palette, soft ribbon and wrapping paper details, inviting shopping campaign style",
+          "cozy gift guide advertisement featuring {{items}} arranged elegantly with intentional visual balance, warm {{color}} festive palette, soft ribbon and wrapping paper texture detail, inviting shopping campaign style, gentle natural lighting, premium seasonal retail quality",
         prompt_display_ar:
-          "إعلان دليل هدايا دافئ يعرض {{items}} مرتبة بأناقة، لوحة ألوان احتفالية دافئة {{color}}، تفاصيل شرائط وورق تغليف ناعمة، أسلوب حملة تسوق جذابة",
+          "إعلان دليل هدايا دافئ يعرض {{items}} مرتبة بأناقة وتوازن بصري مدروس، لوحة ألوان احتفالية دافئة {{color}}، تفاصيل ملمس شرائط وورق تغليف ناعمة، أسلوب حملة تسوق جذابة، إضاءة طبيعية لطيفة، جودة تجارية موسمية فاخرة",
         variables: [
           { key: "items", label_ar: "الهدايا", label_en: "Gift items", default: "perfume bottles and gift boxes" },
           { key: "color", label_ar: "الألوان", label_en: "Colors", default: "burgundy and gold" },
@@ -395,9 +395,9 @@ export const seedCategories: SeedCategory[] = [
         description_ar: "تصميم يبرز تقييماً بارزاً لبناء الثقة",
         description_en: "Design highlighting a standout review to build trust",
         prompt_text_en:
-          "eye-catching review highlight card design, five gold stars prominently displayed, soft {{color}} background, quotation accent graphic, clean modern layout with space for review text",
+          "eye-catching review highlight card design, five prominent gold stars as the visual anchor, soft {{color}} background, refined quotation accent graphic, clean modern layout with clearly defined space for review text, trust-building commercial polish",
         prompt_display_ar:
-          "تصميم بطاقة إبراز تقييم لافت، خمس نجوم ذهبية بارزة، خلفية ناعمة بلون {{color}}، لمسة رسومية لعلامة اقتباس، تخطيط عصري نظيف مع مساحة لنص التقييم",
+          "تصميم بطاقة إبراز تقييم لافت، خمس نجوم ذهبية بارزة كنقطة ارتكاز بصرية، خلفية ناعمة بلون {{color}}، لمسة رسومية راقية لعلامة اقتباس، تخطيط عصري نظيف مع مساحة محددة بوضوح لنص التقييم، لمسة تجارية تبني الثقة",
         variables: [
           { key: "color", label_ar: "لون الخلفية", label_en: "Background color", default: "mint green" },
         ],
@@ -421,9 +421,9 @@ export const seedCategories: SeedCategory[] = [
         description_ar: "شعار أنيق مبني على الحرف الأول من اسم العلامة",
         description_en: "Elegant logo built around the brand's initial letter",
         prompt_text_en:
-          "minimal lettermark logo design featuring the letter '{{letter}}', geometric clean lines, {{color}} color palette, flat vector style, centered on plain white background, modern brand identity",
+          "minimal lettermark logo design featuring the letter '{{letter}}', precise geometric clean lines with perfect symmetry, refined {{color}} color palette, flat scalable vector style, centered on a plain white background, modern timeless brand identity, print and app-icon ready quality",
         prompt_display_ar:
-          "تصميم لوجو حرفي بسيط يعتمد على الحرف '{{letter}}'، خطوط هندسية نظيفة، لوحة ألوان {{color}}، أسلوب فيكتور مسطح، في وسط خلفية بيضاء بسيطة، هوية علامة تجارية عصرية",
+          "تصميم لوجو حرفي بسيط يعتمد على الحرف '{{letter}}'، خطوط هندسية دقيقة بتناظر مثالي، لوحة ألوان راقية {{color}}، أسلوب فيكتور مسطح قابل للتحجيم، في وسط خلفية بيضاء بسيطة، هوية علامة تجارية عصرية خالدة، جودة جاهزة للطباعة وأيقونات التطبيقات",
         variables: [
           { key: "letter", label_ar: "الحرف", label_en: "Letter", default: "N" },
           { key: "color", label_ar: "الألوان", label_en: "Colors", default: "navy and gold" },
@@ -440,9 +440,9 @@ export const seedCategories: SeedCategory[] = [
         description_ar: "رمز تجريدي يعكس مفهوم النشاط التجاري",
         description_en: "Abstract symbol representing the brand's concept",
         prompt_text_en:
-          "abstract geometric logo mark representing {{concept}}, minimal flat vector shapes, {{color}} gradient, balanced negative space, professional brand mark on white background",
+          "abstract geometric logo mark representing {{concept}}, minimal flat vector shapes with precise clean lines, smooth {{color}} gradient, deliberately balanced negative space, professional scalable brand mark on a plain white background, timeless modern identity quality",
         prompt_display_ar:
-          "شعار هندسي تجريدي يمثل مفهوم {{concept}}، أشكال فيكتور مسطحة بسيطة، تدرج لوني {{color}}، توازن في المساحات الفارغة، علامة تجارية احترافية على خلفية بيضاء",
+          "شعار هندسي تجريدي يمثل مفهوم {{concept}}، أشكال فيكتور مسطحة بخطوط دقيقة ونظيفة، تدرج لوني ناعم {{color}}، توازن مدروس في المساحات الفارغة، علامة تجارية احترافية قابلة للتحجيم على خلفية بيضاء، جودة هوية عصرية خالدة",
         variables: [
           { key: "concept", label_ar: "المفهوم", label_en: "Concept", default: "growth and connection" },
           { key: "color", label_ar: "التدرج اللوني", label_en: "Gradient", default: "green to blue" },
@@ -458,9 +458,9 @@ export const seedCategories: SeedCategory[] = [
         description_ar: "شخصية ودودة تمثل العلامة التجارية بأسلوب كرتوني",
         description_en: "Friendly character representing the brand in cartoon style",
         prompt_text_en:
-          "friendly cartoon mascot logo of a {{animal}}, bold outlines, flat vibrant {{color}} colors, playful expression, centered vector illustration on white background, brand mascot style",
+          "friendly cartoon mascot logo of a {{animal}}, bold clean outlines, flat vibrant {{color}} colors, warm playful expression, centered vector illustration on a plain white background, scalable brand mascot style, polished professional finish",
         prompt_display_ar:
-          "شعار ماسكوت كرتوني ودود على شكل {{animal}}، خطوط خارجية بارزة، ألوان مسطحة زاهية {{color}}، تعبير مرح، رسم فيكتور في المنتصف على خلفية بيضاء، أسلوب ماسكوت للعلامة التجارية",
+          "شعار ماسكوت كرتوني ودود على شكل {{animal}}، خطوط خارجية بارزة ونظيفة، ألوان مسطحة زاهية {{color}}، تعبير مرح ودافئ، رسم فيكتور مركزي على خلفية بيضاء، أسلوب ماسكوت قابل للتحجيم، لمسة نهائية احترافية مصقولة",
         variables: [
           { key: "animal", label_ar: "الحيوان", label_en: "Animal", default: "a fox" },
           { key: "color", label_ar: "الألوان", label_en: "Colors", default: "orange and white" },
@@ -476,9 +476,9 @@ export const seedCategories: SeedCategory[] = [
         description_ar: "شعار دائري كلاسيكي يوحي بالثقة والتراث",
         description_en: "Classic circular badge conveying trust and heritage",
         prompt_text_en:
-          "vintage emblem badge logo design for {{business}}, circular border with ornamental details, {{color}} monochrome palette, centered icon of {{icon}}, flat vector illustration on white background",
+          "vintage emblem badge logo design for {{business}}, precise circular border with fine ornamental detailing, {{color}} monochrome palette, centered icon of {{icon}}, flat scalable vector illustration on a plain white background, heritage-quality craftsmanship feel",
         prompt_display_ar:
-          "تصميم شعار شارة كلاسيكية (إمبلم) لـ {{business}}، حدود دائرية بتفاصيل زخرفية، لوحة ألوان أحادية {{color}}، أيقونة مركزية لـ {{icon}}، رسم فيكتور على خلفية بيضاء",
+          "تصميم شعار شارة كلاسيكية (إمبلم) لـ {{business}}، حدود دائرية دقيقة بتفاصيل زخرفية أنيقة، لوحة ألوان أحادية {{color}}، أيقونة مركزية لـ {{icon}}، رسم فيكتور مسطح قابل للتحجيم على خلفية بيضاء، إحساس حرفي تراثي عالي الجودة",
         variables: [
           { key: "business", label_ar: "النشاط التجاري", label_en: "Business", default: "a coffee roastery" },
           { key: "icon", label_ar: "الرمز المركزي", label_en: "Central icon", default: "a coffee bean" },
@@ -495,9 +495,9 @@ export const seedCategories: SeedCategory[] = [
         description_ar: "عرض منظم لألوان الهوية البصرية للعلامة",
         description_en: "Organized presentation of the brand's color identity",
         prompt_text_en:
-          "clean brand style guide color palette board, five color swatches in {{color}} tones arranged horizontally, minimal typography labels, professional branding presentation layout, white background",
+          "clean brand style guide color palette board, five precisely arranged color swatches in {{color}} tones, minimal refined typography labels, professional branding presentation layout, plain white background, print-ready design-system quality",
         prompt_display_ar:
-          "لوحة عرض ألوان دليل الهوية البصرية بتصميم نظيف، خمس عينات ألوان بدرجات {{color}} مرتبة أفقياً، تسميات نصية بسيطة، تخطيط عرض احترافي للهوية، خلفية بيضاء",
+          "لوحة عرض ألوان دليل الهوية البصرية بتصميم نظيف، خمس عينات ألوان مرتبة بدقة بدرجات {{color}}، تسميات نصية أنيقة بسيطة، تخطيط عرض احترافي للهوية، خلفية بيضاء، جودة نظام تصميم جاهزة للطباعة",
         variables: [
           { key: "color", label_ar: "الدرجات اللونية", label_en: "Color tones", default: "warm earthy" },
         ],
@@ -512,9 +512,9 @@ export const seedCategories: SeedCategory[] = [
         description_ar: "عرض واقعي لتصميم بطاقة العمل على سطح أنيق",
         description_en: "Realistic mockup of a business card design on an elegant surface",
         prompt_text_en:
-          "realistic business card mockup, two cards with a {{color}} minimal design, placed on a {{surface}}, soft natural lighting, shallow depth of field, professional branding photography",
+          "photorealistic business card mockup, two cards featuring a {{color}} minimal design, placed on a {{surface}}, soft natural directional lighting, shallow depth of field with a softly blurred background, professional branding photography, physically accurate paper texture and print finish",
         prompt_display_ar:
-          "موك أب واقعي لبطاقة عمل، بطاقتان بتصميم بسيط بلون {{color}}، موضوعتان على {{surface}}، إضاءة طبيعية ناعمة، عمق ميدان ضحل، تصوير هوية بصرية احترافي",
+          "موك أب واقعي لبطاقة عمل، بطاقتان بتصميم بسيط بلون {{color}}، موضوعتان على {{surface}}، إضاءة طبيعية موجهة ناعمة، عمق ميدان ضحل مع خلفية ضبابية ناعمة، تصوير هوية بصرية احترافي، خامة ورق ولمسة طباعة واقعية فيزيائياً",
         variables: [
           { key: "color", label_ar: "اللون", label_en: "Color", default: "black and gold" },
           { key: "surface", label_ar: "السطح", label_en: "Surface", default: "a marble table" },
@@ -530,9 +530,9 @@ export const seedCategories: SeedCategory[] = [
         description_ar: "عرض الشعار على واجهة متجر واقعية",
         description_en: "Logo displayed on a realistic store front",
         prompt_text_en:
-          "realistic storefront signage mockup for {{business}}, modern shop exterior, clean {{color}} signage board with logo placeholder, daytime natural lighting, architectural photography style",
+          "photorealistic storefront signage mockup for {{business}}, modern architectural shop exterior, clean {{color}} signage board with clear logo placement space, natural daytime lighting with accurate shadows, architectural photography style, high-detail realistic materials",
         prompt_display_ar:
-          "موك أب واقعي للافتة واجهة متجر لـ {{business}}، واجهة محل عصرية، لوحة لافتة نظيفة بلون {{color}} مع مساحة للشعار، إضاءة نهارية طبيعية، أسلوب تصوير معماري",
+          "موك أب واقعي للافتة واجهة متجر لـ {{business}}، واجهة محل معمارية عصرية، لوحة لافتة نظيفة بلون {{color}} مع مساحة واضحة لوضع الشعار، إضاءة نهارية طبيعية بظلال دقيقة، أسلوب تصوير معماري، خامات واقعية عالية التفاصيل",
         variables: [
           { key: "business", label_ar: "النشاط التجاري", label_en: "Business", default: "a bakery" },
           { key: "color", label_ar: "لون اللافتة", label_en: "Signage color", default: "warm cream and wood" },
@@ -548,9 +548,9 @@ export const seedCategories: SeedCategory[] = [
         description_ar: "أيقونة تطبيق حديثة بزوايا دائرية وألوان متدرجة",
         description_en: "Modern rounded app icon with gradient colors",
         prompt_text_en:
-          "modern mobile app icon design, rounded square shape, simple {{symbol}} symbol centered, smooth {{color}} gradient background, flat minimal style, iOS app store quality",
+          "modern mobile app icon design, rounded square superellipse shape, simple {{symbol}} symbol precisely centered, smooth {{color}} gradient background, flat minimal style, pixel-perfect edges, iOS/Android app store submission quality",
         prompt_display_ar:
-          "تصميم أيقونة تطبيق جوال عصرية، شكل مربع بزوايا دائرية، رمز {{symbol}} بسيط في المنتصف، خلفية متدرجة ناعمة بلون {{color}}، أسلوب مسطح بسيط، بجودة متجر التطبيقات",
+          "تصميم أيقونة تطبيق جوال عصرية، شكل مربع بزوايا دائرية (superellipse)، رمز {{symbol}} بسيط في المنتصف بدقة، خلفية متدرجة ناعمة بلون {{color}}، أسلوب مسطح بسيط، حواف دقيقة بالبكسل، جودة جاهزة لمتاجر iOS وAndroid",
         variables: [
           { key: "symbol", label_ar: "الرمز", label_en: "Symbol", default: "a chat bubble" },
           { key: "color", label_ar: "التدرج اللوني", label_en: "Gradient", default: "purple to pink" },
@@ -566,9 +566,9 @@ export const seedCategories: SeedCategory[] = [
         description_ar: "عرض واقعي لتصميم الورق الرسمي للمراسلات",
         description_en: "Realistic mockup of official correspondence stationery",
         prompt_text_en:
-          "realistic letterhead mockup for {{business}}, minimal {{color}} header design with logo placeholder, clean paper texture, top-down flat lay photography, professional stationery presentation",
+          "photorealistic letterhead mockup for {{business}}, minimal {{color}} header design with clear logo placement space, clean textured paper, top-down flat lay photography with soft even lighting, professional stationery presentation, print-accurate detail",
         prompt_display_ar:
-          "موك أب واقعي لورق رسمي لـ{{business}}، تصميم ترويسة بسيط بلون {{color}} مع مساحة للشعار، خامة ورق نظيفة، تصوير من الأعلى، عرض قرطاسية احترافي",
+          "موك أب واقعي لورق رسمي لـ{{business}}، تصميم ترويسة بسيط بلون {{color}} مع مساحة واضحة للشعار، خامة ورق نظيفة، تصوير من الأعلى بإضاءة ناعمة متساوية، عرض قرطاسية احترافي، تفاصيل دقيقة مطابقة للطباعة",
         variables: [
           { key: "business", label_ar: "النشاط التجاري", label_en: "Business", default: "a law firm" },
           { key: "color", label_ar: "اللون", label_en: "Color", default: "navy blue" },
@@ -593,9 +593,9 @@ export const seedCategories: SeedCategory[] = [
         description_ar: "صورة بورتريه رسمية تناسب الملفات الشخصية المهنية",
         description_en: "Formal portrait suited for professional profiles",
         prompt_text_en:
-          "professional corporate headshot portrait of a {{person}}, wearing {{outfit}}, neutral gray studio background, soft even lighting, confident expression, sharp focus, high-end photography",
+          "professional corporate headshot portrait of a {{person}}, wearing {{outfit}}, neutral gray studio background, soft even three-point lighting, 85mm portrait lens with subtle background compression, confident authentic expression, natural skin texture with no over-smoothing, sharp eye focus, high-end LinkedIn-quality photography",
         prompt_display_ar:
-          "صورة بورتريه احترافية لـ{{person}}، يرتدي {{outfit}}، خلفية استوديو رمادية محايدة، إضاءة ناعمة متساوية، تعبير واثق، تركيز حاد، تصوير راقٍ",
+          "صورة بورتريه احترافية لـ{{person}}، يرتدي {{outfit}}، خلفية استوديو رمادية محايدة، إضاءة ثلاثية الاتجاه ناعمة متساوية، عدسة بورتريه 85 مم مع ضغط خلفية خفيف، تعبير واثق وأصيل، ملمس بشرة طبيعي بلا تنعيم مفرط، تركيز حاد على العينين، تصوير بجودة LinkedIn الاحترافية",
         variables: [
           { key: "person", label_ar: "الشخص", label_en: "Person", default: "a businesswoman" },
           { key: "outfit", label_ar: "الزي", label_en: "Outfit", default: "a tailored navy blazer" },
@@ -612,9 +612,9 @@ export const seedCategories: SeedCategory[] = [
         description_ar: "بورتريه بإضاءة الغروب وأجواء سينمائية",
         description_en: "Portrait with golden hour lighting and cinematic mood",
         prompt_text_en:
-          "cinematic portrait of a {{person}}, golden hour sunset lighting, warm rim light, shallow depth of field, blurred outdoor background, film grain, moody atmosphere, professional photography",
+          "cinematic portrait of a {{person}}, golden hour sunset lighting, warm rim light separating the subject from the background, shallow depth of field with a smoothly blurred outdoor background, subtle film grain, teal-and-orange inspired color grading, moody atmospheric mood, professional 85mm lens photography",
         prompt_display_ar:
-          "بورتريه سينمائي لـ{{person}}، إضاءة غروب الشمس الذهبية، ضوء حافة دافئ، عمق ميدان ضحل، خلفية خارجية ضبابية، حبيبات فيلم، أجواء درامية، تصوير احترافي",
+          "بورتريه سينمائي لـ{{person}}، إضاءة غروب الشمس الذهبية، ضوء حافة دافئ يفصل الشخص عن الخلفية، عمق ميدان ضحل مع خلفية خارجية ضبابية ناعمة، حبيبات فيلم خفيفة، تدرج ألوان مستوحى من السماوي والبرتقالي، أجواء درامية غامضة، تصوير احترافي بعدسة 85 مم",
         variables: [
           { key: "person", label_ar: "الشخص", label_en: "Person", default: "a young man" },
         ],
@@ -629,9 +629,9 @@ export const seedCategories: SeedCategory[] = [
         description_ar: "بورتريه ناعم يبرز نضارة البشرة لإعلانات التجميل",
         description_en: "Soft glowing portrait highlighting skin, ideal for beauty ads",
         prompt_text_en:
-          "beauty studio portrait of a {{person}}, flawless glowing skin, soft beauty dish lighting, clean {{background_color}} background, minimal makeup, sharp detailed close-up, cosmetics advertising style",
+          "beauty studio portrait of a {{person}}, flawless naturally glowing skin, soft beauty-dish lighting with a gentle catchlight in the eyes, clean {{background_color}} background, minimal fresh makeup, sharp macro-level facial detail, cosmetics advertising quality, color-accurate skin tones",
         prompt_display_ar:
-          "بورتريه تجميلي في الاستوديو لـ{{person}}، بشرة نضرة خالية من العيوب، إضاءة طبق تجميل ناعمة، خلفية نظيفة بلون {{background_color}}، مكياج بسيط، لقطة قريبة حادة التفاصيل، أسلوب إعلانات مستحضرات التجميل",
+          "بورتريه تجميلي في الاستوديو لـ{{person}}، بشرة متوهجة طبيعياً وخالية من العيوب، إضاءة طبق تجميل ناعمة مع بريق خفيف في العينين، خلفية نظيفة بلون {{background_color}}، مكياج بسيط منعش، تفاصيل وجه دقيقة جداً، جودة إعلانات مستحضرات التجميل، دقة ألوان بشرة واقعية",
         variables: [
           { key: "person", label_ar: "الشخص", label_en: "Person", default: "a woman" },
           { key: "background_color", label_ar: "لون الخلفية", label_en: "Background color", default: "soft pink" },
@@ -647,9 +647,9 @@ export const seedCategories: SeedCategory[] = [
         description_ar: "بورتريه يبرز الزي التراثي الخليجي بإضاءة فاخرة",
         description_en: "Portrait highlighting traditional Gulf attire with elegant lighting",
         prompt_text_en:
-          "elegant portrait of a {{person}} wearing traditional {{attire}}, rich warm lighting, ornate patterned background, detailed fabric texture, cultural photography, high production quality",
+          "elegant portrait of a {{person}} wearing traditional {{attire}}, rich warm directional lighting, ornate patterned background, richly detailed fabric texture and embroidery, cultural heritage photography, high production quality, dignified composed posture",
         prompt_display_ar:
-          "بورتريه أنيق لـ{{person}} يرتدي {{attire}} التراثي، إضاءة دافئة فاخرة، خلفية بزخارف مزركشة، تفاصيل قماش دقيقة، تصوير ثقافي، جودة إنتاج عالية",
+          "بورتريه أنيق لـ{{person}} يرتدي {{attire}} التراثي، إضاءة موجهة دافئة وفاخرة، خلفية بزخارف مزركشة، تفاصيل قماش وتطريز دقيقة جداً، تصوير تراثي ثقافي، جودة إنتاج عالية، وقفة متزنة ووقورة",
         variables: [
           { key: "person", label_ar: "الشخص", label_en: "Person", default: "a man" },
           { key: "attire", label_ar: "الزي", label_en: "Attire", default: "a bisht over a white thobe" },
@@ -665,9 +665,9 @@ export const seedCategories: SeedCategory[] = [
         description_ar: "لحظة طبيعية غير مصطنعة تناسب المحتوى الشخصي",
         description_en: "A natural unposed moment, great for personal content",
         prompt_text_en:
-          "candid lifestyle portrait of a {{person}} laughing naturally at {{location}}, soft natural daylight, authentic unposed moment, warm color grading, documentary photography style",
+          "candid lifestyle portrait of a {{person}} laughing naturally at {{location}}, soft natural daylight, genuinely unposed authentic moment, warm film-inspired color grading, documentary photography style, natural motion blur on background elements, real emotion captured mid-moment",
         prompt_display_ar:
-          "بورتريه عفوي بأسلوب حياتي لـ{{person}} يضحك بشكل طبيعي في {{location}}، ضوء نهار طبيعي ناعم، لحظة أصيلة غير مصطنعة، تدرج ألوان دافئ، أسلوب تصوير وثائقي",
+          "بورتريه عفوي بأسلوب حياتي لـ{{person}} يضحك بشكل طبيعي في {{location}}، ضوء نهار طبيعي ناعم، لحظة أصيلة غير مصطنعة تماماً، تدرج ألوان دافئ مستوحى من الأفلام، أسلوب تصوير وثائقي، ضبابية حركة طبيعية في عناصر الخلفية، مشاعر حقيقية ملتقطة في لحظتها",
         variables: [
           { key: "person", label_ar: "الشخص", label_en: "Person", default: "a young woman" },
           { key: "location", label_ar: "المكان", label_en: "Location", default: "a busy souq" },
@@ -683,9 +683,9 @@ export const seedCategories: SeedCategory[] = [
         description_ar: "بورتريه فني كلاسيكي بتباين قوي وظلال درامية",
         description_en: "Classic artistic portrait with strong contrast and dramatic shadows",
         prompt_text_en:
-          "dramatic black and white portrait of a {{person}}, strong directional side lighting, deep shadows, high contrast, fine art photography style, sharp detailed eyes, timeless mood",
+          "dramatic black and white portrait of a {{person}}, strong directional side lighting (Rembrandt style), deep rich shadows, high tonal contrast, fine-art photography quality, tack-sharp detailed eyes, timeless classic mood, full dynamic range from pure black to bright highlight",
         prompt_display_ar:
-          "بورتريه درامي بالأبيض والأسود لـ{{person}}، إضاءة جانبية قوية موجهة، ظلال عميقة، تباين عالٍ، أسلوب تصوير فني كلاسيكي، عينان حادتا التفاصيل، أجواء خالدة",
+          "بورتريه درامي بالأبيض والأسود لـ{{person}}، إضاءة جانبية قوية موجهة (أسلوب رامبرانت)، ظلال عميقة وغنية، تباين لوني عالٍ، جودة تصوير فني كلاسيكي، عينان حادتا التفاصيل جداً، أجواء خالدة كلاسيكية، مدى ديناميكي كامل من الأسود التام للإضاءة الساطعة",
         variables: [
           { key: "person", label_ar: "الشخص", label_en: "Person", default: "an elderly man" },
         ],
@@ -700,9 +700,9 @@ export const seedCategories: SeedCategory[] = [
         description_ar: "صورة جماعية دافئة تناسب المناسبات العائلية",
         description_en: "Warm group photo suited for family occasions",
         prompt_text_en:
-          "warm family group portrait of {{group}}, soft golden hour outdoor lighting, natural genuine smiles, coordinated {{color}} outfit tones, professional family photography style",
+          "warm family group portrait of {{group}}, soft golden hour outdoor lighting, natural genuine smiles and relaxed poses, coordinated {{color}} outfit tones, professional family photography style, gentle bokeh background, heartfelt authentic connection captured",
         prompt_display_ar:
-          "بورتريه عائلي جماعي دافئ لـ{{group}}، إضاءة خارجية ذهبية ناعمة، ابتسامات طبيعية صادقة، ألوان ملابس منسقة {{color}}، أسلوب تصوير عائلي احترافي",
+          "بورتريه عائلي جماعي دافئ لـ{{group}}، إضاءة خارجية ذهبية ناعمة، ابتسامات طبيعية صادقة ووضعيات مريحة، ألوان ملابس منسقة {{color}}، أسلوب تصوير عائلي احترافي، خلفية بوكيه ناعمة، ترابط أصيل ملموس",
         variables: [
           { key: "group", label_ar: "أفراد العائلة", label_en: "Family members", default: "a family of four" },
           { key: "color", label_ar: "ألوان الملابس", label_en: "Outfit colors", default: "beige and white" },
@@ -718,9 +718,9 @@ export const seedCategories: SeedCategory[] = [
         description_ar: "صورة جماعية احترافية لفريق العمل داخل المكتب",
         description_en: "Professional group photo of a team inside the office",
         prompt_text_en:
-          "professional corporate team portrait of {{team_size}} colleagues, modern office background, bright even lighting, confident friendly poses, business casual attire, high-end corporate photography",
+          "professional corporate team portrait of {{team_size}} colleagues, modern office background with soft depth blur, bright even lighting, confident friendly poses, business casual attire, high-end corporate photography, natural group composition with clear individual detail",
         prompt_display_ar:
-          "بورتريه احترافي لفريق عمل مكوّن من {{team_size}}، خلفية مكتب عصري، إضاءة ساطعة متساوية، وضعيات واثقة وودية، زي عمل غير رسمي، تصوير مؤسسي راقٍ",
+          "بورتريه احترافي لفريق عمل مكوّن من {{team_size}}، خلفية مكتب عصري بضبابية ناعمة، إضاءة ساطعة متساوية، وضعيات واثقة وودية، زي عمل غير رسمي، تصوير مؤسسي راقٍ، تكوين جماعي طبيعي مع وضوح تفاصيل كل فرد",
         variables: [
           { key: "team_size", label_ar: "عدد أفراد الفريق", label_en: "Team size", default: "five" },
         ],
@@ -744,9 +744,9 @@ export const seedCategories: SeedCategory[] = [
         description_ar: "شخصية بأسلوب رندر ثلاثي الأبعاد ناعم وحديث",
         description_en: "Character in a smooth modern 3D render style",
         prompt_text_en:
-          "cute 3D rendered character of {{subject}}, smooth clay-like material, soft studio lighting, vibrant {{color}} colors, Pixar-inspired style, centered composition, high quality render",
+          "cute 3D rendered character of {{subject}}, smooth clay-like subsurface-scattering material, soft three-point studio lighting, vibrant {{color}} colors, Pixar/Disney-inspired stylized render, centered composition, ultra high quality octane-style render, crisp clean edges",
         prompt_display_ar:
-          "شخصية برندر ثلاثي الأبعاد لطيفة لـ{{subject}}، خامة ناعمة شبيهة بالصلصال، إضاءة استوديو ناعمة، ألوان زاهية {{color}}، أسلوب مستوحى من بيكسار، تكوين مركزي، رندر عالي الجودة",
+          "شخصية برندر ثلاثي الأبعاد لطيفة لـ{{subject}}، خامة ناعمة شبيهة بالصلصال مع تشتت ضوئي تحت السطح، إضاءة استوديو ثلاثية الاتجاه ناعمة، ألوان زاهية {{color}}، أسلوب مستوحى من بيكسار وديزني، تكوين مركزي، رندر فائق الجودة، حواف نظيفة حادة",
         variables: [
           { key: "subject", label_ar: "الموضوع", label_en: "Subject", default: "a small robot" },
           { key: "color", label_ar: "الألوان", label_en: "Colors", default: "orange and teal" },
@@ -763,9 +763,9 @@ export const seedCategories: SeedCategory[] = [
         description_ar: "مشهد ملون بأسلوب رسوم الأنمي الياباني",
         description_en: "Colorful scene drawn in Japanese anime art style",
         prompt_text_en:
-          "anime style illustration of {{subject}}, vibrant cel-shaded colors, detailed line art, dramatic {{lighting}} lighting, Japanese animation aesthetic, dynamic composition",
+          "high-quality anime style illustration of {{subject}}, vibrant cel-shaded colors with clean line art, dramatic {{lighting}} lighting with strong rim highlights, Japanese animation aesthetic, dynamic dramatic composition, crisp detailed background art, studio-quality frame",
         prompt_display_ar:
-          "رسمة بأسلوب الأنمي لـ{{subject}}، ألوان زاهية بتظليل خلوي، رسم خطوط دقيق، إضاءة {{lighting}} درامية، جمالية الرسوم المتحركة اليابانية، تكوين ديناميكي",
+          "رسمة عالية الجودة بأسلوب الأنمي لـ{{subject}}، ألوان زاهية بتظليل خلوي ورسم خطوط نظيف، إضاءة {{lighting}} درامية بإبرازات حافة قوية، جمالية الرسوم المتحركة اليابانية، تكوين درامي ديناميكي، خلفية دقيقة التفاصيل، جودة استوديو احترافية",
         variables: [
           { key: "subject", label_ar: "الموضوع", label_en: "Subject", default: "a warrior standing on a rooftop" },
           { key: "lighting", label_ar: "الإضاءة", label_en: "Lighting", default: "sunset" },
@@ -781,9 +781,9 @@ export const seedCategories: SeedCategory[] = [
         description_ar: "مشهد بجودة وأجواء لقطة فيلم سينمائي",
         description_en: "Scene with the quality and mood of a film still",
         prompt_text_en:
-          "cinematic movie still of {{scene}}, anamorphic lens flare, teal and orange color grading, dramatic atmosphere, wide aspect ratio composition, film grain, blockbuster quality",
+          "cinematic movie still of {{scene}}, anamorphic lens flare, rich teal-and-orange color grading, dramatic atmospheric haze, wide 2.39:1 aspect ratio composition, subtle film grain, blockbuster production quality, sharp focal subject with soft background falloff",
         prompt_display_ar:
-          "لقطة سينمائية من {{scene}}، توهج عدسة أنامورفيك، تدرج ألوان بين السماوي والبرتقالي، أجواء درامية، تكوين بنسبة عرض واسعة، حبيبات فيلم، جودة أفلام هوليوود",
+          "لقطة سينمائية من {{scene}}، توهج عدسة أنامورفيك، تدرج ألوان غني بين السماوي والبرتقالي، ضباب جوي درامي، تكوين بنسبة عرض سينمائية 2.39:1، حبيبات فيلم خفيفة، جودة إنتاج أفلام هوليوود، موضوع محوري حاد مع تلاشي خلفية ناعم",
         variables: [
           { key: "scene", label_ar: "المشهد", label_en: "Scene", default: "a lone figure walking through a rainy city street at night" },
         ],
@@ -798,9 +798,9 @@ export const seedCategories: SeedCategory[] = [
         description_ar: "رسمة ناعمة بأسلوب الألوان المائية اليدوية",
         description_en: "Soft handmade-feel illustration in watercolor style",
         prompt_text_en:
-          "delicate watercolor illustration of {{subject}}, soft flowing color bleeds, visible paper texture, pastel {{color}} tones, hand-painted artistic style, light and airy composition",
+          "delicate watercolor illustration of {{subject}}, soft flowing color bleeds with natural pigment granulation, visible textured paper grain, pastel {{color}} tones, authentic hand-painted artistic style, light airy composition, gallery-quality fine art finish",
         prompt_display_ar:
-          "رسمة ألوان مائية رقيقة لـ{{subject}}، سيولة ألوان ناعمة متداخلة، خامة ورق ظاهرة، درجات {{color}} باستيل، أسلوب فني مرسوم يدوياً، تكوين خفيف وهوائي",
+          "رسمة ألوان مائية رقيقة لـ{{subject}}، سيولة ألوان ناعمة متداخلة مع تحبب صبغي طبيعي، خامة ورق ظاهرة بوضوح، درجات {{color}} باستيل، أسلوب فني مرسوم يدوياً أصيل، تكوين خفيف وهوائي، لمسة نهائية بجودة معرض فني",
         variables: [
           { key: "subject", label_ar: "الموضوع", label_en: "Subject", default: "a bouquet of desert flowers" },
           { key: "color", label_ar: "الألوان", label_en: "Colors", default: "warm terracotta" },
@@ -816,9 +816,9 @@ export const seedCategories: SeedCategory[] = [
         description_ar: "تصميم إيزومتري نظيف يناسب الشرح البصري والتقني",
         description_en: "Clean isometric design great for tech and explainer visuals",
         prompt_text_en:
-          "isometric illustration of {{scene}}, clean geometric shapes, flat vibrant colors, soft shadows, miniature diorama feel, modern tech illustration style",
+          "isometric illustration of {{scene}}, precise clean geometric shapes at true 30-degree isometric angles, flat vibrant colors, soft consistent shadows, miniature diorama feel, modern tech illustration style, crisp vector-quality edges, polished product-explainer quality",
         prompt_display_ar:
-          "رسمة إيزومترية لـ{{scene}}، أشكال هندسية نظيفة، ألوان مسطحة زاهية، ظلال ناعمة، طابع الديوراما المصغرة، أسلوب رسم تقني عصري",
+          "رسمة إيزومترية لـ{{scene}}، أشكال هندسية نظيفة بزاوية إيزومترية دقيقة 30 درجة، ألوان مسطحة زاهية، ظلال ناعمة متسقة، طابع الديوراما المصغرة، أسلوب رسم تقني عصري، حواف بجودة فيكتور نظيفة، جودة شرح منتج مصقولة",
         variables: [
           { key: "scene", label_ar: "المشهد", label_en: "Scene", default: "a small coffee shop interior" },
         ],
@@ -833,9 +833,9 @@ export const seedCategories: SeedCategory[] = [
         description_ar: "تكوين فني معاصر مبني على الخط العربي",
         description_en: "Contemporary artistic composition built on Arabic calligraphy",
         prompt_text_en:
-          "artistic Arabic calligraphy composition of the word '{{word}}', elegant flowing script, gold ink accents on a {{color}} textured background, modern Islamic art style, high detail",
+          "artistic Arabic calligraphy composition of the word '{{word}}', elegant flowing thuluth-inspired script, refined gold ink accents on a richly textured {{color}} background, modern Islamic art style, intricate fine detail, gallery-quality fine art finish",
         prompt_display_ar:
-          "لوحة خط عربي فنية لكلمة '{{word}}'، خط انسيابي أنيق، لمسات حبر ذهبي على خلفية بخامة {{color}}، أسلوب فني إسلامي معاصر، تفاصيل عالية",
+          "لوحة خط عربي فنية لكلمة '{{word}}'، خط انسيابي أنيق مستوحى من خط الثلث، لمسات حبر ذهبي راقية على خلفية بخامة غنية {{color}}، أسلوب فني إسلامي معاصر، تفاصيل دقيقة ومتقنة، لمسة نهائية بجودة معرض فني",
         variables: [
           { key: "word", label_ar: "الكلمة", label_en: "Word", default: "بسم الله" },
           { key: "color", label_ar: "لون الخلفية", label_en: "Background color", default: "deep emerald green" },
@@ -851,9 +851,9 @@ export const seedCategories: SeedCategory[] = [
         description_ar: "بورتريه ملون بأسلوب البوب آرت الجريء",
         description_en: "Bold colorful portrait in the pop art style",
         prompt_text_en:
-          "pop art style portrait of {{subject}}, bold flat {{color}} color blocks, thick black outlines, halftone dot pattern, Andy Warhol inspired aesthetic, high contrast graphic style",
+          "pop art style portrait of {{subject}}, bold flat {{color}} color blocks with precise registration, thick clean black outlines, classic halftone dot pattern, Andy Warhol inspired aesthetic, high contrast graphic style, crisp screen-print quality finish",
         prompt_display_ar:
-          "بورتريه بأسلوب البوب آرت لـ{{subject}}، كتل ألوان مسطحة جريئة {{color}}، خطوط خارجية سوداء سميكة، نمط نقاط هالفتون، جمالية مستوحاة من آندي وارهول، أسلوب رسومي عالي التباين",
+          "بورتريه بأسلوب البوب آرت لـ{{subject}}، كتل ألوان مسطحة جريئة {{color}} بمحاذاة دقيقة، خطوط خارجية سوداء سميكة ونظيفة، نمط نقاط هالفتون كلاسيكي، جمالية مستوحاة من آندي وارهول، أسلوب رسومي عالي التباين، لمسة نهائية بجودة طباعة الشاشة الحريرية",
         variables: [
           { key: "subject", label_ar: "الموضوع", label_en: "Subject", default: "a woman" },
           { key: "color", label_ar: "الألوان", label_en: "Colors", default: "hot pink and yellow" },
@@ -869,9 +869,9 @@ export const seedCategories: SeedCategory[] = [
         description_ar: "مشهد مدينة مستقبلية بأضواء نيون ساطعة",
         description_en: "A futuristic city scene lit with vivid neon lights",
         prompt_text_en:
-          "cyberpunk futuristic scene of {{scene}}, glowing neon {{color}} lights, rain-soaked reflective streets, towering holographic signs, moody atmospheric fog, highly detailed digital art",
+          "cyberpunk futuristic scene of {{scene}}, glowing neon {{color}} lights reflected on rain-soaked streets, towering holographic signage, moody atmospheric fog with volumetric light rays, highly detailed digital concept-art quality, cinematic wide composition",
         prompt_display_ar:
-          "مشهد سايبربانك مستقبلي لـ{{scene}}، أضواء نيون متوهجة {{color}}، شوارع مبللة عاكسة، لافتات هولوغرافية شاهقة، ضباب جوي غامض، فن رقمي عالي التفاصيل",
+          "مشهد سايبربانك مستقبلي لـ{{scene}}، أضواء نيون متوهجة {{color}} منعكسة على شوارع مبللة، لافتات هولوغرافية شاهقة، ضباب جوي غامض بأشعة ضوئية حجمية، فن رقمي عالي التفاصيل بجودة concept art، تكوين سينمائي واسع",
         variables: [
           { key: "scene", label_ar: "المشهد", label_en: "Scene", default: "a busy night street market" },
           { key: "color", label_ar: "لون الأضواء", label_en: "Light color", default: "cyan and magenta" },
@@ -896,9 +896,9 @@ export const seedCategories: SeedCategory[] = [
         description_ar: "غلاف مربع جذاب يناسب منصات البودكاست",
         description_en: "Eye-catching square cover suited for podcast platforms",
         prompt_text_en:
-          "modern podcast cover art design, bold {{color}} color scheme, abstract sound wave graphic element, large space for title text, professional audio branding style, square format",
+          "modern podcast cover art design, bold {{color}} color scheme with strong visual identity, abstract sound-wave graphic element, large clearly reserved space for title text, professional audio-branding style, square 3000x3000 format, crisp streaming-platform-ready quality",
         prompt_display_ar:
-          "تصميم غلاف بودكاست عصري، ألوان جريئة بدرجة {{color}}، عنصر رسومي لموجات صوتية تجريدية، مساحة كبيرة لعنوان الحلقة، أسلوب هوية صوتية احترافي، مقاس مربع",
+          "تصميم غلاف بودكاست عصري، ألوان جريئة بدرجة {{color}} بهوية بصرية قوية، عنصر رسومي لموجات صوتية تجريدية، مساحة كبيرة محجوزة بوضوح لعنوان الحلقة، أسلوب هوية صوتية احترافي، مقاس مربع 3000×3000، جودة جاهزة لمنصات البث",
         variables: [
           { key: "color", label_ar: "اللون", label_en: "Color", default: "deep purple and orange" },
         ],
@@ -914,9 +914,9 @@ export const seedCategories: SeedCategory[] = [
         description_ar: "غلاف احترافي لكتاب رقمي أو دليل إرشادي",
         description_en: "Professional cover for a digital book or guide",
         prompt_text_en:
-          "professional ebook cover design about {{topic}}, minimal modern layout, {{color}} color palette, large title text space, subtle abstract background graphic, publishing quality",
+          "professional ebook cover design about {{topic}}, minimal modern layout with clear typographic hierarchy, refined {{color}} color palette, large reserved title text space, subtle abstract background graphic, publishing-house quality, crisp print-and-digital-ready resolution",
         prompt_display_ar:
-          "تصميم غلاف كتاب إلكتروني عن {{topic}}، تخطيط عصري بسيط، لوحة ألوان {{color}}، مساحة نص عنوان كبيرة، رسم خلفية تجريدي خفيف، جودة نشر احترافية",
+          "تصميم غلاف كتاب إلكتروني عن {{topic}}، تخطيط عصري بسيط بتسلسل نصي واضح، لوحة ألوان راقية {{color}}، مساحة نص عنوان كبيرة محجوزة، رسم خلفية تجريدي خفيف، جودة دار نشر احترافية، دقة جاهزة للطباعة والرقمي",
         variables: [
           { key: "topic", label_ar: "الموضوع", label_en: "Topic", default: "digital marketing" },
           { key: "color", label_ar: "الألوان", label_en: "Colors", default: "navy and gold" },
@@ -932,9 +932,9 @@ export const seedCategories: SeedCategory[] = [
         description_ar: "صورة مصغرة لافتة تزيد نسبة النقر على الفيديو",
         description_en: "Attention-grabbing thumbnail to boost video click-through",
         prompt_text_en:
-          "high contrast YouTube thumbnail design about {{topic}}, bold expressive focal subject, bright {{color}} background, large readable text space, exciting energetic composition",
+          "high contrast YouTube thumbnail design about {{topic}}, bold expressive focal subject with exaggerated emotion, bright {{color}} background, large clearly readable text space, exciting energetic composition, scroll-stopping click-through optimized design",
         prompt_display_ar:
-          "تصميم صورة مصغرة ليوتيوب عالي التباين عن {{topic}}، عنصر محوري تعبيري بارز، خلفية زاهية بلون {{color}}، مساحة نص كبيرة وواضحة، تكوين حيوي ومثير",
+          "تصميم صورة مصغرة ليوتيوب عالي التباين عن {{topic}}، عنصر محوري تعبيري بارز بمشاعر مبالغ فيها بقصد الجذب، خلفية زاهية بلون {{color}}، مساحة نص كبيرة وواضحة القراءة، تكوين حيوي ومثير، تصميم محسّن لزيادة نسبة النقر",
         variables: [
           { key: "topic", label_ar: "الموضوع", label_en: "Topic", default: "a tech review" },
           { key: "color", label_ar: "لون الخلفية", label_en: "Background color", default: "bright yellow" },
@@ -950,9 +950,9 @@ export const seedCategories: SeedCategory[] = [
         description_ar: "بانر بروفايل يعكس هوية احترافية على لينكدإن",
         description_en: "Profile banner reflecting a professional identity on LinkedIn",
         prompt_text_en:
-          "professional LinkedIn banner design, wide format, clean corporate {{color}} palette, subtle geometric background pattern, elegant space for name and title text, business networking style",
+          "professional LinkedIn banner design, wide 1584x396 format, clean corporate {{color}} palette, subtle geometric background pattern, elegant clearly reserved space for name and title text, business networking style, crisp polished finish",
         prompt_display_ar:
-          "تصميم بانر لينكدإن احترافي، مقاس عريض، لوحة ألوان مؤسسية نظيفة {{color}}، نمط هندسي خفيف في الخلفية، مساحة أنيقة للاسم والمسمى الوظيفي، أسلوب تواصل مهني",
+          "تصميم بانر لينكدإن احترافي، مقاس عريض 1584×396، لوحة ألوان مؤسسية نظيفة {{color}}، نمط هندسي خفيف في الخلفية، مساحة أنيقة محجوزة للاسم والمسمى الوظيفي، أسلوب تواصل مهني، لمسة نهائية نظيفة مصقولة",
         variables: [
           { key: "color", label_ar: "الألوان", label_en: "Colors", default: "navy blue" },
         ],
@@ -967,9 +967,9 @@ export const seedCategories: SeedCategory[] = [
         description_ar: "بوستر إعلاني جذاب للفعاليات والمؤتمرات",
         description_en: "Eye-catching poster design for events and conferences",
         prompt_text_en:
-          "vibrant event poster design for {{event}}, dynamic layered composition, bold {{color}} color scheme, large space for event details text, modern festival poster style",
+          "vibrant event poster design for {{event}}, dynamic layered composition with clear visual hierarchy, bold {{color}} color scheme, large clearly reserved space for event details text, modern festival poster style, crisp print-ready resolution",
         prompt_display_ar:
-          "تصميم بوستر فعالية نابض بالحياة لـ{{event}}، تكوين طبقات ديناميكي، ألوان جريئة {{color}}، مساحة كبيرة لتفاصيل الفعالية، أسلوب بوستر مهرجانات عصري",
+          "تصميم بوستر فعالية نابض بالحياة لـ{{event}}، تكوين طبقات ديناميكي بتسلسل بصري واضح، ألوان جريئة {{color}}، مساحة كبيرة محجوزة لتفاصيل الفعالية، أسلوب بوستر مهرجانات عصري، دقة جاهزة للطباعة",
         variables: [
           { key: "event", label_ar: "الفعالية", label_en: "Event", default: "a tech conference" },
           { key: "color", label_ar: "الألوان", label_en: "Colors", default: "electric blue and purple" },
@@ -985,9 +985,9 @@ export const seedCategories: SeedCategory[] = [
         description_ar: "غلاف مربع نابض بالحياة لقوائم التشغيل الموسيقية",
         description_en: "Vibrant square cover art for music playlists",
         prompt_text_en:
-          "vibrant music playlist cover art for a {{genre}} playlist, abstract flowing color shapes, {{color}} gradient palette, dynamic energetic composition, square streaming platform format",
+          "vibrant music playlist cover art for a {{genre}} playlist, abstract flowing color shapes with organic motion, smooth {{color}} gradient palette, dynamic energetic composition, square streaming-platform format, crisp modern digital-art finish",
         prompt_display_ar:
-          "غلاف قائمة تشغيل موسيقية نابض بالحياة لموسيقى {{genre}}، أشكال لونية متدفقة تجريدية، لوحة تدرج {{color}}، تكوين ديناميكي حيوي، مقاس مربع لمنصات البث",
+          "غلاف قائمة تشغيل موسيقية نابض بالحياة لموسيقى {{genre}}، أشكال لونية متدفقة بحركة عضوية، لوحة تدرج ناعمة {{color}}، تكوين ديناميكي حيوي، مقاس مربع لمنصات البث، لمسة نهائية رقمية عصرية نظيفة",
         variables: [
           { key: "genre", label_ar: "نوع الموسيقى", label_en: "Music genre", default: "chill lofi" },
           { key: "color", label_ar: "التدرج اللوني", label_en: "Gradient", default: "purple to blue" },
@@ -1003,9 +1003,9 @@ export const seedCategories: SeedCategory[] = [
         description_ar: "غلاف بروفايل عريض يعكس هوية العلامة",
         description_en: "Wide profile header reflecting the brand's identity",
         prompt_text_en:
-          "wide social media profile header design about {{topic}}, minimal modern {{color}} background, subtle brand pattern, clean composition with space for profile photo overlay, professional look",
+          "wide social media profile header design about {{topic}}, minimal modern {{color}} background, subtle brand pattern, clean composition with clearly reserved space for profile photo overlay, professional polished look, crisp digital-ready resolution",
         prompt_display_ar:
-          "تصميم غلاف بروفايل عريض لمنصة تواصل عن {{topic}}، خلفية عصرية بسيطة بلون {{color}}، نمط علامة تجارية خفيف، تكوين نظيف مع مساحة لصورة البروفايل، مظهر احترافي",
+          "تصميم غلاف بروفايل عريض لمنصة تواصل عن {{topic}}، خلفية عصرية بسيطة بلون {{color}}، نمط علامة تجارية خفيف، تكوين نظيف مع مساحة محجوزة بوضوح لصورة البروفايل، مظهر احترافي مصقول، دقة رقمية جاهزة",
         variables: [
           { key: "topic", label_ar: "الموضوع", label_en: "Topic", default: "a design studio" },
           { key: "color", label_ar: "لون الخلفية", label_en: "Background color", default: "charcoal and teal" },
@@ -1030,9 +1030,9 @@ export const seedCategories: SeedCategory[] = [
         description_ar: "تصميم احتفالي بأجواء رمضان للمتاجر والعلامات",
         description_en: "Festive Ramadan-themed design for stores and brands",
         prompt_text_en:
-          "elegant Ramadan greeting design, ornate crescent moon and lantern illustration, warm {{color}} tones with gold accents, arabesque pattern details, festive Islamic aesthetic, space for greeting text",
+          "elegant Ramadan greeting design, intricately ornate crescent moon and lantern illustration, warm {{color}} tones with fine gold-leaf accents, detailed arabesque pattern work, festive Islamic aesthetic, clearly reserved space for greeting text, premium print-quality finish",
         prompt_display_ar:
-          "تصميم تهنئة رمضانية أنيق، رسم هلال وفانوس مزخرف، درجات {{color}} دافئة مع لمسات ذهبية، تفاصيل زخرفة عربية، طابع احتفالي إسلامي، مساحة لنص التهنئة",
+          "تصميم تهنئة رمضانية أنيق، رسم هلال وفانوس مزخرف بدقة متقنة، درجات {{color}} دافئة مع لمسات ذهبية دقيقة، زخرفة عربية مفصلة، طابع احتفالي إسلامي، مساحة محجوزة بوضوح لنص التهنئة، لمسة نهائية فاخرة بجودة الطباعة",
         variables: [
           { key: "color", label_ar: "اللون", label_en: "Color", default: "deep purple" },
         ],
@@ -1048,9 +1048,9 @@ export const seedCategories: SeedCategory[] = [
         description_ar: "بانر مبهج للاحتفال بالعيد ومناسبات العروض",
         description_en: "Cheerful banner for Eid celebrations and related promotions",
         prompt_text_en:
-          "joyful Eid celebration banner design, decorative geometric Islamic patterns, bright {{color}} festive colors, fireworks and lantern illustrations, space for greeting message, high quality",
+          "joyful Eid celebration banner design, intricate decorative geometric Islamic patterns, bright {{color}} festive colors, detailed fireworks and lantern illustrations, clearly reserved space for greeting message, high production quality, premium festive finish",
         prompt_display_ar:
-          "تصميم بانر احتفال بالعيد مفعم بالبهجة، زخارف إسلامية هندسية، ألوان احتفالية زاهية {{color}}، رسومات ألعاب نارية وفوانيس، مساحة لرسالة التهنئة، جودة عالية",
+          "تصميم بانر احتفال بالعيد مفعم بالبهجة، زخارف إسلامية هندسية متقنة، ألوان احتفالية زاهية {{color}}، رسومات ألعاب نارية وفوانيس دقيقة، مساحة محجوزة بوضوح لرسالة التهنئة، جودة إنتاج عالية، لمسة احتفالية فاخرة",
         variables: [
           { key: "color", label_ar: "الألوان", label_en: "Colors", default: "gold and green" },
         ],
@@ -1065,9 +1065,9 @@ export const seedCategories: SeedCategory[] = [
         description_ar: "تصميم فخم يحتفي بمناسبة اليوم الوطني",
         description_en: "A proud design celebrating National Day",
         prompt_text_en:
-          "patriotic national day poster design, flag colors {{color}}, falcon and heritage pattern silhouettes, fireworks in the sky, dramatic sunset background, celebratory space themed composition",
+          "patriotic national day poster design, flag-inspired {{color}} color palette, detailed falcon silhouette and heritage pattern work, fireworks bursting in the sky, dramatic sunset background with rich color grading, celebratory composition true to the occasion's spirit, premium print-ready finish",
         prompt_display_ar:
-          "تصميم بوستر وطني فخم، ألوان العلم {{color}}، ظلال صقر وزخارف تراثية، ألعاب نارية في السماء، خلفية غروب درامية، تكوين احتفالي بروح المناسبة",
+          "تصميم بوستر وطني فخم، لوحة ألوان مستوحاة من العلم {{color}}، ظلال صقر وزخارف تراثية دقيقة، ألعاب نارية منفجرة في السماء، خلفية غروب درامية بتدرج ألوان غني، تكوين احتفالي بروح المناسبة، لمسة نهائية فاخرة جاهزة للطباعة",
         variables: [
           { key: "color", label_ar: "ألوان العلم", label_en: "Flag colors", default: "green and white" },
         ],
@@ -1082,9 +1082,9 @@ export const seedCategories: SeedCategory[] = [
         description_ar: "تصميم موسمي حماسي لحملات التخفيضات الكبرى",
         description_en: "Energetic seasonal design for major sale campaigns",
         prompt_text_en:
-          "high energy seasonal sale campaign design for {{season}}, bold '{{discount}}' text placeholder, dynamic burst shapes, vibrant {{color}} color scheme, exciting retail promotion aesthetic",
+          "high energy seasonal sale campaign design for {{season}}, bold '{{discount}}' text placeholder as the clear focal point, dynamic burst shapes radiating outward, vibrant {{color}} color scheme, exciting retail promotion aesthetic, scroll-stopping crisp finish",
         prompt_display_ar:
-          "تصميم حملة تخفيضات موسمية حماسي لـ{{season}}، مساحة نصية بارزة لعبارة '{{discount}}'، أشكال انفجارية ديناميكية، ألوان زاهية {{color}}، طابع ترويجي مثير للتجزئة",
+          "تصميم حملة تخفيضات موسمية حماسي لـ{{season}}، مساحة نصية بارزة وواضحة لعبارة '{{discount}}' كنقطة تركيز، أشكال انفجارية ديناميكية منطلقة للخارج، ألوان زاهية {{color}}، طابع ترويجي مثير للتجزئة، لمسة نهائية نظيفة توقف التمرير",
         variables: [
           { key: "season", label_ar: "الموسم", label_en: "Season", default: "end of season sale" },
           { key: "discount", label_ar: "نسبة الخصم", label_en: "Discount", default: "UP TO 70%" },
@@ -1101,9 +1101,9 @@ export const seedCategories: SeedCategory[] = [
         description_ar: "تصميم أنيق للاحتفال بمناسبة التخرج",
         description_en: "Elegant design celebrating a graduation milestone",
         prompt_text_en:
-          "elegant graduation celebration design, graduation cap and diploma illustration, confetti details, soft {{color}} festive palette, space for congratulatory text, joyful academic milestone style",
+          "elegant graduation celebration design, detailed graduation cap and diploma illustration, fine confetti details, soft {{color}} festive palette, clearly reserved space for congratulatory text, joyful academic milestone style, premium polished finish",
         prompt_display_ar:
-          "تصميم احتفالي أنيق بمناسبة التخرج، رسم قبعة تخرج وشهادة، تفاصيل قصاصات احتفالية، لوحة ألوان ناعمة {{color}}، مساحة لنص التهنئة، طابع بهيج لإنجاز أكاديمي",
+          "تصميم احتفالي أنيق بمناسبة التخرج، رسم قبعة تخرج وشهادة دقيق، تفاصيل قصاصات احتفالية ناعمة، لوحة ألوان ناعمة {{color}}، مساحة محجوزة بوضوح لنص التهنئة، طابع بهيج لإنجاز أكاديمي، لمسة نهائية فاخرة مصقولة",
         variables: [
           { key: "color", label_ar: "الألوان", label_en: "Colors", default: "navy and gold" },
         ],
@@ -1118,9 +1118,9 @@ export const seedCategories: SeedCategory[] = [
         description_ar: "تصميم دعوة زفاف راقٍ بلمسة عربية",
         description_en: "Refined wedding invitation with an Arabic touch",
         prompt_text_en:
-          "luxurious wedding invitation design, delicate floral {{color}} illustrations, elegant ornamental border, soft romantic color palette, space for names and date text, premium stationery style",
+          "luxurious wedding invitation design, delicate botanically-accurate floral {{color}} illustrations, elegant fine-line ornamental border, soft romantic color palette, clearly reserved space for names and date text, premium stationery finish, gallery-quality fine detail",
         prompt_display_ar:
-          "تصميم دعوة زفاف فاخرة، رسومات زهور دقيقة بلون {{color}}، إطار زخرفي أنيق، لوحة ألوان رومانسية ناعمة، مساحة لاسمي العروسين والتاريخ، أسلوب قرطاسية راقٍ",
+          "تصميم دعوة زفاف فاخرة، رسومات زهور دقيقة ونباتياً واقعية بلون {{color}}، إطار زخرفي أنيق بخطوط رفيعة، لوحة ألوان رومانسية ناعمة، مساحة محجوزة بوضوح لاسمي العروسين والتاريخ، لمسة نهائية فاخرة بجودة القرطاسية الراقية",
         variables: [
           { key: "color", label_ar: "لون الزهور", label_en: "Floral color", default: "blush pink and gold" },
         ],
@@ -1135,9 +1135,9 @@ export const seedCategories: SeedCategory[] = [
         description_ar: "تصميم احتفالي متلألئ لمناسبة رأس السنة الميلادية",
         description_en: "Sparkling festive design for New Year celebrations",
         prompt_text_en:
-          "festive New Year celebration design, glittering fireworks and confetti, bold '{{year}}' number typography, dark {{color}} background with sparkling light bokeh, celebratory countdown atmosphere",
+          "festive New Year celebration design, glittering fireworks and fine confetti detail, bold '{{year}}' number typography as the centerpiece, dark {{color}} background with sparkling bokeh light, celebratory countdown atmosphere, premium crisp finish",
         prompt_display_ar:
-          "تصميم احتفالي برأس السنة، ألعاب نارية وقصاصات متلألئة، خط بارز لرقم السنة '{{year}}'، خلفية داكنة بلون {{color}} مع إضاءة بوكيه متلألئة، أجواء عد تنازلي احتفالية",
+          "تصميم احتفالي برأس السنة، ألعاب نارية وقصاصات متلألئة دقيقة، خط بارز لرقم السنة '{{year}}' كنقطة مركزية، خلفية داكنة بلون {{color}} مع إضاءة بوكيه متلألئة، أجواء عد تنازلي احتفالية، لمسة نهائية فاخرة نظيفة",
         variables: [
           { key: "year", label_ar: "السنة", label_en: "Year", default: "2027" },
           { key: "color", label_ar: "لون الخلفية", label_en: "Background color", default: "midnight blue and gold" },
@@ -1153,9 +1153,9 @@ export const seedCategories: SeedCategory[] = [
         description_ar: "تصميم دافئ ورقيق للاحتفاء بعيد الأم",
         description_en: "Warm gentle design celebrating Mother's Day",
         prompt_text_en:
-          "gentle Mother's Day celebration design, soft blooming {{flower}} flowers, warm pastel {{color}} palette, delicate hand-drawn illustration style, tender space for a heartfelt message",
+          "gentle Mother's Day celebration design, soft blooming {{flower}} flowers with delicate botanical detail, warm pastel {{color}} palette, tender hand-drawn illustration style, clearly reserved space for a heartfelt message, premium gentle finish",
         prompt_display_ar:
-          "تصميم رقيق للاحتفاء بعيد الأم، زهور {{flower}} متفتحة ناعمة، لوحة ألوان باستيل دافئة {{color}}، أسلوب رسم يدوي رقيق، مساحة حانية لرسالة من القلب",
+          "تصميم رقيق للاحتفاء بعيد الأم، زهور {{flower}} متفتحة ناعمة بتفاصيل نباتية دقيقة، لوحة ألوان باستيل دافئة {{color}}، أسلوب رسم يدوي رقيق حنون، مساحة محجوزة بوضوح لرسالة من القلب، لمسة نهائية فاخرة رقيقة",
         variables: [
           { key: "flower", label_ar: "نوع الزهور", label_en: "Flower type", default: "roses" },
           { key: "color", label_ar: "الألوان", label_en: "Colors", default: "blush pink and cream" },

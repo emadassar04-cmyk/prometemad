@@ -46,7 +46,11 @@
     "addToFavorites": "أضف للمفضلة",
     "removeFromFavorites": "إزالة من المفضلة",
     "relatedPrompts": "برومبتات مشابهة",
-    "usedCount": "استُخدم {count} مرة"
+    "usedCount": "استُخدم {count} مرة",
+    "uploadPhoto": "ارفع صورتك",
+    "choosePhoto": "اختر صورة",
+    "photoPrivacyNote": "صورتك بتتبعت بس لتوليد هذه الصورة، ومش بنخزنها على سيرفراتنا خالص.",
+    "photoRequired": "ارفع صورة الأول"
   },
   "myImages": {
     "title": "صوري",

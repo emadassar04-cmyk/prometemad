@@ -1,9 +1,9 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 import Image from "next/image";
 import { useLocale, useTranslations } from "next-intl";
-import { Check, Copy, ExternalLink, Loader2, Sparkles } from "lucide-react";
+import { Check, Copy, ExternalLink, Loader2, Sparkles, Upload } from "lucide-react";
 import { createSupabaseBrowserClient } from "@/lib/supabase/client";
 import {
   parsePromptVariables,
@@ -43,6 +43,9 @@ export function PromptWorkspace({
   const [generating, setGenerating] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [resultImageUrl, setResultImageUrl] = useState<string | null>(null);
+  const [photo, setPhoto] = useState<File | null>(null);
+  const [photoPreviewUrl, setPhotoPreviewUrl] = useState<string | null>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   const finalPromptEn = substituteVariables(prompt.prompt_text_en, values);
   const finalPromptAr = substituteVariables(prompt.prompt_display_ar, values);
@@ -63,9 +66,22 @@ export function PromptWorkspace({
     window.open("https://gemini.google.com/app", "_blank", "noopener,noreferrer");
   }
 
+  function handlePhotoChange(file: File | null) {
+    setPhoto(file);
+    setPhotoPreviewUrl((prev) => {
+      if (prev) URL.revokeObjectURL(prev);
+      return file ? URL.createObjectURL(file) : null;
+    });
+  }
+
   async function handleGenerate() {
     if (!isSignedIn) {
       window.location.href = `/${locale}/sign-in`;
+      return;
+    }
+
+    if (prompt.requires_photo && !photo) {
+      setError(t("photoRequired"));
       return;
     }
 
@@ -73,11 +89,22 @@ export function PromptWorkspace({
     setError(null);
 
     try {
-      const response = await fetch("/api/generate", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ promptId: prompt.id, variables: values }),
-      });
+      const response = prompt.requires_photo
+        ? await (() => {
+            const formData = new FormData();
+            formData.set("promptId", prompt.id);
+            formData.set("variables", JSON.stringify(values));
+            formData.set("photo", photo as File);
+            return fetch("/api/generate-photo", {
+              method: "POST",
+              body: formData,
+            });
+          })()
+        : await fetch("/api/generate", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ promptId: prompt.id, variables: values }),
+          });
       const data = await response.json();
 
       if (response.status === 429) {
@@ -132,6 +159,42 @@ export function PromptWorkspace({
             isSignedIn={isSignedIn}
           />
         </div>
+
+        {prompt.requires_photo && (
+          <div className="flex flex-col gap-3 rounded-2xl border border-border bg-surface p-5">
+            <h2 className="text-sm font-semibold text-muted">
+              {t("uploadPhoto")}
+            </h2>
+            <input
+              ref={fileInputRef}
+              type="file"
+              accept="image/jpeg,image/png,image/webp"
+              className="hidden"
+              onChange={(e) => handlePhotoChange(e.target.files?.[0] ?? null)}
+            />
+            <button
+              type="button"
+              onClick={() => fileInputRef.current?.click()}
+              className="flex items-center justify-center gap-2 rounded-lg border border-dashed border-border px-4 py-6 text-sm text-muted transition-colors hover:border-accent hover:text-foreground"
+            >
+              {photoPreviewUrl ? (
+                <span className="relative h-16 w-16 overflow-hidden rounded-lg">
+                  <Image
+                    src={photoPreviewUrl}
+                    alt=""
+                    fill
+                    sizes="64px"
+                    className="object-cover"
+                  />
+                </span>
+              ) : (
+                <Upload className="h-4 w-4" />
+              )}
+              {photo ? photo.name : t("choosePhoto")}
+            </button>
+            <p className="text-xs text-muted">{t("photoPrivacyNote")}</p>
+          </div>
+        )}
 
         {variables.length > 0 && (
           <div className="flex flex-col gap-3 rounded-2xl border border-border bg-surface p-5">

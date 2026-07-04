@@ -194,6 +194,7 @@ export type Database = {
           preview_image_url: string | null
           prompt_display_ar: string
           prompt_text_en: string
+          requires_photo: boolean
           search_vector_ar: unknown
           search_vector_en: unknown
           slug: string
@@ -217,6 +218,7 @@ export type Database = {
           preview_image_url?: string | null
           prompt_display_ar: string
           prompt_text_en: string
+          requires_photo?: boolean
           search_vector_ar?: unknown
           search_vector_en?: unknown
           slug: string
@@ -240,6 +242,7 @@ export type Database = {
           preview_image_url?: string | null
           prompt_display_ar?: string
           prompt_text_en?: string
+          requires_photo?: boolean
           search_vector_ar?: unknown
           search_vector_en?: unknown
           slug?: string

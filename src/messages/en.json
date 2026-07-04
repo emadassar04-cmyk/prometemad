@@ -46,7 +46,11 @@
     "addToFavorites": "Add to favorites",
     "removeFromFavorites": "Remove from favorites",
     "relatedPrompts": "Related prompts",
-    "usedCount": "Used {count} times"
+    "usedCount": "Used {count} times",
+    "uploadPhoto": "Upload your photo",
+    "choosePhoto": "Choose a photo",
+    "photoPrivacyNote": "Your photo is sent only to generate this image and is never stored on our servers.",
+    "photoRequired": "Please upload a photo first"
   },
   "myImages": {
     "title": "My Images",

@@ -20,6 +20,7 @@ export type SeedPrompt = {
   model: string;
   tags: string[];
   is_featured?: boolean;
+  requires_photo?: boolean;
 };
 
 export type SeedCategory = {
@@ -1163,6 +1164,42 @@ export const seedCategories: SeedCategory[] = [
         style: "gentle",
         model: MODEL,
         tags: ["مناسبات", "عيد الأم"],
+      },
+      {
+        slug: "photo-eid-greeting-card",
+        title_ar: "بطاقة تهنئة عيد بصورتك الشخصية",
+        title_en: "Eid Greeting Card With Your Photo",
+        description_ar: "ارفع صورتك وشوف نفسك في بطاقة تهنئة عيد فاخرة",
+        description_en: "Upload your photo and see yourself on a premium Eid greeting card",
+        prompt_text_en:
+          "place the person from the reference photo into an elegant {{occasion}} greeting card scene, preserving their exact facial features and identity, modest festive attire, ornate crescent moon and lantern decorations, warm gold tones, photorealistic seamless blend, clearly reserved space for a greeting message, premium greeting-card quality",
+        prompt_display_ar:
+          "وضع الشخص من الصورة المرجعية في مشهد بطاقة تهنئة {{occasion}} أنيقة، مع الحفاظ الكامل على ملامح وجهه الأصلية وهويته، زي احتفالي محتشم، زخارف هلال وفانوس، درجات ذهبية دافئة، مزج فوتوغرافي واقعي وسلس، مساحة محجوزة بوضوح لرسالة تهنئة، جودة بطاقة تهنئة فاخرة",
+        variables: [
+          { key: "occasion", label_ar: "المناسبة", label_en: "Occasion", default: "Eid al-Fitr" },
+        ],
+        style: "festive",
+        model: MODEL,
+        tags: ["مناسبات", "صورتك الشخصية"],
+        requires_photo: true,
+      },
+      {
+        slug: "photo-seasonal-portrait",
+        title_ar: "بورتريه موسمي بصورتك الشخصية",
+        title_en: "Seasonal Portrait With Your Photo",
+        description_ar: "ارفع صورتك وحوّلها لبورتريه سينمائي بأجواء الموسم",
+        description_en: "Upload your photo and turn it into a cinematic seasonal portrait",
+        prompt_text_en:
+          "place the person from the reference photo into a {{season}} outdoor portrait scene, preserving their exact facial features and identity, golden hour natural lighting, shallow depth of field with a softly blurred background, photorealistic seamless blend, editorial portrait quality",
+        prompt_display_ar:
+          "وضع الشخص من الصورة المرجعية في مشهد بورتريه خارجي بأجواء {{season}}، مع الحفاظ الكامل على ملامح وجهه الأصلية وهويته، إضاءة طبيعية من الساعة الذهبية، عمق ميدان ضحل مع خلفية ضبابية ناعمة، مزج فوتوغرافي واقعي وسلس، جودة بورتريه تحريري",
+        variables: [
+          { key: "season", label_ar: "الموسم", label_en: "Season", default: "spring garden" },
+        ],
+        style: "cinematic",
+        model: MODEL,
+        tags: ["مناسبات", "صورتك الشخصية"],
+        requires_photo: true,
       },
     ],
   },

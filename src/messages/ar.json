@@ -1,0 +1,86 @@
+{
+  "brand": {
+    "name": "برومبتلي",
+    "tagline": "برومبتات صور احترافية بالعربية… ونتيجة حقيقية بضغطة واحدة"
+  },
+  "nav": {
+    "library": "المكتبة",
+    "myImages": "صوري",
+    "favorites": "مفضلتي",
+    "admin": "الإدارة",
+    "signIn": "تسجيل الدخول",
+    "signOut": "تسجيل الخروج",
+    "account": "حسابي"
+  },
+  "home": {
+    "heroTitle": "ابحث عن البرومبت، خصّصه، وولّد صورتك في أقل من دقيقتين",
+    "heroSubtitle": "مكتبة برومبتات صور مصنّفة لصنّاع المحتوى والمسوّقين العرب — كل برومبت معه نتيجة حقيقية",
+    "searchPlaceholder": "ابحث عن برومبت… مثال: عرض منتج، رمضان، لوجو",
+    "filters": {
+      "all": "الكل",
+      "category": "الفئة",
+      "style": "الأسلوب",
+      "model": "النموذج"
+    },
+    "empty": "لا توجد نتائج مطابقة"
+  },
+  "prompt": {
+    "copy": "نسخ البرومبت",
+    "copied": "تم النسخ",
+    "displayAr": "العرض بالعربية",
+    "sourceEn": "النص المرسل للنموذج (إنجليزي)",
+    "variables": "خصّص المتغيرات",
+    "finalPreview": "معاينة البرومبت النهائي",
+    "generate": "ولّد الصورة",
+    "generating": "جارٍ التوليد…",
+    "generateError": "تعذّر توليد الصورة، حاول مرة أخرى",
+    "dailyLimitReached": "وصلت للحد اليومي (10 صور). عد غداً!",
+    "signInToGenerate": "سجّل الدخول لتوليد صورتك",
+    "addToFavorites": "أضف للمفضلة",
+    "removeFromFavorites": "إزالة من المفضلة",
+    "relatedPrompts": "برومبتات مشابهة",
+    "usedCount": "استُخدم {count} مرة"
+  },
+  "myImages": {
+    "title": "صوري",
+    "empty": "لم تولّد أي صورة بعد",
+    "browseLibrary": "تصفح المكتبة"
+  },
+  "favorites": {
+    "title": "مفضلتي",
+    "empty": "لم تُضِف أي برومبت للمفضلة بعد"
+  },
+  "auth": {
+    "signInTitle": "تسجيل الدخول",
+    "signUpTitle": "إنشاء حساب",
+    "email": "البريد الإلكتروني",
+    "password": "كلمة المرور",
+    "continueWithGoogle": "المتابعة عبر Google",
+    "orEmail": "أو عبر البريد الإلكتروني",
+    "submit": "تابع",
+    "switchToSignUp": "ليس لديك حساب؟ أنشئ واحداً",
+    "switchToSignIn": "لديك حساب بالفعل؟ سجّل الدخول"
+  },
+  "admin": {
+    "title": "لوحة الإدارة",
+    "prompts": "البرومبتات",
+    "stats": "الإحصاءات",
+    "newPrompt": "برومبت جديد",
+    "edit": "تعديل",
+    "delete": "حذف",
+    "save": "حفظ",
+    "cancel": "إلغاء",
+    "statusPublished": "منشور",
+    "statusDraft": "مسودة",
+    "statusArchived": "مؤرشف",
+    "totalPrompts": "إجمالي البرومبتات",
+    "totalGenerations": "إجمالي الصور المولدة",
+    "totalUsers": "إجمالي المستخدمين"
+  },
+  "common": {
+    "loading": "جارٍ التحميل…",
+    "error": "حدث خطأ ما",
+    "back": "رجوع",
+    "language": "English"
+  }
+}

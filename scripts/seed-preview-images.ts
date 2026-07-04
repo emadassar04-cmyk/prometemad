@@ -26,6 +26,11 @@ async function main() {
     process.exit(1);
   }
 
+  console.log(`Using Supabase URL: ${url}`);
+  console.log(
+    `Service role key loaded: ${serviceRoleKey.length} characters, starts with "${serviceRoleKey.slice(0, 6)}..."`,
+  );
+
   const supabase = createClient(url, serviceRoleKey);
 
   const { data: prompts, error } = await supabase
@@ -34,7 +39,15 @@ async function main() {
     .eq("status", "published")
     .is("preview_image_url", null);
 
-  if (error) throw error;
+  if (error) {
+    console.error("Failed to read prompts from Supabase:");
+    console.error(JSON.stringify(error, null, 2));
+    console.error(
+      "\nDouble-check NEXT_PUBLIC_SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY in .env.local " +
+        "(the service_role key, not the anon key — copy it fresh from Supabase Settings > API).",
+    );
+    process.exit(1);
+  }
   if (!prompts?.length) {
     console.log("Nothing to backfill — every published prompt already has a preview image.");
     return;
@@ -85,4 +98,8 @@ async function main() {
   console.log("Done.");
 }
 
-main();
+main().catch((err) => {
+  console.error("Unexpected error:");
+  console.error(err);
+  process.exit(1);
+});

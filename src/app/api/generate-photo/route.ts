@@ -5,7 +5,14 @@ import {
   sanitizeVariableValues,
   substituteVariables,
 } from "@/lib/prompt-variables";
-import { generateImageFromPhoto } from "@/lib/providers/fal";
+import { generateImageFromPhoto } from "@/lib/providers/gemini";
+
+const RESULT_BUCKET = "generations";
+const MIME_TO_EXT: Record<string, string> = {
+  "image/png": "png",
+  "image/jpeg": "jpg",
+  "image/webp": "webp",
+};
 
 const DAILY_LIMIT = 10;
 const MAX_VARIABLE_LENGTH = 200;
@@ -91,20 +98,37 @@ export async function POST(request: Request) {
   }
 
   try {
-    // The uploaded photo is sent straight to fal.ai as a data URI and is
+    // The uploaded photo is sent straight to Gemini as inline base64 and is
     // never written to our own storage or database — nothing about the
-    // user's face persists on our side beyond this request.
+    // user's face persists on our side beyond this request. Only the
+    // generated result image is saved, in the user's own storage folder.
     const photoBytes = Buffer.from(await photo.arrayBuffer());
-    const photoDataUri = `data:${photo.type};base64,${photoBytes.toString("base64")}`;
+    const photoBase64 = photoBytes.toString("base64");
 
-    const result = await generateImageFromPhoto(photoDataUri, finalPrompt);
+    const result = await generateImageFromPhoto(photoBase64, photo.type, finalPrompt);
+
+    const ext = MIME_TO_EXT[result.imageMimeType] ?? "png";
+    const path = `${user.id}/${generation.id}.${ext}`;
+    const resultBytes = Buffer.from(result.imageBase64, "base64");
+
+    const { error: uploadError } = await supabase.storage
+      .from(RESULT_BUCKET)
+      .upload(path, resultBytes, { contentType: result.imageMimeType });
+
+    if (uploadError) {
+      throw new Error(`storage upload failed: ${uploadError.message}`);
+    }
+
+    const {
+      data: { publicUrl },
+    } = supabase.storage.from(RESULT_BUCKET).getPublicUrl(path);
 
     await supabase
       .from("generations")
       .update({
         status: "succeeded",
-        image_url: result.imageUrl,
-        provider: result.provider,
+        image_url: publicUrl,
+        provider: "gemini",
       })
       .eq("id", generation.id);
 
@@ -114,7 +138,7 @@ export async function POST(request: Request) {
 
     return NextResponse.json({
       generationId: generation.id,
-      imageUrl: result.imageUrl,
+      imageUrl: publicUrl,
     });
   } catch {
     await supabase

@@ -48,7 +48,12 @@ export default async function HomePage({
 
   return (
     <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6">
-      <section className="mb-10 text-center">
+      <section className="relative mb-10 overflow-hidden px-4 py-6 text-center">
+        <div className="hero-glow" aria-hidden>
+          <span />
+          <span />
+          <span />
+        </div>
         <span className="mx-auto mb-5 inline-flex items-center rounded-full border border-border bg-surface/60 px-4 py-1.5 text-xs text-muted backdrop-blur">
           {t("badge")}
         </span>

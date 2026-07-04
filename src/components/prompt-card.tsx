@@ -27,7 +27,7 @@ export function PromptCard({
     : null;
 
   return (
-    <div className="group relative mb-4 break-inside-avoid overflow-hidden rounded-2xl border border-border bg-surface">
+    <div className="group relative mb-4 break-inside-avoid overflow-hidden rounded-2xl border border-border bg-surface transition-all duration-300 hover:-translate-y-1 hover:border-accent/50 hover:shadow-[0_16px_40px_-16px_rgb(212_175_55_/_0.35)]">
       <Link href={`/prompt/${prompt.slug}`} className="block">
         <div className="relative aspect-[4/5] w-full overflow-hidden bg-surface-elevated">
           {prompt.preview_image_url ? (

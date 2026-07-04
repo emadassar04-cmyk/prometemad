@@ -70,6 +70,25 @@ html[lang="en"] body {
 
 .accent-gradient-bg {
   background: var(--accent-gradient);
+  box-shadow: 0 8px 24px -8px rgb(212 175 55 / 0.45);
+}
+
+.header-border-glow {
+  position: relative;
+}
+
+.header-border-glow::after {
+  content: "";
+  position: absolute;
+  inset-inline: 0;
+  bottom: -1px;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgb(212 175 55 / 0.5) 50%,
+    transparent 100%
+  );
 }
 
 ::selection {

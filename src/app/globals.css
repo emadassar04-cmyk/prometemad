@@ -34,6 +34,21 @@ html {
 body {
   background: var(--background);
   color: var(--foreground);
+  position: relative;
+}
+
+/* Ambient marketing-page glow: soft accent-colored orbs fixed behind the
+   content, faint enough not to fight text contrast at any scroll depth. */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(600px circle at 15% -10%, rgb(139 92 246 / 0.22), transparent 60%),
+    radial-gradient(500px circle at 90% 10%, rgb(34 211 238 / 0.16), transparent 60%),
+    radial-gradient(700px circle at 50% 120%, rgb(139 92 246 / 0.12), transparent 60%);
 }
 
 html[lang="ar"] body {

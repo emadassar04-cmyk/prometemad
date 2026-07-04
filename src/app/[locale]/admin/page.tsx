@@ -1,4 +1,5 @@
 import { getTranslations, setRequestLocale } from "next-intl/server";
+import { ImageIcon, Sparkles, Users } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import { requireAdmin, getAdminStats } from "@/lib/data/admin";
 
@@ -27,19 +28,38 @@ export default async function AdminDashboardPage({
       </div>
 
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
-        <StatCard label={t("totalPrompts")} value={stats.totalPrompts} />
-        <StatCard label={t("totalGenerations")} value={stats.totalGenerations} />
-        <StatCard label={t("totalUsers")} value={stats.totalUsers} />
+        <StatCard
+          icon={Sparkles}
+          label={t("totalPrompts")}
+          value={stats.totalPrompts}
+        />
+        <StatCard
+          icon={ImageIcon}
+          label={t("totalGenerations")}
+          value={stats.totalGenerations}
+        />
+        <StatCard icon={Users} label={t("totalUsers")} value={stats.totalUsers} />
       </div>
     </div>
   );
 }
 
-function StatCard({ label, value }: { label: string; value: number }) {
+function StatCard({
+  icon: Icon,
+  label,
+  value,
+}: {
+  icon: React.ComponentType<{ className?: string }>;
+  label: string;
+  value: number;
+}) {
   return (
     <div className="rounded-2xl border border-border bg-surface p-6">
+      <div className="accent-gradient-bg mb-4 flex h-10 w-10 items-center justify-center rounded-full">
+        <Icon className="h-5 w-5 text-white" />
+      </div>
       <p className="text-sm text-muted">{label}</p>
-      <p className="mt-2 text-3xl font-bold">{value}</p>
+      <p className="mt-1 text-3xl font-bold">{value}</p>
     </div>
   );
 }

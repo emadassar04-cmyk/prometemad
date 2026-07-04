@@ -13,8 +13,12 @@
     "account": "Account"
   },
   "home": {
+    "badge": "The Arabic platform for ready-made image prompts",
     "heroTitle": "Find a prompt, customize it, generate your image in under two minutes",
     "heroSubtitle": "A curated image prompt library for Arab creators and marketers — every prompt comes with a real result",
+    "statPrompts": "professional prompts",
+    "statCategories": "marketing categories",
+    "statDailyLimit": "free images per day",
     "searchPlaceholder": "Search prompts… e.g. product shot, Ramadan, logo",
     "filters": {
       "all": "All",

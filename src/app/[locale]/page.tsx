@@ -49,12 +49,36 @@ export default async function HomePage({
   return (
     <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6">
       <section className="mb-10 text-center">
+        <span className="mx-auto mb-5 inline-flex items-center rounded-full border border-border bg-surface/60 px-4 py-1.5 text-xs text-muted backdrop-blur">
+          {t("badge")}
+        </span>
         <h1 className="mx-auto max-w-3xl text-3xl font-bold leading-tight sm:text-4xl">
           <span className="accent-gradient-text">{brand("name")}</span>
           {" — "}
           {t("heroTitle")}
         </h1>
         <p className="mx-auto mt-4 max-w-2xl text-muted">{t("heroSubtitle")}</p>
+
+        <div className="mx-auto mt-8 flex max-w-xl flex-wrap items-center justify-center gap-x-8 gap-y-3 text-sm">
+          <span>
+            <span className="accent-gradient-text font-bold">
+              {prompts.length}+
+            </span>{" "}
+            <span className="text-muted">{t("statPrompts")}</span>
+          </span>
+          <span className="hidden h-4 w-px bg-border sm:inline-block" />
+          <span>
+            <span className="accent-gradient-text font-bold">
+              {categoriesWithCounts.length}
+            </span>{" "}
+            <span className="text-muted">{t("statCategories")}</span>
+          </span>
+          <span className="hidden h-4 w-px bg-border sm:inline-block" />
+          <span>
+            <span className="accent-gradient-text font-bold">10</span>{" "}
+            <span className="text-muted">{t("statDailyLimit")}</span>
+          </span>
+        </div>
       </section>
 
       <section className="mb-10">

@@ -63,47 +63,79 @@ async function main() {
     `${regenerateAll ? "Regenerating" : "Generating"} previews for ${prompts.length} prompt(s)...`,
   );
 
+  let succeeded = 0;
+  let failed = 0;
+
   for (const prompt of prompts) {
-    const imageUrl = `https://image.pollinations.ai/prompt/${encodeURIComponent(
-      prompt.prompt_text_en,
-    )}?width=1024&height=1024&nologo=true`;
+    try {
+      const imageUrl = `https://image.pollinations.ai/prompt/${encodeURIComponent(
+        prompt.prompt_text_en,
+      )}?width=1024&height=1024&nologo=true`;
 
-    const response = await fetch(imageUrl);
-    if (!response.ok) {
-      console.error(`  ✗ ${prompt.slug}: Pollinations returned ${response.status}`);
-      continue;
+      const response = await fetchWithRetry(imageUrl);
+      if (!response.ok) {
+        console.error(`  ✗ ${prompt.slug}: Pollinations returned ${response.status}`);
+        failed++;
+        continue;
+      }
+
+      const bytes = new Uint8Array(await response.arrayBuffer());
+      const path = `${prompt.slug}.jpg`;
+
+      const { error: uploadError } = await supabase.storage
+        .from(BUCKET)
+        .upload(path, bytes, { contentType: "image/jpeg", upsert: true });
+
+      if (uploadError) {
+        console.error(`  ✗ ${prompt.slug}: upload failed — ${uploadError.message}`);
+        failed++;
+        continue;
+      }
+
+      const {
+        data: { publicUrl },
+      } = supabase.storage.from(BUCKET).getPublicUrl(path);
+
+      const { error: updateError } = await supabase
+        .from("prompts")
+        .update({ preview_image_url: publicUrl })
+        .eq("id", prompt.id);
+
+      if (updateError) {
+        console.error(`  ✗ ${prompt.slug}: db update failed — ${updateError.message}`);
+        failed++;
+        continue;
+      }
+
+      console.log(`  ok ${prompt.slug}`);
+      succeeded++;
+    } catch (err) {
+      console.error(
+        `  ✗ ${prompt.slug}: ${err instanceof Error ? err.message : String(err)}`,
+      );
+      failed++;
     }
-
-    const bytes = new Uint8Array(await response.arrayBuffer());
-    const path = `${prompt.slug}.jpg`;
-
-    const { error: uploadError } = await supabase.storage
-      .from(BUCKET)
-      .upload(path, bytes, { contentType: "image/jpeg", upsert: true });
-
-    if (uploadError) {
-      console.error(`  ✗ ${prompt.slug}: upload failed — ${uploadError.message}`);
-      continue;
-    }
-
-    const {
-      data: { publicUrl },
-    } = supabase.storage.from(BUCKET).getPublicUrl(path);
-
-    const { error: updateError } = await supabase
-      .from("prompts")
-      .update({ preview_image_url: publicUrl })
-      .eq("id", prompt.id);
-
-    if (updateError) {
-      console.error(`  ✗ ${prompt.slug}: db update failed — ${updateError.message}`);
-      continue;
-    }
-
-    console.log(`  ✓ ${prompt.slug}`);
   }
 
-  console.log("Done.");
+  console.log(`Done. ${succeeded} succeeded, ${failed} failed.`);
+  if (failed > 0) {
+    console.log("Re-run the same command to retry the failed ones — completed prompts are skipped unless you pass --all.");
+  }
+}
+
+async function fetchWithRetry(url: string, attempts = 3): Promise<Response> {
+  let lastError: unknown;
+  for (let i = 0; i < attempts; i++) {
+    try {
+      return await fetch(url, { signal: AbortSignal.timeout(30000) });
+    } catch (err) {
+      lastError = err;
+      if (i < attempts - 1) {
+        await new Promise((resolve) => setTimeout(resolve, 2000 * (i + 1)));
+      }
+    }
+  }
+  throw lastError;
 }
 
 main().catch((err) => {

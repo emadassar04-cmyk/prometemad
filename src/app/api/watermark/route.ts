@@ -102,7 +102,14 @@ export async function GET(request: Request) {
       });
     }
 
-    return new NextResponse(watermarked, {
+    // A raw Node Buffer as the body gets mangled somewhere in this Next.js
+    // version's response serialization (bytes >= 0x80 come out as repeated
+    // EF BF BD — the UTF-8 replacement character — as if the body were
+    // round-tripped through a string). A plain Uint8Array copy avoids
+    // whatever Buffer-specific path causes that. Confirmed via
+    // /api/admin/image-stats: identical byte count in and out, but content
+    // scrambled, only for the binary-response path (not the debug/JSON one).
+    return new NextResponse(new Uint8Array(watermarked), {
       status: 200,
       headers: { "Content-Type": "image/jpeg" },
     });

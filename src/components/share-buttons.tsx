@@ -4,16 +4,23 @@ import { useState } from "react";
 import { useTranslations } from "next-intl";
 import { Check, Share2 } from "lucide-react";
 
+function withUtm(url: string, source: string) {
+  const withParams = new URL(url);
+  withParams.searchParams.set("utm_source", source);
+  withParams.searchParams.set("utm_medium", "share");
+  withParams.searchParams.set("utm_campaign", "social_share");
+  return withParams.toString();
+}
+
 export function ShareButtons({ url, text }: { url: string; text?: string }) {
   const t = useTranslations("share");
   const [copied, setCopied] = useState(false);
   const [open, setOpen] = useState(false);
 
-  const encodedUrl = encodeURIComponent(url);
   const encodedText = encodeURIComponent(text ?? "");
 
   async function handleCopyLink() {
-    await navigator.clipboard.writeText(url);
+    await navigator.clipboard.writeText(withUtm(url, "copy_link"));
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   }
@@ -34,7 +41,7 @@ export function ShareButtons({ url, text }: { url: string; text?: string }) {
           className="absolute end-0 top-10 z-10 flex flex-col gap-1 rounded-xl border border-border bg-surface p-2 shadow-lg"
         >
           <a
-            href={`https://wa.me/?text=${encodedText}%20${encodedUrl}`}
+            href={`https://wa.me/?text=${encodedText}%20${encodeURIComponent(withUtm(url, "whatsapp"))}`}
             target="_blank"
             rel="noopener noreferrer"
             className="whitespace-nowrap rounded-lg px-3 py-1.5 text-start text-sm hover:bg-background"
@@ -42,7 +49,7 @@ export function ShareButtons({ url, text }: { url: string; text?: string }) {
             {t("whatsapp")}
           </a>
           <a
-            href={`https://twitter.com/intent/tweet?text=${encodedText}&url=${encodedUrl}`}
+            href={`https://twitter.com/intent/tweet?text=${encodedText}&url=${encodeURIComponent(withUtm(url, "twitter"))}`}
             target="_blank"
             rel="noopener noreferrer"
             className="whitespace-nowrap rounded-lg px-3 py-1.5 text-start text-sm hover:bg-background"
@@ -50,7 +57,7 @@ export function ShareButtons({ url, text }: { url: string; text?: string }) {
             {t("twitter")}
           </a>
           <a
-            href={`https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`}
+            href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(withUtm(url, "facebook"))}`}
             target="_blank"
             rel="noopener noreferrer"
             className="whitespace-nowrap rounded-lg px-3 py-1.5 text-start text-sm hover:bg-background"

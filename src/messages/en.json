@@ -67,7 +67,7 @@
     "modelFluxDev": "flux-dev",
     "modelSdxl": "sdxl",
     "comingSoon": "Coming soon",
-    "generateVariations": "Generate 4 variations",
+    "generateVariations": "Generate 2 variations",
     "variationsPartial": "Generated {count} of {requested} — daily limit reached",
     "downloadImage": "Download",
     "editImage": "Add text/logo",

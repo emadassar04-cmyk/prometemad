@@ -133,7 +133,7 @@ export function PromptWorkspace({
     window.open("https://gemini.google.com/app", "_blank", "noopener,noreferrer");
   }
 
-  async function runGenerate(variations: 1 | 4) {
+  async function runGenerate(variations: 1 | 2) {
     if (!isSignedIn) {
       window.location.href = `/${locale}/sign-in`;
       return;
@@ -460,7 +460,7 @@ export function PromptWorkspace({
           {isSignedIn && (
             <button
               type="button"
-              onClick={() => runGenerate(4)}
+              onClick={() => runGenerate(2)}
               disabled={generating}
               className="flex items-center justify-center gap-2 rounded-full border border-accent px-6 py-3 text-sm font-medium text-accent-2 transition-colors hover:bg-accent/10 disabled:opacity-50"
             >

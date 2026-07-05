@@ -7,7 +7,7 @@ import {
 } from "@/lib/prompt-variables";
 import { callGenerateWebhook } from "@/lib/n8n-generate";
 
-// A 4-variation request staggers its calls and each can retry internally
+// A multi-variation request staggers its calls and each can retry internally
 // (see /api/watermark), so the slowest one can take close to a minute.
 export const maxDuration = 90;
 
@@ -19,7 +19,10 @@ const RATE_LIMIT_WINDOW_SECONDS = 60;
 const MIN_DIMENSION = 256;
 const MAX_DIMENSION = 2048;
 const DEFAULT_DIMENSION = 1024;
-const ALLOWED_VARIATIONS = new Set([1, 4]);
+// The free image provider has a real concurrency ceiling — 4 simultaneous
+// variations reliably left some failing even with retries, so this is
+// capped at 2 rather than chasing more retry tuning.
+const ALLOWED_VARIATIONS = new Set([1, 2]);
 const ALLOWED_MODELS = new Set(["flux-schnell", "flux-dev", "sdxl"]);
 
 function clampDimension(value: unknown): number {

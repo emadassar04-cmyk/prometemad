@@ -77,7 +77,6 @@ export async function GET(request: Request) {
     return NextResponse.json({ error: "source_fetch_failed" }, { status: 502 });
   }
   const sourceBuffer = Buffer.from(await sourceResponse.arrayBuffer());
-  const debug = searchParams.get("debug") === "1";
 
   try {
     const image = sharp(sourceBuffer);
@@ -90,36 +89,17 @@ export async function GET(request: Request) {
       .jpeg({ quality: 90 })
       .toBuffer();
 
-    if (debug) {
-      const outMeta = await sharp(watermarked).metadata();
-      return NextResponse.json({
-        sourceContentType: sourceResponse.headers.get("content-type"),
-        sourceContentLength: sourceResponse.headers.get("content-length"),
-        sourceByteLength: sourceBuffer.length,
-        sourceMetadata: { width: metadata.width, height: metadata.height, format: metadata.format },
-        outputByteLength: watermarked.length,
-        outputMetadata: { width: outMeta.width, height: outMeta.height, format: outMeta.format },
-      });
-    }
-
     // A raw Node Buffer as the body gets mangled somewhere in this Next.js
-    // version's response serialization (bytes >= 0x80 come out as repeated
-    // EF BF BD — the UTF-8 replacement character — as if the body were
-    // round-tripped through a string). A plain Uint8Array copy avoids
-    // whatever Buffer-specific path causes that. Confirmed via
-    // /api/admin/image-stats: identical byte count in and out, but content
-    // scrambled, only for the binary-response path (not the debug/JSON one).
+    // version's response serialization (bytes >= 0x80 came out as repeated
+    // EF BF BD, the UTF-8 replacement character, as if round-tripped through
+    // a string) — a plain Uint8Array copy avoids whatever Buffer-specific
+    // path causes that.
     return new NextResponse(new Uint8Array(watermarked), {
       status: 200,
       headers: { "Content-Type": "image/jpeg" },
     });
   } catch (err) {
     console.error("watermark failed:", err instanceof Error ? err.message : err);
-    return NextResponse.json({
-      error: "watermark_failed",
-      detail: err instanceof Error ? err.message : String(err),
-      sourceContentType: sourceResponse.headers.get("content-type"),
-      sourceByteLength: sourceBuffer.length,
-    }, { status: 500 });
+    return NextResponse.json({ error: "watermark_failed" }, { status: 500 });
   }
 }

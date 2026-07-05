@@ -98,8 +98,13 @@ export function BrandKitForm({
 
       setSaved(true);
       setTimeout(() => setSaved(false), 2500);
-    } catch {
-      setError(t("saveError"));
+    } catch (err) {
+      const message =
+        err && typeof err === "object" && "message" in err
+          ? String((err as { message: unknown }).message)
+          : String(err);
+      console.error("brand kit save failed:", err);
+      setError(`${t("saveError")} (${message})`);
     } finally {
       setSaving(false);
     }

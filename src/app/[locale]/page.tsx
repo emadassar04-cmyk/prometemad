@@ -9,6 +9,7 @@ import { createSupabaseServerClient } from "@/lib/supabase/server";
 import { PromptCard } from "@/components/prompt-card";
 import { LibraryFilters } from "@/components/library-filters";
 import { CategoryGrid } from "@/components/category-grid";
+import { PromptEnhancer } from "@/components/prompt-enhancer";
 
 export default async function HomePage({
   params,
@@ -84,6 +85,10 @@ export default async function HomePage({
             <span className="text-muted">{t("statDailyLimit")}</span>
           </span>
         </div>
+      </section>
+
+      <section className="mb-10">
+        <PromptEnhancer isSignedIn={!!user} locale={locale} />
       </section>
 
       <section className="mb-10">

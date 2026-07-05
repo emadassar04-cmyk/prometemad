@@ -80,6 +80,24 @@ export type Database = {
         }
         Relationships: []
       }
+      enhance_usage: {
+        Row: {
+          enhance_count: number
+          usage_date: string
+          user_id: string
+        }
+        Insert: {
+          enhance_count?: number
+          usage_date?: string
+          user_id: string
+        }
+        Update: {
+          enhance_count?: number
+          usage_date?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       favorites: {
         Row: {
           created_at: string
@@ -313,6 +331,10 @@ export type Database = {
         }[]
       }
       try_increment_daily_usage: {
+        Args: { p_daily_limit?: number; p_user_id: string }
+        Returns: boolean
+      }
+      try_increment_enhance_usage: {
         Args: { p_daily_limit?: number; p_user_id: string }
         Returns: boolean
       }

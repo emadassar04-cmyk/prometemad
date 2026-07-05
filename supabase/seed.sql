@@ -13,1180 +13,1082 @@ on conflict (slug) do update set name_ar = excluded.name_ar, name_en = excluded.
 
 insert into public.prompts (
   slug, title_ar, title_en, description_ar, description_en,
-  prompt_text_en, prompt_display_ar, variables, category_id, style, model, tags, requires_photo, status
+  prompt_text_en, prompt_display_ar, variables, category_id, style, model, tags, status
 ) values (
   'studio-product-white-bg', 'منتج على خلفية بيضاء احترافية', 'Product on a Clean White Studio Background',
   'صورة منتج نظيفة لصفحات المتجر والكتالوجات', 'Clean e-commerce style product photo for store listings',
   'professional studio product photography of {{product}}, centered composition following the rule of thirds, pure white seamless backdrop, three-point studio lighting with a large softbox key light and subtle fill, gentle contact shadow beneath the product, macro-level surface detail, sharp focus throughout, photorealistic, commercial e-commerce quality, 8k resolution', 'تصوير منتج احترافي في استوديو لـ {{product}}، تكوين مركزي وفق قاعدة الأثلاث، خلفية بيضاء ناصعة متصلة بلا حواف، إضاءة استوديو ثلاثية الاتجاه بمصدر رئيسي softbox كبير وإضاءة تعبئة خفيفة، ظل تلامس ناعم أسفل المنتج، تفاصيل سطحية دقيقة جداً، تركيز حاد بالكامل، واقعية فوتوغرافية، جودة تجارية للمتاجر الإلكترونية، دقة 8K',
   '[{"key":"product","label_ar":"المنتج","label_en":"Product","default":"a glass perfume bottle"}]'::jsonb,
   (select id from public.categories where slug = 'product-shots'),
-  'studio', 'flux-schnell', ARRAY['منتجات', 'متجر', 'product']::text[], false, 'published'
+  'studio', 'flux-schnell', ARRAY['منتجات', 'متجر', 'product']::text[], 'published'
 )
 on conflict (slug) do update set
   title_ar = excluded.title_ar, title_en = excluded.title_en,
   description_ar = excluded.description_ar, description_en = excluded.description_en,
   prompt_text_en = excluded.prompt_text_en, prompt_display_ar = excluded.prompt_display_ar,
   variables = excluded.variables, category_id = excluded.category_id,
-  style = excluded.style, model = excluded.model, tags = excluded.tags,
-  requires_photo = excluded.requires_photo;
+  style = excluded.style, model = excluded.model, tags = excluded.tags;
 
 insert into public.prompts (
   slug, title_ar, title_en, description_ar, description_en,
-  prompt_text_en, prompt_display_ar, variables, category_id, style, model, tags, requires_photo, status
+  prompt_text_en, prompt_display_ar, variables, category_id, style, model, tags, status
 ) values (
   'product-lifestyle-scene', 'منتج في مشهد حياتي طبيعي', 'Product in a Lifestyle Scene',
   'منتج ضمن بيئة واقعية تعكس استخدامه اليومي', 'Product placed in a realistic everyday setting',
   'lifestyle product photography, {{product}} placed naturally on a {{surface}}, soft directional natural window light with gentle falloff, warm cozy color grading, shallow depth of field with creamy bokeh, 50mm lens perspective, editorial commercial photography, true-to-life textures and materials, magazine-quality composition', 'تصوير منتج بأسلوب حياتي، {{product}} موضوع بشكل طبيعي على {{surface}}، إضاءة نافذة طبيعية موجهة بتلاشٍ ناعم، تدرج ألوان دافئ ومريح، عمق ميدان ضحل مع بوكيه ناعم، منظور عدسة 50 مم، تصوير تجاري تحريري، خامات وملمس واقعي تماماً، تكوين بجودة المجلات',
   '[{"key":"product","label_ar":"المنتج","label_en":"Product","default":"a ceramic coffee cup"},{"key":"surface","label_ar":"السطح","label_en":"Surface","default":"wooden breakfast table"}]'::jsonb,
   (select id from public.categories where slug = 'product-shots'),
-  'lifestyle', 'flux-schnell', ARRAY['منتجات', 'lifestyle']::text[], false, 'published'
+  'lifestyle', 'flux-schnell', ARRAY['منتجات', 'lifestyle']::text[], 'published'
 )
 on conflict (slug) do update set
   title_ar = excluded.title_ar, title_en = excluded.title_en,
   description_ar = excluded.description_ar, description_en = excluded.description_en,
   prompt_text_en = excluded.prompt_text_en, prompt_display_ar = excluded.prompt_display_ar,
   variables = excluded.variables, category_id = excluded.category_id,
-  style = excluded.style, model = excluded.model, tags = excluded.tags,
-  requires_photo = excluded.requires_photo;
+  style = excluded.style, model = excluded.model, tags = excluded.tags;
 
 insert into public.prompts (
   slug, title_ar, title_en, description_ar, description_en,
-  prompt_text_en, prompt_display_ar, variables, category_id, style, model, tags, requires_photo, status
+  prompt_text_en, prompt_display_ar, variables, category_id, style, model, tags, status
 ) values (
   'product-floating-levitation', 'منتج عائم بتأثير الجاذبية الصفرية', 'Levitating Product Shot',
   'منتج يطفو في الهواء بتأثير بصري جذاب للإعلانات', 'Eye-catching floating product effect for ads',
   '{{product}} levitating in mid-air frozen at the peak of motion, zero gravity effect, dynamic scattered elements orbiting around it, dramatic multi-point studio lighting with rim light separation, smooth gradient {{background_color}} background, high-end advertising photography, crisp sharp focus on the product, motion-frozen precision, premium campaign quality', '{{product}} يطفو في الهواء متجمداً في ذروة الحركة، تأثير انعدام الجاذبية، عناصر متناثرة ديناميكية تدور حوله، إضاءة استوديو درامية متعددة الاتجاهات مع فصل بضوء حافة (rim light)، خلفية متدرجة ناعمة باللون {{background_color}}، تصوير إعلاني راقٍ، تركيز حاد جداً على المنتج، دقة تجميد الحركة، جودة حملة إعلانية فاخرة',
   '[{"key":"product","label_ar":"المنتج","label_en":"Product","default":"a sneaker"},{"key":"background_color","label_ar":"لون الخلفية","label_en":"Background color","default":"deep purple"}]'::jsonb,
   (select id from public.categories where slug = 'product-shots'),
-  'dramatic', 'flux-schnell', ARRAY['منتجات', 'إعلان']::text[], false, 'published'
+  'dramatic', 'flux-schnell', ARRAY['منتجات', 'إعلان']::text[], 'published'
 )
 on conflict (slug) do update set
   title_ar = excluded.title_ar, title_en = excluded.title_en,
   description_ar = excluded.description_ar, description_en = excluded.description_en,
   prompt_text_en = excluded.prompt_text_en, prompt_display_ar = excluded.prompt_display_ar,
   variables = excluded.variables, category_id = excluded.category_id,
-  style = excluded.style, model = excluded.model, tags = excluded.tags,
-  requires_photo = excluded.requires_photo;
+  style = excluded.style, model = excluded.model, tags = excluded.tags;
 
 insert into public.prompts (
   slug, title_ar, title_en, description_ar, description_en,
-  prompt_text_en, prompt_display_ar, variables, category_id, style, model, tags, requires_photo, status
+  prompt_text_en, prompt_display_ar, variables, category_id, style, model, tags, status
 ) values (
   'product-flatlay-top-down', 'تنسيق منتجات من الأعلى (Flat Lay)', 'Top-Down Flat Lay Arrangement',
   'تنسيق أنيق للمنتجات من زاوية علوية لمنشورات السوشيال ميديا', 'Elegant top-down arrangement for social media posts',
   'flat lay photography shot directly from above at 90 degrees, {{product}} arranged neatly alongside {{props}}, soft {{background_color}} surface, diffused natural light with no harsh shadows, minimal balanced aesthetic, precise symmetrical composition with generous negative space, high resolution, styled editorial flat lay quality', 'تصوير من الأعلى مباشرة بزاوية 90 درجة (Flat Lay)، {{product}} مرتب بعناية مع {{props}}، سطح بلون {{background_color}}، إضاءة طبيعية موزعة بلا ظلال قاسية، تصميم بسيط متوازن، تكوين متماثل دقيق مع مساحات فارغة كافية، دقة عالية، جودة تحريرية منسقة',
   '[{"key":"product","label_ar":"المنتج","label_en":"Product","default":"skincare bottles"},{"key":"props","label_ar":"إكسسوارات مرافقة","label_en":"Props","default":"dried flowers and a linen towel"},{"key":"background_color","label_ar":"لون الخلفية","label_en":"Background color","default":"beige"}]'::jsonb,
   (select id from public.categories where slug = 'product-shots'),
-  'minimal', 'flux-schnell', ARRAY['منتجات', 'flatlay']::text[], false, 'published'
+  'minimal', 'flux-schnell', ARRAY['منتجات', 'flatlay']::text[], 'published'
 )
 on conflict (slug) do update set
   title_ar = excluded.title_ar, title_en = excluded.title_en,
   description_ar = excluded.description_ar, description_en = excluded.description_en,
   prompt_text_en = excluded.prompt_text_en, prompt_display_ar = excluded.prompt_display_ar,
   variables = excluded.variables, category_id = excluded.category_id,
-  style = excluded.style, model = excluded.model, tags = excluded.tags,
-  requires_photo = excluded.requires_photo;
+  style = excluded.style, model = excluded.model, tags = excluded.tags;
 
 insert into public.prompts (
   slug, title_ar, title_en, description_ar, description_en,
-  prompt_text_en, prompt_display_ar, variables, category_id, style, model, tags, requires_photo, status
+  prompt_text_en, prompt_display_ar, variables, category_id, style, model, tags, status
 ) values (
   'product-hand-holding', 'منتج ممسوك باليد', 'Product Held in Hand',
   'لقطة قريبة تُظهر حجم المنتج وملمسه بشكل واقعي', 'Close-up shot showing the product''s scale and texture',
   'close-up macro photo of a hand naturally holding {{product}}, realistic skin texture and natural tones, soft diffused daylight, gently blurred background with shallow depth of field, authentic unboxing moment, fine surface detail on both hand and product, sharp focal point, high-end lifestyle commercial quality', 'لقطة قريبة ماكرو ليد تمسك {{product}} بشكل طبيعي، ملمس بشرة واقعي وألوان طبيعية، ضوء نهار ناعم موزع، خلفية ضبابية خفيفة بعمق ميدان ضحل، لحظة فتح صندوق أصيلة، تفاصيل سطحية دقيقة لليد والمنتج معاً، نقطة تركيز حادة، جودة تجارية حياتية راقية',
   '[{"key":"product","label_ar":"المنتج","label_en":"Product","default":"a smartphone box"}]'::jsonb,
   (select id from public.categories where slug = 'product-shots'),
-  'lifestyle', 'flux-schnell', ARRAY['منتجات', 'unboxing']::text[], false, 'published'
+  'lifestyle', 'flux-schnell', ARRAY['منتجات', 'unboxing']::text[], 'published'
 )
 on conflict (slug) do update set
   title_ar = excluded.title_ar, title_en = excluded.title_en,
   description_ar = excluded.description_ar, description_en = excluded.description_en,
   prompt_text_en = excluded.prompt_text_en, prompt_display_ar = excluded.prompt_display_ar,
   variables = excluded.variables, category_id = excluded.category_id,
-  style = excluded.style, model = excluded.model, tags = excluded.tags,
-  requires_photo = excluded.requires_photo;
+  style = excluded.style, model = excluded.model, tags = excluded.tags;
 
 insert into public.prompts (
   slug, title_ar, title_en, description_ar, description_en,
-  prompt_text_en, prompt_display_ar, variables, category_id, style, model, tags, requires_photo, status
+  prompt_text_en, prompt_display_ar, variables, category_id, style, model, tags, status
 ) values (
   'product-splash-liquid', 'منتج مع تناثر سائل', 'Product with Liquid Splash',
   'تأثير بصري قوي لمنتجات المشروبات ومستحضرات التجميل', 'Dramatic splash effect for beverages and cosmetics',
   '{{product}} with dynamic {{liquid}} splash frozen at 1/8000th of a second, dramatic dark studio background, high-contrast rim lighting sculpting the droplets, ultra high speed photography, crisp crystal-clear droplets with realistic refraction, commercial beverage/cosmetics campaign quality, tack-sharp focus', '{{product}} مع تناثر {{liquid}} متجمد بسرعة تصوير فائقة (1/8000 ثانية)، خلفية استوديو داكنة درامية، إضاءة حافة عالية التباين تُبرز شكل القطرات، تصوير عالي السرعة احترافي، قطرات واضحة تماماً كالكريستال مع انكسار ضوئي واقعي، جودة حملة تجارية للمشروبات ومستحضرات التجميل، تركيز حاد جداً',
   '[{"key":"product","label_ar":"المنتج","label_en":"Product","default":"a cosmetic jar"},{"key":"liquid","label_ar":"السائل","label_en":"Liquid","default":"milk"}]'::jsonb,
   (select id from public.categories where slug = 'product-shots'),
-  'dramatic', 'flux-schnell', ARRAY['منتجات', 'splash']::text[], false, 'published'
+  'dramatic', 'flux-schnell', ARRAY['منتجات', 'splash']::text[], 'published'
 )
 on conflict (slug) do update set
   title_ar = excluded.title_ar, title_en = excluded.title_en,
   description_ar = excluded.description_ar, description_en = excluded.description_en,
   prompt_text_en = excluded.prompt_text_en, prompt_display_ar = excluded.prompt_display_ar,
   variables = excluded.variables, category_id = excluded.category_id,
-  style = excluded.style, model = excluded.model, tags = excluded.tags,
-  requires_photo = excluded.requires_photo;
+  style = excluded.style, model = excluded.model, tags = excluded.tags;
 
 insert into public.prompts (
   slug, title_ar, title_en, description_ar, description_en,
-  prompt_text_en, prompt_display_ar, variables, category_id, style, model, tags, requires_photo, status
+  prompt_text_en, prompt_display_ar, variables, category_id, style, model, tags, status
 ) values (
   'product-packaging-mockup', 'موك أب تغليف المنتج', 'Product Packaging Mockup',
   'عرض واقعي لعلبة أو تغليف المنتج قبل الطباعة', 'Realistic mockup of product packaging before printing',
   'photorealistic 3D packaging mockup of a {{product}} box, {{color}} label design with clean typography space, resting on a neutral matte surface, soft studio lighting with a subtle reflection below, precise front-facing angle, physically accurate materials and print texture, high resolution product render, retail-ready presentation quality', 'موك أب ثلاثي الأبعاد واقعي لعلبة تغليف {{product}}، تصميم ملصق بلون {{color}} مع مساحة خط واضحة، موضوعة على سطح مطفي محايد، إضاءة استوديو ناعمة مع انعكاس خفيف أسفلها، زاوية أمامية دقيقة، خامات وطباعة واقعية فيزيائياً، عرض منتج بدقة عالية، جودة عرض جاهزة للتجزئة',
   '[{"key":"product","label_ar":"المنتج","label_en":"Product","default":"a snack"},{"key":"color","label_ar":"اللون الأساسي","label_en":"Primary color","default":"green and gold"}]'::jsonb,
   (select id from public.categories where slug = 'product-shots'),
-  'studio', 'flux-schnell', ARRAY['منتجات', 'تغليف']::text[], false, 'published'
+  'studio', 'flux-schnell', ARRAY['منتجات', 'تغليف']::text[], 'published'
 )
 on conflict (slug) do update set
   title_ar = excluded.title_ar, title_en = excluded.title_en,
   description_ar = excluded.description_ar, description_en = excluded.description_en,
   prompt_text_en = excluded.prompt_text_en, prompt_display_ar = excluded.prompt_display_ar,
   variables = excluded.variables, category_id = excluded.category_id,
-  style = excluded.style, model = excluded.model, tags = excluded.tags,
-  requires_photo = excluded.requires_photo;
+  style = excluded.style, model = excluded.model, tags = excluded.tags;
 
 insert into public.prompts (
   slug, title_ar, title_en, description_ar, description_en,
-  prompt_text_en, prompt_display_ar, variables, category_id, style, model, tags, requires_photo, status
+  prompt_text_en, prompt_display_ar, variables, category_id, style, model, tags, status
 ) values (
   'product-outdoor-natural', 'منتج في بيئة خارجية طبيعية', 'Product in an Outdoor Natural Setting',
   'منتج بمظهر طبيعي خارجي يناسب منتجات العناية والطبيعة', 'Natural outdoor look, suited for organic and wellness products',
   '{{product}} placed among natural elements like weathered stones, moss, and green leaves, warm outdoor golden hour side lighting, organic earthy color palette, shallow depth of field with a softly blurred natural backdrop, editorial nature photography, authentic textures, serene wellness-brand mood', '{{product}} موضوع وسط عناصر طبيعية كحجارة متآكلة، طحالب، وأوراق شجر خضراء، إضاءة جانبية دافئة من الساعة الذهبية الخارجية، لوحة ألوان ترابية عضوية، عمق ميدان ضحل مع خلفية طبيعية ضبابية ناعمة، تصوير طبيعي تحريري، خامات أصيلة، أجواء هادئة تناسب علامات العناية والصحة',
   '[{"key":"product","label_ar":"المنتج","label_en":"Product","default":"an organic soap bar"}]'::jsonb,
   (select id from public.categories where slug = 'product-shots'),
-  'natural', 'flux-schnell', ARRAY['منتجات', 'طبيعي']::text[], false, 'published'
+  'natural', 'flux-schnell', ARRAY['منتجات', 'طبيعي']::text[], 'published'
 )
 on conflict (slug) do update set
   title_ar = excluded.title_ar, title_en = excluded.title_en,
   description_ar = excluded.description_ar, description_en = excluded.description_en,
   prompt_text_en = excluded.prompt_text_en, prompt_display_ar = excluded.prompt_display_ar,
   variables = excluded.variables, category_id = excluded.category_id,
-  style = excluded.style, model = excluded.model, tags = excluded.tags,
-  requires_photo = excluded.requires_photo;
+  style = excluded.style, model = excluded.model, tags = excluded.tags;
 
 insert into public.prompts (
   slug, title_ar, title_en, description_ar, description_en,
-  prompt_text_en, prompt_display_ar, variables, category_id, style, model, tags, requires_photo, status
+  prompt_text_en, prompt_display_ar, variables, category_id, style, model, tags, status
 ) values (
   'product-360-catalog', 'منتج بزاوية ثلاثة أرباع للكتالوج', 'Three-Quarter Angle Catalog Shot',
   'زاوية كتالوجية كلاسيكية تُظهر أبعاد المنتج', 'Classic catalog angle showing the product''s dimensions',
   'three-quarter angle product photo of {{product}}, light gray seamless gradient background, even soft-box studio lighting eliminating harsh shadows, tack-sharp focus with crisp edge definition, professional retouching, color-accurate rendering, catalog-ready commercial quality, consistent with multi-angle product sets', 'صورة منتج بزاوية ثلاثة أرباع لـ {{product}}، خلفية متدرجة رمادية فاتحة متصلة، إضاءة استوديو softbox متساوية تلغي الظلال القاسية، تركيز حاد جداً مع حواف واضحة، معالجة احترافية، ألوان دقيقة، جودة تجارية جاهزة للكتالوج، متسقة مع مجموعات الزوايا المتعددة',
   '[{"key":"product","label_ar":"المنتج","label_en":"Product","default":"a leather handbag"}]'::jsonb,
   (select id from public.categories where slug = 'product-shots'),
-  'studio', 'flux-schnell', ARRAY['منتجات', 'كتالوج']::text[], false, 'published'
+  'studio', 'flux-schnell', ARRAY['منتجات', 'كتالوج']::text[], 'published'
 )
 on conflict (slug) do update set
   title_ar = excluded.title_ar, title_en = excluded.title_en,
   description_ar = excluded.description_ar, description_en = excluded.description_en,
   prompt_text_en = excluded.prompt_text_en, prompt_display_ar = excluded.prompt_display_ar,
   variables = excluded.variables, category_id = excluded.category_id,
-  style = excluded.style, model = excluded.model, tags = excluded.tags,
-  requires_photo = excluded.requires_photo;
+  style = excluded.style, model = excluded.model, tags = excluded.tags;
 
 insert into public.prompts (
   slug, title_ar, title_en, description_ar, description_en,
-  prompt_text_en, prompt_display_ar, variables, category_id, style, model, tags, requires_photo, status
+  prompt_text_en, prompt_display_ar, variables, category_id, style, model, tags, status
 ) values (
   'product-color-variants-grid', 'شبكة تدرجات ألوان المنتج', 'Product Color Variants Grid',
   'عرض منظم لتدرجات ألوان المنتج المتوفرة', 'Organized display of the product''s available color options',
   'clean grid layout showing {{product}} in three distinct color variants, consistent identical studio lighting across all three, plain seamless white background, evenly spaced precise arrangement, sharp product-level detail on each variant, e-commerce variant showcase style, high resolution catalog quality', 'تخطيط شبكي نظيف يعرض {{product}} بثلاثة تدرجات ألوان مختلفة، إضاءة استوديو متطابقة تماماً على الثلاثة، خلفية بيضاء بسيطة متصلة، ترتيب متساوي المسافات دقيق، تفاصيل واضحة على مستوى المنتج لكل تدرج، أسلوب عرض خيارات المتجر الإلكتروني، جودة كتالوج بدقة عالية',
   '[{"key":"product","label_ar":"المنتج","label_en":"Product","default":"a wireless earbuds case"}]'::jsonb,
   (select id from public.categories where slug = 'product-shots'),
-  'studio', 'flux-schnell', ARRAY['منتجات', 'متغيرات']::text[], false, 'published'
+  'studio', 'flux-schnell', ARRAY['منتجات', 'متغيرات']::text[], 'published'
 )
 on conflict (slug) do update set
   title_ar = excluded.title_ar, title_en = excluded.title_en,
   description_ar = excluded.description_ar, description_en = excluded.description_en,
   prompt_text_en = excluded.prompt_text_en, prompt_display_ar = excluded.prompt_display_ar,
   variables = excluded.variables, category_id = excluded.category_id,
-  style = excluded.style, model = excluded.model, tags = excluded.tags,
-  requires_photo = excluded.requires_photo;
+  style = excluded.style, model = excluded.model, tags = excluded.tags;
 
 insert into public.prompts (
   slug, title_ar, title_en, description_ar, description_en,
-  prompt_text_en, prompt_display_ar, variables, category_id, style, model, tags, requires_photo, status
+  prompt_text_en, prompt_display_ar, variables, category_id, style, model, tags, status
 ) values (
   'instagram-square-promo', 'منشور ترويجي مربع لإنستغرام', 'Square Instagram Promo Post',
   'تصميم إعلاني جذاب بمقاس مربع لمنشورات إنستغرام', 'Bold square-format ad visual for Instagram feed',
   'square 1:1 format social media advertisement for {{business}}, bold {{color}} color scheme with strong visual hierarchy, generous empty space reserved for text overlay, modern flat design, high contrast, scroll-stopping composition, clean vector-quality shapes, marketing poster precision, crisp print-ready resolution', 'إعلان سوشيال ميديا بمقاس مربع 1:1 لـ {{business}}، ألوان جريئة بدرجة {{color}} مع تسلسل بصري واضح، مساحة فارغة واسعة مخصصة للنص، تصميم مسطح عصري، تباين عالٍ، تكوين يوقف التمرير فوراً، أشكال بجودة فيكتور نظيفة، دقة بوستر تسويقي، دقة طباعة عالية',
   '[{"key":"business","label_ar":"النشاط التجاري","label_en":"Business","default":"a coffee shop"},{"key":"color","label_ar":"اللون الأساسي","label_en":"Primary color","default":"orange and cream"}]'::jsonb,
   (select id from public.categories where slug = 'social-ads'),
-  'flat design', 'flux-schnell', ARRAY['إعلان', 'سوشيال ميديا']::text[], false, 'published'
+  'flat design', 'flux-schnell', ARRAY['إعلان', 'سوشيال ميديا']::text[], 'published'
 )
 on conflict (slug) do update set
   title_ar = excluded.title_ar, title_en = excluded.title_en,
   description_ar = excluded.description_ar, description_en = excluded.description_en,
   prompt_text_en = excluded.prompt_text_en, prompt_display_ar = excluded.prompt_display_ar,
   variables = excluded.variables, category_id = excluded.category_id,
-  style = excluded.style, model = excluded.model, tags = excluded.tags,
-  requires_photo = excluded.requires_photo;
+  style = excluded.style, model = excluded.model, tags = excluded.tags;
 
 insert into public.prompts (
   slug, title_ar, title_en, description_ar, description_en,
-  prompt_text_en, prompt_display_ar, variables, category_id, style, model, tags, requires_photo, status
+  prompt_text_en, prompt_display_ar, variables, category_id, style, model, tags, status
 ) values (
   'sale-discount-banner', 'بانر تخفيضات وعروض', 'Sale & Discount Banner',
   'بانر إعلاني حماسي لعروض التخفيضات الموسمية', 'Energetic banner design for seasonal discount campaigns',
   'vibrant sale banner design, large bold ''{{discount}}'' text placeholder as the clear focal point, dynamic diagonal shapes guiding the eye, smooth {{color}} gradient background, confetti and motion-burst elements, exciting high-energy retail promotion style, crisp vector precision, print and digital-ready quality', 'تصميم بانر تخفيضات نابض بالحياة، مساحة نصية كبيرة وجريئة لنسبة الخصم ''{{discount}}'' كنقطة تركيز واضحة، أشكال قطرية ديناميكية توجّه النظر، خلفية متدرجة ناعمة بلون {{color}}، عناصر قصاصات ورقية وانفجار حركي، أسلوب ترويجي عالي الطاقة للتجزئة، دقة فيكتور نظيفة، جودة جاهزة للطباعة والرقمي',
   '[{"key":"discount","label_ar":"نسبة الخصم","label_en":"Discount","default":"50% OFF"},{"key":"color","label_ar":"لون الخلفية","label_en":"Background color","default":"red and yellow"}]'::jsonb,
   (select id from public.categories where slug = 'social-ads'),
-  'bold', 'flux-schnell', ARRAY['إعلان', 'تخفيضات']::text[], false, 'published'
+  'bold', 'flux-schnell', ARRAY['إعلان', 'تخفيضات']::text[], 'published'
 )
 on conflict (slug) do update set
   title_ar = excluded.title_ar, title_en = excluded.title_en,
   description_ar = excluded.description_ar, description_en = excluded.description_en,
   prompt_text_en = excluded.prompt_text_en, prompt_display_ar = excluded.prompt_display_ar,
   variables = excluded.variables, category_id = excluded.category_id,
-  style = excluded.style, model = excluded.model, tags = excluded.tags,
-  requires_photo = excluded.requires_photo;
+  style = excluded.style, model = excluded.model, tags = excluded.tags;
 
 insert into public.prompts (
   slug, title_ar, title_en, description_ar, description_en,
-  prompt_text_en, prompt_display_ar, variables, category_id, style, model, tags, requires_photo, status
+  prompt_text_en, prompt_display_ar, variables, category_id, style, model, tags, status
 ) values (
   'app-feature-mockup', 'عرض ميزة تطبيق على جهاز', 'App Feature Mockup on Device',
   'عرض واجهة تطبيق على شاشة هاتف بأسلوب تسويقي أنيق', 'Elegant marketing display of an app screen on a phone mockup',
   'modern smartphone mockup floating at a slight 3D angle, displaying a pixel-precise clean {{app_type}} app interface, soft smooth gradient {{color}} background, realistic drop shadow beneath the device, premium tech marketing style, minimal and polished, product-launch quality render', 'موك أب هاتف ذكي عصري معلق بزاوية ثلاثية أبعاد خفيفة، يعرض واجهة تطبيق {{app_type}} نظيفة ودقيقة البكسل، خلفية متدرجة ناعمة بلون {{color}}، ظل واقعي أسفل الجهاز، أسلوب تسويقي تقني فاخر، بسيط ومصقول، جودة رندر إطلاق منتج',
   '[{"key":"app_type","label_ar":"نوع التطبيق","label_en":"App type","default":"food delivery"},{"key":"color","label_ar":"لون الخلفية","label_en":"Background color","default":"blue and white"}]'::jsonb,
   (select id from public.categories where slug = 'social-ads'),
-  'tech', 'flux-schnell', ARRAY['إعلان', 'تطبيقات']::text[], false, 'published'
+  'tech', 'flux-schnell', ARRAY['إعلان', 'تطبيقات']::text[], 'published'
 )
 on conflict (slug) do update set
   title_ar = excluded.title_ar, title_en = excluded.title_en,
   description_ar = excluded.description_ar, description_en = excluded.description_en,
   prompt_text_en = excluded.prompt_text_en, prompt_display_ar = excluded.prompt_display_ar,
   variables = excluded.variables, category_id = excluded.category_id,
-  style = excluded.style, model = excluded.model, tags = excluded.tags,
-  requires_photo = excluded.requires_photo;
+  style = excluded.style, model = excluded.model, tags = excluded.tags;
 
 insert into public.prompts (
   slug, title_ar, title_en, description_ar, description_en,
-  prompt_text_en, prompt_display_ar, variables, category_id, style, model, tags, requires_photo, status
+  prompt_text_en, prompt_display_ar, variables, category_id, style, model, tags, status
 ) values (
   'before-after-split', 'مقارنة قبل وبعد', 'Before & After Split Visual',
   'تصميم مقسوم يعرض نتائج الخدمة أو المنتج بوضوح', 'Split-screen design clearly showcasing service or product results',
   'clean split-screen comparison image, left half showing {{before}}, right half showing {{after}}, sharp precise dividing line, bright even lighting matched identically on both sides, professional before-and-after marketing layout, high-detail realism on both halves, trustworthy commercial quality', 'صورة مقارنة نظيفة مقسومة الشاشة، النصف الأيسر يُظهر {{before}}، النصف الأيمن يُظهر {{after}}، خط فاصل دقيق وحاد، إضاءة ساطعة متطابقة تماماً في الجانبين، تخطيط تسويقي احترافي لقبل وبعد، واقعية عالية التفاصيل في الجانبين، جودة تجارية موثوقة',
   '[{"key":"before","label_ar":"الحالة قبل","label_en":"Before state","default":"a dull faded car exterior"},{"key":"after","label_ar":"الحالة بعد","label_en":"After state","default":"the same car, polished and glossy"}]'::jsonb,
   (select id from public.categories where slug = 'social-ads'),
-  'clean', 'flux-schnell', ARRAY['إعلان', 'قبل وبعد']::text[], false, 'published'
+  'clean', 'flux-schnell', ARRAY['إعلان', 'قبل وبعد']::text[], 'published'
 )
 on conflict (slug) do update set
   title_ar = excluded.title_ar, title_en = excluded.title_en,
   description_ar = excluded.description_ar, description_en = excluded.description_en,
   prompt_text_en = excluded.prompt_text_en, prompt_display_ar = excluded.prompt_display_ar,
   variables = excluded.variables, category_id = excluded.category_id,
-  style = excluded.style, model = excluded.model, tags = excluded.tags,
-  requires_photo = excluded.requires_photo;
+  style = excluded.style, model = excluded.model, tags = excluded.tags;
 
 insert into public.prompts (
   slug, title_ar, title_en, description_ar, description_en,
-  prompt_text_en, prompt_display_ar, variables, category_id, style, model, tags, requires_photo, status
+  prompt_text_en, prompt_display_ar, variables, category_id, style, model, tags, status
 ) values (
   'testimonial-quote-card', 'بطاقة رأي عميل', 'Customer Testimonial Card',
   'بطاقة أنيقة لعرض تقييمات وآراء العملاء', 'Elegant card layout for displaying customer reviews',
   'elegant testimonial card background design, soft {{color}} pastel gradient, large refined quotation mark graphic, five gold star rating icons, minimal clean layout with clearly reserved space for text, professional social-proof marketing style, crisp vector precision, premium finish', 'خلفية بطاقة تقييم عملاء أنيقة، تدرج لوني ناعم {{color}} باستيل، رمز علامة اقتباس كبيرة وراقية، خمس نجوم تقييم ذهبية، تخطيط بسيط ونظيف مع مساحة محجوزة بوضوح للنص، أسلوب احترافي لعرض الثقة الاجتماعية، دقة فيكتور نظيفة، لمسة نهائية فاخرة',
   '[{"key":"color","label_ar":"اللون","label_en":"Color","default":"soft blue"}]'::jsonb,
   (select id from public.categories where slug = 'social-ads'),
-  'minimal', 'flux-schnell', ARRAY['إعلان', 'تقييمات']::text[], false, 'published'
+  'minimal', 'flux-schnell', ARRAY['إعلان', 'تقييمات']::text[], 'published'
 )
 on conflict (slug) do update set
   title_ar = excluded.title_ar, title_en = excluded.title_en,
   description_ar = excluded.description_ar, description_en = excluded.description_en,
   prompt_text_en = excluded.prompt_text_en, prompt_display_ar = excluded.prompt_display_ar,
   variables = excluded.variables, category_id = excluded.category_id,
-  style = excluded.style, model = excluded.model, tags = excluded.tags,
-  requires_photo = excluded.requires_photo;
+  style = excluded.style, model = excluded.model, tags = excluded.tags;
 
 insert into public.prompts (
   slug, title_ar, title_en, description_ar, description_en,
-  prompt_text_en, prompt_display_ar, variables, category_id, style, model, tags, requires_photo, status
+  prompt_text_en, prompt_display_ar, variables, category_id, style, model, tags, status
 ) values (
   'story-countdown-launch', 'ستوري عد تنازلي لإطلاق منتج', 'Countdown Story for Product Launch',
   'تصميم ستوري رأسي مثير يعلن عن اقتراب إطلاق جديد', 'Vertical story design building excitement for a new launch',
   'vertical 9:16 story format design, dramatic glowing countdown timer graphic as the centerpiece, dark {{color}} background with softly glowing particle bokeh, clear teaser text space, futuristic launch-announcement style, high-energy anticipation mood, crisp premium render quality', 'تصميم ستوري بصيغة رأسية 9:16، رسم عداد تنازلي متوهج درامي كنقطة مركزية، خلفية داكنة بلون {{color}} مع جزيئات بوكيه متوهجة ناعمة، مساحة نص تشويقي واضحة، أسلوب إعلان إطلاق مستقبلي، أجواء ترقب عالية الطاقة، جودة رندر فاخرة نظيفة',
   '[{"key":"color","label_ar":"لون الخلفية","label_en":"Background color","default":"midnight blue"}]'::jsonb,
   (select id from public.categories where slug = 'social-ads'),
-  'futuristic', 'flux-schnell', ARRAY['إعلان', 'ستوري']::text[], false, 'published'
+  'futuristic', 'flux-schnell', ARRAY['إعلان', 'ستوري']::text[], 'published'
 )
 on conflict (slug) do update set
   title_ar = excluded.title_ar, title_en = excluded.title_en,
   description_ar = excluded.description_ar, description_en = excluded.description_en,
   prompt_text_en = excluded.prompt_text_en, prompt_display_ar = excluded.prompt_display_ar,
   variables = excluded.variables, category_id = excluded.category_id,
-  style = excluded.style, model = excluded.model, tags = excluded.tags,
-  requires_photo = excluded.requires_photo;
+  style = excluded.style, model = excluded.model, tags = excluded.tags;
 
 insert into public.prompts (
   slug, title_ar, title_en, description_ar, description_en,
-  prompt_text_en, prompt_display_ar, variables, category_id, style, model, tags, requires_photo, status
+  prompt_text_en, prompt_display_ar, variables, category_id, style, model, tags, status
 ) values (
   'carousel-tips-slide', 'شريحة كاروسيل نصائح', 'Carousel Tips Slide',
   'تصميم شريحة موحدة لمنشورات الكاروسيل التعليمية', 'Cohesive slide design for educational carousel posts',
   'clean educational carousel slide design, bold oversized number ''{{number}}'' as the dominant graphic element, {{color}} background with soft geometric accent shapes, generous clearly organized text space, modern infographic style with strong visual hierarchy, crisp flat-design precision', 'تصميم شريحة كاروسيل تعليمية نظيفة، رقم ''{{number}}'' كبير وبارز كعنصر رسومي مهيمن، خلفية بلون {{color}} مع أشكال هندسية ناعمة مساندة، مساحة نص واسعة ومنظمة بوضوح، أسلوب إنفوجرافيك عصري بتسلسل بصري قوي، دقة تصميم مسطح نظيفة',
   '[{"key":"number","label_ar":"الرقم","label_en":"Number","default":"1"},{"key":"color","label_ar":"لون الخلفية","label_en":"Background color","default":"teal"}]'::jsonb,
   (select id from public.categories where slug = 'social-ads'),
-  'infographic', 'flux-schnell', ARRAY['إعلان', 'كاروسيل']::text[], false, 'published'
+  'infographic', 'flux-schnell', ARRAY['إعلان', 'كاروسيل']::text[], 'published'
 )
 on conflict (slug) do update set
   title_ar = excluded.title_ar, title_en = excluded.title_en,
   description_ar = excluded.description_ar, description_en = excluded.description_en,
   prompt_text_en = excluded.prompt_text_en, prompt_display_ar = excluded.prompt_display_ar,
   variables = excluded.variables, category_id = excluded.category_id,
-  style = excluded.style, model = excluded.model, tags = excluded.tags,
-  requires_photo = excluded.requires_photo;
+  style = excluded.style, model = excluded.model, tags = excluded.tags;
 
 insert into public.prompts (
   slug, title_ar, title_en, description_ar, description_en,
-  prompt_text_en, prompt_display_ar, variables, category_id, style, model, tags, requires_photo, status
+  prompt_text_en, prompt_display_ar, variables, category_id, style, model, tags, status
 ) values (
   'limited-stock-urgency', 'تصميم إلحاح الكمية المحدودة', 'Limited Stock Urgency Design',
   'تصميم يحفّز الشراء الفوري بشعور الندرة', 'Design that drives urgency and immediate purchase action',
   'urgent retail promotion design, bold ''{{message}}'' typography placeholder as the dominant focal point, sharp warning-stripe pattern accents, high-alert {{color}} color scheme, dynamic energetic diagonal composition, scroll-stopping impact, crisp print and digital-ready precision', 'تصميم ترويجي عاجل للتجزئة، مساحة نصية بارزة ومهيمنة لعبارة ''{{message}}''، لمسات نمط خطوط تحذيرية حادة، تدرج ألوان {{color}} عالي التنبيه، تكوين قطري ديناميكي حيوي، تأثير يوقف التمرير فوراً، دقة نظيفة جاهزة للطباعة والرقمي',
   '[{"key":"message","label_ar":"الرسالة","label_en":"Message","default":"LAST CHANCE"},{"key":"color","label_ar":"اللون","label_en":"Color","default":"red and black"}]'::jsonb,
   (select id from public.categories where slug = 'social-ads'),
-  'bold', 'flux-schnell', ARRAY['إعلان', 'عرض محدود']::text[], false, 'published'
+  'bold', 'flux-schnell', ARRAY['إعلان', 'عرض محدود']::text[], 'published'
 )
 on conflict (slug) do update set
   title_ar = excluded.title_ar, title_en = excluded.title_en,
   description_ar = excluded.description_ar, description_en = excluded.description_en,
   prompt_text_en = excluded.prompt_text_en, prompt_display_ar = excluded.prompt_display_ar,
   variables = excluded.variables, category_id = excluded.category_id,
-  style = excluded.style, model = excluded.model, tags = excluded.tags,
-  requires_photo = excluded.requires_photo;
+  style = excluded.style, model = excluded.model, tags = excluded.tags;
 
 insert into public.prompts (
   slug, title_ar, title_en, description_ar, description_en,
-  prompt_text_en, prompt_display_ar, variables, category_id, style, model, tags, requires_photo, status
+  prompt_text_en, prompt_display_ar, variables, category_id, style, model, tags, status
 ) values (
   'gift-guide-ad', 'إعلان دليل هدايا', 'Gift Guide Ad',
   'تصميم دافئ يعرض تشكيلة هدايا لمناسبة معينة', 'Warm design showcasing a curated gift collection',
   'cozy gift guide advertisement featuring {{items}} arranged elegantly with intentional visual balance, warm {{color}} festive palette, soft ribbon and wrapping paper texture detail, inviting shopping campaign style, gentle natural lighting, premium seasonal retail quality', 'إعلان دليل هدايا دافئ يعرض {{items}} مرتبة بأناقة وتوازن بصري مدروس، لوحة ألوان احتفالية دافئة {{color}}، تفاصيل ملمس شرائط وورق تغليف ناعمة، أسلوب حملة تسوق جذابة، إضاءة طبيعية لطيفة، جودة تجارية موسمية فاخرة',
   '[{"key":"items","label_ar":"الهدايا","label_en":"Gift items","default":"perfume bottles and gift boxes"},{"key":"color","label_ar":"الألوان","label_en":"Colors","default":"burgundy and gold"}]'::jsonb,
   (select id from public.categories where slug = 'social-ads'),
-  'festive', 'flux-schnell', ARRAY['إعلان', 'هدايا']::text[], false, 'published'
+  'festive', 'flux-schnell', ARRAY['إعلان', 'هدايا']::text[], 'published'
 )
 on conflict (slug) do update set
   title_ar = excluded.title_ar, title_en = excluded.title_en,
   description_ar = excluded.description_ar, description_en = excluded.description_en,
   prompt_text_en = excluded.prompt_text_en, prompt_display_ar = excluded.prompt_display_ar,
   variables = excluded.variables, category_id = excluded.category_id,
-  style = excluded.style, model = excluded.model, tags = excluded.tags,
-  requires_photo = excluded.requires_photo;
+  style = excluded.style, model = excluded.model, tags = excluded.tags;
 
 insert into public.prompts (
   slug, title_ar, title_en, description_ar, description_en,
-  prompt_text_en, prompt_display_ar, variables, category_id, style, model, tags, requires_photo, status
+  prompt_text_en, prompt_display_ar, variables, category_id, style, model, tags, status
 ) values (
   'review-highlight-card', 'بطاقة إبراز تقييم مميز', 'Review Highlight Card',
   'تصميم يبرز تقييماً بارزاً لبناء الثقة', 'Design highlighting a standout review to build trust',
   'eye-catching review highlight card design, five prominent gold stars as the visual anchor, soft {{color}} background, refined quotation accent graphic, clean modern layout with clearly defined space for review text, trust-building commercial polish', 'تصميم بطاقة إبراز تقييم لافت، خمس نجوم ذهبية بارزة كنقطة ارتكاز بصرية، خلفية ناعمة بلون {{color}}، لمسة رسومية راقية لعلامة اقتباس، تخطيط عصري نظيف مع مساحة محددة بوضوح لنص التقييم، لمسة تجارية تبني الثقة',
   '[{"key":"color","label_ar":"لون الخلفية","label_en":"Background color","default":"mint green"}]'::jsonb,
   (select id from public.categories where slug = 'social-ads'),
-  'minimal', 'flux-schnell', ARRAY['إعلان', 'تقييمات']::text[], false, 'published'
+  'minimal', 'flux-schnell', ARRAY['إعلان', 'تقييمات']::text[], 'published'
 )
 on conflict (slug) do update set
   title_ar = excluded.title_ar, title_en = excluded.title_en,
   description_ar = excluded.description_ar, description_en = excluded.description_en,
   prompt_text_en = excluded.prompt_text_en, prompt_display_ar = excluded.prompt_display_ar,
   variables = excluded.variables, category_id = excluded.category_id,
-  style = excluded.style, model = excluded.model, tags = excluded.tags,
-  requires_photo = excluded.requires_photo;
+  style = excluded.style, model = excluded.model, tags = excluded.tags;
 
 insert into public.prompts (
   slug, title_ar, title_en, description_ar, description_en,
-  prompt_text_en, prompt_display_ar, variables, category_id, style, model, tags, requires_photo, status
+  prompt_text_en, prompt_display_ar, variables, category_id, style, model, tags, status
 ) values (
   'minimal-lettermark-logo', 'لوجو حرفي بسيط', 'Minimal Lettermark Logo',
   'شعار أنيق مبني على الحرف الأول من اسم العلامة', 'Elegant logo built around the brand''s initial letter',
   'minimal lettermark logo design featuring the letter ''{{letter}}'', precise geometric clean lines with perfect symmetry, refined {{color}} color palette, flat scalable vector style, centered on a plain white background, modern timeless brand identity, print and app-icon ready quality', 'تصميم لوجو حرفي بسيط يعتمد على الحرف ''{{letter}}''، خطوط هندسية دقيقة بتناظر مثالي، لوحة ألوان راقية {{color}}، أسلوب فيكتور مسطح قابل للتحجيم، في وسط خلفية بيضاء بسيطة، هوية علامة تجارية عصرية خالدة، جودة جاهزة للطباعة وأيقونات التطبيقات',
   '[{"key":"letter","label_ar":"الحرف","label_en":"Letter","default":"N"},{"key":"color","label_ar":"الألوان","label_en":"Colors","default":"navy and gold"}]'::jsonb,
   (select id from public.categories where slug = 'branding-logos'),
-  'flat vector', 'flux-schnell', ARRAY['لوجو', 'هوية']::text[], false, 'published'
+  'flat vector', 'flux-schnell', ARRAY['لوجو', 'هوية']::text[], 'published'
 )
 on conflict (slug) do update set
   title_ar = excluded.title_ar, title_en = excluded.title_en,
   description_ar = excluded.description_ar, description_en = excluded.description_en,
   prompt_text_en = excluded.prompt_text_en, prompt_display_ar = excluded.prompt_display_ar,
   variables = excluded.variables, category_id = excluded.category_id,
-  style = excluded.style, model = excluded.model, tags = excluded.tags,
-  requires_photo = excluded.requires_photo;
+  style = excluded.style, model = excluded.model, tags = excluded.tags;
 
 insert into public.prompts (
   slug, title_ar, title_en, description_ar, description_en,
-  prompt_text_en, prompt_display_ar, variables, category_id, style, model, tags, requires_photo, status
+  prompt_text_en, prompt_display_ar, variables, category_id, style, model, tags, status
 ) values (
   'abstract-mark-logo', 'شعار رمزي تجريدي', 'Abstract Symbol Mark',
   'رمز تجريدي يعكس مفهوم النشاط التجاري', 'Abstract symbol representing the brand''s concept',
   'abstract geometric logo mark representing {{concept}}, minimal flat vector shapes with precise clean lines, smooth {{color}} gradient, deliberately balanced negative space, professional scalable brand mark on a plain white background, timeless modern identity quality', 'شعار هندسي تجريدي يمثل مفهوم {{concept}}، أشكال فيكتور مسطحة بخطوط دقيقة ونظيفة، تدرج لوني ناعم {{color}}، توازن مدروس في المساحات الفارغة، علامة تجارية احترافية قابلة للتحجيم على خلفية بيضاء، جودة هوية عصرية خالدة',
   '[{"key":"concept","label_ar":"المفهوم","label_en":"Concept","default":"growth and connection"},{"key":"color","label_ar":"التدرج اللوني","label_en":"Gradient","default":"green to blue"}]'::jsonb,
   (select id from public.categories where slug = 'branding-logos'),
-  'abstract', 'flux-schnell', ARRAY['لوجو', 'تجريدي']::text[], false, 'published'
+  'abstract', 'flux-schnell', ARRAY['لوجو', 'تجريدي']::text[], 'published'
 )
 on conflict (slug) do update set
   title_ar = excluded.title_ar, title_en = excluded.title_en,
   description_ar = excluded.description_ar, description_en = excluded.description_en,
   prompt_text_en = excluded.prompt_text_en, prompt_display_ar = excluded.prompt_display_ar,
   variables = excluded.variables, category_id = excluded.category_id,
-  style = excluded.style, model = excluded.model, tags = excluded.tags,
-  requires_photo = excluded.requires_photo;
+  style = excluded.style, model = excluded.model, tags = excluded.tags;
 
 insert into public.prompts (
   slug, title_ar, title_en, description_ar, description_en,
-  prompt_text_en, prompt_display_ar, variables, category_id, style, model, tags, requires_photo, status
+  prompt_text_en, prompt_display_ar, variables, category_id, style, model, tags, status
 ) values (
   'mascot-character-logo', 'شعار شخصية كرتونية (ماسكوت)', 'Mascot Character Logo',
   'شخصية ودودة تمثل العلامة التجارية بأسلوب كرتوني', 'Friendly character representing the brand in cartoon style',
   'friendly cartoon mascot logo of a {{animal}}, bold clean outlines, flat vibrant {{color}} colors, warm playful expression, centered vector illustration on a plain white background, scalable brand mascot style, polished professional finish', 'شعار ماسكوت كرتوني ودود على شكل {{animal}}، خطوط خارجية بارزة ونظيفة، ألوان مسطحة زاهية {{color}}، تعبير مرح ودافئ، رسم فيكتور مركزي على خلفية بيضاء، أسلوب ماسكوت قابل للتحجيم، لمسة نهائية احترافية مصقولة',
   '[{"key":"animal","label_ar":"الحيوان","label_en":"Animal","default":"a fox"},{"key":"color","label_ar":"الألوان","label_en":"Colors","default":"orange and white"}]'::jsonb,
   (select id from public.categories where slug = 'branding-logos'),
-  'mascot', 'flux-schnell', ARRAY['لوجو', 'ماسكوت']::text[], false, 'published'
+  'mascot', 'flux-schnell', ARRAY['لوجو', 'ماسكوت']::text[], 'published'
 )
 on conflict (slug) do update set
   title_ar = excluded.title_ar, title_en = excluded.title_en,
   description_ar = excluded.description_ar, description_en = excluded.description_en,
   prompt_text_en = excluded.prompt_text_en, prompt_display_ar = excluded.prompt_display_ar,
   variables = excluded.variables, category_id = excluded.category_id,
-  style = excluded.style, model = excluded.model, tags = excluded.tags,
-  requires_photo = excluded.requires_photo;
+  style = excluded.style, model = excluded.model, tags = excluded.tags;
 
 insert into public.prompts (
   slug, title_ar, title_en, description_ar, description_en,
-  prompt_text_en, prompt_display_ar, variables, category_id, style, model, tags, requires_photo, status
+  prompt_text_en, prompt_display_ar, variables, category_id, style, model, tags, status
 ) values (
   'emblem-badge-logo', 'شعار شارة تقليدية (إمبلم)', 'Classic Emblem Badge Logo',
   'شعار دائري كلاسيكي يوحي بالثقة والتراث', 'Classic circular badge conveying trust and heritage',
   'vintage emblem badge logo design for {{business}}, precise circular border with fine ornamental detailing, {{color}} monochrome palette, centered icon of {{icon}}, flat scalable vector illustration on a plain white background, heritage-quality craftsmanship feel', 'تصميم شعار شارة كلاسيكية (إمبلم) لـ {{business}}، حدود دائرية دقيقة بتفاصيل زخرفية أنيقة، لوحة ألوان أحادية {{color}}، أيقونة مركزية لـ {{icon}}، رسم فيكتور مسطح قابل للتحجيم على خلفية بيضاء، إحساس حرفي تراثي عالي الجودة',
   '[{"key":"business","label_ar":"النشاط التجاري","label_en":"Business","default":"a coffee roastery"},{"key":"icon","label_ar":"الرمز المركزي","label_en":"Central icon","default":"a coffee bean"},{"key":"color","label_ar":"اللون","label_en":"Color","default":"dark brown"}]'::jsonb,
   (select id from public.categories where slug = 'branding-logos'),
-  'emblem', 'flux-schnell', ARRAY['لوجو', 'شارة']::text[], false, 'published'
+  'emblem', 'flux-schnell', ARRAY['لوجو', 'شارة']::text[], 'published'
 )
 on conflict (slug) do update set
   title_ar = excluded.title_ar, title_en = excluded.title_en,
   description_ar = excluded.description_ar, description_en = excluded.description_en,
   prompt_text_en = excluded.prompt_text_en, prompt_display_ar = excluded.prompt_display_ar,
   variables = excluded.variables, category_id = excluded.category_id,
-  style = excluded.style, model = excluded.model, tags = excluded.tags,
-  requires_photo = excluded.requires_photo;
+  style = excluded.style, model = excluded.model, tags = excluded.tags;
 
 insert into public.prompts (
   slug, title_ar, title_en, description_ar, description_en,
-  prompt_text_en, prompt_display_ar, variables, category_id, style, model, tags, requires_photo, status
+  prompt_text_en, prompt_display_ar, variables, category_id, style, model, tags, status
 ) values (
   'brand-color-palette-board', 'لوحة ألوان الهوية البصرية', 'Brand Color Palette Board',
   'عرض منظم لألوان الهوية البصرية للعلامة', 'Organized presentation of the brand''s color identity',
   'clean brand style guide color palette board, five precisely arranged color swatches in {{color}} tones, minimal refined typography labels, professional branding presentation layout, plain white background, print-ready design-system quality', 'لوحة عرض ألوان دليل الهوية البصرية بتصميم نظيف، خمس عينات ألوان مرتبة بدقة بدرجات {{color}}، تسميات نصية أنيقة بسيطة، تخطيط عرض احترافي للهوية، خلفية بيضاء، جودة نظام تصميم جاهزة للطباعة',
   '[{"key":"color","label_ar":"الدرجات اللونية","label_en":"Color tones","default":"warm earthy"}]'::jsonb,
   (select id from public.categories where slug = 'branding-logos'),
-  'presentation', 'flux-schnell', ARRAY['هوية', 'ألوان']::text[], false, 'published'
+  'presentation', 'flux-schnell', ARRAY['هوية', 'ألوان']::text[], 'published'
 )
 on conflict (slug) do update set
   title_ar = excluded.title_ar, title_en = excluded.title_en,
   description_ar = excluded.description_ar, description_en = excluded.description_en,
   prompt_text_en = excluded.prompt_text_en, prompt_display_ar = excluded.prompt_display_ar,
   variables = excluded.variables, category_id = excluded.category_id,
-  style = excluded.style, model = excluded.model, tags = excluded.tags,
-  requires_photo = excluded.requires_photo;
+  style = excluded.style, model = excluded.model, tags = excluded.tags;
 
 insert into public.prompts (
   slug, title_ar, title_en, description_ar, description_en,
-  prompt_text_en, prompt_display_ar, variables, category_id, style, model, tags, requires_photo, status
+  prompt_text_en, prompt_display_ar, variables, category_id, style, model, tags, status
 ) values (
   'business-card-mockup', 'موك أب بطاقة عمل', 'Business Card Mockup',
   'عرض واقعي لتصميم بطاقة العمل على سطح أنيق', 'Realistic mockup of a business card design on an elegant surface',
   'photorealistic business card mockup, two cards featuring a {{color}} minimal design, placed on a {{surface}}, soft natural directional lighting, shallow depth of field with a softly blurred background, professional branding photography, physically accurate paper texture and print finish', 'موك أب واقعي لبطاقة عمل، بطاقتان بتصميم بسيط بلون {{color}}، موضوعتان على {{surface}}، إضاءة طبيعية موجهة ناعمة، عمق ميدان ضحل مع خلفية ضبابية ناعمة، تصوير هوية بصرية احترافي، خامة ورق ولمسة طباعة واقعية فيزيائياً',
   '[{"key":"color","label_ar":"اللون","label_en":"Color","default":"black and gold"},{"key":"surface","label_ar":"السطح","label_en":"Surface","default":"a marble table"}]'::jsonb,
   (select id from public.categories where slug = 'branding-logos'),
-  'mockup', 'flux-schnell', ARRAY['هوية', 'بطاقة عمل']::text[], false, 'published'
+  'mockup', 'flux-schnell', ARRAY['هوية', 'بطاقة عمل']::text[], 'published'
 )
 on conflict (slug) do update set
   title_ar = excluded.title_ar, title_en = excluded.title_en,
   description_ar = excluded.description_ar, description_en = excluded.description_en,
   prompt_text_en = excluded.prompt_text_en, prompt_display_ar = excluded.prompt_display_ar,
   variables = excluded.variables, category_id = excluded.category_id,
-  style = excluded.style, model = excluded.model, tags = excluded.tags,
-  requires_photo = excluded.requires_photo;
+  style = excluded.style, model = excluded.model, tags = excluded.tags;
 
 insert into public.prompts (
   slug, title_ar, title_en, description_ar, description_en,
-  prompt_text_en, prompt_display_ar, variables, category_id, style, model, tags, requires_photo, status
+  prompt_text_en, prompt_display_ar, variables, category_id, style, model, tags, status
 ) values (
   'storefront-signage-mockup', 'موك أب لافتة واجهة متجر', 'Storefront Signage Mockup',
   'عرض الشعار على واجهة متجر واقعية', 'Logo displayed on a realistic store front',
   'photorealistic storefront signage mockup for {{business}}, modern architectural shop exterior, clean {{color}} signage board with clear logo placement space, natural daytime lighting with accurate shadows, architectural photography style, high-detail realistic materials', 'موك أب واقعي للافتة واجهة متجر لـ {{business}}، واجهة محل معمارية عصرية، لوحة لافتة نظيفة بلون {{color}} مع مساحة واضحة لوضع الشعار، إضاءة نهارية طبيعية بظلال دقيقة، أسلوب تصوير معماري، خامات واقعية عالية التفاصيل',
   '[{"key":"business","label_ar":"النشاط التجاري","label_en":"Business","default":"a bakery"},{"key":"color","label_ar":"لون اللافتة","label_en":"Signage color","default":"warm cream and wood"}]'::jsonb,
   (select id from public.categories where slug = 'branding-logos'),
-  'mockup', 'flux-schnell', ARRAY['هوية', 'واجهة متجر']::text[], false, 'published'
+  'mockup', 'flux-schnell', ARRAY['هوية', 'واجهة متجر']::text[], 'published'
 )
 on conflict (slug) do update set
   title_ar = excluded.title_ar, title_en = excluded.title_en,
   description_ar = excluded.description_ar, description_en = excluded.description_en,
   prompt_text_en = excluded.prompt_text_en, prompt_display_ar = excluded.prompt_display_ar,
   variables = excluded.variables, category_id = excluded.category_id,
-  style = excluded.style, model = excluded.model, tags = excluded.tags,
-  requires_photo = excluded.requires_photo;
+  style = excluded.style, model = excluded.model, tags = excluded.tags;
 
 insert into public.prompts (
   slug, title_ar, title_en, description_ar, description_en,
-  prompt_text_en, prompt_display_ar, variables, category_id, style, model, tags, requires_photo, status
+  prompt_text_en, prompt_display_ar, variables, category_id, style, model, tags, status
 ) values (
   'app-icon-design', 'تصميم أيقونة تطبيق', 'App Icon Design',
   'أيقونة تطبيق حديثة بزوايا دائرية وألوان متدرجة', 'Modern rounded app icon with gradient colors',
   'modern mobile app icon design, rounded square superellipse shape, simple {{symbol}} symbol precisely centered, smooth {{color}} gradient background, flat minimal style, pixel-perfect edges, iOS/Android app store submission quality', 'تصميم أيقونة تطبيق جوال عصرية، شكل مربع بزوايا دائرية (superellipse)، رمز {{symbol}} بسيط في المنتصف بدقة، خلفية متدرجة ناعمة بلون {{color}}، أسلوب مسطح بسيط، حواف دقيقة بالبكسل، جودة جاهزة لمتاجر iOS وAndroid',
   '[{"key":"symbol","label_ar":"الرمز","label_en":"Symbol","default":"a chat bubble"},{"key":"color","label_ar":"التدرج اللوني","label_en":"Gradient","default":"purple to pink"}]'::jsonb,
   (select id from public.categories where slug = 'branding-logos'),
-  'flat design', 'flux-schnell', ARRAY['هوية', 'أيقونة']::text[], false, 'published'
+  'flat design', 'flux-schnell', ARRAY['هوية', 'أيقونة']::text[], 'published'
 )
 on conflict (slug) do update set
   title_ar = excluded.title_ar, title_en = excluded.title_en,
   description_ar = excluded.description_ar, description_en = excluded.description_en,
   prompt_text_en = excluded.prompt_text_en, prompt_display_ar = excluded.prompt_display_ar,
   variables = excluded.variables, category_id = excluded.category_id,
-  style = excluded.style, model = excluded.model, tags = excluded.tags,
-  requires_photo = excluded.requires_photo;
+  style = excluded.style, model = excluded.model, tags = excluded.tags;
 
 insert into public.prompts (
   slug, title_ar, title_en, description_ar, description_en,
-  prompt_text_en, prompt_display_ar, variables, category_id, style, model, tags, requires_photo, status
+  prompt_text_en, prompt_display_ar, variables, category_id, style, model, tags, status
 ) values (
   'letterhead-mockup', 'موك أب ورق رسمي (Letterhead)', 'Letterhead Mockup',
   'عرض واقعي لتصميم الورق الرسمي للمراسلات', 'Realistic mockup of official correspondence stationery',
   'photorealistic letterhead mockup for {{business}}, minimal {{color}} header design with clear logo placement space, clean textured paper, top-down flat lay photography with soft even lighting, professional stationery presentation, print-accurate detail', 'موك أب واقعي لورق رسمي لـ{{business}}، تصميم ترويسة بسيط بلون {{color}} مع مساحة واضحة للشعار، خامة ورق نظيفة، تصوير من الأعلى بإضاءة ناعمة متساوية، عرض قرطاسية احترافي، تفاصيل دقيقة مطابقة للطباعة',
   '[{"key":"business","label_ar":"النشاط التجاري","label_en":"Business","default":"a law firm"},{"key":"color","label_ar":"اللون","label_en":"Color","default":"navy blue"}]'::jsonb,
   (select id from public.categories where slug = 'branding-logos'),
-  'mockup', 'flux-schnell', ARRAY['هوية', 'قرطاسية']::text[], false, 'published'
+  'mockup', 'flux-schnell', ARRAY['هوية', 'قرطاسية']::text[], 'published'
 )
 on conflict (slug) do update set
   title_ar = excluded.title_ar, title_en = excluded.title_en,
   description_ar = excluded.description_ar, description_en = excluded.description_en,
   prompt_text_en = excluded.prompt_text_en, prompt_display_ar = excluded.prompt_display_ar,
   variables = excluded.variables, category_id = excluded.category_id,
-  style = excluded.style, model = excluded.model, tags = excluded.tags,
-  requires_photo = excluded.requires_photo;
+  style = excluded.style, model = excluded.model, tags = excluded.tags;
 
 insert into public.prompts (
   slug, title_ar, title_en, description_ar, description_en,
-  prompt_text_en, prompt_display_ar, variables, category_id, style, model, tags, requires_photo, status
+  prompt_text_en, prompt_display_ar, variables, category_id, style, model, tags, status
 ) values (
   'corporate-headshot', 'صورة شخصية احترافية للأعمال', 'Professional Corporate Headshot',
   'صورة بورتريه رسمية تناسب الملفات الشخصية المهنية', 'Formal portrait suited for professional profiles',
   'professional corporate headshot portrait of a {{person}}, wearing {{outfit}}, neutral gray studio background, soft even three-point lighting, 85mm portrait lens with subtle background compression, confident authentic expression, natural skin texture with no over-smoothing, sharp eye focus, high-end LinkedIn-quality photography', 'صورة بورتريه احترافية لـ{{person}}، يرتدي {{outfit}}، خلفية استوديو رمادية محايدة، إضاءة ثلاثية الاتجاه ناعمة متساوية، عدسة بورتريه 85 مم مع ضغط خلفية خفيف، تعبير واثق وأصيل، ملمس بشرة طبيعي بلا تنعيم مفرط، تركيز حاد على العينين، تصوير بجودة LinkedIn الاحترافية',
   '[{"key":"person","label_ar":"الشخص","label_en":"Person","default":"a businesswoman"},{"key":"outfit","label_ar":"الزي","label_en":"Outfit","default":"a tailored navy blazer"}]'::jsonb,
   (select id from public.categories where slug = 'portraits'),
-  'corporate', 'flux-schnell', ARRAY['بورتريه', 'أعمال']::text[], false, 'published'
+  'corporate', 'flux-schnell', ARRAY['بورتريه', 'أعمال']::text[], 'published'
 )
 on conflict (slug) do update set
   title_ar = excluded.title_ar, title_en = excluded.title_en,
   description_ar = excluded.description_ar, description_en = excluded.description_en,
   prompt_text_en = excluded.prompt_text_en, prompt_display_ar = excluded.prompt_display_ar,
   variables = excluded.variables, category_id = excluded.category_id,
-  style = excluded.style, model = excluded.model, tags = excluded.tags,
-  requires_photo = excluded.requires_photo;
+  style = excluded.style, model = excluded.model, tags = excluded.tags;
 
 insert into public.prompts (
   slug, title_ar, title_en, description_ar, description_en,
-  prompt_text_en, prompt_display_ar, variables, category_id, style, model, tags, requires_photo, status
+  prompt_text_en, prompt_display_ar, variables, category_id, style, model, tags, status
 ) values (
   'cinematic-outdoor-portrait', 'بورتريه سينمائي خارجي', 'Cinematic Outdoor Portrait',
   'بورتريه بإضاءة الغروب وأجواء سينمائية', 'Portrait with golden hour lighting and cinematic mood',
   'cinematic portrait of a {{person}}, golden hour sunset lighting, warm rim light separating the subject from the background, shallow depth of field with a smoothly blurred outdoor background, subtle film grain, teal-and-orange inspired color grading, moody atmospheric mood, professional 85mm lens photography', 'بورتريه سينمائي لـ{{person}}، إضاءة غروب الشمس الذهبية، ضوء حافة دافئ يفصل الشخص عن الخلفية، عمق ميدان ضحل مع خلفية خارجية ضبابية ناعمة، حبيبات فيلم خفيفة، تدرج ألوان مستوحى من السماوي والبرتقالي، أجواء درامية غامضة، تصوير احترافي بعدسة 85 مم',
   '[{"key":"person","label_ar":"الشخص","label_en":"Person","default":"a young man"}]'::jsonb,
   (select id from public.categories where slug = 'portraits'),
-  'cinematic', 'flux-schnell', ARRAY['بورتريه', 'سينمائي']::text[], false, 'published'
+  'cinematic', 'flux-schnell', ARRAY['بورتريه', 'سينمائي']::text[], 'published'
 )
 on conflict (slug) do update set
   title_ar = excluded.title_ar, title_en = excluded.title_en,
   description_ar = excluded.description_ar, description_en = excluded.description_en,
   prompt_text_en = excluded.prompt_text_en, prompt_display_ar = excluded.prompt_display_ar,
   variables = excluded.variables, category_id = excluded.category_id,
-  style = excluded.style, model = excluded.model, tags = excluded.tags,
-  requires_photo = excluded.requires_photo;
+  style = excluded.style, model = excluded.model, tags = excluded.tags;
 
 insert into public.prompts (
   slug, title_ar, title_en, description_ar, description_en,
-  prompt_text_en, prompt_display_ar, variables, category_id, style, model, tags, requires_photo, status
+  prompt_text_en, prompt_display_ar, variables, category_id, style, model, tags, status
 ) values (
   'studio-beauty-portrait', 'بورتريه تجميلي في الاستوديو', 'Studio Beauty Portrait',
   'بورتريه ناعم يبرز نضارة البشرة لإعلانات التجميل', 'Soft glowing portrait highlighting skin, ideal for beauty ads',
   'beauty studio portrait of a {{person}}, flawless naturally glowing skin, soft beauty-dish lighting with a gentle catchlight in the eyes, clean {{background_color}} background, minimal fresh makeup, sharp macro-level facial detail, cosmetics advertising quality, color-accurate skin tones', 'بورتريه تجميلي في الاستوديو لـ{{person}}، بشرة متوهجة طبيعياً وخالية من العيوب، إضاءة طبق تجميل ناعمة مع بريق خفيف في العينين، خلفية نظيفة بلون {{background_color}}، مكياج بسيط منعش، تفاصيل وجه دقيقة جداً، جودة إعلانات مستحضرات التجميل، دقة ألوان بشرة واقعية',
   '[{"key":"person","label_ar":"الشخص","label_en":"Person","default":"a woman"},{"key":"background_color","label_ar":"لون الخلفية","label_en":"Background color","default":"soft pink"}]'::jsonb,
   (select id from public.categories where slug = 'portraits'),
-  'beauty', 'flux-schnell', ARRAY['بورتريه', 'تجميل']::text[], false, 'published'
+  'beauty', 'flux-schnell', ARRAY['بورتريه', 'تجميل']::text[], 'published'
 )
 on conflict (slug) do update set
   title_ar = excluded.title_ar, title_en = excluded.title_en,
   description_ar = excluded.description_ar, description_en = excluded.description_en,
   prompt_text_en = excluded.prompt_text_en, prompt_display_ar = excluded.prompt_display_ar,
   variables = excluded.variables, category_id = excluded.category_id,
-  style = excluded.style, model = excluded.model, tags = excluded.tags,
-  requires_photo = excluded.requires_photo;
+  style = excluded.style, model = excluded.model, tags = excluded.tags;
 
 insert into public.prompts (
   slug, title_ar, title_en, description_ar, description_en,
-  prompt_text_en, prompt_display_ar, variables, category_id, style, model, tags, requires_photo, status
+  prompt_text_en, prompt_display_ar, variables, category_id, style, model, tags, status
 ) values (
   'traditional-attire-portrait', 'بورتريه بالزي التراثي', 'Traditional Attire Portrait',
   'بورتريه يبرز الزي التراثي الخليجي بإضاءة فاخرة', 'Portrait highlighting traditional Gulf attire with elegant lighting',
   'elegant portrait of a {{person}} wearing traditional {{attire}}, rich warm directional lighting, ornate patterned background, richly detailed fabric texture and embroidery, cultural heritage photography, high production quality, dignified composed posture', 'بورتريه أنيق لـ{{person}} يرتدي {{attire}} التراثي، إضاءة موجهة دافئة وفاخرة، خلفية بزخارف مزركشة، تفاصيل قماش وتطريز دقيقة جداً، تصوير تراثي ثقافي، جودة إنتاج عالية، وقفة متزنة ووقورة',
   '[{"key":"person","label_ar":"الشخص","label_en":"Person","default":"a man"},{"key":"attire","label_ar":"الزي","label_en":"Attire","default":"a bisht over a white thobe"}]'::jsonb,
   (select id from public.categories where slug = 'portraits'),
-  'cultural', 'flux-schnell', ARRAY['بورتريه', 'تراث']::text[], false, 'published'
+  'cultural', 'flux-schnell', ARRAY['بورتريه', 'تراث']::text[], 'published'
 )
 on conflict (slug) do update set
   title_ar = excluded.title_ar, title_en = excluded.title_en,
   description_ar = excluded.description_ar, description_en = excluded.description_en,
   prompt_text_en = excluded.prompt_text_en, prompt_display_ar = excluded.prompt_display_ar,
   variables = excluded.variables, category_id = excluded.category_id,
-  style = excluded.style, model = excluded.model, tags = excluded.tags,
-  requires_photo = excluded.requires_photo;
+  style = excluded.style, model = excluded.model, tags = excluded.tags;
 
 insert into public.prompts (
   slug, title_ar, title_en, description_ar, description_en,
-  prompt_text_en, prompt_display_ar, variables, category_id, style, model, tags, requires_photo, status
+  prompt_text_en, prompt_display_ar, variables, category_id, style, model, tags, status
 ) values (
   'candid-lifestyle-portrait', 'بورتريه عفوي بأسلوب حياتي', 'Candid Lifestyle Portrait',
   'لحظة طبيعية غير مصطنعة تناسب المحتوى الشخصي', 'A natural unposed moment, great for personal content',
   'candid lifestyle portrait of a {{person}} laughing naturally at {{location}}, soft natural daylight, genuinely unposed authentic moment, warm film-inspired color grading, documentary photography style, natural motion blur on background elements, real emotion captured mid-moment', 'بورتريه عفوي بأسلوب حياتي لـ{{person}} يضحك بشكل طبيعي في {{location}}، ضوء نهار طبيعي ناعم، لحظة أصيلة غير مصطنعة تماماً، تدرج ألوان دافئ مستوحى من الأفلام، أسلوب تصوير وثائقي، ضبابية حركة طبيعية في عناصر الخلفية، مشاعر حقيقية ملتقطة في لحظتها',
   '[{"key":"person","label_ar":"الشخص","label_en":"Person","default":"a young woman"},{"key":"location","label_ar":"المكان","label_en":"Location","default":"a busy souq"}]'::jsonb,
   (select id from public.categories where slug = 'portraits'),
-  'candid', 'flux-schnell', ARRAY['بورتريه', 'حياتي']::text[], false, 'published'
+  'candid', 'flux-schnell', ARRAY['بورتريه', 'حياتي']::text[], 'published'
 )
 on conflict (slug) do update set
   title_ar = excluded.title_ar, title_en = excluded.title_en,
   description_ar = excluded.description_ar, description_en = excluded.description_en,
   prompt_text_en = excluded.prompt_text_en, prompt_display_ar = excluded.prompt_display_ar,
   variables = excluded.variables, category_id = excluded.category_id,
-  style = excluded.style, model = excluded.model, tags = excluded.tags,
-  requires_photo = excluded.requires_photo;
+  style = excluded.style, model = excluded.model, tags = excluded.tags;
 
 insert into public.prompts (
   slug, title_ar, title_en, description_ar, description_en,
-  prompt_text_en, prompt_display_ar, variables, category_id, style, model, tags, requires_photo, status
+  prompt_text_en, prompt_display_ar, variables, category_id, style, model, tags, status
 ) values (
   'dramatic-black-white-portrait', 'بورتريه درامي بالأبيض والأسود', 'Dramatic Black & White Portrait',
   'بورتريه فني كلاسيكي بتباين قوي وظلال درامية', 'Classic artistic portrait with strong contrast and dramatic shadows',
   'dramatic black and white portrait of a {{person}}, strong directional side lighting (Rembrandt style), deep rich shadows, high tonal contrast, fine-art photography quality, tack-sharp detailed eyes, timeless classic mood, full dynamic range from pure black to bright highlight', 'بورتريه درامي بالأبيض والأسود لـ{{person}}، إضاءة جانبية قوية موجهة (أسلوب رامبرانت)، ظلال عميقة وغنية، تباين لوني عالٍ، جودة تصوير فني كلاسيكي، عينان حادتا التفاصيل جداً، أجواء خالدة كلاسيكية، مدى ديناميكي كامل من الأسود التام للإضاءة الساطعة',
   '[{"key":"person","label_ar":"الشخص","label_en":"Person","default":"an elderly man"}]'::jsonb,
   (select id from public.categories where slug = 'portraits'),
-  'fine art', 'flux-schnell', ARRAY['بورتريه', 'أبيض وأسود']::text[], false, 'published'
+  'fine art', 'flux-schnell', ARRAY['بورتريه', 'أبيض وأسود']::text[], 'published'
 )
 on conflict (slug) do update set
   title_ar = excluded.title_ar, title_en = excluded.title_en,
   description_ar = excluded.description_ar, description_en = excluded.description_en,
   prompt_text_en = excluded.prompt_text_en, prompt_display_ar = excluded.prompt_display_ar,
   variables = excluded.variables, category_id = excluded.category_id,
-  style = excluded.style, model = excluded.model, tags = excluded.tags,
-  requires_photo = excluded.requires_photo;
+  style = excluded.style, model = excluded.model, tags = excluded.tags;
 
 insert into public.prompts (
   slug, title_ar, title_en, description_ar, description_en,
-  prompt_text_en, prompt_display_ar, variables, category_id, style, model, tags, requires_photo, status
+  prompt_text_en, prompt_display_ar, variables, category_id, style, model, tags, status
 ) values (
   'family-group-portrait', 'بورتريه عائلي جماعي', 'Family Group Portrait',
   'صورة جماعية دافئة تناسب المناسبات العائلية', 'Warm group photo suited for family occasions',
   'warm family group portrait of {{group}}, soft golden hour outdoor lighting, natural genuine smiles and relaxed poses, coordinated {{color}} outfit tones, professional family photography style, gentle bokeh background, heartfelt authentic connection captured', 'بورتريه عائلي جماعي دافئ لـ{{group}}، إضاءة خارجية ذهبية ناعمة، ابتسامات طبيعية صادقة ووضعيات مريحة، ألوان ملابس منسقة {{color}}، أسلوب تصوير عائلي احترافي، خلفية بوكيه ناعمة، ترابط أصيل ملموس',
   '[{"key":"group","label_ar":"أفراد العائلة","label_en":"Family members","default":"a family of four"},{"key":"color","label_ar":"ألوان الملابس","label_en":"Outfit colors","default":"beige and white"}]'::jsonb,
   (select id from public.categories where slug = 'portraits'),
-  'lifestyle', 'flux-schnell', ARRAY['بورتريه', 'عائلي']::text[], false, 'published'
+  'lifestyle', 'flux-schnell', ARRAY['بورتريه', 'عائلي']::text[], 'published'
 )
 on conflict (slug) do update set
   title_ar = excluded.title_ar, title_en = excluded.title_en,
   description_ar = excluded.description_ar, description_en = excluded.description_en,
   prompt_text_en = excluded.prompt_text_en, prompt_display_ar = excluded.prompt_display_ar,
   variables = excluded.variables, category_id = excluded.category_id,
-  style = excluded.style, model = excluded.model, tags = excluded.tags,
-  requires_photo = excluded.requires_photo;
+  style = excluded.style, model = excluded.model, tags = excluded.tags;
 
 insert into public.prompts (
   slug, title_ar, title_en, description_ar, description_en,
-  prompt_text_en, prompt_display_ar, variables, category_id, style, model, tags, requires_photo, status
+  prompt_text_en, prompt_display_ar, variables, category_id, style, model, tags, status
 ) values (
   'team-corporate-portrait', 'بورتريه فريق العمل', 'Corporate Team Portrait',
   'صورة جماعية احترافية لفريق العمل داخل المكتب', 'Professional group photo of a team inside the office',
   'professional corporate team portrait of {{team_size}} colleagues, modern office background with soft depth blur, bright even lighting, confident friendly poses, business casual attire, high-end corporate photography, natural group composition with clear individual detail', 'بورتريه احترافي لفريق عمل مكوّن من {{team_size}}، خلفية مكتب عصري بضبابية ناعمة، إضاءة ساطعة متساوية، وضعيات واثقة وودية، زي عمل غير رسمي، تصوير مؤسسي راقٍ، تكوين جماعي طبيعي مع وضوح تفاصيل كل فرد',
   '[{"key":"team_size","label_ar":"عدد أفراد الفريق","label_en":"Team size","default":"five"}]'::jsonb,
   (select id from public.categories where slug = 'portraits'),
-  'corporate', 'flux-schnell', ARRAY['بورتريه', 'فريق عمل']::text[], false, 'published'
+  'corporate', 'flux-schnell', ARRAY['بورتريه', 'فريق عمل']::text[], 'published'
 )
 on conflict (slug) do update set
   title_ar = excluded.title_ar, title_en = excluded.title_en,
   description_ar = excluded.description_ar, description_en = excluded.description_en,
   prompt_text_en = excluded.prompt_text_en, prompt_display_ar = excluded.prompt_display_ar,
   variables = excluded.variables, category_id = excluded.category_id,
-  style = excluded.style, model = excluded.model, tags = excluded.tags,
-  requires_photo = excluded.requires_photo;
+  style = excluded.style, model = excluded.model, tags = excluded.tags;
 
 insert into public.prompts (
   slug, title_ar, title_en, description_ar, description_en,
-  prompt_text_en, prompt_display_ar, variables, category_id, style, model, tags, requires_photo, status
+  prompt_text_en, prompt_display_ar, variables, category_id, style, model, tags, status
 ) values (
   '3d-render-character', 'شخصية برندر ثلاثي الأبعاد', '3D Rendered Character',
   'شخصية بأسلوب رندر ثلاثي الأبعاد ناعم وحديث', 'Character in a smooth modern 3D render style',
   'cute 3D rendered character of {{subject}}, smooth clay-like subsurface-scattering material, soft three-point studio lighting, vibrant {{color}} colors, Pixar/Disney-inspired stylized render, centered composition, ultra high quality octane-style render, crisp clean edges', 'شخصية برندر ثلاثي الأبعاد لطيفة لـ{{subject}}، خامة ناعمة شبيهة بالصلصال مع تشتت ضوئي تحت السطح، إضاءة استوديو ثلاثية الاتجاه ناعمة، ألوان زاهية {{color}}، أسلوب مستوحى من بيكسار وديزني، تكوين مركزي، رندر فائق الجودة، حواف نظيفة حادة',
   '[{"key":"subject","label_ar":"الموضوع","label_en":"Subject","default":"a small robot"},{"key":"color","label_ar":"الألوان","label_en":"Colors","default":"orange and teal"}]'::jsonb,
   (select id from public.categories where slug = 'art-styles'),
-  '3D render', 'flux-schnell', ARRAY['فني', '3D']::text[], false, 'published'
+  '3D render', 'flux-schnell', ARRAY['فني', '3D']::text[], 'published'
 )
 on conflict (slug) do update set
   title_ar = excluded.title_ar, title_en = excluded.title_en,
   description_ar = excluded.description_ar, description_en = excluded.description_en,
   prompt_text_en = excluded.prompt_text_en, prompt_display_ar = excluded.prompt_display_ar,
   variables = excluded.variables, category_id = excluded.category_id,
-  style = excluded.style, model = excluded.model, tags = excluded.tags,
-  requires_photo = excluded.requires_photo;
+  style = excluded.style, model = excluded.model, tags = excluded.tags;
 
 insert into public.prompts (
   slug, title_ar, title_en, description_ar, description_en,
-  prompt_text_en, prompt_display_ar, variables, category_id, style, model, tags, requires_photo, status
+  prompt_text_en, prompt_display_ar, variables, category_id, style, model, tags, status
 ) values (
   'anime-style-scene', 'مشهد بأسلوب الأنمي', 'Anime Style Scene',
   'مشهد ملون بأسلوب رسوم الأنمي الياباني', 'Colorful scene drawn in Japanese anime art style',
   'high-quality anime style illustration of {{subject}}, vibrant cel-shaded colors with clean line art, dramatic {{lighting}} lighting with strong rim highlights, Japanese animation aesthetic, dynamic dramatic composition, crisp detailed background art, studio-quality frame', 'رسمة عالية الجودة بأسلوب الأنمي لـ{{subject}}، ألوان زاهية بتظليل خلوي ورسم خطوط نظيف، إضاءة {{lighting}} درامية بإبرازات حافة قوية، جمالية الرسوم المتحركة اليابانية، تكوين درامي ديناميكي، خلفية دقيقة التفاصيل، جودة استوديو احترافية',
   '[{"key":"subject","label_ar":"الموضوع","label_en":"Subject","default":"a warrior standing on a rooftop"},{"key":"lighting","label_ar":"الإضاءة","label_en":"Lighting","default":"sunset"}]'::jsonb,
   (select id from public.categories where slug = 'art-styles'),
-  'anime', 'flux-schnell', ARRAY['فني', 'أنمي']::text[], false, 'published'
+  'anime', 'flux-schnell', ARRAY['فني', 'أنمي']::text[], 'published'
 )
 on conflict (slug) do update set
   title_ar = excluded.title_ar, title_en = excluded.title_en,
   description_ar = excluded.description_ar, description_en = excluded.description_en,
   prompt_text_en = excluded.prompt_text_en, prompt_display_ar = excluded.prompt_display_ar,
   variables = excluded.variables, category_id = excluded.category_id,
-  style = excluded.style, model = excluded.model, tags = excluded.tags,
-  requires_photo = excluded.requires_photo;
+  style = excluded.style, model = excluded.model, tags = excluded.tags;
 
 insert into public.prompts (
   slug, title_ar, title_en, description_ar, description_en,
-  prompt_text_en, prompt_display_ar, variables, category_id, style, model, tags, requires_photo, status
+  prompt_text_en, prompt_display_ar, variables, category_id, style, model, tags, status
 ) values (
   'cinematic-movie-still', 'لقطة سينمائية بأسلوب الأفلام', 'Cinematic Movie Still',
   'مشهد بجودة وأجواء لقطة فيلم سينمائي', 'Scene with the quality and mood of a film still',
   'cinematic movie still of {{scene}}, anamorphic lens flare, rich teal-and-orange color grading, dramatic atmospheric haze, wide 2.39:1 aspect ratio composition, subtle film grain, blockbuster production quality, sharp focal subject with soft background falloff', 'لقطة سينمائية من {{scene}}، توهج عدسة أنامورفيك، تدرج ألوان غني بين السماوي والبرتقالي، ضباب جوي درامي، تكوين بنسبة عرض سينمائية 2.39:1، حبيبات فيلم خفيفة، جودة إنتاج أفلام هوليوود، موضوع محوري حاد مع تلاشي خلفية ناعم',
   '[{"key":"scene","label_ar":"المشهد","label_en":"Scene","default":"a lone figure walking through a rainy city street at night"}]'::jsonb,
   (select id from public.categories where slug = 'art-styles'),
-  'cinematic', 'flux-schnell', ARRAY['فني', 'سينمائي']::text[], false, 'published'
+  'cinematic', 'flux-schnell', ARRAY['فني', 'سينمائي']::text[], 'published'
 )
 on conflict (slug) do update set
   title_ar = excluded.title_ar, title_en = excluded.title_en,
   description_ar = excluded.description_ar, description_en = excluded.description_en,
   prompt_text_en = excluded.prompt_text_en, prompt_display_ar = excluded.prompt_display_ar,
   variables = excluded.variables, category_id = excluded.category_id,
-  style = excluded.style, model = excluded.model, tags = excluded.tags,
-  requires_photo = excluded.requires_photo;
+  style = excluded.style, model = excluded.model, tags = excluded.tags;
 
 insert into public.prompts (
   slug, title_ar, title_en, description_ar, description_en,
-  prompt_text_en, prompt_display_ar, variables, category_id, style, model, tags, requires_photo, status
+  prompt_text_en, prompt_display_ar, variables, category_id, style, model, tags, status
 ) values (
   'watercolor-illustration', 'رسمة بألوان مائية', 'Watercolor Illustration',
   'رسمة ناعمة بأسلوب الألوان المائية اليدوية', 'Soft handmade-feel illustration in watercolor style',
   'delicate watercolor illustration of {{subject}}, soft flowing color bleeds with natural pigment granulation, visible textured paper grain, pastel {{color}} tones, authentic hand-painted artistic style, light airy composition, gallery-quality fine art finish', 'رسمة ألوان مائية رقيقة لـ{{subject}}، سيولة ألوان ناعمة متداخلة مع تحبب صبغي طبيعي، خامة ورق ظاهرة بوضوح، درجات {{color}} باستيل، أسلوب فني مرسوم يدوياً أصيل، تكوين خفيف وهوائي، لمسة نهائية بجودة معرض فني',
   '[{"key":"subject","label_ar":"الموضوع","label_en":"Subject","default":"a bouquet of desert flowers"},{"key":"color","label_ar":"الألوان","label_en":"Colors","default":"warm terracotta"}]'::jsonb,
   (select id from public.categories where slug = 'art-styles'),
-  'watercolor', 'flux-schnell', ARRAY['فني', 'ألوان مائية']::text[], false, 'published'
+  'watercolor', 'flux-schnell', ARRAY['فني', 'ألوان مائية']::text[], 'published'
 )
 on conflict (slug) do update set
   title_ar = excluded.title_ar, title_en = excluded.title_en,
   description_ar = excluded.description_ar, description_en = excluded.description_en,
   prompt_text_en = excluded.prompt_text_en, prompt_display_ar = excluded.prompt_display_ar,
   variables = excluded.variables, category_id = excluded.category_id,
-  style = excluded.style, model = excluded.model, tags = excluded.tags,
-  requires_photo = excluded.requires_photo;
+  style = excluded.style, model = excluded.model, tags = excluded.tags;
 
 insert into public.prompts (
   slug, title_ar, title_en, description_ar, description_en,
-  prompt_text_en, prompt_display_ar, variables, category_id, style, model, tags, requires_photo, status
+  prompt_text_en, prompt_display_ar, variables, category_id, style, model, tags, status
 ) values (
   'isometric-illustration', 'رسمة إيزومترية', 'Isometric Illustration',
   'تصميم إيزومتري نظيف يناسب الشرح البصري والتقني', 'Clean isometric design great for tech and explainer visuals',
   'isometric illustration of {{scene}}, precise clean geometric shapes at true 30-degree isometric angles, flat vibrant colors, soft consistent shadows, miniature diorama feel, modern tech illustration style, crisp vector-quality edges, polished product-explainer quality', 'رسمة إيزومترية لـ{{scene}}، أشكال هندسية نظيفة بزاوية إيزومترية دقيقة 30 درجة، ألوان مسطحة زاهية، ظلال ناعمة متسقة، طابع الديوراما المصغرة، أسلوب رسم تقني عصري، حواف بجودة فيكتور نظيفة، جودة شرح منتج مصقولة',
   '[{"key":"scene","label_ar":"المشهد","label_en":"Scene","default":"a small coffee shop interior"}]'::jsonb,
   (select id from public.categories where slug = 'art-styles'),
-  'isometric', 'flux-schnell', ARRAY['فني', 'إيزومتري']::text[], false, 'published'
+  'isometric', 'flux-schnell', ARRAY['فني', 'إيزومتري']::text[], 'published'
 )
 on conflict (slug) do update set
   title_ar = excluded.title_ar, title_en = excluded.title_en,
   description_ar = excluded.description_ar, description_en = excluded.description_en,
   prompt_text_en = excluded.prompt_text_en, prompt_display_ar = excluded.prompt_display_ar,
   variables = excluded.variables, category_id = excluded.category_id,
-  style = excluded.style, model = excluded.model, tags = excluded.tags,
-  requires_photo = excluded.requires_photo;
+  style = excluded.style, model = excluded.model, tags = excluded.tags;
 
 insert into public.prompts (
   slug, title_ar, title_en, description_ar, description_en,
-  prompt_text_en, prompt_display_ar, variables, category_id, style, model, tags, requires_photo, status
+  prompt_text_en, prompt_display_ar, variables, category_id, style, model, tags, status
 ) values (
   'arabic-calligraphy-art', 'لوحة خط عربي فني', 'Arabic Calligraphy Art',
   'تكوين فني معاصر مبني على الخط العربي', 'Contemporary artistic composition built on Arabic calligraphy',
   'artistic Arabic calligraphy composition of the word ''{{word}}'', elegant flowing thuluth-inspired script, refined gold ink accents on a richly textured {{color}} background, modern Islamic art style, intricate fine detail, gallery-quality fine art finish', 'لوحة خط عربي فنية لكلمة ''{{word}}''، خط انسيابي أنيق مستوحى من خط الثلث، لمسات حبر ذهبي راقية على خلفية بخامة غنية {{color}}، أسلوب فني إسلامي معاصر، تفاصيل دقيقة ومتقنة، لمسة نهائية بجودة معرض فني',
   '[{"key":"word","label_ar":"الكلمة","label_en":"Word","default":"بسم الله"},{"key":"color","label_ar":"لون الخلفية","label_en":"Background color","default":"deep emerald green"}]'::jsonb,
   (select id from public.categories where slug = 'art-styles'),
-  'calligraphy', 'flux-schnell', ARRAY['فني', 'خط عربي']::text[], false, 'published'
+  'calligraphy', 'flux-schnell', ARRAY['فني', 'خط عربي']::text[], 'published'
 )
 on conflict (slug) do update set
   title_ar = excluded.title_ar, title_en = excluded.title_en,
   description_ar = excluded.description_ar, description_en = excluded.description_en,
   prompt_text_en = excluded.prompt_text_en, prompt_display_ar = excluded.prompt_display_ar,
   variables = excluded.variables, category_id = excluded.category_id,
-  style = excluded.style, model = excluded.model, tags = excluded.tags,
-  requires_photo = excluded.requires_photo;
+  style = excluded.style, model = excluded.model, tags = excluded.tags;
 
 insert into public.prompts (
   slug, title_ar, title_en, description_ar, description_en,
-  prompt_text_en, prompt_display_ar, variables, category_id, style, model, tags, requires_photo, status
+  prompt_text_en, prompt_display_ar, variables, category_id, style, model, tags, status
 ) values (
   'pop-art-portrait', 'بورتريه بأسلوب البوب آرت', 'Pop Art Style Portrait',
   'بورتريه ملون بأسلوب البوب آرت الجريء', 'Bold colorful portrait in the pop art style',
   'pop art style portrait of {{subject}}, bold flat {{color}} color blocks with precise registration, thick clean black outlines, classic halftone dot pattern, Andy Warhol inspired aesthetic, high contrast graphic style, crisp screen-print quality finish', 'بورتريه بأسلوب البوب آرت لـ{{subject}}، كتل ألوان مسطحة جريئة {{color}} بمحاذاة دقيقة، خطوط خارجية سوداء سميكة ونظيفة، نمط نقاط هالفتون كلاسيكي، جمالية مستوحاة من آندي وارهول، أسلوب رسومي عالي التباين، لمسة نهائية بجودة طباعة الشاشة الحريرية',
   '[{"key":"subject","label_ar":"الموضوع","label_en":"Subject","default":"a woman"},{"key":"color","label_ar":"الألوان","label_en":"Colors","default":"hot pink and yellow"}]'::jsonb,
   (select id from public.categories where slug = 'art-styles'),
-  'pop art', 'flux-schnell', ARRAY['فني', 'بوب آرت']::text[], false, 'published'
+  'pop art', 'flux-schnell', ARRAY['فني', 'بوب آرت']::text[], 'published'
 )
 on conflict (slug) do update set
   title_ar = excluded.title_ar, title_en = excluded.title_en,
   description_ar = excluded.description_ar, description_en = excluded.description_en,
   prompt_text_en = excluded.prompt_text_en, prompt_display_ar = excluded.prompt_display_ar,
   variables = excluded.variables, category_id = excluded.category_id,
-  style = excluded.style, model = excluded.model, tags = excluded.tags,
-  requires_photo = excluded.requires_photo;
+  style = excluded.style, model = excluded.model, tags = excluded.tags;
 
 insert into public.prompts (
   slug, title_ar, title_en, description_ar, description_en,
-  prompt_text_en, prompt_display_ar, variables, category_id, style, model, tags, requires_photo, status
+  prompt_text_en, prompt_display_ar, variables, category_id, style, model, tags, status
 ) values (
   'cyberpunk-scene', 'مشهد سايبربانك مستقبلي', 'Cyberpunk Futuristic Scene',
   'مشهد مدينة مستقبلية بأضواء نيون ساطعة', 'A futuristic city scene lit with vivid neon lights',
   'cyberpunk futuristic scene of {{scene}}, glowing neon {{color}} lights reflected on rain-soaked streets, towering holographic signage, moody atmospheric fog with volumetric light rays, highly detailed digital concept-art quality, cinematic wide composition', 'مشهد سايبربانك مستقبلي لـ{{scene}}، أضواء نيون متوهجة {{color}} منعكسة على شوارع مبللة، لافتات هولوغرافية شاهقة، ضباب جوي غامض بأشعة ضوئية حجمية، فن رقمي عالي التفاصيل بجودة concept art، تكوين سينمائي واسع',
   '[{"key":"scene","label_ar":"المشهد","label_en":"Scene","default":"a busy night street market"},{"key":"color","label_ar":"لون الأضواء","label_en":"Light color","default":"cyan and magenta"}]'::jsonb,
   (select id from public.categories where slug = 'art-styles'),
-  'cyberpunk', 'flux-schnell', ARRAY['فني', 'سايبربانك']::text[], false, 'published'
+  'cyberpunk', 'flux-schnell', ARRAY['فني', 'سايبربانك']::text[], 'published'
 )
 on conflict (slug) do update set
   title_ar = excluded.title_ar, title_en = excluded.title_en,
   description_ar = excluded.description_ar, description_en = excluded.description_en,
   prompt_text_en = excluded.prompt_text_en, prompt_display_ar = excluded.prompt_display_ar,
   variables = excluded.variables, category_id = excluded.category_id,
-  style = excluded.style, model = excluded.model, tags = excluded.tags,
-  requires_photo = excluded.requires_photo;
+  style = excluded.style, model = excluded.model, tags = excluded.tags;
 
 insert into public.prompts (
   slug, title_ar, title_en, description_ar, description_en,
-  prompt_text_en, prompt_display_ar, variables, category_id, style, model, tags, requires_photo, status
+  prompt_text_en, prompt_display_ar, variables, category_id, style, model, tags, status
 ) values (
   'podcast-cover-art', 'غلاف بودكاست', 'Podcast Cover Art',
   'غلاف مربع جذاب يناسب منصات البودكاست', 'Eye-catching square cover suited for podcast platforms',
   'modern podcast cover art design, bold {{color}} color scheme with strong visual identity, abstract sound-wave graphic element, large clearly reserved space for title text, professional audio-branding style, square 3000x3000 format, crisp streaming-platform-ready quality', 'تصميم غلاف بودكاست عصري، ألوان جريئة بدرجة {{color}} بهوية بصرية قوية، عنصر رسومي لموجات صوتية تجريدية، مساحة كبيرة محجوزة بوضوح لعنوان الحلقة، أسلوب هوية صوتية احترافي، مقاس مربع 3000×3000، جودة جاهزة لمنصات البث',
   '[{"key":"color","label_ar":"اللون","label_en":"Color","default":"deep purple and orange"}]'::jsonb,
   (select id from public.categories where slug = 'covers-posts'),
-  'modern', 'flux-schnell', ARRAY['غلاف', 'بودكاست']::text[], false, 'published'
+  'modern', 'flux-schnell', ARRAY['غلاف', 'بودكاست']::text[], 'published'
 )
 on conflict (slug) do update set
   title_ar = excluded.title_ar, title_en = excluded.title_en,
   description_ar = excluded.description_ar, description_en = excluded.description_en,
   prompt_text_en = excluded.prompt_text_en, prompt_display_ar = excluded.prompt_display_ar,
   variables = excluded.variables, category_id = excluded.category_id,
-  style = excluded.style, model = excluded.model, tags = excluded.tags,
-  requires_photo = excluded.requires_photo;
+  style = excluded.style, model = excluded.model, tags = excluded.tags;
 
 insert into public.prompts (
   slug, title_ar, title_en, description_ar, description_en,
-  prompt_text_en, prompt_display_ar, variables, category_id, style, model, tags, requires_photo, status
+  prompt_text_en, prompt_display_ar, variables, category_id, style, model, tags, status
 ) values (
   'ebook-cover-design', 'غلاف كتاب إلكتروني', 'Ebook Cover Design',
   'غلاف احترافي لكتاب رقمي أو دليل إرشادي', 'Professional cover for a digital book or guide',
   'professional ebook cover design about {{topic}}, minimal modern layout with clear typographic hierarchy, refined {{color}} color palette, large reserved title text space, subtle abstract background graphic, publishing-house quality, crisp print-and-digital-ready resolution', 'تصميم غلاف كتاب إلكتروني عن {{topic}}، تخطيط عصري بسيط بتسلسل نصي واضح، لوحة ألوان راقية {{color}}، مساحة نص عنوان كبيرة محجوزة، رسم خلفية تجريدي خفيف، جودة دار نشر احترافية، دقة جاهزة للطباعة والرقمي',
   '[{"key":"topic","label_ar":"الموضوع","label_en":"Topic","default":"digital marketing"},{"key":"color","label_ar":"الألوان","label_en":"Colors","default":"navy and gold"}]'::jsonb,
   (select id from public.categories where slug = 'covers-posts'),
-  'editorial', 'flux-schnell', ARRAY['غلاف', 'كتاب']::text[], false, 'published'
+  'editorial', 'flux-schnell', ARRAY['غلاف', 'كتاب']::text[], 'published'
 )
 on conflict (slug) do update set
   title_ar = excluded.title_ar, title_en = excluded.title_en,
   description_ar = excluded.description_ar, description_en = excluded.description_en,
   prompt_text_en = excluded.prompt_text_en, prompt_display_ar = excluded.prompt_display_ar,
   variables = excluded.variables, category_id = excluded.category_id,
-  style = excluded.style, model = excluded.model, tags = excluded.tags,
-  requires_photo = excluded.requires_photo;
+  style = excluded.style, model = excluded.model, tags = excluded.tags;
 
 insert into public.prompts (
   slug, title_ar, title_en, description_ar, description_en,
-  prompt_text_en, prompt_display_ar, variables, category_id, style, model, tags, requires_photo, status
+  prompt_text_en, prompt_display_ar, variables, category_id, style, model, tags, status
 ) values (
   'youtube-thumbnail', 'صورة مصغرة ليوتيوب', 'YouTube Thumbnail',
   'صورة مصغرة لافتة تزيد نسبة النقر على الفيديو', 'Attention-grabbing thumbnail to boost video click-through',
   'high contrast YouTube thumbnail design about {{topic}}, bold expressive focal subject with exaggerated emotion, bright {{color}} background, large clearly readable text space, exciting energetic composition, scroll-stopping click-through optimized design', 'تصميم صورة مصغرة ليوتيوب عالي التباين عن {{topic}}، عنصر محوري تعبيري بارز بمشاعر مبالغ فيها بقصد الجذب، خلفية زاهية بلون {{color}}، مساحة نص كبيرة وواضحة القراءة، تكوين حيوي ومثير، تصميم محسّن لزيادة نسبة النقر',
   '[{"key":"topic","label_ar":"الموضوع","label_en":"Topic","default":"a tech review"},{"key":"color","label_ar":"لون الخلفية","label_en":"Background color","default":"bright yellow"}]'::jsonb,
   (select id from public.categories where slug = 'covers-posts'),
-  'bold', 'flux-schnell', ARRAY['غلاف', 'يوتيوب']::text[], false, 'published'
+  'bold', 'flux-schnell', ARRAY['غلاف', 'يوتيوب']::text[], 'published'
 )
 on conflict (slug) do update set
   title_ar = excluded.title_ar, title_en = excluded.title_en,
   description_ar = excluded.description_ar, description_en = excluded.description_en,
   prompt_text_en = excluded.prompt_text_en, prompt_display_ar = excluded.prompt_display_ar,
   variables = excluded.variables, category_id = excluded.category_id,
-  style = excluded.style, model = excluded.model, tags = excluded.tags,
-  requires_photo = excluded.requires_photo;
+  style = excluded.style, model = excluded.model, tags = excluded.tags;
 
 insert into public.prompts (
   slug, title_ar, title_en, description_ar, description_en,
-  prompt_text_en, prompt_display_ar, variables, category_id, style, model, tags, requires_photo, status
+  prompt_text_en, prompt_display_ar, variables, category_id, style, model, tags, status
 ) values (
   'linkedin-banner', 'بانر لينكدإن احترافي', 'Professional LinkedIn Banner',
   'بانر بروفايل يعكس هوية احترافية على لينكدإن', 'Profile banner reflecting a professional identity on LinkedIn',
   'professional LinkedIn banner design, wide 1584x396 format, clean corporate {{color}} palette, subtle geometric background pattern, elegant clearly reserved space for name and title text, business networking style, crisp polished finish', 'تصميم بانر لينكدإن احترافي، مقاس عريض 1584×396، لوحة ألوان مؤسسية نظيفة {{color}}، نمط هندسي خفيف في الخلفية، مساحة أنيقة محجوزة للاسم والمسمى الوظيفي، أسلوب تواصل مهني، لمسة نهائية نظيفة مصقولة',
   '[{"key":"color","label_ar":"الألوان","label_en":"Colors","default":"navy blue"}]'::jsonb,
   (select id from public.categories where slug = 'covers-posts'),
-  'corporate', 'flux-schnell', ARRAY['غلاف', 'لينكدإن']::text[], false, 'published'
+  'corporate', 'flux-schnell', ARRAY['غلاف', 'لينكدإن']::text[], 'published'
 )
 on conflict (slug) do update set
   title_ar = excluded.title_ar, title_en = excluded.title_en,
   description_ar = excluded.description_ar, description_en = excluded.description_en,
   prompt_text_en = excluded.prompt_text_en, prompt_display_ar = excluded.prompt_display_ar,
   variables = excluded.variables, category_id = excluded.category_id,
-  style = excluded.style, model = excluded.model, tags = excluded.tags,
-  requires_photo = excluded.requires_photo;
+  style = excluded.style, model = excluded.model, tags = excluded.tags;
 
 insert into public.prompts (
   slug, title_ar, title_en, description_ar, description_en,
-  prompt_text_en, prompt_display_ar, variables, category_id, style, model, tags, requires_photo, status
+  prompt_text_en, prompt_display_ar, variables, category_id, style, model, tags, status
 ) values (
   'event-poster-design', 'بوستر فعالية', 'Event Poster Design',
   'بوستر إعلاني جذاب للفعاليات والمؤتمرات', 'Eye-catching poster design for events and conferences',
   'vibrant event poster design for {{event}}, dynamic layered composition with clear visual hierarchy, bold {{color}} color scheme, large clearly reserved space for event details text, modern festival poster style, crisp print-ready resolution', 'تصميم بوستر فعالية نابض بالحياة لـ{{event}}، تكوين طبقات ديناميكي بتسلسل بصري واضح، ألوان جريئة {{color}}، مساحة كبيرة محجوزة لتفاصيل الفعالية، أسلوب بوستر مهرجانات عصري، دقة جاهزة للطباعة',
   '[{"key":"event","label_ar":"الفعالية","label_en":"Event","default":"a tech conference"},{"key":"color","label_ar":"الألوان","label_en":"Colors","default":"electric blue and purple"}]'::jsonb,
   (select id from public.categories where slug = 'covers-posts'),
-  'festival', 'flux-schnell', ARRAY['غلاف', 'فعاليات']::text[], false, 'published'
+  'festival', 'flux-schnell', ARRAY['غلاف', 'فعاليات']::text[], 'published'
 )
 on conflict (slug) do update set
   title_ar = excluded.title_ar, title_en = excluded.title_en,
   description_ar = excluded.description_ar, description_en = excluded.description_en,
   prompt_text_en = excluded.prompt_text_en, prompt_display_ar = excluded.prompt_display_ar,
   variables = excluded.variables, category_id = excluded.category_id,
-  style = excluded.style, model = excluded.model, tags = excluded.tags,
-  requires_photo = excluded.requires_photo;
+  style = excluded.style, model = excluded.model, tags = excluded.tags;
 
 insert into public.prompts (
   slug, title_ar, title_en, description_ar, description_en,
-  prompt_text_en, prompt_display_ar, variables, category_id, style, model, tags, requires_photo, status
+  prompt_text_en, prompt_display_ar, variables, category_id, style, model, tags, status
 ) values (
   'playlist-cover-art', 'غلاف قائمة تشغيل موسيقية', 'Music Playlist Cover Art',
   'غلاف مربع نابض بالحياة لقوائم التشغيل الموسيقية', 'Vibrant square cover art for music playlists',
   'vibrant music playlist cover art for a {{genre}} playlist, abstract flowing color shapes with organic motion, smooth {{color}} gradient palette, dynamic energetic composition, square streaming-platform format, crisp modern digital-art finish', 'غلاف قائمة تشغيل موسيقية نابض بالحياة لموسيقى {{genre}}، أشكال لونية متدفقة بحركة عضوية، لوحة تدرج ناعمة {{color}}، تكوين ديناميكي حيوي، مقاس مربع لمنصات البث، لمسة نهائية رقمية عصرية نظيفة',
   '[{"key":"genre","label_ar":"نوع الموسيقى","label_en":"Music genre","default":"chill lofi"},{"key":"color","label_ar":"التدرج اللوني","label_en":"Gradient","default":"purple to blue"}]'::jsonb,
   (select id from public.categories where slug = 'covers-posts'),
-  'abstract', 'flux-schnell', ARRAY['غلاف', 'موسيقى']::text[], false, 'published'
+  'abstract', 'flux-schnell', ARRAY['غلاف', 'موسيقى']::text[], 'published'
 )
 on conflict (slug) do update set
   title_ar = excluded.title_ar, title_en = excluded.title_en,
   description_ar = excluded.description_ar, description_en = excluded.description_en,
   prompt_text_en = excluded.prompt_text_en, prompt_display_ar = excluded.prompt_display_ar,
   variables = excluded.variables, category_id = excluded.category_id,
-  style = excluded.style, model = excluded.model, tags = excluded.tags,
-  requires_photo = excluded.requires_photo;
+  style = excluded.style, model = excluded.model, tags = excluded.tags;
 
 insert into public.prompts (
   slug, title_ar, title_en, description_ar, description_en,
-  prompt_text_en, prompt_display_ar, variables, category_id, style, model, tags, requires_photo, status
+  prompt_text_en, prompt_display_ar, variables, category_id, style, model, tags, status
 ) values (
   'social-profile-header', 'غلاف بروفايل تويتر/إكس', 'Twitter/X Profile Header',
   'غلاف بروفايل عريض يعكس هوية العلامة', 'Wide profile header reflecting the brand''s identity',
   'wide social media profile header design about {{topic}}, minimal modern {{color}} background, subtle brand pattern, clean composition with clearly reserved space for profile photo overlay, professional polished look, crisp digital-ready resolution', 'تصميم غلاف بروفايل عريض لمنصة تواصل عن {{topic}}، خلفية عصرية بسيطة بلون {{color}}، نمط علامة تجارية خفيف، تكوين نظيف مع مساحة محجوزة بوضوح لصورة البروفايل، مظهر احترافي مصقول، دقة رقمية جاهزة',
   '[{"key":"topic","label_ar":"الموضوع","label_en":"Topic","default":"a design studio"},{"key":"color","label_ar":"لون الخلفية","label_en":"Background color","default":"charcoal and teal"}]'::jsonb,
   (select id from public.categories where slug = 'covers-posts'),
-  'minimal', 'flux-schnell', ARRAY['غلاف', 'بروفايل']::text[], false, 'published'
+  'minimal', 'flux-schnell', ARRAY['غلاف', 'بروفايل']::text[], 'published'
 )
 on conflict (slug) do update set
   title_ar = excluded.title_ar, title_en = excluded.title_en,
   description_ar = excluded.description_ar, description_en = excluded.description_en,
   prompt_text_en = excluded.prompt_text_en, prompt_display_ar = excluded.prompt_display_ar,
   variables = excluded.variables, category_id = excluded.category_id,
-  style = excluded.style, model = excluded.model, tags = excluded.tags,
-  requires_photo = excluded.requires_photo;
+  style = excluded.style, model = excluded.model, tags = excluded.tags;
 
 insert into public.prompts (
   slug, title_ar, title_en, description_ar, description_en,
-  prompt_text_en, prompt_display_ar, variables, category_id, style, model, tags, requires_photo, status
+  prompt_text_en, prompt_display_ar, variables, category_id, style, model, tags, status
 ) values (
   'ramadan-greeting-post', 'منشور تهنئة رمضانية', 'Ramadan Greeting Post',
   'تصميم احتفالي بأجواء رمضان للمتاجر والعلامات', 'Festive Ramadan-themed design for stores and brands',
   'elegant Ramadan greeting design, intricately ornate crescent moon and lantern illustration, warm {{color}} tones with fine gold-leaf accents, detailed arabesque pattern work, festive Islamic aesthetic, clearly reserved space for greeting text, premium print-quality finish', 'تصميم تهنئة رمضانية أنيق، رسم هلال وفانوس مزخرف بدقة متقنة، درجات {{color}} دافئة مع لمسات ذهبية دقيقة، زخرفة عربية مفصلة، طابع احتفالي إسلامي، مساحة محجوزة بوضوح لنص التهنئة، لمسة نهائية فاخرة بجودة الطباعة',
   '[{"key":"color","label_ar":"اللون","label_en":"Color","default":"deep purple"}]'::jsonb,
   (select id from public.categories where slug = 'occasions'),
-  'festive', 'flux-schnell', ARRAY['مناسبات', 'رمضان']::text[], false, 'published'
+  'festive', 'flux-schnell', ARRAY['مناسبات', 'رمضان']::text[], 'published'
 )
 on conflict (slug) do update set
   title_ar = excluded.title_ar, title_en = excluded.title_en,
   description_ar = excluded.description_ar, description_en = excluded.description_en,
   prompt_text_en = excluded.prompt_text_en, prompt_display_ar = excluded.prompt_display_ar,
   variables = excluded.variables, category_id = excluded.category_id,
-  style = excluded.style, model = excluded.model, tags = excluded.tags,
-  requires_photo = excluded.requires_photo;
+  style = excluded.style, model = excluded.model, tags = excluded.tags;
 
 insert into public.prompts (
   slug, title_ar, title_en, description_ar, description_en,
-  prompt_text_en, prompt_display_ar, variables, category_id, style, model, tags, requires_photo, status
+  prompt_text_en, prompt_display_ar, variables, category_id, style, model, tags, status
 ) values (
   'eid-celebration-banner', 'بانر احتفال العيد', 'Eid Celebration Banner',
   'بانر مبهج للاحتفال بالعيد ومناسبات العروض', 'Cheerful banner for Eid celebrations and related promotions',
   'joyful Eid celebration banner design, intricate decorative geometric Islamic patterns, bright {{color}} festive colors, detailed fireworks and lantern illustrations, clearly reserved space for greeting message, high production quality, premium festive finish', 'تصميم بانر احتفال بالعيد مفعم بالبهجة، زخارف إسلامية هندسية متقنة، ألوان احتفالية زاهية {{color}}، رسومات ألعاب نارية وفوانيس دقيقة، مساحة محجوزة بوضوح لرسالة التهنئة، جودة إنتاج عالية، لمسة احتفالية فاخرة',
   '[{"key":"color","label_ar":"الألوان","label_en":"Colors","default":"gold and green"}]'::jsonb,
   (select id from public.categories where slug = 'occasions'),
-  'festive', 'flux-schnell', ARRAY['مناسبات', 'عيد']::text[], false, 'published'
+  'festive', 'flux-schnell', ARRAY['مناسبات', 'عيد']::text[], 'published'
 )
 on conflict (slug) do update set
   title_ar = excluded.title_ar, title_en = excluded.title_en,
   description_ar = excluded.description_ar, description_en = excluded.description_en,
   prompt_text_en = excluded.prompt_text_en, prompt_display_ar = excluded.prompt_display_ar,
   variables = excluded.variables, category_id = excluded.category_id,
-  style = excluded.style, model = excluded.model, tags = excluded.tags,
-  requires_photo = excluded.requires_photo;
+  style = excluded.style, model = excluded.model, tags = excluded.tags;
 
 insert into public.prompts (
   slug, title_ar, title_en, description_ar, description_en,
-  prompt_text_en, prompt_display_ar, variables, category_id, style, model, tags, requires_photo, status
+  prompt_text_en, prompt_display_ar, variables, category_id, style, model, tags, status
 ) values (
   'national-day-poster', 'بوستر اليوم الوطني', 'National Day Poster',
   'تصميم فخم يحتفي بمناسبة اليوم الوطني', 'A proud design celebrating National Day',
   'patriotic national day poster design, flag-inspired {{color}} color palette, detailed falcon silhouette and heritage pattern work, fireworks bursting in the sky, dramatic sunset background with rich color grading, celebratory composition true to the occasion''s spirit, premium print-ready finish', 'تصميم بوستر وطني فخم، لوحة ألوان مستوحاة من العلم {{color}}، ظلال صقر وزخارف تراثية دقيقة، ألعاب نارية منفجرة في السماء، خلفية غروب درامية بتدرج ألوان غني، تكوين احتفالي بروح المناسبة، لمسة نهائية فاخرة جاهزة للطباعة',
   '[{"key":"color","label_ar":"ألوان العلم","label_en":"Flag colors","default":"green and white"}]'::jsonb,
   (select id from public.categories where slug = 'occasions'),
-  'patriotic', 'flux-schnell', ARRAY['مناسبات', 'اليوم الوطني']::text[], false, 'published'
+  'patriotic', 'flux-schnell', ARRAY['مناسبات', 'اليوم الوطني']::text[], 'published'
 )
 on conflict (slug) do update set
   title_ar = excluded.title_ar, title_en = excluded.title_en,
   description_ar = excluded.description_ar, description_en = excluded.description_en,
   prompt_text_en = excluded.prompt_text_en, prompt_display_ar = excluded.prompt_display_ar,
   variables = excluded.variables, category_id = excluded.category_id,
-  style = excluded.style, model = excluded.model, tags = excluded.tags,
-  requires_photo = excluded.requires_photo;
+  style = excluded.style, model = excluded.model, tags = excluded.tags;
 
 insert into public.prompts (
   slug, title_ar, title_en, description_ar, description_en,
-  prompt_text_en, prompt_display_ar, variables, category_id, style, model, tags, requires_photo, status
+  prompt_text_en, prompt_display_ar, variables, category_id, style, model, tags, status
 ) values (
   'seasonal-sale-occasion', 'تصميم عروض موسم التخفيضات', 'Seasonal Sale Occasion Design',
   'تصميم موسمي حماسي لحملات التخفيضات الكبرى', 'Energetic seasonal design for major sale campaigns',
   'high energy seasonal sale campaign design for {{season}}, bold ''{{discount}}'' text placeholder as the clear focal point, dynamic burst shapes radiating outward, vibrant {{color}} color scheme, exciting retail promotion aesthetic, scroll-stopping crisp finish', 'تصميم حملة تخفيضات موسمية حماسي لـ{{season}}، مساحة نصية بارزة وواضحة لعبارة ''{{discount}}'' كنقطة تركيز، أشكال انفجارية ديناميكية منطلقة للخارج، ألوان زاهية {{color}}، طابع ترويجي مثير للتجزئة، لمسة نهائية نظيفة توقف التمرير',
   '[{"key":"season","label_ar":"الموسم","label_en":"Season","default":"end of season sale"},{"key":"discount","label_ar":"نسبة الخصم","label_en":"Discount","default":"UP TO 70%"},{"key":"color","label_ar":"الألوان","label_en":"Colors","default":"red and gold"}]'::jsonb,
   (select id from public.categories where slug = 'occasions'),
-  'bold', 'flux-schnell', ARRAY['مناسبات', 'تخفيضات']::text[], false, 'published'
+  'bold', 'flux-schnell', ARRAY['مناسبات', 'تخفيضات']::text[], 'published'
 )
 on conflict (slug) do update set
   title_ar = excluded.title_ar, title_en = excluded.title_en,
   description_ar = excluded.description_ar, description_en = excluded.description_en,
   prompt_text_en = excluded.prompt_text_en, prompt_display_ar = excluded.prompt_display_ar,
   variables = excluded.variables, category_id = excluded.category_id,
-  style = excluded.style, model = excluded.model, tags = excluded.tags,
-  requires_photo = excluded.requires_photo;
+  style = excluded.style, model = excluded.model, tags = excluded.tags;
 
 insert into public.prompts (
   slug, title_ar, title_en, description_ar, description_en,
-  prompt_text_en, prompt_display_ar, variables, category_id, style, model, tags, requires_photo, status
+  prompt_text_en, prompt_display_ar, variables, category_id, style, model, tags, status
 ) values (
   'graduation-announcement', 'تصميم تهنئة تخرج', 'Graduation Announcement Design',
   'تصميم أنيق للاحتفال بمناسبة التخرج', 'Elegant design celebrating a graduation milestone',
   'elegant graduation celebration design, detailed graduation cap and diploma illustration, fine confetti details, soft {{color}} festive palette, clearly reserved space for congratulatory text, joyful academic milestone style, premium polished finish', 'تصميم احتفالي أنيق بمناسبة التخرج، رسم قبعة تخرج وشهادة دقيق، تفاصيل قصاصات احتفالية ناعمة، لوحة ألوان ناعمة {{color}}، مساحة محجوزة بوضوح لنص التهنئة، طابع بهيج لإنجاز أكاديمي، لمسة نهائية فاخرة مصقولة',
   '[{"key":"color","label_ar":"الألوان","label_en":"Colors","default":"navy and gold"}]'::jsonb,
   (select id from public.categories where slug = 'occasions'),
-  'festive', 'flux-schnell', ARRAY['مناسبات', 'تخرج']::text[], false, 'published'
+  'festive', 'flux-schnell', ARRAY['مناسبات', 'تخرج']::text[], 'published'
 )
 on conflict (slug) do update set
   title_ar = excluded.title_ar, title_en = excluded.title_en,
   description_ar = excluded.description_ar, description_en = excluded.description_en,
   prompt_text_en = excluded.prompt_text_en, prompt_display_ar = excluded.prompt_display_ar,
   variables = excluded.variables, category_id = excluded.category_id,
-  style = excluded.style, model = excluded.model, tags = excluded.tags,
-  requires_photo = excluded.requires_photo;
+  style = excluded.style, model = excluded.model, tags = excluded.tags;
 
 insert into public.prompts (
   slug, title_ar, title_en, description_ar, description_en,
-  prompt_text_en, prompt_display_ar, variables, category_id, style, model, tags, requires_photo, status
+  prompt_text_en, prompt_display_ar, variables, category_id, style, model, tags, status
 ) values (
   'wedding-invitation-design', 'تصميم دعوة زفاف', 'Wedding Invitation Design',
   'تصميم دعوة زفاف راقٍ بلمسة عربية', 'Refined wedding invitation with an Arabic touch',
   'luxurious wedding invitation design, delicate botanically-accurate floral {{color}} illustrations, elegant fine-line ornamental border, soft romantic color palette, clearly reserved space for names and date text, premium stationery finish, gallery-quality fine detail', 'تصميم دعوة زفاف فاخرة، رسومات زهور دقيقة ونباتياً واقعية بلون {{color}}، إطار زخرفي أنيق بخطوط رفيعة، لوحة ألوان رومانسية ناعمة، مساحة محجوزة بوضوح لاسمي العروسين والتاريخ، لمسة نهائية فاخرة بجودة القرطاسية الراقية',
   '[{"key":"color","label_ar":"لون الزهور","label_en":"Floral color","default":"blush pink and gold"}]'::jsonb,
   (select id from public.categories where slug = 'occasions'),
-  'elegant', 'flux-schnell', ARRAY['مناسبات', 'زفاف']::text[], false, 'published'
+  'elegant', 'flux-schnell', ARRAY['مناسبات', 'زفاف']::text[], 'published'
 )
 on conflict (slug) do update set
   title_ar = excluded.title_ar, title_en = excluded.title_en,
   description_ar = excluded.description_ar, description_en = excluded.description_en,
   prompt_text_en = excluded.prompt_text_en, prompt_display_ar = excluded.prompt_display_ar,
   variables = excluded.variables, category_id = excluded.category_id,
-  style = excluded.style, model = excluded.model, tags = excluded.tags,
-  requires_photo = excluded.requires_photo;
+  style = excluded.style, model = excluded.model, tags = excluded.tags;
 
 insert into public.prompts (
   slug, title_ar, title_en, description_ar, description_en,
-  prompt_text_en, prompt_display_ar, variables, category_id, style, model, tags, requires_photo, status
+  prompt_text_en, prompt_display_ar, variables, category_id, style, model, tags, status
 ) values (
   'new-year-celebration', 'تصميم احتفال رأس السنة', 'New Year Celebration Design',
   'تصميم احتفالي متلألئ لمناسبة رأس السنة الميلادية', 'Sparkling festive design for New Year celebrations',
   'festive New Year celebration design, glittering fireworks and fine confetti detail, bold ''{{year}}'' number typography as the centerpiece, dark {{color}} background with sparkling bokeh light, celebratory countdown atmosphere, premium crisp finish', 'تصميم احتفالي برأس السنة، ألعاب نارية وقصاصات متلألئة دقيقة، خط بارز لرقم السنة ''{{year}}'' كنقطة مركزية، خلفية داكنة بلون {{color}} مع إضاءة بوكيه متلألئة، أجواء عد تنازلي احتفالية، لمسة نهائية فاخرة نظيفة',
   '[{"key":"year","label_ar":"السنة","label_en":"Year","default":"2027"},{"key":"color","label_ar":"لون الخلفية","label_en":"Background color","default":"midnight blue and gold"}]'::jsonb,
   (select id from public.categories where slug = 'occasions'),
-  'festive', 'flux-schnell', ARRAY['مناسبات', 'رأس السنة']::text[], false, 'published'
+  'festive', 'flux-schnell', ARRAY['مناسبات', 'رأس السنة']::text[], 'published'
 )
 on conflict (slug) do update set
   title_ar = excluded.title_ar, title_en = excluded.title_en,
   description_ar = excluded.description_ar, description_en = excluded.description_en,
   prompt_text_en = excluded.prompt_text_en, prompt_display_ar = excluded.prompt_display_ar,
   variables = excluded.variables, category_id = excluded.category_id,
-  style = excluded.style, model = excluded.model, tags = excluded.tags,
-  requires_photo = excluded.requires_photo;
+  style = excluded.style, model = excluded.model, tags = excluded.tags;
 
 insert into public.prompts (
   slug, title_ar, title_en, description_ar, description_en,
-  prompt_text_en, prompt_display_ar, variables, category_id, style, model, tags, requires_photo, status
+  prompt_text_en, prompt_display_ar, variables, category_id, style, model, tags, status
 ) values (
   'mothers-day-design', 'تصميم عيد الأم', 'Mother''s Day Design',
   'تصميم دافئ ورقيق للاحتفاء بعيد الأم', 'Warm gentle design celebrating Mother''s Day',
   'gentle Mother''s Day celebration design, soft blooming {{flower}} flowers with delicate botanical detail, warm pastel {{color}} palette, tender hand-drawn illustration style, clearly reserved space for a heartfelt message, premium gentle finish', 'تصميم رقيق للاحتفاء بعيد الأم، زهور {{flower}} متفتحة ناعمة بتفاصيل نباتية دقيقة، لوحة ألوان باستيل دافئة {{color}}، أسلوب رسم يدوي رقيق حنون، مساحة محجوزة بوضوح لرسالة من القلب، لمسة نهائية فاخرة رقيقة',
   '[{"key":"flower","label_ar":"نوع الزهور","label_en":"Flower type","default":"roses"},{"key":"color","label_ar":"الألوان","label_en":"Colors","default":"blush pink and cream"}]'::jsonb,
   (select id from public.categories where slug = 'occasions'),
-  'gentle', 'flux-schnell', ARRAY['مناسبات', 'عيد الأم']::text[], false, 'published'
+  'gentle', 'flux-schnell', ARRAY['مناسبات', 'عيد الأم']::text[], 'published'
 )
 on conflict (slug) do update set
   title_ar = excluded.title_ar, title_en = excluded.title_en,
   description_ar = excluded.description_ar, description_en = excluded.description_en,
   prompt_text_en = excluded.prompt_text_en, prompt_display_ar = excluded.prompt_display_ar,
   variables = excluded.variables, category_id = excluded.category_id,
-  style = excluded.style, model = excluded.model, tags = excluded.tags,
-  requires_photo = excluded.requires_photo;
-
-insert into public.prompts (
-  slug, title_ar, title_en, description_ar, description_en,
-  prompt_text_en, prompt_display_ar, variables, category_id, style, model, tags, requires_photo, status
-) values (
-  'photo-eid-greeting-card', 'بطاقة تهنئة عيد بصورتك الشخصية', 'Eid Greeting Card With Your Photo',
-  'ارفع صورتك وشوف نفسك في بطاقة تهنئة عيد فاخرة', 'Upload your photo and see yourself on a premium Eid greeting card',
-  'place the person from the reference photo into an elegant {{occasion}} greeting card scene, preserving their exact facial features and identity, modest festive attire, ornate crescent moon and lantern decorations, warm gold tones, photorealistic seamless blend, clearly reserved space for a greeting message, premium greeting-card quality', 'وضع الشخص من الصورة المرجعية في مشهد بطاقة تهنئة {{occasion}} أنيقة، مع الحفاظ الكامل على ملامح وجهه الأصلية وهويته، زي احتفالي محتشم، زخارف هلال وفانوس، درجات ذهبية دافئة، مزج فوتوغرافي واقعي وسلس، مساحة محجوزة بوضوح لرسالة تهنئة، جودة بطاقة تهنئة فاخرة',
-  '[{"key":"occasion","label_ar":"المناسبة","label_en":"Occasion","default":"Eid al-Fitr"}]'::jsonb,
-  (select id from public.categories where slug = 'occasions'),
-  'festive', 'flux-schnell', ARRAY['مناسبات', 'صورتك الشخصية']::text[], true, 'published'
-)
-on conflict (slug) do update set
-  title_ar = excluded.title_ar, title_en = excluded.title_en,
-  description_ar = excluded.description_ar, description_en = excluded.description_en,
-  prompt_text_en = excluded.prompt_text_en, prompt_display_ar = excluded.prompt_display_ar,
-  variables = excluded.variables, category_id = excluded.category_id,
-  style = excluded.style, model = excluded.model, tags = excluded.tags,
-  requires_photo = excluded.requires_photo;
-
-insert into public.prompts (
-  slug, title_ar, title_en, description_ar, description_en,
-  prompt_text_en, prompt_display_ar, variables, category_id, style, model, tags, requires_photo, status
-) values (
-  'photo-seasonal-portrait', 'بورتريه موسمي بصورتك الشخصية', 'Seasonal Portrait With Your Photo',
-  'ارفع صورتك وحوّلها لبورتريه سينمائي بأجواء الموسم', 'Upload your photo and turn it into a cinematic seasonal portrait',
-  'place the person from the reference photo into a {{season}} outdoor portrait scene, preserving their exact facial features and identity, golden hour natural lighting, shallow depth of field with a softly blurred background, photorealistic seamless blend, editorial portrait quality', 'وضع الشخص من الصورة المرجعية في مشهد بورتريه خارجي بأجواء {{season}}، مع الحفاظ الكامل على ملامح وجهه الأصلية وهويته، إضاءة طبيعية من الساعة الذهبية، عمق ميدان ضحل مع خلفية ضبابية ناعمة، مزج فوتوغرافي واقعي وسلس، جودة بورتريه تحريري',
-  '[{"key":"season","label_ar":"الموسم","label_en":"Season","default":"spring garden"}]'::jsonb,
-  (select id from public.categories where slug = 'occasions'),
-  'cinematic', 'flux-schnell', ARRAY['مناسبات', 'صورتك الشخصية']::text[], true, 'published'
-)
-on conflict (slug) do update set
-  title_ar = excluded.title_ar, title_en = excluded.title_en,
-  description_ar = excluded.description_ar, description_en = excluded.description_en,
-  prompt_text_en = excluded.prompt_text_en, prompt_display_ar = excluded.prompt_display_ar,
-  variables = excluded.variables, category_id = excluded.category_id,
-  style = excluded.style, model = excluded.model, tags = excluded.tags,
-  requires_photo = excluded.requires_photo;
+  style = excluded.style, model = excluded.model, tags = excluded.tags;
 
 update public.prompts set is_featured = true where slug in ('studio-product-white-bg', 'instagram-square-promo', 'minimal-lettermark-logo', 'corporate-headshot', '3d-render-character', 'podcast-cover-art', 'ramadan-greeting-post');

@@ -70,36 +70,15 @@ export function BrandKitForm({
       let logoUrl = initialBrandKit?.logo_url ?? null;
 
       if (logoFile) {
-        const ext = logoFile.name.split(".").pop() ?? "png";
-        const path = `${user.id}/logo.${ext}`;
-        const { data: sessionData } = await supabase.auth.getSession();
-        const session = sessionData.session;
-        let jwtInfo = "no token";
-        if (session?.access_token) {
-          const [headerB64, payloadB64] = session.access_token.split(".");
-          const decode = (s: string) =>
-            JSON.parse(atob(s.replace(/-/g, "+").replace(/_/g, "/")));
-          try {
-            const header = decode(headerB64);
-            const payload = decode(payloadB64);
-            jwtInfo = `alg=${header.alg},kid=${header.kid ?? "none"},role=${payload.role},aud=${payload.aud},sub=${payload.sub}`;
-          } catch {
-            jwtInfo = "decode failed";
-          }
-        }
-        const sessionInfo = session
-          ? `session ok, expires_at=${session.expires_at}, now=${Math.floor(Date.now() / 1000)}, jwt[${jwtInfo}]`
-          : "NO SESSION at upload time";
-        const { error: uploadError } = await supabase.storage
-          .from("brand-logos")
-          .upload(path, logoFile, { upsert: true });
-        if (uploadError)
-          throw new Error(`upload failed [${sessionInfo}]: ${uploadError.message}`);
-
-        const {
-          data: { publicUrl },
-        } = supabase.storage.from("brand-logos").getPublicUrl(path);
-        logoUrl = publicUrl;
+        const uploadBody = new FormData();
+        uploadBody.append("file", logoFile);
+        const uploadRes = await fetch("/api/brand-logo", {
+          method: "POST",
+          body: uploadBody,
+        });
+        const uploadJson = await uploadRes.json();
+        if (!uploadRes.ok) throw new Error(uploadJson.error ?? "upload failed");
+        logoUrl = uploadJson.publicUrl;
       }
 
       const { error: upsertError } = await supabase.from("brand_kits").upsert(

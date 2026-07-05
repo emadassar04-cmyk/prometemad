@@ -201,7 +201,9 @@
     "error": "Couldn't enhance the prompt, please try again",
     "dailyLimitReached": "You've reached today's enhance limit (20). Come back tomorrow!",
     "arabicLabel": "Arabic",
-    "englishLabel": "Text sent to the model (English)"
+    "englishLabel": "Text sent to the model (English)",
+    "openInGemini": "Open in Gemini",
+    "copied": "Copied"
   },
   "imageToPrompt": {
     "title": "Image to Prompt",

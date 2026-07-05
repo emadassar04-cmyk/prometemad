@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useTranslations } from "next-intl";
-import { Check, Copy, Loader2, Sparkles } from "lucide-react";
+import { Check, Copy, ExternalLink, Loader2, Sparkles } from "lucide-react";
 
 export function PromptEnhancer({
   isSignedIn,
@@ -17,6 +17,7 @@ export function PromptEnhancer({
   const [error, setError] = useState<string | null>(null);
   const [result, setResult] = useState<{ ar: string; en: string } | null>(null);
   const [copied, setCopied] = useState<"ar" | "en" | null>(null);
+  const [openedInGemini, setOpenedInGemini] = useState(false);
 
   async function handleEnhance() {
     if (!isSignedIn) {
@@ -58,6 +59,14 @@ export function PromptEnhancer({
     await navigator.clipboard.writeText(result[which]);
     setCopied(which);
     setTimeout(() => setCopied(null), 2000);
+  }
+
+  async function handleOpenInGemini() {
+    if (!result) return;
+    await navigator.clipboard.writeText(result.en);
+    setOpenedInGemini(true);
+    setTimeout(() => setOpenedInGemini(false), 2500);
+    window.open("https://gemini.google.com/app", "_blank", "noopener,noreferrer");
   }
 
   return (
@@ -130,6 +139,19 @@ export function PromptEnhancer({
               {result.en}
             </p>
           </div>
+
+          <button
+            type="button"
+            onClick={handleOpenInGemini}
+            className="flex w-fit items-center gap-1.5 rounded-full border border-border px-4 py-2 text-sm font-medium transition-colors hover:border-accent"
+          >
+            {openedInGemini ? (
+              <Check className="h-4 w-4" />
+            ) : (
+              <ExternalLink className="h-4 w-4" />
+            )}
+            {openedInGemini ? t("copied") : t("openInGemini")}
+          </button>
         </div>
       )}
     </div>

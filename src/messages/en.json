@@ -131,7 +131,9 @@
     "save": "Save",
     "saving": "Saving…",
     "saved": "Saved",
-    "saveError": "Couldn't save, please try again"
+    "saveError": "Couldn't save, please try again",
+    "resultsTitle": "Brand Kit Results",
+    "resultsEmpty": "Images you generate with your brand colors will show up here"
   },
   "showcase": {
     "title": "Showcase",

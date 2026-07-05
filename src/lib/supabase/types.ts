@@ -167,6 +167,7 @@ export type Database = {
           provider: string | null
           seed: number | null
           status: string
+          used_brand_kit: boolean
           user_id: string
           width: number | null
         }
@@ -182,6 +183,7 @@ export type Database = {
           provider?: string | null
           seed?: number | null
           status?: string
+          used_brand_kit?: boolean
           user_id: string
           width?: number | null
         }
@@ -197,6 +199,7 @@ export type Database = {
           provider?: string | null
           seed?: number | null
           status?: string
+          used_brand_kit?: boolean
           user_id?: string
           width?: number | null
         }

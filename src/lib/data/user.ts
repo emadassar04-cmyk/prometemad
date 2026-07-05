@@ -33,3 +33,15 @@ export async function getUserBrandKit(userId: string) {
     .maybeSingle();
   return data;
 }
+
+export async function getUserBrandKitGenerations(userId: string) {
+  const supabase = await createSupabaseServerClient();
+  const { data } = await supabase
+    .from("generations")
+    .select("*, prompts(slug, title_ar, title_en)")
+    .eq("user_id", userId)
+    .eq("status", "succeeded")
+    .eq("used_brand_kit", true)
+    .order("created_at", { ascending: false });
+  return data ?? [];
+}

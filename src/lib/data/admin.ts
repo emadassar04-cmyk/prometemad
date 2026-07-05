@@ -43,21 +43,32 @@ export async function requireAdminApi() {
   return { supabase, user };
 }
 
-export async function getAdminStats() {
+export type AdminDashboardStats = {
+  total_prompts: number;
+  total_generations: number;
+  total_users: number;
+  daily_generations: { day: string; count: number }[];
+  top_prompts: {
+    id: string;
+    title_ar: string;
+    title_en: string;
+    generation_count: number;
+  }[];
+  top_categories: {
+    name_ar: string;
+    name_en: string;
+    total_generations: number;
+  }[];
+};
+
+// A plain per-table count query here would be silently scoped by RLS to the
+// admin's own rows (generations' SELECT policy only allows own + publicly
+// shared) — this calls a security-definer RPC that aggregates across every
+// user instead, gated by its own internal admin check.
+export async function getAdminStats(): Promise<AdminDashboardStats> {
   const supabase = await createSupabaseServerClient();
-
-  const [{ count: totalPrompts }, { count: totalGenerations }, { count: totalUsers }] =
-    await Promise.all([
-      supabase.from("prompts").select("*", { count: "exact", head: true }),
-      supabase.from("generations").select("*", { count: "exact", head: true }),
-      supabase.from("profiles").select("*", { count: "exact", head: true }),
-    ]);
-
-  return {
-    totalPrompts: totalPrompts ?? 0,
-    totalGenerations: totalGenerations ?? 0,
-    totalUsers: totalUsers ?? 0,
-  };
+  const { data } = await supabase.rpc("admin_dashboard_stats");
+  return data as unknown as AdminDashboardStats;
 }
 
 export async function getAllPromptsForAdmin() {

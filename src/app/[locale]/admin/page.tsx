@@ -2,6 +2,7 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import { ImageIcon, Sparkles, Users } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import { requireAdmin, getAdminStats } from "@/lib/data/admin";
+import { DailyGenerationsChart } from "@/components/admin/daily-generations-chart";
 
 export default async function AdminDashboardPage({
   params,
@@ -14,6 +15,7 @@ export default async function AdminDashboardPage({
 
   const stats = await getAdminStats();
   const t = await getTranslations("admin");
+  const isAr = locale === "ar";
 
   return (
     <div className="mx-auto max-w-5xl px-4 py-10 sm:px-6">
@@ -35,18 +37,58 @@ export default async function AdminDashboardPage({
         </div>
       </div>
 
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
+      <div className="mb-6 grid grid-cols-1 gap-4 sm:grid-cols-3">
         <StatCard
           icon={Sparkles}
           label={t("totalPrompts")}
-          value={stats.totalPrompts}
+          value={stats.total_prompts}
         />
         <StatCard
           icon={ImageIcon}
           label={t("totalGenerations")}
-          value={stats.totalGenerations}
+          value={stats.total_generations}
         />
-        <StatCard icon={Users} label={t("totalUsers")} value={stats.totalUsers} />
+        <StatCard icon={Users} label={t("totalUsers")} value={stats.total_users} />
+      </div>
+
+      <div className="mb-6">
+        <DailyGenerationsChart data={stats.daily_generations} />
+      </div>
+
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+        <div className="rounded-2xl border border-border bg-surface p-6">
+          <h2 className="mb-3 text-sm font-semibold text-muted">
+            أعلى 10 برومبتات استخدامًا
+          </h2>
+          <ol className="flex flex-col gap-2 text-sm">
+            {stats.top_prompts.map((p, i) => (
+              <li key={p.id} className="flex items-center justify-between">
+                <span>
+                  <span className="text-muted">{i + 1}.</span>{" "}
+                  {isAr ? p.title_ar : p.title_en}
+                </span>
+                <span className="font-semibold">{p.generation_count}</span>
+              </li>
+            ))}
+          </ol>
+        </div>
+
+        <div className="rounded-2xl border border-border bg-surface p-6">
+          <h2 className="mb-3 text-sm font-semibold text-muted">
+            أعلى الفئات استخدامًا
+          </h2>
+          <ol className="flex flex-col gap-2 text-sm">
+            {stats.top_categories.map((c, i) => (
+              <li key={c.name_en} className="flex items-center justify-between">
+                <span>
+                  <span className="text-muted">{i + 1}.</span>{" "}
+                  {isAr ? c.name_ar : c.name_en}
+                </span>
+                <span className="font-semibold">{c.total_generations}</span>
+              </li>
+            ))}
+          </ol>
+        </div>
       </div>
     </div>
   );

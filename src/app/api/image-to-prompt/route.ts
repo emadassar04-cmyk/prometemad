@@ -21,7 +21,9 @@ export async function POST(request: Request) {
     .select("role")
     .eq("id", user.id)
     .single();
-  const dailyLimit = profile?.role === "admin" ? Number.MAX_SAFE_INTEGER : DAILY_LIMIT;
+  // Postgres's p_daily_limit param is `integer` (32-bit) — Number.MAX_SAFE_INTEGER
+  // overflows it and makes PostgREST fail to match the RPC signature at all.
+  const dailyLimit = profile?.role === "admin" ? 1_000_000 : DAILY_LIMIT;
 
   const { data: allowed, error: quotaError } = await supabase.rpc(
     "try_increment_image_to_prompt_usage",

@@ -27,8 +27,10 @@ export async function POST(request: Request) {
   if (profile?.is_banned) {
     return NextResponse.json({ error: "banned" }, { status: 403 });
   }
+  // Postgres's p_daily_limit param is `integer` (32-bit) — Number.MAX_SAFE_INTEGER
+  // overflows it and makes PostgREST fail to match the RPC signature at all.
   const dailyLimit =
-    profile?.role === "admin" ? Number.MAX_SAFE_INTEGER : (profile?.daily_limit_override ?? DAILY_LIMIT);
+    profile?.role === "admin" ? 1_000_000 : (profile?.daily_limit_override ?? DAILY_LIMIT);
 
   const body = await request.json().catch(() => null);
   const finalPrompt =

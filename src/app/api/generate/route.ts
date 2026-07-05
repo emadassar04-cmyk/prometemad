@@ -44,9 +44,11 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "banned" }, { status: 403 });
   }
   // Admins are exempt from daily quotas entirely — the platform owner
-  // shouldn't be capped by the same limits set for regular users.
+  // shouldn't be capped by the same limits set for regular users. Postgres's
+  // p_daily_limit param is `integer` (32-bit) — Number.MAX_SAFE_INTEGER
+  // overflows it and makes PostgREST fail to match the RPC signature at all.
   const dailyLimit =
-    profile?.role === "admin" ? Number.MAX_SAFE_INTEGER : (profile?.daily_limit_override ?? DAILY_LIMIT);
+    profile?.role === "admin" ? 1_000_000 : (profile?.daily_limit_override ?? DAILY_LIMIT);
 
   if (profile?.role !== "admin") {
     const { data: withinRateLimit, error: rateLimitError } = await supabase.rpc(

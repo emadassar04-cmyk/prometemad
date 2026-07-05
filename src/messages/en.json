@@ -10,7 +10,8 @@
     "admin": "Admin",
     "signIn": "Sign In",
     "signOut": "Sign Out",
-    "account": "Account"
+    "account": "Account",
+    "whatsapp": "Contact us on WhatsApp"
   },
   "home": {
     "badge": "The Arabic platform for ready-made image prompts",

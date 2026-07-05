@@ -2,6 +2,7 @@ import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { LocaleSwitcher } from "@/components/locale-switcher";
 import { HeaderAuth } from "@/components/header-auth";
+import { WhatsAppButton } from "@/components/whatsapp-button";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 
 export async function SiteHeader() {
@@ -55,6 +56,7 @@ export async function SiteHeader() {
         </nav>
 
         <div className="flex items-center gap-3">
+          <WhatsAppButton label={t("nav.whatsapp")} />
           <LocaleSwitcher />
           <HeaderAuth />
         </div>

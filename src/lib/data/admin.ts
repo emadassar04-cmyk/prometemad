@@ -85,3 +85,24 @@ export async function getPromptForAdmin(id: string) {
   const { data } = await supabase.from("prompts").select("*").eq("id", id).single();
   return data;
 }
+
+export type AdminUserRow = {
+  id: string;
+  email: string;
+  created_at: string;
+  last_sign_in_at: string | null;
+  role: string;
+  is_banned: boolean;
+  daily_limit_override: number | null;
+  total_generations: number;
+  generations_today: number;
+};
+
+// auth.users (email, last_sign_in_at) isn't queryable via the normal client
+// at all, so this goes through a security-definer RPC rather than a table
+// select — see admin_list_users() in the migrations.
+export async function getAdminUsers(): Promise<AdminUserRow[]> {
+  const supabase = await createSupabaseServerClient();
+  const { data } = await supabase.rpc("admin_list_users");
+  return (data as unknown as AdminUserRow[]) ?? [];
+}

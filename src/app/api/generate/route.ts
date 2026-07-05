@@ -34,6 +34,17 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "unauthorized" }, { status: 401 });
   }
 
+  const { data: profile } = await supabase
+    .from("profiles")
+    .select("is_banned, daily_limit_override")
+    .eq("id", user.id)
+    .single();
+
+  if (profile?.is_banned) {
+    return NextResponse.json({ error: "banned" }, { status: 403 });
+  }
+  const dailyLimit = profile?.daily_limit_override ?? DAILY_LIMIT;
+
   const { data: withinRateLimit, error: rateLimitError } = await supabase.rpc(
     "try_increment_rate_limit",
     {
@@ -111,7 +122,7 @@ export async function POST(request: Request) {
   for (let i = 0; i < variationsRequested; i++) {
     const { data: allowed, error: quotaError } = await supabase.rpc(
       "try_increment_daily_usage",
-      { p_user_id: user.id, p_daily_limit: DAILY_LIMIT },
+      { p_user_id: user.id, p_daily_limit: dailyLimit },
     );
     if (quotaError) {
       return NextResponse.json({ error: "quota_check_failed" }, { status: 500 });

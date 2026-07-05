@@ -218,7 +218,9 @@ export type Database = {
           avatar_url: string | null
           created_at: string
           credits: number
+          daily_limit_override: number | null
           id: string
+          is_banned: boolean
           locale: string
           plan: string
           role: string
@@ -228,7 +230,9 @@ export type Database = {
           avatar_url?: string | null
           created_at?: string
           credits?: number
+          daily_limit_override?: number | null
           id: string
+          is_banned?: boolean
           locale?: string
           plan?: string
           role?: string
@@ -238,7 +242,9 @@ export type Database = {
           avatar_url?: string | null
           created_at?: string
           credits?: number
+          daily_limit_override?: number | null
           id?: string
+          is_banned?: boolean
           locale?: string
           plan?: string
           role?: string
@@ -379,6 +385,10 @@ export type Database = {
     }
     Functions: {
       admin_dashboard_stats: {
+        Args: Record<PropertyKey, never>
+        Returns: Json
+      }
+      admin_list_users: {
         Args: Record<PropertyKey, never>
         Returns: Json
       }

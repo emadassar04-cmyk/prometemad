@@ -117,7 +117,20 @@
     "categoryNameEn": "Name (EN)",
     "categorySlug": "Slug",
     "categoryIcon": "Icon",
-    "categorySortOrder": "Sort order"
+    "categorySortOrder": "Sort order",
+    "users": "Users",
+    "userEmail": "Email",
+    "userJoined": "Joined",
+    "userLastSignIn": "Last sign-in",
+    "userGenerations": "Generations (today / total)",
+    "userDailyLimit": "Daily limit",
+    "userDailyLimitPlaceholder": "default",
+    "userBan": "Ban",
+    "userUnban": "Unban",
+    "userMakeAdmin": "Make admin",
+    "userRevokeAdmin": "Revoke admin",
+    "userBanned": "Banned",
+    "never": "Never"
   },
   "common": {
     "loading": "Loading…",

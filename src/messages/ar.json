@@ -117,7 +117,20 @@
     "categoryNameEn": "الاسم (إنجليزي)",
     "categorySlug": "المعرّف (slug)",
     "categoryIcon": "الأيقونة",
-    "categorySortOrder": "ترتيب العرض"
+    "categorySortOrder": "ترتيب العرض",
+    "users": "المستخدمون",
+    "userEmail": "البريد الإلكتروني",
+    "userJoined": "تاريخ التسجيل",
+    "userLastSignIn": "آخر دخول",
+    "userGenerations": "الصور (اليوم / الإجمالي)",
+    "userDailyLimit": "الحد اليومي",
+    "userDailyLimitPlaceholder": "الافتراضي",
+    "userBan": "حظر",
+    "userUnban": "رفع الحظر",
+    "userMakeAdmin": "منح صلاحية أدمن",
+    "userRevokeAdmin": "سحب صلاحية أدمن",
+    "userBanned": "محظور",
+    "never": "أبدًا"
   },
   "common": {
     "loading": "جارٍ التحميل…",

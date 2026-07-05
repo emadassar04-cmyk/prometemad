@@ -140,7 +140,9 @@ export async function POST(request: Request) {
       generationId: generation.id,
       imageUrl: publicUrl,
     });
-  } catch {
+  } catch (err) {
+    console.error("generate-photo failed:", err instanceof Error ? err.message : err);
+
     await supabase
       .from("generations")
       .update({ status: "failed" })

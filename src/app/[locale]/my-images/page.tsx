@@ -66,6 +66,7 @@ export default async function MyImagesPage({
                 <ShowcaseToggle
                   generationId={generation.id}
                   initialIsPublic={generation.is_public}
+                  initialModerationStatus={generation.moderation_status}
                 />
               </div>
             </Link>

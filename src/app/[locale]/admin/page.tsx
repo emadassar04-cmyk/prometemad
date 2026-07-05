@@ -21,7 +21,13 @@ export default async function AdminDashboardPage({
     <div className="mx-auto max-w-5xl px-4 py-10 sm:px-6">
       <div className="mb-8 flex items-center justify-between">
         <h1 className="text-2xl font-bold">{t("title")}</h1>
-        <div className="flex gap-3">
+        <div className="flex flex-wrap gap-3">
+          <Link
+            href="/admin/moderation"
+            className="rounded-full border border-border px-4 py-2 text-sm font-medium hover:border-accent"
+          >
+            {t("moderation")}
+          </Link>
           <Link
             href="/admin/users"
             className="rounded-full border border-border px-4 py-2 text-sm font-medium hover:border-accent"

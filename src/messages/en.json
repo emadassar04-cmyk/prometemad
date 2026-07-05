@@ -77,7 +77,9 @@
     "empty": "You haven't generated any images yet",
     "browseLibrary": "Browse the library",
     "shareToShowcase": "Share to showcase",
-    "shared": "Shared in showcase"
+    "shared": "Shared in showcase",
+    "pendingReview": "Pending review",
+    "rejected": "Not approved — try a different image"
   },
   "favorites": {
     "title": "Favorites",
@@ -130,7 +132,11 @@
     "userMakeAdmin": "Make admin",
     "userRevokeAdmin": "Revoke admin",
     "userBanned": "Banned",
-    "never": "Never"
+    "never": "Never",
+    "moderation": "Moderation",
+    "moderationEmpty": "Nothing pending review",
+    "moderationApprove": "Approve",
+    "moderationReject": "Reject"
   },
   "common": {
     "loading": "Loading…",

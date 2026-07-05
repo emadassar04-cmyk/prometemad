@@ -77,7 +77,9 @@
     "empty": "لم تولّد أي صورة بعد",
     "browseLibrary": "تصفح المكتبة",
     "shareToShowcase": "شارك في معرض الإلهام",
-    "shared": "منشورة في المعرض"
+    "shared": "منشورة في المعرض",
+    "pendingReview": "قيد المراجعة",
+    "rejected": "لم تتم الموافقة — جرّب صورة تانية"
   },
   "favorites": {
     "title": "مفضلتي",
@@ -130,7 +132,11 @@
     "userMakeAdmin": "منح صلاحية أدمن",
     "userRevokeAdmin": "سحب صلاحية أدمن",
     "userBanned": "محظور",
-    "never": "أبدًا"
+    "never": "أبدًا",
+    "moderation": "الإشراف",
+    "moderationEmpty": "لا يوجد شيء بانتظار المراجعة",
+    "moderationApprove": "موافقة",
+    "moderationReject": "رفض"
   },
   "common": {
     "loading": "جارٍ التحميل…",

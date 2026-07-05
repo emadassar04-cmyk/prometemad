@@ -106,3 +106,15 @@ export async function getAdminUsers(): Promise<AdminUserRow[]> {
   const { data } = await supabase.rpc("admin_list_users");
   return (data as unknown as AdminUserRow[]) ?? [];
 }
+
+// Relies on the "admins can read all generations" RLS policy (no RPC
+// needed here, unlike users/stats — nothing in auth.users is required).
+export async function getPendingModerationGenerations() {
+  const supabase = await createSupabaseServerClient();
+  const { data } = await supabase
+    .from("generations")
+    .select("*, prompts(slug, title_ar, title_en)")
+    .eq("moderation_status", "pending")
+    .order("created_at", { ascending: true });
+  return data ?? [];
+}

@@ -163,6 +163,7 @@ export type Database = {
           image_url: string | null
           is_public: boolean
           model: string | null
+          moderation_status: string
           prompt_id: string | null
           provider: string | null
           seed: number | null
@@ -179,6 +180,7 @@ export type Database = {
           image_url?: string | null
           is_public?: boolean
           model?: string | null
+          moderation_status?: string
           prompt_id?: string | null
           provider?: string | null
           seed?: number | null
@@ -195,6 +197,7 @@ export type Database = {
           image_url?: string | null
           is_public?: boolean
           model?: string | null
+          moderation_status?: string
           prompt_id?: string | null
           provider?: string | null
           seed?: number | null
@@ -403,6 +406,10 @@ export type Database = {
       increment_prompt_generation_count: {
         Args: { p_prompt_id: string }
         Returns: undefined
+      }
+      is_admin: {
+        Args: Record<PropertyKey, never>
+        Returns: boolean
       }
       match_documents: {
         Args: { filter?: Json; match_count?: number; query_embedding: string }

@@ -70,10 +70,25 @@ export async function GET(request: Request) {
     return NextResponse.json({ error: "src_not_allowed" }, { status: 400 });
   }
 
-  const sourceResponse = await fetch(sourceUrl, {
-    signal: AbortSignal.timeout(30_000),
-  });
-  if (!sourceResponse.ok) {
+  // Pollinations occasionally rejects a fraction of requests when several
+  // land at once (e.g. a multi-variation batch) — a short retry absorbs
+  // that instead of failing the whole generation.
+  let sourceResponse: Response | null = null;
+  for (let attempt = 0; attempt < 3; attempt++) {
+    if (attempt > 0) {
+      await new Promise((resolve) => setTimeout(resolve, 1000 * attempt));
+    }
+    try {
+      const res = await fetch(sourceUrl, { signal: AbortSignal.timeout(30_000) });
+      if (res.ok) {
+        sourceResponse = res;
+        break;
+      }
+    } catch {
+      // network error or timeout — fall through and retry
+    }
+  }
+  if (!sourceResponse) {
     return NextResponse.json({ error: "source_fetch_failed" }, { status: 502 });
   }
   const sourceBuffer = Buffer.from(await sourceResponse.arrayBuffer());

@@ -72,10 +72,16 @@ export function BrandKitForm({
       if (logoFile) {
         const ext = logoFile.name.split(".").pop() ?? "png";
         const path = `${user.id}/logo.${ext}`;
+        const { data: sessionData } = await supabase.auth.getSession();
+        const session = sessionData.session;
+        const sessionInfo = session
+          ? `session ok, expires_at=${session.expires_at}, now=${Math.floor(Date.now() / 1000)}`
+          : "NO SESSION at upload time";
         const { error: uploadError } = await supabase.storage
           .from("brand-logos")
           .upload(path, logoFile, { upsert: true });
-        if (uploadError) throw uploadError;
+        if (uploadError)
+          throw new Error(`upload failed [${sessionInfo}]: ${uploadError.message}`);
 
         const {
           data: { publicUrl },

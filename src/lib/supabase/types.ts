@@ -110,32 +110,44 @@ export type Database = {
         Row: {
           created_at: string
           final_prompt: string
+          height: number | null
           id: string
           image_url: string | null
+          model: string | null
           prompt_id: string | null
           provider: string | null
+          seed: number | null
           status: string
           user_id: string
+          width: number | null
         }
         Insert: {
           created_at?: string
           final_prompt: string
+          height?: number | null
           id?: string
           image_url?: string | null
+          model?: string | null
           prompt_id?: string | null
           provider?: string | null
+          seed?: number | null
           status?: string
           user_id: string
+          width?: number | null
         }
         Update: {
           created_at?: string
           final_prompt?: string
+          height?: number | null
           id?: string
           image_url?: string | null
+          model?: string | null
           prompt_id?: string | null
           provider?: string | null
+          seed?: number | null
           status?: string
           user_id?: string
+          width?: number | null
         }
         Relationships: [
           {

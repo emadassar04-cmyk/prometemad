@@ -3,18 +3,39 @@
 import { useMemo, useState } from "react";
 import Image from "next/image";
 import { useLocale, useTranslations } from "next-intl";
-import { Check, Copy, ExternalLink, Loader2, Sparkles } from "lucide-react";
+import {
+  Check,
+  Copy,
+  Download,
+  ExternalLink,
+  Layers,
+  Loader2,
+  Sparkles,
+} from "lucide-react";
 import { createSupabaseBrowserClient } from "@/lib/supabase/client";
 import {
   parsePromptVariables,
   substituteVariables,
 } from "@/lib/prompt-variables";
+import {
+  ASPECT_RATIOS,
+  LAST_ASPECT_RATIO_STORAGE_KEY,
+  type AspectRatioKey,
+} from "@/lib/aspect-ratios";
 import { FavoriteButton } from "@/components/favorite-button";
 import type { Tables } from "@/lib/supabase/types";
 import { cn } from "@/lib/utils";
 
 type PromptRow = Tables<"prompts"> & {
   categories: { slug: string; name_ar: string; name_en: string } | null;
+};
+
+type ModelOption = "flux-schnell" | "flux-dev" | "sdxl";
+
+type GenerationResult = {
+  generationId: string;
+  imageUrl?: string;
+  error?: string;
 };
 
 export function PromptWorkspace({
@@ -42,7 +63,28 @@ export function PromptWorkspace({
   const [openedInGemini, setOpenedInGemini] = useState(false);
   const [generating, setGenerating] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [resultImageUrl, setResultImageUrl] = useState<string | null>(null);
+  const [partialNotice, setPartialNotice] = useState<string | null>(null);
+  const [results, setResults] = useState<GenerationResult[]>([]);
+
+  const [aspectRatioKey, setAspectRatioKey] = useState<AspectRatioKey>(() => {
+    if (typeof window === "undefined") return "instagram";
+    const saved = window.localStorage.getItem(LAST_ASPECT_RATIO_STORAGE_KEY);
+    return saved && ASPECT_RATIOS.some((preset) => preset.key === saved)
+      ? (saved as AspectRatioKey)
+      : "instagram";
+  });
+  const [customWidth, setCustomWidth] = useState(1024);
+  const [customHeight, setCustomHeight] = useState(1024);
+  const [model, setModel] = useState<ModelOption>("flux-schnell");
+
+  function handleAspectRatioChange(key: AspectRatioKey) {
+    setAspectRatioKey(key);
+    window.localStorage.setItem(LAST_ASPECT_RATIO_STORAGE_KEY, key);
+  }
+
+  const activePreset = ASPECT_RATIOS.find((preset) => preset.key === aspectRatioKey);
+  const width = activePreset?.width ?? customWidth;
+  const height = activePreset?.height ?? customHeight;
 
   const finalPromptEn = substituteVariables(prompt.prompt_text_en, values);
   const finalPromptAr = substituteVariables(prompt.prompt_display_ar, values);
@@ -63,7 +105,7 @@ export function PromptWorkspace({
     window.open("https://gemini.google.com/app", "_blank", "noopener,noreferrer");
   }
 
-  async function handleGenerate() {
+  async function runGenerate(variations: 1 | 4) {
     if (!isSignedIn) {
       window.location.href = `/${locale}/sign-in`;
       return;
@@ -71,12 +113,20 @@ export function PromptWorkspace({
 
     setGenerating(true);
     setError(null);
+    setPartialNotice(null);
 
     try {
       const response = await fetch("/api/generate", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ promptId: prompt.id, variables: values }),
+        body: JSON.stringify({
+          promptId: prompt.id,
+          variables: values,
+          width,
+          height,
+          model,
+          variations,
+        }),
       });
       const data = await response.json();
 
@@ -93,7 +143,15 @@ export function PromptWorkspace({
         return;
       }
 
-      setResultImageUrl(data.imageUrl);
+      setResults(data.results ?? []);
+      if (data.limitReached) {
+        setPartialNotice(
+          t("variationsPartial", {
+            count: data.results?.length ?? 0,
+            requested: variations,
+          }),
+        );
+      }
     } catch {
       setError(t("generateError"));
     } finally {
@@ -105,23 +163,68 @@ export function PromptWorkspace({
   const description =
     locale === "ar" ? prompt.description_ar : prompt.description_en;
 
+  const successfulResults = results.filter((r) => r.imageUrl);
+
   return (
     <div className="mx-auto grid max-w-5xl gap-8 px-4 py-10 sm:px-6 lg:grid-cols-2">
       <div>
-        <div className="relative aspect-square w-full overflow-hidden rounded-2xl border border-border bg-surface-elevated">
-          <Image
-            src={resultImageUrl ?? prompt.preview_image_url ?? ""}
-            alt={title}
-            fill
-            sizes="(max-width: 1024px) 100vw, 50vw"
-            className="object-cover"
-          />
-          {generating && (
-            <div className="absolute inset-0 flex items-center justify-center bg-background/70 backdrop-blur">
-              <Loader2 className="h-8 w-8 animate-spin text-accent" />
-            </div>
-          )}
-        </div>
+        {successfulResults.length > 0 ? (
+          <div
+            className={cn(
+              "grid gap-3",
+              successfulResults.length > 1 ? "grid-cols-2" : "grid-cols-1",
+            )}
+          >
+            {results.map((result) => (
+              <div
+                key={result.generationId}
+                className="relative aspect-square w-full overflow-hidden rounded-2xl border border-border bg-surface-elevated"
+              >
+                {result.imageUrl ? (
+                  <>
+                    <Image
+                      src={result.imageUrl}
+                      alt={title}
+                      fill
+                      sizes="(max-width: 1024px) 50vw, 25vw"
+                      className="object-cover"
+                    />
+                    <a
+                      href={result.imageUrl}
+                      download
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="absolute end-2 top-2 flex h-8 w-8 items-center justify-center rounded-full bg-background/80 text-foreground backdrop-blur transition-colors hover:bg-accent hover:text-white"
+                      title={t("downloadImage")}
+                    >
+                      <Download className="h-4 w-4" />
+                    </a>
+                  </>
+                ) : (
+                  <div className="flex h-full items-center justify-center text-xs text-red-400">
+                    {t("generateError")}
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+        ) : (
+          <div className="relative aspect-square w-full overflow-hidden rounded-2xl border border-border bg-surface-elevated">
+            <Image
+              src={prompt.preview_image_url ?? ""}
+              alt={title}
+              fill
+              sizes="(max-width: 1024px) 100vw, 50vw"
+              className="object-cover"
+            />
+          </div>
+        )}
+        {generating && (
+          <div className="mt-3 flex items-center justify-center gap-2 text-sm text-muted">
+            <Loader2 className="h-4 w-4 animate-spin text-accent" />
+            {t("generating")}
+          </div>
+        )}
       </div>
 
       <div className="flex flex-col gap-6">
@@ -135,6 +238,62 @@ export function PromptWorkspace({
             initialFavorited={isFavorited}
             isSignedIn={isSignedIn}
           />
+        </div>
+
+        <div className="flex flex-col gap-3 rounded-2xl border border-border bg-surface p-5">
+          <h2 className="text-sm font-semibold text-muted">{t("aspectRatio")}</h2>
+          <select
+            value={aspectRatioKey}
+            onChange={(e) => handleAspectRatioChange(e.target.value as AspectRatioKey)}
+            className="rounded-lg border border-border bg-background px-3 py-2 text-sm outline-none focus:border-accent"
+          >
+            {ASPECT_RATIOS.map((preset) => (
+              <option key={preset.key} value={preset.key}>
+                {t(preset.labelKey)}
+              </option>
+            ))}
+          </select>
+          {aspectRatioKey === "custom" && (
+            <div className="flex gap-3">
+              <div className="flex flex-1 flex-col gap-1.5">
+                <label className="text-xs text-muted">{t("customWidth")}</label>
+                <input
+                  type="number"
+                  min={256}
+                  max={2048}
+                  value={customWidth}
+                  onChange={(e) => setCustomWidth(Number(e.target.value))}
+                  className="rounded-lg border border-border bg-background px-3 py-2 text-sm outline-none focus:border-accent"
+                />
+              </div>
+              <div className="flex flex-1 flex-col gap-1.5">
+                <label className="text-xs text-muted">{t("customHeight")}</label>
+                <input
+                  type="number"
+                  min={256}
+                  max={2048}
+                  value={customHeight}
+                  onChange={(e) => setCustomHeight(Number(e.target.value))}
+                  className="rounded-lg border border-border bg-background px-3 py-2 text-sm outline-none focus:border-accent"
+                />
+              </div>
+            </div>
+          )}
+
+          <h2 className="mt-2 text-sm font-semibold text-muted">{t("model")}</h2>
+          <select
+            value={model}
+            onChange={(e) => setModel(e.target.value as ModelOption)}
+            className="rounded-lg border border-border bg-background px-3 py-2 text-sm outline-none focus:border-accent"
+          >
+            <option value="flux-schnell">{t("modelFluxSchnell")}</option>
+            <option value="flux-dev" disabled>
+              {t("modelFluxDev")} — {t("comingSoon")}
+            </option>
+            <option value="sdxl" disabled>
+              {t("modelSdxl")} — {t("comingSoon")}
+            </option>
+          </select>
         </div>
 
         {variables.length > 0 && (
@@ -223,26 +382,40 @@ export function PromptWorkspace({
         </div>
 
         {error && <p className="text-sm text-red-400">{error}</p>}
+        {partialNotice && <p className="text-sm text-accent-2">{partialNotice}</p>}
 
-        <button
-          type="button"
-          onClick={handleGenerate}
-          disabled={generating}
-          className={cn(
-            "accent-gradient-bg flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-medium text-white transition-opacity hover:opacity-90 disabled:opacity-50",
+        <div className="flex flex-col gap-2 sm:flex-row">
+          <button
+            type="button"
+            onClick={() => runGenerate(1)}
+            disabled={generating}
+            className={cn(
+              "accent-gradient-bg flex flex-1 items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-medium text-white transition-opacity hover:opacity-90 disabled:opacity-50",
+            )}
+          >
+            {generating ? (
+              <Loader2 className="h-4 w-4 animate-spin" />
+            ) : (
+              <Sparkles className="h-4 w-4" />
+            )}
+            {generating
+              ? t("generating")
+              : isSignedIn
+                ? t("generate")
+                : t("signInToGenerate")}
+          </button>
+          {isSignedIn && (
+            <button
+              type="button"
+              onClick={() => runGenerate(4)}
+              disabled={generating}
+              className="flex items-center justify-center gap-2 rounded-full border border-accent px-6 py-3 text-sm font-medium text-accent-2 transition-colors hover:bg-accent/10 disabled:opacity-50"
+            >
+              <Layers className="h-4 w-4" />
+              {t("generateVariations")}
+            </button>
           )}
-        >
-          {generating ? (
-            <Loader2 className="h-4 w-4 animate-spin" />
-          ) : (
-            <Sparkles className="h-4 w-4" />
-          )}
-          {generating
-            ? t("generating")
-            : isSignedIn
-              ? t("generate")
-              : t("signInToGenerate")}
-        </button>
+        </div>
       </div>
     </div>
   );

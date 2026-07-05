@@ -114,6 +114,18 @@ export async function getPrompts(filters: PromptListFilters = {}) {
   });
 }
 
+export async function getPromptsByTag(tag: string) {
+  const supabase = await createSupabaseServerClient();
+  const { data } = await supabase
+    .from("prompts")
+    .select("*, categories(slug, name_ar, name_en)")
+    .eq("status", "published")
+    .contains("tags", [tag])
+    .order("is_featured", { ascending: false })
+    .order("created_at", { ascending: false });
+  return data ?? [];
+}
+
 export const getPromptBySlug = cache(async (slug: string) => {
   const supabase = await createSupabaseServerClient();
   const { data, error } = await supabase

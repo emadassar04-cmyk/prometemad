@@ -218,5 +218,13 @@
     "generateError": "Couldn't generate the image, please try again",
     "generateDailyLimitReached": "You've reached today's image limit (10). Come back tomorrow!",
     "signInToUse": "Sign in to use this tool"
+  },
+  "nanoBanana": {
+    "seoTitle": "Nano Banana Prompts in Arabic — Promptly",
+    "seoDescription": "A curated collection of Arabic prompts made for Google's Nano Banana (Gemini 2.5 Flash Image) model — portraits, photo edits, and realistic scenes, ready to copy and use.",
+    "title": "Nano Banana Prompts in Arabic",
+    "subtitle": "A curated collection of prompts made for Google's Nano Banana model — precise portrait edits, realistic scenes, and photo transformations",
+    "howTo": "Copy the prompt, open Gemini, upload your photo, and paste it in",
+    "empty": "No prompts here yet"
   }
 }

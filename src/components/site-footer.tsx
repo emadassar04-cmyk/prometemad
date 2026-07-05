@@ -40,6 +40,18 @@ export async function SiteFooter() {
             >
               {t("nav.favorites")}
             </Link>
+            <Link
+              href="/image-to-prompt"
+              className="transition-colors hover:text-foreground"
+            >
+              {t("nav.imageToPrompt")}
+            </Link>
+            <Link
+              href="/nano-banana"
+              className="transition-colors hover:text-foreground"
+            >
+              🍌 Nano Banana
+            </Link>
           </nav>
         </div>
 

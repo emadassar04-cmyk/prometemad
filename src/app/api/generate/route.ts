@@ -36,29 +36,34 @@ export async function POST(request: Request) {
 
   const { data: profile } = await supabase
     .from("profiles")
-    .select("is_banned, daily_limit_override")
+    .select("role, is_banned, daily_limit_override")
     .eq("id", user.id)
     .single();
 
   if (profile?.is_banned) {
     return NextResponse.json({ error: "banned" }, { status: 403 });
   }
-  const dailyLimit = profile?.daily_limit_override ?? DAILY_LIMIT;
+  // Admins are exempt from daily quotas entirely — the platform owner
+  // shouldn't be capped by the same limits set for regular users.
+  const dailyLimit =
+    profile?.role === "admin" ? Number.MAX_SAFE_INTEGER : (profile?.daily_limit_override ?? DAILY_LIMIT);
 
-  const { data: withinRateLimit, error: rateLimitError } = await supabase.rpc(
-    "try_increment_rate_limit",
-    {
-      p_user_id: user.id,
-      p_max_requests: RATE_LIMIT_MAX_REQUESTS,
-      p_window_seconds: RATE_LIMIT_WINDOW_SECONDS,
-    },
-  );
+  if (profile?.role !== "admin") {
+    const { data: withinRateLimit, error: rateLimitError } = await supabase.rpc(
+      "try_increment_rate_limit",
+      {
+        p_user_id: user.id,
+        p_max_requests: RATE_LIMIT_MAX_REQUESTS,
+        p_window_seconds: RATE_LIMIT_WINDOW_SECONDS,
+      },
+    );
 
-  if (rateLimitError) {
-    return NextResponse.json({ error: "rate_limit_check_failed" }, { status: 500 });
-  }
-  if (!withinRateLimit) {
-    return NextResponse.json({ error: "rate_limited" }, { status: 429 });
+    if (rateLimitError) {
+      return NextResponse.json({ error: "rate_limit_check_failed" }, { status: 500 });
+    }
+    if (!withinRateLimit) {
+      return NextResponse.json({ error: "rate_limited" }, { status: 429 });
+    }
   }
 
   const body = await request.json().catch(() => null);

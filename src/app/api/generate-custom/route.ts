@@ -20,14 +20,15 @@ export async function POST(request: Request) {
 
   const { data: profile } = await supabase
     .from("profiles")
-    .select("is_banned, daily_limit_override")
+    .select("role, is_banned, daily_limit_override")
     .eq("id", user.id)
     .single();
 
   if (profile?.is_banned) {
     return NextResponse.json({ error: "banned" }, { status: 403 });
   }
-  const dailyLimit = profile?.daily_limit_override ?? DAILY_LIMIT;
+  const dailyLimit =
+    profile?.role === "admin" ? Number.MAX_SAFE_INTEGER : (profile?.daily_limit_override ?? DAILY_LIMIT);
 
   const body = await request.json().catch(() => null);
   const finalPrompt =

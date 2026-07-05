@@ -16,9 +16,16 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "unauthorized" }, { status: 401 });
   }
 
+  const { data: profile } = await supabase
+    .from("profiles")
+    .select("role")
+    .eq("id", user.id)
+    .single();
+  const dailyLimit = profile?.role === "admin" ? Number.MAX_SAFE_INTEGER : DAILY_LIMIT;
+
   const { data: allowed, error: quotaError } = await supabase.rpc(
     "try_increment_image_to_prompt_usage",
-    { p_user_id: user.id, p_daily_limit: DAILY_LIMIT },
+    { p_user_id: user.id, p_daily_limit: dailyLimit },
   );
 
   if (quotaError) {

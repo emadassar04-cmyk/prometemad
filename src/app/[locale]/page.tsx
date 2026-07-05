@@ -5,6 +5,7 @@ import {
   getDistinctStylesAndModels,
   getPrompts,
 } from "@/lib/data/prompts";
+import { getTotalGenerationCount } from "@/lib/data/showcase";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 import { PromptCard } from "@/components/prompt-card";
 import { LibraryFilters } from "@/components/library-filters";
@@ -30,13 +31,19 @@ export default async function HomePage({
     data: { user },
   } = await supabase.auth.getUser();
 
-  const [prompts, categories, categoriesWithCounts, { styles, models }] =
-    await Promise.all([
-      getPrompts(filters),
-      getCategories(),
-      getCategoriesWithCounts(),
-      getDistinctStylesAndModels(),
-    ]);
+  const [
+    prompts,
+    categories,
+    categoriesWithCounts,
+    { styles, models },
+    totalGenerations,
+  ] = await Promise.all([
+    getPrompts(filters),
+    getCategories(),
+    getCategoriesWithCounts(),
+    getDistinctStylesAndModels(),
+    getTotalGenerationCount(),
+  ]);
 
   let favoritedIds = new Set<string>();
   if (user) {
@@ -84,6 +91,17 @@ export default async function HomePage({
             <span className="accent-gradient-text font-bold">10</span>{" "}
             <span className="text-muted">{t("statDailyLimit")}</span>
           </span>
+          {totalGenerations > 0 && (
+            <>
+              <span className="hidden h-4 w-px bg-border sm:inline-block" />
+              <span>
+                <span className="accent-gradient-text font-bold">
+                  {totalGenerations}+
+                </span>{" "}
+                <span className="text-muted">{t("statTotalGenerations")}</span>
+              </span>
+            </>
+          )}
         </div>
       </section>
 

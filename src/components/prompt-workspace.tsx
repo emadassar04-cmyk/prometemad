@@ -25,6 +25,9 @@ import {
   type AspectRatioKey,
 } from "@/lib/aspect-ratios";
 import { FavoriteButton } from "@/components/favorite-button";
+import { PromptRating } from "@/components/prompt-rating";
+import { ShareButtons } from "@/components/share-buttons";
+import { SITE_URL } from "@/lib/site-url";
 import type { Tables } from "@/lib/supabase/types";
 import { cn } from "@/lib/utils";
 
@@ -51,12 +54,18 @@ export function PromptWorkspace({
   isSignedIn,
   brandColors,
   brandLogoUrl,
+  ratingAverage,
+  ratingCount,
+  userRating,
 }: {
   prompt: PromptRow;
   isFavorited: boolean;
   isSignedIn: boolean;
   brandColors?: string[] | null;
   brandLogoUrl?: string | null;
+  ratingAverage?: number;
+  ratingCount?: number;
+  userRating?: number | null;
 }) {
   const t = useTranslations("prompt");
   const locale = useLocale() as "ar" | "en";
@@ -183,6 +192,7 @@ export function PromptWorkspace({
     locale === "ar" ? prompt.description_ar : prompt.description_en;
 
   const successfulResults = results.filter((r) => r.imageUrl);
+  const promptPageUrl = `${SITE_URL}/${locale}/prompt/${prompt.slug}`;
 
   return (
     <div className="mx-auto grid max-w-5xl gap-8 px-4 py-10 sm:px-6 lg:grid-cols-2">
@@ -217,6 +227,7 @@ export function PromptWorkspace({
                       >
                         <Pencil className="h-4 w-4" />
                       </button>
+                      <ShareButtons url={promptPageUrl} text={title} />
                       <a
                         href={result.imageUrl}
                         download
@@ -268,6 +279,14 @@ export function PromptWorkspace({
             isSignedIn={isSignedIn}
           />
         </div>
+
+        <PromptRating
+          promptId={prompt.id}
+          average={ratingAverage ?? 0}
+          count={ratingCount ?? 0}
+          initialUserRating={userRating ?? null}
+          isSignedIn={isSignedIn}
+        />
 
         <div className="flex flex-col gap-3 rounded-2xl border border-border bg-surface p-5">
           <h2 className="text-sm font-semibold text-muted">{t("aspectRatio")}</h2>

@@ -1,7 +1,11 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { setRequestLocale } from "next-intl/server";
-import { getPromptBySlug } from "@/lib/data/prompts";
+import {
+  getPromptBySlug,
+  getPromptRatingSummary,
+  getUserRatingForPrompt,
+} from "@/lib/data/prompts";
 import { getUserBrandKit } from "@/lib/data/user";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 import { PromptWorkspace } from "@/components/prompt-workspace";
@@ -68,6 +72,7 @@ export default async function PromptDetailPage({
   let isFavorited = false;
   let brandColors: string[] | null = null;
   let brandLogoUrl: string | null = null;
+  let userRating: number | null = null;
   if (user) {
     const { data } = await supabase
       .from("favorites")
@@ -81,7 +86,11 @@ export default async function PromptDetailPage({
     const colors = Array.isArray(brandKit?.colors) ? brandKit.colors : [];
     if (colors.length > 0) brandColors = colors as string[];
     brandLogoUrl = brandKit?.logo_url ?? null;
+
+    userRating = await getUserRatingForPrompt(user.id, prompt.id);
   }
+
+  const ratingSummary = await getPromptRatingSummary(prompt.id);
 
   const title = locale === "ar" ? prompt.title_ar : prompt.title_en;
   const description = locale === "ar" ? prompt.description_ar : prompt.description_en;
@@ -107,6 +116,9 @@ export default async function PromptDetailPage({
         isSignedIn={!!user}
         brandColors={brandColors}
         brandLogoUrl={brandLogoUrl}
+        ratingAverage={ratingSummary.average}
+        ratingCount={ratingSummary.count}
+        userRating={userRating}
       />
     </>
   );

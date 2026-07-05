@@ -127,6 +127,31 @@ export const getPromptBySlug = cache(async (slug: string) => {
   return data;
 });
 
+export async function getPromptRatingSummary(promptId: string) {
+  const supabase = await createSupabaseServerClient();
+  const { data } = await supabase
+    .from("prompt_ratings")
+    .select("rating")
+    .eq("prompt_id", promptId);
+
+  const ratings = data ?? [];
+  const count = ratings.length;
+  const average =
+    count > 0 ? ratings.reduce((sum, r) => sum + r.rating, 0) / count : 0;
+  return { average, count };
+}
+
+export async function getUserRatingForPrompt(userId: string, promptId: string) {
+  const supabase = await createSupabaseServerClient();
+  const { data } = await supabase
+    .from("prompt_ratings")
+    .select("rating")
+    .eq("user_id", userId)
+    .eq("prompt_id", promptId)
+    .maybeSingle();
+  return data?.rating ?? null;
+}
+
 export async function getDistinctStylesAndModels() {
   const supabase = await createSupabaseServerClient();
   const { data } = await supabase

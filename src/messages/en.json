@@ -7,6 +7,7 @@
     "library": "Library",
     "myImages": "My Images",
     "favorites": "Favorites",
+    "showcase": "Showcase",
     "brandKit": "My Brand",
     "admin": "Admin",
     "signIn": "Sign In",
@@ -21,6 +22,7 @@
     "statPrompts": "professional prompts",
     "statCategories": "marketing categories",
     "statDailyLimit": "free images per day",
+    "statTotalGenerations": "images generated on the platform",
     "searchPlaceholder": "Search prompts… e.g. product shot, Ramadan, logo",
     "filters": {
       "all": "All",
@@ -67,12 +69,15 @@
     "variationsPartial": "Generated {count} of {requested} — daily limit reached",
     "downloadImage": "Download",
     "editImage": "Add text/logo",
-    "fromBrandKit": "From your brand"
+    "fromBrandKit": "From your brand",
+    "noRatingsYet": "No ratings yet"
   },
   "myImages": {
     "title": "My Images",
     "empty": "You haven't generated any images yet",
-    "browseLibrary": "Browse the library"
+    "browseLibrary": "Browse the library",
+    "shareToShowcase": "Share to showcase",
+    "shared": "Shared in showcase"
   },
   "favorites": {
     "title": "Favorites",
@@ -127,6 +132,19 @@
     "saving": "Saving…",
     "saved": "Saved",
     "saveError": "Couldn't save, please try again"
+  },
+  "showcase": {
+    "title": "Showcase",
+    "subtitle": "The best images users have generated and shared",
+    "empty": "No shared images yet — be the first from your \"My Images\" page"
+  },
+  "share": {
+    "share": "Share",
+    "whatsapp": "WhatsApp",
+    "twitter": "X (Twitter)",
+    "facebook": "Facebook",
+    "copyLink": "Copy link",
+    "linkCopied": "Link copied"
   },
   "editor": {
     "title": "Edit Image",

@@ -161,6 +161,7 @@ export type Database = {
           height: number | null
           id: string
           image_url: string | null
+          is_public: boolean
           model: string | null
           prompt_id: string | null
           provider: string | null
@@ -175,6 +176,7 @@ export type Database = {
           height?: number | null
           id?: string
           image_url?: string | null
+          is_public?: boolean
           model?: string | null
           prompt_id?: string | null
           provider?: string | null
@@ -189,6 +191,7 @@ export type Database = {
           height?: number | null
           id?: string
           image_url?: string | null
+          is_public?: boolean
           model?: string | null
           prompt_id?: string | null
           provider?: string | null
@@ -239,6 +242,35 @@ export type Database = {
           username?: string | null
         }
         Relationships: []
+      }
+      prompt_ratings: {
+        Row: {
+          created_at: string
+          prompt_id: string
+          rating: number
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          prompt_id: string
+          rating: number
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          prompt_id?: string
+          rating?: number
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "prompt_ratings_prompt_id_fkey"
+            columns: ["prompt_id"]
+            isOneToOne: false
+            referencedRelation: "prompts"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       prompts: {
         Row: {
@@ -343,6 +375,10 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      get_total_generation_count: {
+        Args: Record<PropertyKey, never>
+        Returns: number
+      }
       increment_prompt_copy_count: {
         Args: { p_prompt_id: string }
         Returns: undefined

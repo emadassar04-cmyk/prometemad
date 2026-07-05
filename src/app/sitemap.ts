@@ -18,6 +18,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: "daily",
       priority: 1,
     });
+    entries.push({
+      url: `${SITE_URL}/${locale}/showcase`,
+      changeFrequency: "daily",
+      priority: 0.6,
+    });
     for (const prompt of prompts ?? []) {
       entries.push({
         url: `${SITE_URL}/${locale}/prompt/${prompt.slug}`,

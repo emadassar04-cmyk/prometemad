@@ -23,6 +23,12 @@ export async function SiteFooter() {
               {t("nav.library")}
             </Link>
             <Link
+              href="/showcase"
+              className="transition-colors hover:text-foreground"
+            >
+              {t("nav.showcase")}
+            </Link>
+            <Link
               href="/my-images"
               className="transition-colors hover:text-foreground"
             >

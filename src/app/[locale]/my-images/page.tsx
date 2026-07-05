@@ -3,6 +3,7 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import { redirect, Link } from "@/i18n/navigation";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 import { getUserGenerations } from "@/lib/data/user";
+import { ShowcaseToggle } from "@/components/showcase-toggle";
 
 export default async function MyImagesPage({
   params,
@@ -61,6 +62,12 @@ export default async function MyImagesPage({
                   className="object-cover transition-transform duration-300 group-hover:scale-105"
                 />
               )}
+              <div className="absolute end-2 top-2">
+                <ShowcaseToggle
+                  generationId={generation.id}
+                  initialIsPublic={generation.is_public}
+                />
+              </div>
             </Link>
           ))}
         </div>

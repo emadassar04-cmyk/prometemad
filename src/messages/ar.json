@@ -7,6 +7,7 @@
     "library": "المكتبة",
     "myImages": "صوري",
     "favorites": "مفضلتي",
+    "showcase": "معرض الإلهام",
     "brandKit": "هويتي",
     "admin": "الإدارة",
     "signIn": "تسجيل الدخول",
@@ -21,6 +22,7 @@
     "statPrompts": "برومبت احترافي",
     "statCategories": "فئات تسويقية",
     "statDailyLimit": "صور مجانية يومياً",
+    "statTotalGenerations": "صورة اتولّدت على المنصة",
     "searchPlaceholder": "ابحث عن برومبت… مثال: عرض منتج، رمضان، لوجو",
     "filters": {
       "all": "الكل",
@@ -67,12 +69,15 @@
     "variationsPartial": "اتولّدت {count} من {requested} بس — وصلت للحد اليومي",
     "downloadImage": "تحميل",
     "editImage": "أضف نص/لوجو",
-    "fromBrandKit": "من هويتك"
+    "fromBrandKit": "من هويتك",
+    "noRatingsYet": "لسه مفيش تقييمات"
   },
   "myImages": {
     "title": "صوري",
     "empty": "لم تولّد أي صورة بعد",
-    "browseLibrary": "تصفح المكتبة"
+    "browseLibrary": "تصفح المكتبة",
+    "shareToShowcase": "شارك في معرض الإلهام",
+    "shared": "منشورة في المعرض"
   },
   "favorites": {
     "title": "مفضلتي",
@@ -127,6 +132,19 @@
     "saving": "جارٍ الحفظ…",
     "saved": "تم الحفظ",
     "saveError": "تعذّر الحفظ، حاول مرة أخرى"
+  },
+  "showcase": {
+    "title": "معرض الإلهام",
+    "subtitle": "أفضل الصور اللي المستخدمين ولّدوها وشاركوها",
+    "empty": "لسه مفيش صور مشاركة، كن أول من يشارك من صفحة \"صوري\""
+  },
+  "share": {
+    "share": "مشاركة",
+    "whatsapp": "واتساب",
+    "twitter": "X (تويتر)",
+    "facebook": "فيسبوك",
+    "copyLink": "نسخ الرابط",
+    "linkCopied": "تم نسخ الرابط"
   },
   "editor": {
     "title": "تعديل الصورة",

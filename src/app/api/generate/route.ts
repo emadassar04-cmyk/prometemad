@@ -5,6 +5,7 @@ import {
   sanitizeVariableValues,
   substituteVariables,
 } from "@/lib/prompt-variables";
+import { callGenerateWebhook } from "@/lib/n8n-generate";
 
 const DAILY_LIMIT = 10;
 const MAX_VARIABLE_LENGTH = 200;
@@ -123,10 +124,7 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "daily_limit_reached" }, { status: 429 });
   }
 
-  const webhookUrl = process.env.N8N_GENERATE_IMAGE_WEBHOOK_URL;
-  const webhookSecret = process.env.N8N_WEBHOOK_SECRET;
-
-  if (!webhookUrl || !webhookSecret) {
+  if (!process.env.N8N_GENERATE_IMAGE_WEBHOOK_URL || !process.env.N8N_WEBHOOK_SECRET) {
     return NextResponse.json({ error: "provider_not_configured" }, { status: 503 });
   }
 
@@ -158,44 +156,24 @@ export async function POST(request: Request) {
     }
 
     try {
-      const webhookResponse = await fetch(webhookUrl!, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "x-webhook-secret": webhookSecret!,
-          Authorization: `Bearer ${session?.access_token ?? ""}`,
-        },
-        body: JSON.stringify({
-          user_id: user!.id,
-          prompt_id: prompt!.id,
-          generation_id: generation.id,
-          final_prompt: finalPrompt,
-          width,
-          height,
-          model,
-          seed,
-        }),
+      const result = await callGenerateWebhook({
+        userId: user!.id,
+        promptId: prompt!.id,
+        generationId: generation.id,
+        finalPrompt,
+        width,
+        height,
+        model,
+        seed,
+        accessToken: session?.access_token,
       });
-
-      if (!webhookResponse.ok) {
-        throw new Error(`webhook responded ${webhookResponse.status}`);
-      }
-
-      const result = (await webhookResponse.json()) as {
-        image_url?: string;
-        provider?: string;
-      };
-
-      if (!result.image_url) {
-        throw new Error("webhook response missing image_url");
-      }
 
       await supabase
         .from("generations")
         .update({
           status: "succeeded",
           image_url: result.image_url,
-          provider: result.provider ?? "n8n",
+          provider: result.provider,
         })
         .eq("id", generation.id);
 

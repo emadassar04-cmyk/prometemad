@@ -24,6 +24,25 @@ export async function requireAdmin(locale: string) {
   return { supabase, user: user! };
 }
 
+// For API routes (can't redirect like requireAdmin does for pages) — returns
+// the admin user, or null if the caller isn't signed in as an admin.
+export async function requireAdminApi() {
+  const supabase = await createSupabaseServerClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  if (!user) return null;
+
+  const { data: profile } = await supabase
+    .from("profiles")
+    .select("role")
+    .eq("id", user.id)
+    .single();
+  if (profile?.role !== "admin") return null;
+
+  return { supabase, user };
+}
+
 export async function getAdminStats() {
   const supabase = await createSupabaseServerClient();
 

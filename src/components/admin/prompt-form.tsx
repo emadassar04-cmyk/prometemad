@@ -1,5 +1,7 @@
 import { getTranslations } from "next-intl/server";
 import { savePromptAction } from "@/app/[locale]/admin/prompts/actions";
+import { PromptAiAssistant } from "@/components/admin/prompt-ai-assistant";
+import { PromptTestGenerate } from "@/components/admin/prompt-test-generate";
 import type { Tables } from "@/lib/supabase/types";
 
 export async function PromptForm({
@@ -17,6 +19,8 @@ export async function PromptForm({
     <form action={savePromptAction} className="flex flex-col gap-4">
       <input type="hidden" name="locale" value={locale} />
       {prompt && <input type="hidden" name="id" value={prompt.id} />}
+
+      <PromptAiAssistant />
 
       <div className="grid grid-cols-2 gap-4">
         <Field label="Slug" name="slug" defaultValue={prompt?.slug} required />
@@ -81,6 +85,7 @@ export async function PromptForm({
         <div className="flex flex-col gap-1.5">
           <label className="text-sm text-muted">Category</label>
           <select
+            id="category_id"
             name="category_id"
             defaultValue={prompt?.category_id ?? ""}
             className="rounded-lg border border-border bg-background px-3 py-2 text-sm"
@@ -117,6 +122,8 @@ export async function PromptForm({
         Featured
       </label>
 
+      <PromptTestGenerate promptId={prompt?.id} />
+
       <button
         type="submit"
         className="accent-gradient-bg w-fit rounded-full px-6 py-2.5 text-sm font-medium text-white"
@@ -148,6 +155,7 @@ function Field({
       <label className="text-sm text-muted">{label}</label>
       {textarea ? (
         <textarea
+          id={name}
           name={name}
           defaultValue={defaultValue ?? ""}
           required={required}
@@ -156,6 +164,7 @@ function Field({
         />
       ) : (
         <input
+          id={name}
           type="text"
           name={name}
           defaultValue={defaultValue ?? ""}

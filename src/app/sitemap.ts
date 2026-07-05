@@ -9,6 +9,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     .from("prompts")
     .select("slug, created_at")
     .eq("status", "published");
+  const { data: categories } = await supabase.from("categories").select("slug");
 
   const entries: MetadataRoute.Sitemap = [];
 
@@ -39,6 +40,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         lastModified: prompt.created_at,
         changeFrequency: "weekly",
         priority: 0.8,
+      });
+    }
+    for (const category of categories ?? []) {
+      entries.push({
+        url: `${SITE_URL}/${locale}/prompts/${category.slug}`,
+        changeFrequency: "weekly",
+        priority: 0.85,
       });
     }
   }

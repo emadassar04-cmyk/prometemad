@@ -1,8 +1,11 @@
-import { getTranslations } from "next-intl/server";
+import { getLocale, getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
+import { getCategories } from "@/lib/data/prompts";
 
 export async function SiteFooter() {
   const t = await getTranslations();
+  const locale = (await getLocale()) as "ar" | "en";
+  const categories = await getCategories();
   const year = new Date().getFullYear();
 
   return (
@@ -54,6 +57,20 @@ export async function SiteFooter() {
             </Link>
           </nav>
         </div>
+
+        {categories.length > 0 && (
+          <nav className="mt-6 flex flex-wrap items-center justify-center gap-x-5 gap-y-2 border-t border-border pt-6 text-xs text-muted sm:justify-start">
+            {categories.map((category) => (
+              <Link
+                key={category.slug}
+                href={`/prompts/${category.slug}`}
+                className="transition-colors hover:text-foreground"
+              >
+                {locale === "ar" ? category.name_ar : category.name_en}
+              </Link>
+            ))}
+          </nav>
+        )}
 
         <div className="mt-8 border-t border-border pt-6 text-center text-xs text-muted">
           © {year} {t("brand.name")}

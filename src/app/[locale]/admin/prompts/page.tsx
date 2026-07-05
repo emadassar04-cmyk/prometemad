@@ -19,12 +19,20 @@ export default async function AdminPromptsPage({
     <div className="mx-auto max-w-5xl px-4 py-10 sm:px-6">
       <div className="mb-6 flex items-center justify-between">
         <h1 className="text-2xl font-bold">{t("prompts")}</h1>
-        <Link
-          href="/admin/prompts/new"
-          className="accent-gradient-bg rounded-full px-4 py-2 text-sm font-medium text-white"
-        >
-          {t("newPrompt")}
-        </Link>
+        <div className="flex gap-3">
+          <Link
+            href="/admin/categories"
+            className="rounded-full border border-border px-4 py-2 text-sm font-medium hover:border-accent"
+          >
+            {t("categories")}
+          </Link>
+          <Link
+            href="/admin/prompts/new"
+            className="accent-gradient-bg rounded-full px-4 py-2 text-sm font-medium text-white"
+          >
+            {t("newPrompt")}
+          </Link>
+        </div>
       </div>
 
       <div className="overflow-hidden rounded-2xl border border-border">

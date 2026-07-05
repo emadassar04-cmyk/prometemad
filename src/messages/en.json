@@ -110,7 +110,14 @@
     "statusArchived": "Archived",
     "totalPrompts": "Total Prompts",
     "totalGenerations": "Total Generations",
-    "totalUsers": "Total Users"
+    "totalUsers": "Total Users",
+    "categories": "Categories",
+    "newCategory": "New Category",
+    "categoryNameAr": "Name (AR)",
+    "categoryNameEn": "Name (EN)",
+    "categorySlug": "Slug",
+    "categoryIcon": "Icon",
+    "categorySortOrder": "Sort order"
   },
   "common": {
     "loading": "Loading…",

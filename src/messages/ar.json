@@ -110,7 +110,14 @@
     "statusArchived": "مؤرشف",
     "totalPrompts": "إجمالي البرومبتات",
     "totalGenerations": "إجمالي الصور المولدة",
-    "totalUsers": "إجمالي المستخدمين"
+    "totalUsers": "إجمالي المستخدمين",
+    "categories": "الفئات",
+    "newCategory": "فئة جديدة",
+    "categoryNameAr": "الاسم (عربي)",
+    "categoryNameEn": "الاسم (إنجليزي)",
+    "categorySlug": "المعرّف (slug)",
+    "categoryIcon": "الأيقونة",
+    "categorySortOrder": "ترتيب العرض"
   },
   "common": {
     "loading": "جارٍ التحميل…",

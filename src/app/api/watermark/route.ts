@@ -77,6 +77,7 @@ export async function GET(request: Request) {
     return NextResponse.json({ error: "source_fetch_failed" }, { status: 502 });
   }
   const sourceBuffer = Buffer.from(await sourceResponse.arrayBuffer());
+  const debug = searchParams.get("debug") === "1";
 
   try {
     const image = sharp(sourceBuffer);
@@ -89,12 +90,29 @@ export async function GET(request: Request) {
       .jpeg({ quality: 90 })
       .toBuffer();
 
+    if (debug) {
+      const outMeta = await sharp(watermarked).metadata();
+      return NextResponse.json({
+        sourceContentType: sourceResponse.headers.get("content-type"),
+        sourceContentLength: sourceResponse.headers.get("content-length"),
+        sourceByteLength: sourceBuffer.length,
+        sourceMetadata: { width: metadata.width, height: metadata.height, format: metadata.format },
+        outputByteLength: watermarked.length,
+        outputMetadata: { width: outMeta.width, height: outMeta.height, format: outMeta.format },
+      });
+    }
+
     return new NextResponse(watermarked, {
       status: 200,
       headers: { "Content-Type": "image/jpeg" },
     });
   } catch (err) {
     console.error("watermark failed:", err instanceof Error ? err.message : err);
-    return NextResponse.json({ error: "watermark_failed" }, { status: 500 });
+    return NextResponse.json({
+      error: "watermark_failed",
+      detail: err instanceof Error ? err.message : String(err),
+      sourceContentType: sourceResponse.headers.get("content-type"),
+      sourceByteLength: sourceBuffer.length,
+    }, { status: 500 });
   }
 }

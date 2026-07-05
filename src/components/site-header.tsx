@@ -51,14 +51,6 @@ export async function SiteHeader() {
           >
             {t("nav.favorites")}
           </Link>
-          {user && (
-            <Link
-              href="/brand"
-              className="transition-colors hover:text-foreground"
-            >
-              {t("nav.brandKit")}
-            </Link>
-          )}
           {isAdmin && (
             <Link
               href="/admin"

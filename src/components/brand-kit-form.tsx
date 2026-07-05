@@ -74,8 +74,21 @@ export function BrandKitForm({
         const path = `${user.id}/logo.${ext}`;
         const { data: sessionData } = await supabase.auth.getSession();
         const session = sessionData.session;
+        let jwtInfo = "no token";
+        if (session?.access_token) {
+          const [headerB64, payloadB64] = session.access_token.split(".");
+          const decode = (s: string) =>
+            JSON.parse(atob(s.replace(/-/g, "+").replace(/_/g, "/")));
+          try {
+            const header = decode(headerB64);
+            const payload = decode(payloadB64);
+            jwtInfo = `alg=${header.alg},kid=${header.kid ?? "none"},role=${payload.role},aud=${payload.aud},sub=${payload.sub}`;
+          } catch {
+            jwtInfo = "decode failed";
+          }
+        }
         const sessionInfo = session
-          ? `session ok, expires_at=${session.expires_at}, now=${Math.floor(Date.now() / 1000)}`
+          ? `session ok, expires_at=${session.expires_at}, now=${Math.floor(Date.now() / 1000)}, jwt[${jwtInfo}]`
           : "NO SESSION at upload time";
         const { error: uploadError } = await supabase.storage
           .from("brand-logos")

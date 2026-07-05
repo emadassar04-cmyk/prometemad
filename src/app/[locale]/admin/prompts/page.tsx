@@ -1,6 +1,8 @@
+import Image from "next/image";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { requireAdmin, getAllPromptsForAdmin } from "@/lib/data/admin";
+import { BackfillPreviewsButton } from "@/components/admin/backfill-previews-button";
 import { deletePromptAction } from "./actions";
 
 export default async function AdminPromptsPage({
@@ -35,11 +37,32 @@ export default async function AdminPromptsPage({
         </div>
       </div>
 
+      <div className="mb-4">
+        <BackfillPreviewsButton />
+      </div>
+
       <div className="overflow-hidden rounded-2xl border border-border">
         <table className="w-full text-sm">
           <tbody>
             {prompts.map((prompt) => (
               <tr key={prompt.id} className="border-b border-border last:border-0">
+                <td className="p-4">
+                  {prompt.preview_image_url ? (
+                    <span className="relative block h-12 w-12 overflow-hidden rounded-lg bg-background">
+                      <Image
+                        src={prompt.preview_image_url}
+                        alt=""
+                        fill
+                        sizes="48px"
+                        className="object-cover"
+                      />
+                    </span>
+                  ) : (
+                    <span className="flex h-12 w-12 items-center justify-center rounded-lg border border-dashed border-red-400/50 text-[10px] text-red-400">
+                      —
+                    </span>
+                  )}
+                </td>
                 <td className="p-4">
                   <p className="font-medium">{prompt.title_ar}</p>
                   <p className="text-muted">{prompt.title_en}</p>

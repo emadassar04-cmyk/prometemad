@@ -42,6 +42,7 @@
     "generating": "جارٍ التوليد…",
     "generateError": "تعذّر توليد الصورة، حاول مرة أخرى",
     "dailyLimitReached": "وصلت للحد اليومي (10 صور). عد غداً!",
+    "rateLimited": "طلبات كتير في وقت قصير، استنى لحظات وحاول تاني",
     "signInToGenerate": "سجّل الدخول لتوليد صورتك",
     "addToFavorites": "أضف للمفضلة",
     "removeFromFavorites": "إزالة من المفضلة",

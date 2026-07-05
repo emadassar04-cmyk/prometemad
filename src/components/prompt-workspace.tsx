@@ -81,7 +81,11 @@ export function PromptWorkspace({
       const data = await response.json();
 
       if (response.status === 429) {
-        setError(t("dailyLimitReached"));
+        setError(
+          data?.error === "rate_limited"
+            ? t("rateLimited")
+            : t("dailyLimitReached"),
+        );
         return;
       }
       if (!response.ok) {

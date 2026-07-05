@@ -8,6 +8,8 @@ import {
 
 const DAILY_LIMIT = 10;
 const MAX_VARIABLE_LENGTH = 200;
+const RATE_LIMIT_MAX_REQUESTS = 5;
+const RATE_LIMIT_WINDOW_SECONDS = 60;
 
 export async function POST(request: Request) {
   const supabase = await createSupabaseServerClient();
@@ -17,6 +19,22 @@ export async function POST(request: Request) {
 
   if (!user) {
     return NextResponse.json({ error: "unauthorized" }, { status: 401 });
+  }
+
+  const { data: withinRateLimit, error: rateLimitError } = await supabase.rpc(
+    "try_increment_rate_limit",
+    {
+      p_user_id: user.id,
+      p_max_requests: RATE_LIMIT_MAX_REQUESTS,
+      p_window_seconds: RATE_LIMIT_WINDOW_SECONDS,
+    },
+  );
+
+  if (rateLimitError) {
+    return NextResponse.json({ error: "rate_limit_check_failed" }, { status: 500 });
+  }
+  if (!withinRateLimit) {
+    return NextResponse.json({ error: "rate_limited" }, { status: 429 });
   }
 
   const body = await request.json().catch(() => null);

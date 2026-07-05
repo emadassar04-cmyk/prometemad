@@ -37,35 +37,80 @@ export async function getCategoriesWithCounts() {
 
 export async function getPrompts(filters: PromptListFilters = {}) {
   const supabase = await createSupabaseServerClient();
-  let query = supabase
-    .from("prompts")
-    .select("*, categories(slug, name_ar, name_en)")
-    .eq("status", "published")
-    .order("is_featured", { ascending: false })
-    .order("created_at", { ascending: false });
 
+  let categoryId: string | null = null;
   if (filters.category) {
     const { data: category } = await supabase
       .from("categories")
       .select("id")
       .eq("slug", filters.category)
       .single();
-    if (category) query = query.eq("category_id", category.id);
+    categoryId = category?.id ?? null;
   }
 
-  if (filters.style) query = query.eq("style", filters.style);
-  if (filters.model) query = query.eq("model", filters.model);
+  const term = filters.q?.trim();
 
-  if (filters.q?.trim()) {
-    const term = filters.q.trim();
-    query = query.or(
-      `title_ar.ilike.%${term}%,title_en.ilike.%${term}%,tags.cs.{${term}}`,
-    );
+  if (!term) {
+    let query = supabase
+      .from("prompts")
+      .select("*, categories(slug, name_ar, name_en)")
+      .eq("status", "published")
+      .order("is_featured", { ascending: false })
+      .order("created_at", { ascending: false });
+
+    if (categoryId) query = query.eq("category_id", categoryId);
+    if (filters.style) query = query.eq("style", filters.style);
+    if (filters.model) query = query.eq("model", filters.model);
+
+    const { data, error } = await query;
+    if (error) throw error;
+    return data ?? [];
   }
 
-  const { data, error } = await query;
-  if (error) throw error;
-  return data ?? [];
+  // Full-text search using the indexed tsvector columns instead of ilike
+  // scans. The English and Arabic columns each use their own dictionary, so
+  // a single filter can't OR across both — run them as parallel queries
+  // (plus a tag containment check) and merge the results in memory.
+  const buildSearchQuery = () => {
+    let query = supabase
+      .from("prompts")
+      .select("*, categories(slug, name_ar, name_en)")
+      .eq("status", "published");
+    if (categoryId) query = query.eq("category_id", categoryId);
+    if (filters.style) query = query.eq("style", filters.style);
+    if (filters.model) query = query.eq("model", filters.model);
+    return query;
+  };
+
+  const [enResult, arResult, tagResult] = await Promise.all([
+    buildSearchQuery().textSearch("search_vector_en", term, {
+      type: "websearch",
+      config: "english",
+    }),
+    buildSearchQuery().textSearch("search_vector_ar", term, {
+      type: "websearch",
+      config: "arabic",
+    }),
+    buildSearchQuery().contains("tags", [term]),
+  ]);
+
+  if (enResult.error) throw enResult.error;
+  if (arResult.error) throw arResult.error;
+  if (tagResult.error) throw tagResult.error;
+
+  const merged = new Map<string, NonNullable<typeof enResult.data>[number]>();
+  for (const row of [
+    ...(enResult.data ?? []),
+    ...(arResult.data ?? []),
+    ...(tagResult.data ?? []),
+  ]) {
+    merged.set(row.id, row);
+  }
+
+  return [...merged.values()].sort((a, b) => {
+    if (a.is_featured !== b.is_featured) return a.is_featured ? -1 : 1;
+    return new Date(b.created_at).getTime() - new Date(a.created_at).getTime();
+  });
 }
 
 export async function getPromptBySlug(slug: string) {

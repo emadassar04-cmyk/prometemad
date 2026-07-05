@@ -260,6 +260,24 @@ export type Database = {
           },
         ]
       }
+      rate_limit_windows: {
+        Row: {
+          request_count: number
+          user_id: string
+          window_start: string
+        }
+        Insert: {
+          request_count?: number
+          user_id: string
+          window_start: string
+        }
+        Update: {
+          request_count?: number
+          user_id?: string
+          window_start?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
@@ -284,6 +302,14 @@ export type Database = {
       }
       try_increment_daily_usage: {
         Args: { p_daily_limit?: number; p_user_id: string }
+        Returns: boolean
+      }
+      try_increment_rate_limit: {
+        Args: {
+          p_max_requests?: number
+          p_user_id: string
+          p_window_seconds?: number
+        }
         Returns: boolean
       }
     }

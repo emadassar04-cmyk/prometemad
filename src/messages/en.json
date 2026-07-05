@@ -42,6 +42,7 @@
     "generating": "Generating…",
     "generateError": "Couldn't generate the image, please try again",
     "dailyLimitReached": "You've reached today's limit (10 images). Come back tomorrow!",
+    "rateLimited": "Too many requests in a short time, please wait a moment and try again",
     "signInToGenerate": "Sign in to generate your image",
     "addToFavorites": "Add to favorites",
     "removeFromFavorites": "Remove from favorites",

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { setRequestLocale } from "next-intl/server";
 import { getPromptBySlug } from "@/lib/data/prompts";
+import { getUserBrandKit } from "@/lib/data/user";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 import { PromptWorkspace } from "@/components/prompt-workspace";
 import { SITE_URL } from "@/lib/site-url";
@@ -65,6 +66,7 @@ export default async function PromptDetailPage({
   } = await supabase.auth.getUser();
 
   let isFavorited = false;
+  let brandColors: string[] | null = null;
   if (user) {
     const { data } = await supabase
       .from("favorites")
@@ -73,6 +75,10 @@ export default async function PromptDetailPage({
       .eq("prompt_id", prompt.id)
       .maybeSingle();
     isFavorited = !!data;
+
+    const brandKit = await getUserBrandKit(user.id);
+    const colors = Array.isArray(brandKit?.colors) ? brandKit.colors : [];
+    if (colors.length > 0) brandColors = colors as string[];
   }
 
   const title = locale === "ar" ? prompt.title_ar : prompt.title_en;
@@ -97,6 +103,7 @@ export default async function PromptDetailPage({
         prompt={prompt}
         isFavorited={isFavorited}
         isSignedIn={!!user}
+        brandColors={brandColors}
       />
     </>
   );

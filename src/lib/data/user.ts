@@ -23,3 +23,13 @@ export async function getUserFavoritePrompts(userId: string) {
     .map((row) => row.prompts)
     .filter((prompt): prompt is NonNullable<typeof prompt> => !!prompt);
 }
+
+export async function getUserBrandKit(userId: string) {
+  const supabase = await createSupabaseServerClient();
+  const { data } = await supabase
+    .from("brand_kits")
+    .select("*")
+    .eq("user_id", userId)
+    .maybeSingle();
+  return data;
+}

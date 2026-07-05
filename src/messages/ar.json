@@ -7,6 +7,7 @@
     "library": "المكتبة",
     "myImages": "صوري",
     "favorites": "مفضلتي",
+    "brandKit": "هويتي",
     "admin": "الإدارة",
     "signIn": "تسجيل الدخول",
     "signOut": "تسجيل الخروج",
@@ -64,7 +65,8 @@
     "comingSoon": "قريبًا",
     "generateVariations": "ولّد 4 نسخ",
     "variationsPartial": "اتولّدت {count} من {requested} بس — وصلت للحد اليومي",
-    "downloadImage": "تحميل"
+    "downloadImage": "تحميل",
+    "fromBrandKit": "من هويتك"
   },
   "myImages": {
     "title": "صوري",
@@ -109,6 +111,21 @@
     "error": "حدث خطأ ما",
     "back": "رجوع",
     "language": "English"
+  },
+  "brandKit": {
+    "title": "هوية علامتك التجارية",
+    "subtitle": "احفظ شعارك وألوانك مرة واحدة، وهتتطبق تلقائيًا في البرومبتات اللي فيها متغير ألوان",
+    "businessName": "اسم النشاط التجاري",
+    "businessNamePlaceholder": "مثال: قهوة الوسام",
+    "logo": "الشعار",
+    "chooseLogo": "اختر شعار",
+    "colors": "الألوان",
+    "addColor": "إضافة لون",
+    "font": "الخط",
+    "save": "حفظ",
+    "saving": "جارٍ الحفظ…",
+    "saved": "تم الحفظ",
+    "saveError": "تعذّر الحفظ، حاول مرة أخرى"
   },
   "enhancer": {
     "title": "✨ اكتب فكرتك، وهنحوّلها لبرومبت احترافي",

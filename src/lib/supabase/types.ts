@@ -14,6 +14,36 @@ export type Database = {
   }
   public: {
     Tables: {
+      brand_kits: {
+        Row: {
+          business_name: string | null
+          colors: Json
+          created_at: string
+          font: string | null
+          logo_url: string | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          business_name?: string | null
+          colors?: Json
+          created_at?: string
+          font?: string | null
+          logo_url?: string | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          business_name?: string | null
+          colors?: Json
+          created_at?: string
+          font?: string | null
+          logo_url?: string | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       categories: {
         Row: {
           icon: string | null

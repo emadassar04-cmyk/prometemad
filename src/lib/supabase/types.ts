@@ -285,6 +285,7 @@ export type Database = {
           is_banned: boolean
           locale: string
           plan: string
+          referral_code: string
           role: string
           username: string | null
         }
@@ -297,6 +298,7 @@ export type Database = {
           is_banned?: boolean
           locale?: string
           plan?: string
+          referral_code?: string
           role?: string
           username?: string | null
         }
@@ -309,6 +311,7 @@ export type Database = {
           is_banned?: boolean
           locale?: string
           plan?: string
+          referral_code?: string
           role?: string
           username?: string | null
         }
@@ -441,6 +444,42 @@ export type Database = {
         }
         Relationships: []
       }
+      referrals: {
+        Row: {
+          created_at: string
+          id: string
+          referred_id: string
+          referrer_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          referred_id: string
+          referrer_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          referred_id?: string
+          referrer_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "referrals_referred_id_fkey"
+            columns: ["referred_id"]
+            isOneToOne: true
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "referrals_referrer_id_fkey"
+            columns: ["referrer_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       site_settings: {
         Row: {
           key: string
@@ -499,6 +538,10 @@ export type Database = {
           metadata: Json
           similarity: number
         }[]
+      }
+      redeem_referral: {
+        Args: { p_referral_code: string }
+        Returns: boolean
       }
       try_increment_daily_usage: {
         Args: { p_daily_limit?: number; p_user_id: string }

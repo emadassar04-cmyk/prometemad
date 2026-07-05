@@ -7,6 +7,7 @@ import { routing } from "@/i18n/routing";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { GuestFavoritesSync } from "@/components/guest-favorites-sync";
+import { ReferralCapture } from "@/components/referral-capture";
 import { getSiteSettings, pickSiteSetting } from "@/lib/data/site-settings";
 import "../globals.css";
 
@@ -61,6 +62,7 @@ export default async function LocaleLayout({
       <body className="flex min-h-screen flex-col antialiased">
         <NextIntlClientProvider>
           <GuestFavoritesSync />
+          <ReferralCapture />
           <SiteHeader />
           <main className="flex-1">{children}</main>
           <SiteFooter />

@@ -34,6 +34,22 @@ export async function getUserBrandKit(userId: string) {
   return data;
 }
 
+export async function getUserReferralInfo(userId: string) {
+  const supabase = await createSupabaseServerClient();
+  const [{ data: profile }, { count }] = await Promise.all([
+    supabase.from("profiles").select("referral_code").eq("id", userId).single(),
+    supabase
+      .from("referrals")
+      .select("id", { count: "exact", head: true })
+      .eq("referrer_id", userId),
+  ]);
+
+  return {
+    referralCode: profile?.referral_code ?? null,
+    referralCount: count ?? 0,
+  };
+}
+
 export async function getUserBrandKitGenerations(userId: string) {
   const supabase = await createSupabaseServerClient();
   const { data } = await supabase

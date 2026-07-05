@@ -10,6 +10,7 @@
     "showcase": "Showcase",
     "brandKit": "My Brand",
     "imageToPrompt": "Image to Prompt",
+    "invite": "Invite Friends",
     "admin": "Admin",
     "signIn": "Sign In",
     "signOut": "Sign Out",
@@ -236,5 +237,14 @@
     "seoDescription": "The best ready-to-use {name} AI image prompts — generate free images instantly with Promptly.",
     "empty": "No prompts in this category yet",
     "browseAll": "Browse all categories"
+  },
+  "invite": {
+    "title": "Invite Friends",
+    "subtitle": "Share your invite link — when a friend joins through it, you both get extra daily images for free, permanently",
+    "bonusExplanation": "When a friend signs up through your invite link, your daily limit and theirs both go up by 5 images — stacking with every new friend",
+    "copyLink": "Copy Link",
+    "copied": "Copied",
+    "referralCount": "Friends who joined via your invite: {count}",
+    "shareText": "Try Promptly — an Arabic AI image prompt platform"
   }
 }

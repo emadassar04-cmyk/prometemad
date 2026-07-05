@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from "react";
 import Image from "next/image";
+import dynamic from "next/dynamic";
 import { useLocale, useTranslations } from "next-intl";
 import {
   Check,
@@ -10,6 +11,7 @@ import {
   ExternalLink,
   Layers,
   Loader2,
+  Pencil,
   Sparkles,
 } from "lucide-react";
 import { createSupabaseBrowserClient } from "@/lib/supabase/client";
@@ -25,6 +27,11 @@ import {
 import { FavoriteButton } from "@/components/favorite-button";
 import type { Tables } from "@/lib/supabase/types";
 import { cn } from "@/lib/utils";
+
+const ImageEditorModal = dynamic(
+  () => import("@/components/image-editor-modal").then((m) => m.ImageEditorModal),
+  { ssr: false },
+);
 
 type PromptRow = Tables<"prompts"> & {
   categories: { slug: string; name_ar: string; name_en: string } | null;
@@ -43,11 +50,13 @@ export function PromptWorkspace({
   isFavorited,
   isSignedIn,
   brandColors,
+  brandLogoUrl,
 }: {
   prompt: PromptRow;
   isFavorited: boolean;
   isSignedIn: boolean;
   brandColors?: string[] | null;
+  brandLogoUrl?: string | null;
 }) {
   const t = useTranslations("prompt");
   const locale = useLocale() as "ar" | "en";
@@ -74,6 +83,7 @@ export function PromptWorkspace({
   const [error, setError] = useState<string | null>(null);
   const [partialNotice, setPartialNotice] = useState<string | null>(null);
   const [results, setResults] = useState<GenerationResult[]>([]);
+  const [editingImageUrl, setEditingImageUrl] = useState<string | null>(null);
 
   const [aspectRatioKey, setAspectRatioKey] = useState<AspectRatioKey>(() => {
     if (typeof window === "undefined") return "instagram";
@@ -198,16 +208,26 @@ export function PromptWorkspace({
                       sizes="(max-width: 1024px) 50vw, 25vw"
                       className="object-cover"
                     />
-                    <a
-                      href={result.imageUrl}
-                      download
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="absolute end-2 top-2 flex h-8 w-8 items-center justify-center rounded-full bg-background/80 text-foreground backdrop-blur transition-colors hover:bg-accent hover:text-white"
-                      title={t("downloadImage")}
-                    >
-                      <Download className="h-4 w-4" />
-                    </a>
+                    <div className="absolute end-2 top-2 flex gap-2">
+                      <button
+                        type="button"
+                        onClick={() => setEditingImageUrl(result.imageUrl!)}
+                        className="flex h-8 w-8 items-center justify-center rounded-full bg-background/80 text-foreground backdrop-blur transition-colors hover:bg-accent hover:text-white"
+                        title={t("editImage")}
+                      >
+                        <Pencil className="h-4 w-4" />
+                      </button>
+                      <a
+                        href={result.imageUrl}
+                        download
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex h-8 w-8 items-center justify-center rounded-full bg-background/80 text-foreground backdrop-blur transition-colors hover:bg-accent hover:text-white"
+                        title={t("downloadImage")}
+                      >
+                        <Download className="h-4 w-4" />
+                      </a>
+                    </div>
                   </>
                 ) : (
                   <div className="flex h-full items-center justify-center text-xs text-red-400">
@@ -431,6 +451,14 @@ export function PromptWorkspace({
           )}
         </div>
       </div>
+
+      {editingImageUrl && (
+        <ImageEditorModal
+          imageUrl={editingImageUrl}
+          logoUrl={brandLogoUrl}
+          onClose={() => setEditingImageUrl(null)}
+        />
+      )}
     </div>
   );
 }

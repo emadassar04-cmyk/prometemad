@@ -66,6 +66,7 @@
     "generateVariations": "ولّد 4 نسخ",
     "variationsPartial": "اتولّدت {count} من {requested} بس — وصلت للحد اليومي",
     "downloadImage": "تحميل",
+    "editImage": "أضف نص/لوجو",
     "fromBrandKit": "من هويتك"
   },
   "myImages": {
@@ -126,6 +127,15 @@
     "saving": "جارٍ الحفظ…",
     "saved": "تم الحفظ",
     "saveError": "تعذّر الحفظ، حاول مرة أخرى"
+  },
+  "editor": {
+    "title": "تعديل الصورة",
+    "addText": "أضف نص",
+    "addLogo": "أضف الشعار",
+    "deleteSelected": "حذف المحدد",
+    "export": "تحميل PNG",
+    "defaultText": "اكتب هنا",
+    "loadError": "تعذّر تحميل الصورة للتعديل"
   },
   "enhancer": {
     "title": "✨ اكتب فكرتك، وهنحوّلها لبرومبت احترافي",

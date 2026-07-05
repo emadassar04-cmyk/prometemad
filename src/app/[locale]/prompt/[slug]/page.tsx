@@ -67,6 +67,7 @@ export default async function PromptDetailPage({
 
   let isFavorited = false;
   let brandColors: string[] | null = null;
+  let brandLogoUrl: string | null = null;
   if (user) {
     const { data } = await supabase
       .from("favorites")
@@ -79,6 +80,7 @@ export default async function PromptDetailPage({
     const brandKit = await getUserBrandKit(user.id);
     const colors = Array.isArray(brandKit?.colors) ? brandKit.colors : [];
     if (colors.length > 0) brandColors = colors as string[];
+    brandLogoUrl = brandKit?.logo_url ?? null;
   }
 
   const title = locale === "ar" ? prompt.title_ar : prompt.title_en;
@@ -104,6 +106,7 @@ export default async function PromptDetailPage({
         isFavorited={isFavorited}
         isSignedIn={!!user}
         brandColors={brandColors}
+        brandLogoUrl={brandLogoUrl}
       />
     </>
   );

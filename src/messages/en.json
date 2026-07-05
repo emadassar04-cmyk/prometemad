@@ -66,6 +66,7 @@
     "generateVariations": "Generate 4 variations",
     "variationsPartial": "Generated {count} of {requested} — daily limit reached",
     "downloadImage": "Download",
+    "editImage": "Add text/logo",
     "fromBrandKit": "From your brand"
   },
   "myImages": {
@@ -126,6 +127,15 @@
     "saving": "Saving…",
     "saved": "Saved",
     "saveError": "Couldn't save, please try again"
+  },
+  "editor": {
+    "title": "Edit Image",
+    "addText": "Add Text",
+    "addLogo": "Add Logo",
+    "deleteSelected": "Delete Selected",
+    "export": "Download PNG",
+    "defaultText": "Type here",
+    "loadError": "Couldn't load the image for editing"
   },
   "enhancer": {
     "title": "✨ Write your idea, we'll turn it into a professional prompt",

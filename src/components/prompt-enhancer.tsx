@@ -43,7 +43,7 @@ export function PromptEnhancer({
         return;
       }
       if (!response.ok) {
-        setError(t("error"));
+        setError(`${t("error")}${data?.detail ? ` (${data.detail})` : ""}`);
         return;
       }
       setResult(data);

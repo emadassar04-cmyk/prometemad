@@ -46,7 +46,8 @@ export async function POST(request: Request) {
     const result = await enhancePrompt(idea);
     return NextResponse.json(result);
   } catch (err) {
-    console.error("enhance-prompt failed:", err instanceof Error ? err.message : err);
-    return NextResponse.json({ error: "enhance_failed" }, { status: 502 });
+    const message = err instanceof Error ? err.message : String(err);
+    console.error("enhance-prompt failed:", message);
+    return NextResponse.json({ error: "enhance_failed", detail: message }, { status: 502 });
   }
 }

@@ -3,6 +3,10 @@ import path from "path";
 import { NextResponse } from "next/server";
 import sharp from "sharp";
 
+// Retrying the source fetch (below) can take up to ~70s in the worst
+// case, well past Vercel's default function timeout — give it room.
+export const maxDuration = 90;
+
 const ALLOWED_SOURCE_HOSTS = new Set(["image.pollinations.ai"]);
 const WATERMARK_TEXT = "برومبتلي";
 
@@ -70,16 +74,18 @@ export async function GET(request: Request) {
     return NextResponse.json({ error: "src_not_allowed" }, { status: 400 });
   }
 
-  // Pollinations occasionally rejects a fraction of requests when several
-  // land at once (e.g. a multi-variation batch) — a short retry absorbs
-  // that instead of failing the whole generation.
+  // Pollinations has a real concurrency ceiling: when several variation
+  // requests land at once, it keeps rejecting the overflow ones rather than
+  // queuing them, so a couple of quick retries aren't always enough — back
+  // off longer and try more times to actually outlast the busy window.
+  const BACKOFF_MS = [0, 2000, 4000, 6000, 8000];
   let sourceResponse: Response | null = null;
-  for (let attempt = 0; attempt < 3; attempt++) {
-    if (attempt > 0) {
-      await new Promise((resolve) => setTimeout(resolve, 1000 * attempt));
+  for (const delay of BACKOFF_MS) {
+    if (delay > 0) {
+      await new Promise((resolve) => setTimeout(resolve, delay));
     }
     try {
-      const res = await fetch(sourceUrl, { signal: AbortSignal.timeout(30_000) });
+      const res = await fetch(sourceUrl, { signal: AbortSignal.timeout(12_000) });
       if (res.ok) {
         sourceResponse = res;
         break;

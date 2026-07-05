@@ -7,6 +7,10 @@ import {
 } from "@/lib/prompt-variables";
 import { callGenerateWebhook } from "@/lib/n8n-generate";
 
+// A 4-variation request staggers its calls and each can retry internally
+// (see /api/watermark), so the slowest one can take close to a minute.
+export const maxDuration = 90;
+
 const DAILY_LIMIT = 10;
 const MAX_VARIABLE_LENGTH = 200;
 const RATE_LIMIT_MAX_REQUESTS = 5;
@@ -150,7 +154,7 @@ export async function POST(request: Request) {
     data: { session },
   } = await supabase.auth.getSession();
 
-  async function generateOne() {
+  async function generateOne(index: number) {
     const seed = Math.floor(Math.random() * 1_000_000_000);
 
     const { data: generation, error: insertError } = await supabase
@@ -174,6 +178,13 @@ export async function POST(request: Request) {
     }
 
     try {
+      // Pollinations has a real concurrency ceiling — staggering the
+      // variation requests instead of firing them all at once avoids
+      // tripping it in the first place, rather than only retrying after.
+      if (index > 0) {
+        await new Promise((resolve) => setTimeout(resolve, index * 1200));
+      }
+
       const result = await callGenerateWebhook({
         userId: user!.id,
         promptId: prompt!.id,
@@ -214,7 +225,7 @@ export async function POST(request: Request) {
   }
 
   const results = await Promise.all(
-    Array.from({ length: allowedCount }, () => generateOne()),
+    Array.from({ length: allowedCount }, (_, index) => generateOne(index)),
   );
 
   return NextResponse.json({

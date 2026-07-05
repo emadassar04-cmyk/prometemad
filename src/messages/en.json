@@ -9,6 +9,7 @@
     "favorites": "Favorites",
     "showcase": "Showcase",
     "brandKit": "My Brand",
+    "imageToPrompt": "Image to Prompt",
     "admin": "Admin",
     "signIn": "Sign In",
     "signOut": "Sign Out",
@@ -201,5 +202,21 @@
     "dailyLimitReached": "You've reached today's enhance limit (20). Come back tomorrow!",
     "arabicLabel": "Arabic",
     "englishLabel": "Text sent to the model (English)"
+  },
+  "imageToPrompt": {
+    "title": "Image to Prompt",
+    "subtitle": "Upload any image you like and get a ready-to-use prompt in Arabic and English — no one else offers this",
+    "chooseImage": "Choose an image",
+    "analyze": "Extract Prompt",
+    "analyzing": "Analyzing…",
+    "error": "Couldn't analyze the image, please try again",
+    "dailyLimitReached": "You've reached today's limit (15). Come back tomorrow!",
+    "arabicLabel": "Arabic",
+    "englishLabel": "English (sent to the model)",
+    "generateSimilar": "Generate a similar image",
+    "generating": "Generating…",
+    "generateError": "Couldn't generate the image, please try again",
+    "generateDailyLimitReached": "You've reached today's image limit (10). Come back tomorrow!",
+    "signInToUse": "Sign in to use this tool"
   }
 }

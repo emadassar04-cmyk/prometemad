@@ -23,6 +23,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: "daily",
       priority: 0.6,
     });
+    entries.push({
+      url: `${SITE_URL}/${locale}/image-to-prompt`,
+      changeFrequency: "monthly",
+      priority: 0.9,
+    });
     for (const prompt of prompts ?? []) {
       entries.push({
         url: `${SITE_URL}/${locale}/prompt/${prompt.slug}`,

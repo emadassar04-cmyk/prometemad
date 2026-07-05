@@ -51,6 +51,12 @@ export async function SiteHeader() {
           >
             {t("nav.favorites")}
           </Link>
+          <Link
+            href="/image-to-prompt"
+            className="transition-colors hover:text-foreground"
+          >
+            {t("nav.imageToPrompt")}
+          </Link>
           {isAdmin && (
             <Link
               href="/admin"

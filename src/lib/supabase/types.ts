@@ -257,6 +257,24 @@ export type Database = {
           },
         ]
       }
+      image_to_prompt_usage: {
+        Row: {
+          usage_count: number
+          usage_date: string
+          user_id: string
+        }
+        Insert: {
+          usage_count?: number
+          usage_date?: string
+          user_id: string
+        }
+        Update: {
+          usage_count?: number
+          usage_date?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       profiles: {
         Row: {
           avatar_url: string | null
@@ -487,6 +505,10 @@ export type Database = {
         Returns: boolean
       }
       try_increment_enhance_usage: {
+        Args: { p_daily_limit?: number; p_user_id: string }
+        Returns: boolean
+      }
+      try_increment_image_to_prompt_usage: {
         Args: { p_daily_limit?: number; p_user_id: string }
         Returns: boolean
       }

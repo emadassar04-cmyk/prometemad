@@ -77,18 +77,25 @@ export type AdminGeneratedPrompt = {
   }[];
 };
 
-async function callGeminiJson(instructions: string): Promise<unknown> {
+async function callGeminiJson(
+  instructions: string,
+  image?: { base64: string; mimeType: string },
+): Promise<unknown> {
   const apiKey = process.env.GEMINI_API_KEY;
   if (!apiKey) {
     throw new Error("GEMINI_API_KEY is not configured");
   }
+
+  const parts: Record<string, unknown>[] = image
+    ? [{ inlineData: { mimeType: image.mimeType, data: image.base64 } }, { text: instructions }]
+    : [{ text: instructions }];
 
   const response = await fetch(
     `https://generativelanguage.googleapis.com/v1beta/models/${MODEL}:generateContent?key=${apiKey}`,
     {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ contents: [{ parts: [{ text: instructions }] }] }),
+      body: JSON.stringify({ contents: [{ parts }] }),
     },
   );
 
@@ -160,4 +167,29 @@ Idea: """${idea}"""`;
     tags: Array.isArray(parsed.tags) ? parsed.tags : [],
     variables: Array.isArray(parsed.variables) ? parsed.variables : [],
   };
+}
+
+// Image-to-Prompt: reverse-engineers an uploaded photo into a usable ar/en
+// prompt pair, using Gemini's vision input (image + text -> text), the same
+// generateContent endpoint as the text-only calls above, just with an
+// inlineData image part added.
+export async function describeImageAsPrompt(
+  base64: string,
+  mimeType: string,
+): Promise<EnhancedPrompt> {
+  const instructions = `You are a professional AI image-prompt engineer for an Arabic image-generation platform.
+
+Look at the attached image and reverse-engineer it into a prompt pair a user could use to generate a similar image with a text-to-image model:
+- "en": a detailed, professional English prompt describing the subject, composition, lighting, style, and quality descriptors needed to recreate a similar image.
+- "ar": a natural Arabic description of that same prompt, for display to Arabic-speaking users.
+
+Respond with ONLY a raw JSON object like {"en": "...", "ar": "..."} — no markdown, no code fences, no extra text.`;
+
+  const parsed = (await callGeminiJson(instructions, { base64, mimeType })) as Partial<EnhancedPrompt>;
+
+  if (!parsed.en || !parsed.ar) {
+    throw new Error("Gemini response missing en/ar fields");
+  }
+
+  return { en: parsed.en, ar: parsed.ar };
 }

@@ -139,7 +139,13 @@
     "moderationReject": "رفض",
     "content": "المحتوى",
     "campaigns": "الحملات",
-    "newCampaign": "حملة جديدة"
+    "newCampaign": "حملة جديدة",
+    "logs": "السجلات",
+    "logsSucceededToday": "نجحت اليوم",
+    "logsFailedToday": "فشلت اليوم",
+    "logsPendingToday": "قيد التنفيذ اليوم",
+    "logsRecentFailures": "أحدث الأخطاء",
+    "logsEmpty": "لا يوجد أخطاء مسجّلة"
   },
   "common": {
     "loading": "جارٍ التحميل…",

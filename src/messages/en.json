@@ -139,7 +139,13 @@
     "moderationReject": "Reject",
     "content": "Content",
     "campaigns": "Campaigns",
-    "newCampaign": "New campaign"
+    "newCampaign": "New campaign",
+    "logs": "Logs",
+    "logsSucceededToday": "Succeeded today",
+    "logsFailedToday": "Failed today",
+    "logsPendingToday": "Pending today",
+    "logsRecentFailures": "Recent failures",
+    "logsEmpty": "No failures recorded"
   },
   "common": {
     "loading": "Loading…",

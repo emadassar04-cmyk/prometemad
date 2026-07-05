@@ -193,10 +193,13 @@ export async function POST(request: Request) {
       });
 
       return { generationId: generation.id, imageUrl: result.image_url };
-    } catch {
+    } catch (err) {
       await supabase
         .from("generations")
-        .update({ status: "failed" })
+        .update({
+          status: "failed",
+          error: err instanceof Error ? err.message : String(err),
+        })
         .eq("id", generation.id);
 
       return { generationId: generation.id, error: "generation_failed" as const };

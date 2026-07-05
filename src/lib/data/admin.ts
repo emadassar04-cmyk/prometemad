@@ -127,3 +127,39 @@ export async function getAllCampaigns() {
     .order("start_date", { ascending: false });
   return data ?? [];
 }
+
+export async function getRecentFailedGenerations(limit = 50) {
+  const supabase = await createSupabaseServerClient();
+  const { data } = await supabase
+    .from("generations")
+    .select("*, prompts(title_ar, title_en)")
+    .eq("status", "failed")
+    .order("created_at", { ascending: false })
+    .limit(limit);
+  return data ?? [];
+}
+
+export type GenerationVolumeToday = {
+  succeeded: number;
+  failed: number;
+  pending: number;
+};
+
+export async function getGenerationVolumeToday(): Promise<GenerationVolumeToday> {
+  const supabase = await createSupabaseServerClient();
+  const startOfDay = new Date();
+  startOfDay.setUTCHours(0, 0, 0, 0);
+
+  const { data } = await supabase
+    .from("generations")
+    .select("status")
+    .gte("created_at", startOfDay.toISOString());
+
+  const counts: GenerationVolumeToday = { succeeded: 0, failed: 0, pending: 0 };
+  for (const row of data ?? []) {
+    if (row.status === "succeeded") counts.succeeded++;
+    else if (row.status === "failed") counts.failed++;
+    else counts.pending++;
+  }
+  return counts;
+}

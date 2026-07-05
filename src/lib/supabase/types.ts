@@ -195,6 +195,7 @@ export type Database = {
       generations: {
         Row: {
           created_at: string
+          error: string | null
           final_prompt: string
           height: number | null
           id: string
@@ -212,6 +213,7 @@ export type Database = {
         }
         Insert: {
           created_at?: string
+          error?: string | null
           final_prompt: string
           height?: number | null
           id?: string
@@ -229,6 +231,7 @@ export type Database = {
         }
         Update: {
           created_at?: string
+          error?: string | null
           final_prompt?: string
           height?: number | null
           id?: string

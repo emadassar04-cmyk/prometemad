@@ -147,7 +147,17 @@
     "logsFailedToday": "Failed today",
     "logsPendingToday": "Pending today",
     "logsRecentFailures": "Recent failures",
-    "logsEmpty": "No failures recorded"
+    "logsEmpty": "No failures recorded",
+    "newsletter": "Newsletter",
+    "newsletterSubscriberCount": "Subscribers: {count}",
+    "newsletterCompose": "Compose a new message",
+    "newsletterSubjectPlaceholder": "Subject",
+    "newsletterBodyPlaceholder": "Message body",
+    "newsletterSend": "Send to all",
+    "newsletterSending": "Sending...",
+    "newsletterNotConfigured": "Email sending isn't enabled yet — needs an API key (e.g. Resend) before it can actually send.",
+    "newsletterSendError": "Sending failed, try again",
+    "newsletterSendResult": "Sent to {sent} subscribers — failed: {failed}"
   },
   "common": {
     "loading": "Loading…",
@@ -246,5 +256,13 @@
     "copied": "Copied",
     "referralCount": "Friends who joined via your invite: {count}",
     "shareText": "Try Promptly — an Arabic AI image prompt platform"
+  },
+  "newsletter": {
+    "title": "Subscribe to our newsletter",
+    "placeholder": "Your email",
+    "subscribe": "Subscribe",
+    "loading": "Subscribing...",
+    "subscribed": "Subscribed, thank you!",
+    "error": "Something went wrong, try again"
   }
 }

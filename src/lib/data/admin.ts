@@ -128,6 +128,16 @@ export async function getAllCampaigns() {
   return data ?? [];
 }
 
+export async function getSubscribers() {
+  const supabase = await createSupabaseServerClient();
+  const { data } = await supabase
+    .from("subscribers")
+    .select("*")
+    .is("unsubscribed_at", null)
+    .order("subscribed_at", { ascending: false });
+  return data ?? [];
+}
+
 export async function getRecentFailedGenerations(limit = 50) {
   const supabase = await createSupabaseServerClient();
   const { data } = await supabase

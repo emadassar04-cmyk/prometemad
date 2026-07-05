@@ -147,7 +147,17 @@
     "logsFailedToday": "فشلت اليوم",
     "logsPendingToday": "قيد التنفيذ اليوم",
     "logsRecentFailures": "أحدث الأخطاء",
-    "logsEmpty": "لا يوجد أخطاء مسجّلة"
+    "logsEmpty": "لا يوجد أخطاء مسجّلة",
+    "newsletter": "النشرة البريدية",
+    "newsletterSubscriberCount": "عدد المشتركين: {count}",
+    "newsletterCompose": "إنشاء رسالة جديدة",
+    "newsletterSubjectPlaceholder": "عنوان الرسالة",
+    "newsletterBodyPlaceholder": "نص الرسالة",
+    "newsletterSend": "إرسال للجميع",
+    "newsletterSending": "جارٍ الإرسال...",
+    "newsletterNotConfigured": "خدمة الإرسال مش متفعّلة لسه — محتاجين مفتاح API (مثل Resend) قبل ما يشتغل الإرسال الفعلي.",
+    "newsletterSendError": "فشل الإرسال، حاول تاني",
+    "newsletterSendResult": "اتبعت لـ {sent} مشترك — فشل: {failed}"
   },
   "common": {
     "loading": "جارٍ التحميل…",
@@ -246,5 +256,13 @@
     "copied": "تم النسخ",
     "referralCount": "عدد اللي دخلوا بدعوتك: {count}",
     "shareText": "جرّب برومبتلي — منصة توليد صور بالذكاء الاصطناعي بالعربي"
+  },
+  "newsletter": {
+    "title": "اشترك في النشرة البريدية",
+    "placeholder": "بريدك الإلكتروني",
+    "subscribe": "اشتراك",
+    "loading": "جارٍ الاشتراك...",
+    "subscribed": "تم الاشتراك، شكرًا لك!",
+    "error": "حصل خطأ، حاول تاني"
   }
 }

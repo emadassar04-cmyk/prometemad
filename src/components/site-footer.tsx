@@ -1,6 +1,7 @@
 import { getLocale, getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { getCategories } from "@/lib/data/prompts";
+import { NewsletterForm } from "@/components/newsletter-form";
 
 export async function SiteFooter() {
   const t = await getTranslations();
@@ -56,6 +57,13 @@ export async function SiteFooter() {
               🍌 Nano Banana
             </Link>
           </nav>
+        </div>
+
+        <div className="mt-6 flex flex-col items-center gap-2 border-t border-border pt-6 sm:items-start">
+          <span className="text-xs font-semibold text-muted">
+            {t("newsletter.title")}
+          </span>
+          <NewsletterForm />
         </div>
 
         {categories.length > 0 && (

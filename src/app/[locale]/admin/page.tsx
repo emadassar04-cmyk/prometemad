@@ -23,6 +23,18 @@ export default async function AdminDashboardPage({
         <h1 className="text-2xl font-bold">{t("title")}</h1>
         <div className="flex flex-wrap gap-3">
           <Link
+            href="/admin/content"
+            className="rounded-full border border-border px-4 py-2 text-sm font-medium hover:border-accent"
+          >
+            {t("content")}
+          </Link>
+          <Link
+            href="/admin/campaigns"
+            className="rounded-full border border-border px-4 py-2 text-sm font-medium hover:border-accent"
+          >
+            {t("campaigns")}
+          </Link>
+          <Link
             href="/admin/moderation"
             className="rounded-full border border-border px-4 py-2 text-sm font-medium hover:border-accent"
           >

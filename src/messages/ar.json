@@ -136,7 +136,10 @@
     "moderation": "الإشراف",
     "moderationEmpty": "لا يوجد شيء بانتظار المراجعة",
     "moderationApprove": "موافقة",
-    "moderationReject": "رفض"
+    "moderationReject": "رفض",
+    "content": "المحتوى",
+    "campaigns": "الحملات",
+    "newCampaign": "حملة جديدة"
   },
   "common": {
     "loading": "جارٍ التحميل…",

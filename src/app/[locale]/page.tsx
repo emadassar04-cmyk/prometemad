@@ -6,7 +6,9 @@ import {
   getPrompts,
 } from "@/lib/data/prompts";
 import { getTotalGenerationCount } from "@/lib/data/showcase";
+import { getSiteSettings, pickSiteSetting, getActiveCampaigns } from "@/lib/data/site-settings";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
+import { Link } from "@/i18n/navigation";
 import { PromptCard } from "@/components/prompt-card";
 import { LibraryFilters } from "@/components/library-filters";
 import { CategoryGrid } from "@/components/category-grid";
@@ -37,12 +39,16 @@ export default async function HomePage({
     categoriesWithCounts,
     { styles, models },
     totalGenerations,
+    siteSettings,
+    activeCampaigns,
   ] = await Promise.all([
     getPrompts(filters),
     getCategories(),
     getCategoriesWithCounts(),
     getDistinctStylesAndModels(),
     getTotalGenerationCount(),
+    getSiteSettings(),
+    getActiveCampaigns(),
   ]);
 
   let favoritedIds = new Set<string>();
@@ -63,14 +69,34 @@ export default async function HomePage({
           <span />
         </div>
         <span className="mx-auto mb-5 inline-flex items-center rounded-full border border-border bg-surface/60 px-4 py-1.5 text-xs text-muted backdrop-blur">
-          {t("badge")}
+          {pickSiteSetting(siteSettings, "hero_badge", locale, t("badge"))}
         </span>
         <h1 className="mx-auto max-w-3xl text-3xl font-bold leading-tight sm:text-4xl">
           <span className="accent-gradient-text">{brand("name")}</span>
           {" — "}
-          {t("heroTitle")}
+          {pickSiteSetting(siteSettings, "hero_title", locale, t("heroTitle"))}
         </h1>
-        <p className="mx-auto mt-4 max-w-2xl text-muted">{t("heroSubtitle")}</p>
+        <p className="mx-auto mt-4 max-w-2xl text-muted">
+          {pickSiteSetting(siteSettings, "hero_subtitle", locale, t("heroSubtitle"))}
+        </p>
+
+        {activeCampaigns.length > 0 && (
+          <div className="mx-auto mt-6 flex max-w-2xl flex-col gap-2">
+            {activeCampaigns.map((campaign) => (
+              <Link
+                key={campaign.id}
+                href={
+                  campaign.categories
+                    ? `/?category=${campaign.categories.slug}`
+                    : "/"
+                }
+                className="accent-gradient-bg rounded-full px-5 py-2 text-sm font-medium text-white"
+              >
+                🎉 {locale === "ar" ? campaign.name_ar : campaign.name_en}
+              </Link>
+            ))}
+          </div>
+        )}
 
         <div className="mx-auto mt-8 flex max-w-xl flex-wrap items-center justify-center gap-x-8 gap-y-3 text-sm">
           <span>

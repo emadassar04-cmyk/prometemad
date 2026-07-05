@@ -136,7 +136,10 @@
     "moderation": "Moderation",
     "moderationEmpty": "Nothing pending review",
     "moderationApprove": "Approve",
-    "moderationReject": "Reject"
+    "moderationReject": "Reject",
+    "content": "Content",
+    "campaigns": "Campaigns",
+    "newCampaign": "New campaign"
   },
   "common": {
     "loading": "Loading…",

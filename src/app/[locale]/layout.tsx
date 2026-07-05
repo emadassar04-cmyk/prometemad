@@ -7,6 +7,7 @@ import { routing } from "@/i18n/routing";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { GuestFavoritesSync } from "@/components/guest-favorites-sync";
+import { getSiteSettings, pickSiteSetting } from "@/lib/data/site-settings";
 import "../globals.css";
 
 const ibmPlexSansArabic = IBM_Plex_Sans_Arabic({
@@ -33,9 +34,10 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "brand" });
+  const siteSettings = await getSiteSettings();
   return {
-    title: t("name"),
-    description: t("tagline"),
+    title: pickSiteSetting(siteSettings, "seo_title", locale, t("name")),
+    description: pickSiteSetting(siteSettings, "seo_description", locale, t("tagline")),
   };
 }
 

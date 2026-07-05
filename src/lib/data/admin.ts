@@ -118,3 +118,12 @@ export async function getPendingModerationGenerations() {
     .order("created_at", { ascending: true });
   return data ?? [];
 }
+
+export async function getAllCampaigns() {
+  const supabase = await createSupabaseServerClient();
+  const { data } = await supabase
+    .from("campaigns")
+    .select("*, categories(slug, name_ar, name_en)")
+    .order("start_date", { ascending: false });
+  return data ?? [];
+}

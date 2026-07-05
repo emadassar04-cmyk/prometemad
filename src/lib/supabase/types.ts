@@ -44,6 +44,44 @@ export type Database = {
         }
         Relationships: []
       }
+      campaigns: {
+        Row: {
+          category_id: string | null
+          created_at: string
+          end_date: string
+          id: string
+          name_ar: string
+          name_en: string
+          start_date: string
+        }
+        Insert: {
+          category_id?: string | null
+          created_at?: string
+          end_date: string
+          id?: string
+          name_ar: string
+          name_en: string
+          start_date: string
+        }
+        Update: {
+          category_id?: string | null
+          created_at?: string
+          end_date?: string
+          id?: string
+          name_ar?: string
+          name_en?: string
+          start_date?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "campaigns_category_id_fkey"
+            columns: ["category_id"]
+            isOneToOne: false
+            referencedRelation: "categories"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       categories: {
         Row: {
           icon: string | null
@@ -379,6 +417,27 @@ export type Database = {
           request_count?: number
           user_id?: string
           window_start?: string
+        }
+        Relationships: []
+      }
+      site_settings: {
+        Row: {
+          key: string
+          updated_at: string
+          value_ar: string | null
+          value_en: string | null
+        }
+        Insert: {
+          key: string
+          updated_at?: string
+          value_ar?: string | null
+          value_en?: string | null
+        }
+        Update: {
+          key?: string
+          updated_at?: string
+          value_ar?: string | null
+          value_en?: string | null
         }
         Relationships: []
       }

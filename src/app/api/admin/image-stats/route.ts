@@ -39,6 +39,11 @@ export async function GET(request: Request) {
     );
   }
   const buffer = Buffer.from(await response.arrayBuffer());
+  const first16Hex = buffer.subarray(0, 16).toString("hex");
+  const last16Hex = buffer.subarray(-16).toString("hex");
+  const responseContentType = response.headers.get("content-type");
+  const responseContentEncoding = response.headers.get("content-encoding");
+  const responseContentLength = response.headers.get("content-length");
 
   try {
     const image = sharp(buffer);
@@ -49,6 +54,11 @@ export async function GET(request: Request) {
       width: metadata.width,
       height: metadata.height,
       format: metadata.format,
+      first16Hex,
+      last16Hex,
+      responseContentType,
+      responseContentEncoding,
+      responseContentLength,
       channels: stats.channels.map((c) => ({
         mean: c.mean,
         min: c.min,
@@ -58,7 +68,16 @@ export async function GET(request: Request) {
     });
   } catch (err) {
     return NextResponse.json(
-      { error: "stats_failed", detail: err instanceof Error ? err.message : String(err) },
+      {
+        error: "stats_failed",
+        detail: err instanceof Error ? err.message : String(err),
+        byteLength: buffer.length,
+        first16Hex,
+        last16Hex,
+        responseContentType,
+        responseContentEncoding,
+        responseContentLength,
+      },
       { status: 500 },
     );
   }

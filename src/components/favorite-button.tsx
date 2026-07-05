@@ -2,8 +2,9 @@
 
 import { useState, useTransition } from "react";
 import { Heart } from "lucide-react";
-import { useTranslations, useLocale } from "next-intl";
+import { useTranslations } from "next-intl";
 import { createSupabaseBrowserClient } from "@/lib/supabase/client";
+import { getGuestFavorites, setGuestFavorites } from "@/lib/guest-favorites";
 import { cn } from "@/lib/utils";
 
 export function FavoriteButton({
@@ -16,14 +17,20 @@ export function FavoriteButton({
   isSignedIn: boolean;
 }) {
   const t = useTranslations("prompt");
-  const locale = useLocale();
   const supabase = createSupabaseBrowserClient();
-  const [favorited, setFavorited] = useState(initialFavorited);
+  const [favorited, setFavorited] = useState(() =>
+    isSignedIn ? initialFavorited : getGuestFavorites().includes(promptId),
+  );
   const [pending, startTransition] = useTransition();
 
-  async function toggle() {
+  function toggle() {
     if (!isSignedIn) {
-      window.location.href = `/${locale}/sign-in`;
+      const current = getGuestFavorites();
+      const next = favorited
+        ? current.filter((id) => id !== promptId)
+        : [...current, promptId];
+      setGuestFavorites(next);
+      setFavorited(!favorited);
       return;
     }
 

@@ -6,6 +6,7 @@ import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
+import { GuestFavoritesSync } from "@/components/guest-favorites-sync";
 import "../globals.css";
 
 const ibmPlexSansArabic = IBM_Plex_Sans_Arabic({
@@ -57,6 +58,7 @@ export default async function LocaleLayout({
     <html lang={locale} dir={dir} className={`${ibmPlexSansArabic.variable} ${inter.variable}`}>
       <body className="flex min-h-screen flex-col antialiased">
         <NextIntlClientProvider>
+          <GuestFavoritesSync />
           <SiteHeader />
           <main className="flex-1">{children}</main>
           <SiteFooter />

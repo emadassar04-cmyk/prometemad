@@ -1,8 +1,8 @@
 import { getTranslations, setRequestLocale } from "next-intl/server";
-import { redirect } from "@/i18n/navigation";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 import { getUserFavoritePrompts } from "@/lib/data/user";
 import { PromptCard } from "@/components/prompt-card";
+import { GuestFavoritesList } from "@/components/guest-favorites-list";
 
 export default async function FavoritesPage({
   params,
@@ -17,10 +17,18 @@ export default async function FavoritesPage({
     data: { user },
   } = await supabase.auth.getUser();
 
-  if (!user) redirect({ href: "/sign-in", locale });
-
-  const prompts = await getUserFavoritePrompts(user!.id);
   const t = await getTranslations("favorites");
+
+  if (!user) {
+    return (
+      <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6">
+        <h1 className="mb-6 text-2xl font-bold">{t("title")}</h1>
+        <GuestFavoritesList />
+      </div>
+    );
+  }
+
+  const prompts = await getUserFavoritePrompts(user.id);
 
   return (
     <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6">

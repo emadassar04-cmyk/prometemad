@@ -1,8 +1,52 @@
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { setRequestLocale } from "next-intl/server";
 import { getPromptBySlug } from "@/lib/data/prompts";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 import { PromptWorkspace } from "@/components/prompt-workspace";
+import { SITE_URL } from "@/lib/site-url";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string; slug: string }>;
+}): Promise<Metadata> {
+  const { locale, slug } = await params;
+  const prompt = await getPromptBySlug(slug);
+  if (!prompt) return {};
+
+  const title = locale === "ar" ? prompt.title_ar : prompt.title_en;
+  const description =
+    (locale === "ar" ? prompt.description_ar : prompt.description_en) ??
+    undefined;
+  const url = `${SITE_URL}/${locale}/prompt/${slug}`;
+  const images = prompt.preview_image_url ? [prompt.preview_image_url] : [];
+
+  return {
+    title,
+    description,
+    alternates: {
+      canonical: url,
+      languages: {
+        ar: `${SITE_URL}/ar/prompt/${slug}`,
+        en: `${SITE_URL}/en/prompt/${slug}`,
+      },
+    },
+    openGraph: {
+      title,
+      description,
+      url,
+      images,
+      type: "article",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images,
+    },
+  };
+}
 
 export default async function PromptDetailPage({
   params,
@@ -31,11 +75,29 @@ export default async function PromptDetailPage({
     isFavorited = !!data;
   }
 
+  const title = locale === "ar" ? prompt.title_ar : prompt.title_en;
+  const description = locale === "ar" ? prompt.description_ar : prompt.description_en;
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "CreativeWork",
+    name: title,
+    description: description ?? undefined,
+    image: prompt.preview_image_url ?? undefined,
+    url: `${SITE_URL}/${locale}/prompt/${slug}`,
+    inLanguage: locale,
+  };
+
   return (
-    <PromptWorkspace
-      prompt={prompt}
-      isFavorited={isFavorited}
-      isSignedIn={!!user}
-    />
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <PromptWorkspace
+        prompt={prompt}
+        isFavorited={isFavorited}
+        isSignedIn={!!user}
+      />
+    </>
   );
 }

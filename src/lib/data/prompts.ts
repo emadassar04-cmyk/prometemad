@@ -1,3 +1,4 @@
+import { cache } from "react";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 
 export type PromptListFilters = {
@@ -113,7 +114,7 @@ export async function getPrompts(filters: PromptListFilters = {}) {
   });
 }
 
-export async function getPromptBySlug(slug: string) {
+export const getPromptBySlug = cache(async (slug: string) => {
   const supabase = await createSupabaseServerClient();
   const { data, error } = await supabase
     .from("prompts")
@@ -124,7 +125,7 @@ export async function getPromptBySlug(slug: string) {
 
   if (error) return null;
   return data;
-}
+});
 
 export async function getDistinctStylesAndModels() {
   const supabase = await createSupabaseServerClient();

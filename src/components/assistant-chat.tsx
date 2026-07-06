@@ -201,15 +201,15 @@ export function AssistantChat({
             className={cn(
               "max-w-[85%] rounded-2xl px-3.5 py-2 text-sm leading-relaxed",
               m.role === "user"
-                ? "self-end bg-accent text-white"
-                : "self-start bg-surface-elevated text-foreground",
+                ? "self-start bg-accent text-white"
+                : "self-end bg-surface-elevated text-foreground",
             )}
           >
             {m.content}
           </div>
         ))}
         {loading && (
-          <div className="flex items-center gap-2 self-start rounded-2xl bg-surface-elevated px-3.5 py-2 text-sm text-muted">
+          <div className="flex items-center gap-2 self-end rounded-2xl bg-surface-elevated px-3.5 py-2 text-sm text-muted">
             <Loader2 className="h-3.5 w-3.5 animate-spin" />
             {t("thinking")}
           </div>

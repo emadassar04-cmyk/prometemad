@@ -21,7 +21,13 @@ export default async function HomePage({
   searchParams,
 }: {
   params: Promise<{ locale: string }>;
-  searchParams: Promise<{ q?: string; category?: string; style?: string; model?: string }>;
+  searchParams: Promise<{
+    q?: string;
+    category?: string;
+    style?: string;
+    model?: string;
+    idea?: string;
+  }>;
 }) {
   const { locale } = await params;
   setRequestLocale(locale);
@@ -146,7 +152,7 @@ export default async function HomePage({
       )}
 
       <section id="enhancer" className="mb-10">
-        <PromptEnhancer isSignedIn={!!user} locale={locale} />
+        <PromptEnhancer isSignedIn={!!user} locale={locale} initialIdea={filters.idea} />
       </section>
 
       <section className="mb-10">

@@ -7,12 +7,14 @@ import { Check, Copy, ExternalLink, Loader2, Sparkles } from "lucide-react";
 export function PromptEnhancer({
   isSignedIn,
   locale,
+  initialIdea,
 }: {
   isSignedIn: boolean;
   locale: string;
+  initialIdea?: string;
 }) {
   const t = useTranslations("enhancer");
-  const [idea, setIdea] = useState("");
+  const [idea, setIdea] = useState(initialIdea ?? "");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [result, setResult] = useState<{ ar: string; en: string } | null>(null);

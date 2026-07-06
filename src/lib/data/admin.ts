@@ -149,6 +149,51 @@ export async function getRecentFailedGenerations(limit = 50) {
   return data ?? [];
 }
 
+export type AssistantStats = {
+  total_conversations: number;
+  conversions: number;
+  conversion_rate: number;
+  top_recommended: { slug: string; title_ar: string; title_en: string; count: number }[];
+};
+
+// assistant_sessions has an "admin reads all sessions" RLS policy (unlike
+// generations, which needs a security-definer RPC), so a plain select works
+// here — aggregation happens in JS since the dataset is small, same pattern
+// as getCategoriesWithCounts.
+export async function getAssistantStats(): Promise<AssistantStats> {
+  const supabase = await createSupabaseServerClient();
+  const { data: sessions } = await supabase
+    .from("assistant_sessions")
+    .select("recommended_slug, led_to_generation");
+
+  const rows = sessions ?? [];
+  const total_conversations = rows.length;
+  const conversions = rows.filter((r) => r.led_to_generation).length;
+  const conversion_rate = total_conversations > 0 ? conversions / total_conversations : 0;
+
+  const slugCounts = new Map<string, number>();
+  for (const row of rows) {
+    if (!row.recommended_slug) continue;
+    slugCounts.set(row.recommended_slug, (slugCounts.get(row.recommended_slug) ?? 0) + 1);
+  }
+
+  const topSlugs = [...slugCounts.entries()].sort((a, b) => b[1] - a[1]).slice(0, 5);
+  const { data: prompts } = await supabase
+    .from("prompts")
+    .select("slug, title_ar, title_en")
+    .in("slug", topSlugs.map(([slug]) => slug));
+
+  const promptsBySlug = new Map((prompts ?? []).map((p) => [p.slug, p]));
+  const top_recommended = topSlugs.map(([slug, count]) => ({
+    slug,
+    title_ar: promptsBySlug.get(slug)?.title_ar ?? slug,
+    title_en: promptsBySlug.get(slug)?.title_en ?? slug,
+    count,
+  }));
+
+  return { total_conversations, conversions, conversion_rate, top_recommended };
+}
+
 export type GenerationVolumeToday = {
   succeeded: number;
   failed: number;

@@ -69,6 +69,8 @@ export default async function PromptDetailPage({
     if (!key.startsWith("var_") || typeof value !== "string") continue;
     prefillValues[key.slice("var_".length)] = value;
   }
+  const assistantSessionRaw = resolvedSearchParams.assistant_session;
+  const assistantSessionId = typeof assistantSessionRaw === "string" ? assistantSessionRaw : null;
 
   const prompt = await getPromptBySlug(slug);
   if (!prompt) notFound();
@@ -129,6 +131,7 @@ export default async function PromptDetailPage({
         ratingCount={ratingSummary.count}
         userRating={userRating}
         prefillValues={prefillValues}
+        assistantSessionId={assistantSessionId}
       />
     </>
   );

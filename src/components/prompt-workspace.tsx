@@ -58,6 +58,7 @@ export function PromptWorkspace({
   ratingCount,
   userRating,
   prefillValues,
+  assistantSessionId,
 }: {
   prompt: PromptRow;
   isFavorited: boolean;
@@ -68,6 +69,7 @@ export function PromptWorkspace({
   ratingCount?: number;
   userRating?: number | null;
   prefillValues?: Record<string, string>;
+  assistantSessionId?: string | null;
 }) {
   const t = useTranslations("prompt");
   const locale = useLocale() as "ar" | "en";
@@ -157,6 +159,7 @@ export function PromptWorkspace({
           height,
           model,
           variations,
+          assistantSessionId: assistantSessionId ?? undefined,
         }),
       });
       const data = await response.json();

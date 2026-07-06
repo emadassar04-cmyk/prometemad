@@ -78,6 +78,8 @@ export async function POST(request: Request) {
   const body = await request.json().catch(() => null);
   const promptId = body?.promptId;
   const rawVariables = body?.variables ?? {};
+  const assistantSessionId =
+    typeof body?.assistantSessionId === "string" ? body.assistantSessionId : null;
 
   if (typeof promptId !== "string") {
     return NextResponse.json({ error: "invalid_request" }, { status: 400 });
@@ -230,6 +232,16 @@ export async function POST(request: Request) {
   const results = await Promise.all(
     Array.from({ length: allowedCount }, (_, index) => generateOne(index)),
   );
+
+  // Best-effort conversion signal for the assistant feature — only fires
+  // when a real generation actually succeeded, not just a click-through.
+  if (assistantSessionId && results.some((r) => "imageUrl" in r)) {
+    await supabase
+      .from("assistant_sessions")
+      .update({ led_to_generation: true })
+      .eq("id", assistantSessionId)
+      .eq("user_id", user.id);
+  }
 
   return NextResponse.json({
     results,

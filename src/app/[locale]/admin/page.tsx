@@ -1,7 +1,7 @@
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { ImageIcon, Sparkles, Users } from "lucide-react";
 import { Link } from "@/i18n/navigation";
-import { requireAdmin, getAdminStats } from "@/lib/data/admin";
+import { requireAdmin, getAdminStats, getAssistantStats } from "@/lib/data/admin";
 import { DailyGenerationsChart } from "@/components/admin/daily-generations-chart";
 
 export default async function AdminDashboardPage({
@@ -14,6 +14,7 @@ export default async function AdminDashboardPage({
   await requireAdmin(locale);
 
   const stats = await getAdminStats();
+  const assistantStats = await getAssistantStats();
   const t = await getTranslations("admin");
   const isAr = locale === "ar";
 
@@ -124,6 +125,42 @@ export default async function AdminDashboardPage({
               </li>
             ))}
           </ol>
+        </div>
+
+        <div className="rounded-2xl border border-border bg-surface p-6 sm:col-span-2">
+          <h2 className="mb-3 text-sm font-semibold text-muted">المساعد الذكي</h2>
+          <div className="mb-4 grid grid-cols-1 gap-4 sm:grid-cols-3">
+            <div>
+              <p className="text-xs text-muted">عدد المحادثات</p>
+              <p className="mt-1 text-2xl font-bold">{assistantStats.total_conversations}</p>
+            </div>
+            <div>
+              <p className="text-xs text-muted">محادثات أدّت لتوليد صورة</p>
+              <p className="mt-1 text-2xl font-bold">{assistantStats.conversions}</p>
+            </div>
+            <div>
+              <p className="text-xs text-muted">نسبة التحويل</p>
+              <p className="mt-1 text-2xl font-bold">
+                {(assistantStats.conversion_rate * 100).toFixed(0)}%
+              </p>
+            </div>
+          </div>
+          {assistantStats.top_recommended.length > 0 && (
+            <>
+              <p className="mb-2 text-xs font-semibold text-muted">أكثر البرومبتات ترشيحًا</p>
+              <ol className="flex flex-col gap-2 text-sm">
+                {assistantStats.top_recommended.map((p, i) => (
+                  <li key={p.slug} className="flex items-center justify-between">
+                    <span>
+                      <span className="text-muted">{i + 1}.</span>{" "}
+                      {isAr ? p.title_ar : p.title_en}
+                    </span>
+                    <span className="font-semibold">{p.count}</span>
+                  </li>
+                ))}
+              </ol>
+            </>
+          )}
         </div>
       </div>
     </div>

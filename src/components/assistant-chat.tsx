@@ -127,6 +127,7 @@ export function AssistantChat({
     for (const [key, value] of Object.entries(rec.variables ?? {})) {
       if (value) params.set(`var_${key}`, value);
     }
+    if (sessionId) params.set("assistant_session", sessionId);
     const qs = params.toString();
     window.location.href = `/${locale}/prompt/${rec.slug}${qs ? `?${qs}` : ""}`;
   }
@@ -257,7 +258,11 @@ export function AssistantChat({
 
       {fallbackAction === "enhancer" && (
         <a
-          href={`/${locale}#enhancer`}
+          href={(() => {
+            const idea = messages.find((m) => m.role === "user")?.content ?? "";
+            const qs = idea ? `?idea=${encodeURIComponent(idea)}` : "";
+            return `/${locale}${qs}#enhancer`;
+          })()}
           className="flex w-fit items-center gap-1.5 rounded-full border border-border px-4 py-2 text-xs font-medium transition-colors hover:border-accent"
         >
           <Sparkles className="h-3.5 w-3.5 text-accent" />

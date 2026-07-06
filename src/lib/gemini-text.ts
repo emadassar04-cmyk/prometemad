@@ -77,7 +77,7 @@ export type AdminGeneratedPrompt = {
   }[];
 };
 
-async function callGeminiJson(
+export async function callGeminiJson(
   instructions: string,
   image?: { base64: string; mimeType: string },
 ): Promise<unknown> {
@@ -192,4 +192,73 @@ Respond with ONLY a raw JSON object like {"en": "...", "ar": "..."} — no markd
   }
 
   return { en: parsed.en, ar: parsed.ar };
+}
+
+export type AssistantMessage = { role: "user" | "assistant"; content: string };
+
+export type AssistantPromptIndexEntry = {
+  slug: string;
+  title_ar: string;
+  description_ar: string | null;
+  category: string | null;
+  variables: { key: string; label_ar: string }[];
+};
+
+export type AssistantReply = {
+  type: "question" | "recommendation" | "fallback";
+  message_ar: string;
+  quick_replies: string[];
+  recommendation: {
+    slug: string;
+    title_ar: string;
+    category: string | null;
+    variables: Record<string, string>;
+  } | null;
+  fallback_action: "enhancer" | null;
+};
+
+// Conversational recommendation engine for the "assistant" feature — picks
+// an existing published prompt (by slug) from the index it's given, rather
+// than inventing one. Callers MUST re-verify the returned slug against the
+// database before trusting it; this only guards against malformed JSON.
+export async function getAssistantReply(
+  systemPrompt: string,
+  promptsIndex: AssistantPromptIndexEntry[],
+  history: AssistantMessage[],
+): Promise<AssistantReply> {
+  const historyText = history
+    .map((m) => `${m.role === "user" ? "المستخدم" : "المساعد"}: ${m.content}`)
+    .join("\n");
+
+  const instructions = `${systemPrompt}
+
+القائمة (JSON، البرومبتات المنشورة المتاحة فقط — اختر slug من هنا حصريًا، ممنوع اختراع slug غير موجود):
+${JSON.stringify(promptsIndex)}
+
+المحادثة حتى الآن:
+${historyText}
+
+أرجع JSON فقط بالضبط بهذا الشكل، بدون أي نص إضافي أو markdown:
+{
+  "type": "question" | "recommendation" | "fallback",
+  "message_ar": "نص ودّي بالعربي",
+  "quick_replies": ["رد سريع 1", "رد سريع 2"],
+  "recommendation": { "slug": "...", "title_ar": "...", "category": "...", "variables": { "مفتاح": "قيمة" } },
+  "fallback_action": "enhancer"
+}
+لو type مش "recommendation"، خلي "recommendation" = null. لو type مش "fallback"، خلي "fallback_action" = null.`;
+
+  const parsed = (await callGeminiJson(instructions)) as Partial<AssistantReply>;
+
+  if (!parsed.type || !parsed.message_ar) {
+    throw new Error("Gemini response missing required fields");
+  }
+
+  return {
+    type: parsed.type,
+    message_ar: parsed.message_ar,
+    quick_replies: Array.isArray(parsed.quick_replies) ? parsed.quick_replies : [],
+    recommendation: parsed.recommendation ?? null,
+    fallback_action: parsed.fallback_action ?? null,
+  };
 }

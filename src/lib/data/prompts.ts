@@ -1,5 +1,6 @@
 import { cache } from "react";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
+import { parsePromptVariables } from "@/lib/prompt-variables";
 
 export type PromptListFilters = {
   q?: string;
@@ -124,6 +125,32 @@ export async function getPromptsByTag(tag: string) {
     .order("is_featured", { ascending: false })
     .order("created_at", { ascending: false });
   return data ?? [];
+}
+
+export type PromptIndexEntry = {
+  slug: string;
+  title_ar: string;
+  description_ar: string | null;
+  category: string | null;
+  variables: ReturnType<typeof parsePromptVariables>;
+};
+
+// Compact per-prompt shape sent to the assistant's LLM call — just enough
+// for it to pick a slug and fill variables, not the full row.
+export async function getPublishedPromptsIndex(): Promise<PromptIndexEntry[]> {
+  const supabase = await createSupabaseServerClient();
+  const { data } = await supabase
+    .from("prompts")
+    .select("slug, title_ar, description_ar, variables, categories(name_ar)")
+    .eq("status", "published");
+
+  return (data ?? []).map((row) => ({
+    slug: row.slug,
+    title_ar: row.title_ar,
+    description_ar: row.description_ar,
+    category: row.categories?.name_ar ?? null,
+    variables: parsePromptVariables(row.variables),
+  }));
 }
 
 export const getPromptBySlug = cache(async (slug: string) => {

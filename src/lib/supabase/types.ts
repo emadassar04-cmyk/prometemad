@@ -14,6 +14,67 @@ export type Database = {
   }
   public: {
     Tables: {
+      assistant_sessions: {
+        Row: {
+          created_at: string
+          id: string
+          led_to_generation: boolean
+          messages: Json
+          recommended_slug: string | null
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          led_to_generation?: boolean
+          messages?: Json
+          recommended_slug?: string | null
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          led_to_generation?: boolean
+          messages?: Json
+          recommended_slug?: string | null
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "assistant_sessions_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      assistant_usage: {
+        Row: {
+          usage_count: number
+          usage_date: string
+          user_id: string
+        }
+        Insert: {
+          usage_count?: number
+          usage_date?: string
+          user_id: string
+        }
+        Update: {
+          usage_count?: number
+          usage_date?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "assistant_usage_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       brand_kits: {
         Row: {
           business_name: string | null
@@ -191,6 +252,24 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
+      }
+      feature_settings: {
+        Row: {
+          config: Json
+          key: string
+          updated_at: string
+        }
+        Insert: {
+          config?: Json
+          key: string
+          updated_at?: string
+        }
+        Update: {
+          config?: Json
+          key?: string
+          updated_at?: string
+        }
+        Relationships: []
       }
       generations: {
         Row: {
@@ -565,6 +644,10 @@ export type Database = {
       }
       redeem_referral: {
         Args: { p_referral_code: string }
+        Returns: boolean
+      }
+      try_increment_assistant_usage: {
+        Args: { p_daily_limit?: number; p_user_id: string }
         Returns: boolean
       }
       try_increment_daily_usage: {

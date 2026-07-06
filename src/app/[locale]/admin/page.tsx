@@ -128,7 +128,15 @@ export default async function AdminDashboardPage({
         </div>
 
         <div className="rounded-2xl border border-border bg-surface p-6 sm:col-span-2">
-          <h2 className="mb-3 text-sm font-semibold text-muted">المساعد الذكي</h2>
+          <div className="mb-3 flex items-center justify-between">
+            <h2 className="text-sm font-semibold text-muted">المساعد الذكي</h2>
+            <Link
+              href="/admin/features/assistant"
+              className="text-xs text-accent-2 hover:text-accent"
+            >
+              إعدادات المساعد
+            </Link>
+          </div>
           <div className="mb-4 grid grid-cols-1 gap-4 sm:grid-cols-3">
             <div>
               <p className="text-xs text-muted">عدد المحادثات</p>

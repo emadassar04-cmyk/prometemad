@@ -142,190 +142,184 @@ export function AssistantChat({
     window.localStorage.removeItem(STORAGE_KEY);
   }
 
-  if (!open) {
-    return (
-      <button
-        type="button"
-        onClick={() => setOpen(true)}
-        className="flex w-full items-center justify-between gap-3 rounded-2xl border border-border bg-surface px-5 py-4 text-start transition-colors hover:border-accent"
-      >
-        <span className="flex items-center gap-2 text-sm font-medium">
-          <Sparkles className="h-4 w-4 text-accent" />
-          {t("entryTitle")}
-        </span>
-        <span className="flex items-center gap-1.5 rounded-full bg-accent/10 px-3 py-1.5 text-xs text-accent-2">
-          <MessageCircle className="h-3.5 w-3.5" />
-          {t("entryCta")}
-        </span>
-      </button>
-    );
-  }
-
   return (
-    <div className="flex flex-col gap-3 rounded-2xl border border-border bg-surface p-4 sm:p-5">
-      <div className="flex items-center justify-between">
-        <h2 className="flex items-center gap-2 text-sm font-semibold">
-          <Sparkles className="h-4 w-4 text-accent" />
-          {t("title")}
-        </h2>
-        <div className="flex items-center gap-3">
-          {messages.length > 0 && (
-            <button
-              type="button"
-              onClick={resetConversation}
-              className="text-xs text-muted hover:text-accent-2"
-            >
-              {t("newConversation")}
-            </button>
-          )}
-          <button
-            type="button"
-            onClick={() => setOpen(false)}
-            className="flex h-7 w-7 items-center justify-center rounded-full text-muted hover:bg-background hover:text-foreground"
-            aria-label={t("close")}
-          >
-            <X className="h-4 w-4" />
-          </button>
-        </div>
-      </div>
+    <div className="fixed bottom-4 end-4 z-50 flex flex-col items-end gap-3">
+      {open && (
+        <div className="flex max-h-[75vh] w-[360px] max-w-[calc(100vw-2rem)] flex-col gap-3 rounded-2xl border border-border bg-surface p-4 shadow-2xl sm:p-5">
+          <div className="flex items-center justify-between">
+            <h2 className="flex items-center gap-2 text-sm font-semibold">
+              <Sparkles className="h-4 w-4 text-accent" />
+              {t("title")}
+            </h2>
+            <div className="flex items-center gap-3">
+              {messages.length > 0 && (
+                <button
+                  type="button"
+                  onClick={resetConversation}
+                  className="text-xs text-muted hover:text-accent-2"
+                >
+                  {t("newConversation")}
+                </button>
+              )}
+              <button
+                type="button"
+                onClick={() => setOpen(false)}
+                className="flex h-7 w-7 items-center justify-center rounded-full text-muted hover:bg-background hover:text-foreground"
+                aria-label={t("close")}
+              >
+                <X className="h-4 w-4" />
+              </button>
+            </div>
+          </div>
 
-      <div
-        ref={scrollRef}
-        className="flex max-h-96 flex-col gap-2 overflow-y-auto rounded-lg border border-border bg-background p-3"
-      >
-        {messages.length === 0 && (
-          <p className="py-6 text-center text-sm text-muted">{t("emptyHint")}</p>
-        )}
-        {messages.map((m, i) => (
           <div
-            key={i}
-            className={cn(
-              "max-w-[85%] rounded-2xl px-3.5 py-2 text-sm leading-relaxed",
-              m.role === "user"
-                ? "self-start bg-accent text-white"
-                : "self-end bg-surface-elevated text-foreground",
-            )}
+            ref={scrollRef}
+            className="flex max-h-72 flex-col gap-2 overflow-y-auto rounded-lg border border-border bg-background p-3"
           >
-            {m.content}
+            {messages.length === 0 && (
+              <p className="py-6 text-center text-sm text-muted">{t("emptyHint")}</p>
+            )}
+            {messages.map((m, i) => (
+              <div
+                key={i}
+                className={cn(
+                  "max-w-[85%] rounded-2xl px-3.5 py-2 text-sm leading-relaxed",
+                  m.role === "user"
+                    ? "self-start bg-accent text-white"
+                    : "self-end bg-surface-elevated text-foreground",
+                )}
+              >
+                {m.content}
+              </div>
+            ))}
+            {loading && (
+              <div className="flex items-center gap-2 self-end rounded-2xl bg-surface-elevated px-3.5 py-2 text-sm text-muted">
+                <Loader2 className="h-3.5 w-3.5 animate-spin" />
+                {t("thinking")}
+              </div>
+            )}
           </div>
-        ))}
-        {loading && (
-          <div className="flex items-center gap-2 self-end rounded-2xl bg-surface-elevated px-3.5 py-2 text-sm text-muted">
-            <Loader2 className="h-3.5 w-3.5 animate-spin" />
-            {t("thinking")}
-          </div>
-        )}
-      </div>
 
-      {recommendation && (
-        <div className="flex flex-col gap-3 rounded-2xl border border-accent/40 bg-accent/5 p-4 sm:flex-row sm:items-center">
-          {recommendation.preview_image_url && (
-            <div className="relative h-24 w-24 shrink-0 overflow-hidden rounded-xl border border-border">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src={recommendation.preview_image_url}
-                alt={recommendation.title_ar}
-                className="h-full w-full object-cover"
-              />
+          {recommendation && (
+            <div className="flex flex-col gap-3 rounded-2xl border border-accent/40 bg-accent/5 p-4">
+              {recommendation.preview_image_url && (
+                <div className="relative h-24 w-full overflow-hidden rounded-xl border border-border">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={recommendation.preview_image_url}
+                    alt={recommendation.title_ar}
+                    className="h-full w-full object-cover"
+                  />
+                </div>
+              )}
+              <div className="flex flex-col gap-1">
+                <span className="text-sm font-semibold">{recommendation.title_ar}</span>
+                {recommendation.category && (
+                  <span className="w-fit rounded-full bg-accent/10 px-2 py-0.5 text-xs text-accent-2">
+                    {recommendation.category}
+                  </span>
+                )}
+              </div>
+              <div className="flex gap-2">
+                <button
+                  type="button"
+                  onClick={() => handleGenerateNow(recommendation)}
+                  className="accent-gradient-bg rounded-full px-4 py-2 text-xs font-medium text-white hover:opacity-90"
+                >
+                  {t("generateNow")}
+                </button>
+                <button
+                  type="button"
+                  onClick={() => sendMessage(t("suggestAnotherMessage"))}
+                  className="rounded-full border border-accent px-4 py-2 text-xs font-medium text-accent-2 hover:bg-accent/10"
+                >
+                  {t("suggestAnother")}
+                </button>
+              </div>
             </div>
           )}
-          <div className="flex flex-1 flex-col gap-1">
-            <span className="text-sm font-semibold">{recommendation.title_ar}</span>
-            {recommendation.category && (
-              <span className="w-fit rounded-full bg-accent/10 px-2 py-0.5 text-xs text-accent-2">
-                {recommendation.category}
-              </span>
-            )}
-          </div>
-          <div className="flex gap-2">
-            <button
-              type="button"
-              onClick={() => handleGenerateNow(recommendation)}
-              className="accent-gradient-bg rounded-full px-4 py-2 text-xs font-medium text-white hover:opacity-90"
+
+          {fallbackAction === "enhancer" && (
+            <a
+              href={(() => {
+                const idea = messages.find((m) => m.role === "user")?.content ?? "";
+                const qs = idea ? `?idea=${encodeURIComponent(idea)}` : "";
+                return `/${locale}${qs}#enhancer`;
+              })()}
+              className="flex w-fit items-center gap-1.5 rounded-full border border-border px-4 py-2 text-xs font-medium transition-colors hover:border-accent"
             >
-              {t("generateNow")}
-            </button>
+              <Sparkles className="h-3.5 w-3.5 text-accent" />
+              {t("fallbackCta")}
+            </a>
+          )}
+
+          {quickReplies.length > 0 && (
+            <div className="flex flex-wrap gap-2">
+              {quickReplies.map((qr) => (
+                <button
+                  key={qr}
+                  type="button"
+                  onClick={() => sendMessage(qr)}
+                  className="rounded-full border border-border px-3.5 py-1.5 text-xs transition-colors hover:border-accent hover:text-accent-2"
+                >
+                  {qr}
+                </button>
+              ))}
+            </div>
+          )}
+
+          {messages.length === 0 && starterSuggestions.length > 0 && (
+            <div className="flex flex-wrap gap-2">
+              {starterSuggestions.map((s) => (
+                <button
+                  key={s}
+                  type="button"
+                  onClick={() => sendMessage(s)}
+                  className="rounded-full border border-border px-3.5 py-1.5 text-xs transition-colors hover:border-accent hover:text-accent-2"
+                >
+                  {s}
+                </button>
+              ))}
+            </div>
+          )}
+
+          {error && <p className="text-sm text-red-400">{error}</p>}
+
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              sendMessage(input);
+            }}
+            className="flex items-center gap-2"
+          >
+            <input
+              type="text"
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
+              placeholder={t("inputPlaceholder")}
+              maxLength={500}
+              className="flex-1 rounded-full border border-border bg-background px-4 py-2.5 text-sm outline-none focus:border-accent"
+            />
             <button
-              type="button"
-              onClick={() => sendMessage(t("suggestAnotherMessage"))}
-              className="rounded-full border border-accent px-4 py-2 text-xs font-medium text-accent-2 hover:bg-accent/10"
+              type="submit"
+              disabled={loading || !input.trim()}
+              className="accent-gradient-bg flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-white transition-opacity hover:opacity-90 disabled:opacity-50"
+              aria-label={t("send")}
             >
-              {t("suggestAnother")}
+              <Send className="h-4 w-4" />
             </button>
-          </div>
+          </form>
         </div>
       )}
 
-      {fallbackAction === "enhancer" && (
-        <a
-          href={(() => {
-            const idea = messages.find((m) => m.role === "user")?.content ?? "";
-            const qs = idea ? `?idea=${encodeURIComponent(idea)}` : "";
-            return `/${locale}${qs}#enhancer`;
-          })()}
-          className="flex w-fit items-center gap-1.5 rounded-full border border-border px-4 py-2 text-xs font-medium transition-colors hover:border-accent"
-        >
-          <Sparkles className="h-3.5 w-3.5 text-accent" />
-          {t("fallbackCta")}
-        </a>
-      )}
-
-      {quickReplies.length > 0 && (
-        <div className="flex flex-wrap gap-2">
-          {quickReplies.map((qr) => (
-            <button
-              key={qr}
-              type="button"
-              onClick={() => sendMessage(qr)}
-              className="rounded-full border border-border px-3.5 py-1.5 text-xs transition-colors hover:border-accent hover:text-accent-2"
-            >
-              {qr}
-            </button>
-          ))}
-        </div>
-      )}
-
-      {messages.length === 0 && starterSuggestions.length > 0 && (
-        <div className="flex flex-wrap gap-2">
-          {starterSuggestions.map((s) => (
-            <button
-              key={s}
-              type="button"
-              onClick={() => sendMessage(s)}
-              className="rounded-full border border-border px-3.5 py-1.5 text-xs transition-colors hover:border-accent hover:text-accent-2"
-            >
-              {s}
-            </button>
-          ))}
-        </div>
-      )}
-
-      {error && <p className="text-sm text-red-400">{error}</p>}
-
-      <form
-        onSubmit={(e) => {
-          e.preventDefault();
-          sendMessage(input);
-        }}
-        className="flex items-center gap-2"
+      <button
+        type="button"
+        onClick={() => setOpen((prev) => !prev)}
+        className="accent-gradient-bg flex h-14 w-14 items-center justify-center rounded-full text-white shadow-2xl transition-opacity hover:opacity-90"
+        aria-label={open ? t("close") : t("entryCta")}
       >
-        <input
-          type="text"
-          value={input}
-          onChange={(e) => setInput(e.target.value)}
-          placeholder={t("inputPlaceholder")}
-          maxLength={500}
-          className="flex-1 rounded-full border border-border bg-background px-4 py-2.5 text-sm outline-none focus:border-accent"
-        />
-        <button
-          type="submit"
-          disabled={loading || !input.trim()}
-          className="accent-gradient-bg flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-white transition-opacity hover:opacity-90 disabled:opacity-50"
-          aria-label={t("send")}
-        >
-          <Send className="h-4 w-4" />
-        </button>
-      </form>
+        {open ? <X className="h-6 w-6" /> : <MessageCircle className="h-6 w-6" />}
+      </button>
     </div>
   );
 }

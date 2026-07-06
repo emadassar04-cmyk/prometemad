@@ -142,13 +142,11 @@ export default async function HomePage({
       </section>
 
       {assistantConfig.is_enabled && (
-        <section className="mb-10">
-          <AssistantChat
-            isSignedIn={!!user}
-            locale={locale}
-            starterSuggestions={assistantConfig.starter_suggestions}
-          />
-        </section>
+        <AssistantChat
+          isSignedIn={!!user}
+          locale={locale}
+          starterSuggestions={assistantConfig.starter_suggestions}
+        />
       )}
 
       <section id="enhancer" className="mb-10">

@@ -266,7 +266,6 @@
     "error": "Something went wrong, try again"
   },
   "assistant": {
-    "entryTitle": "Not sure where to start? Let us help you ✨",
     "entryCta": "Start chat",
     "title": "AI Assistant",
     "newConversation": "New conversation",

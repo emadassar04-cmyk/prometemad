@@ -99,7 +99,8 @@ ${historyText}
   "recommendation": { "slug": "...", "title_ar": "...", "category": "...", "variables": { "مفتاح": "قيمة" } },
   "fallback_action": "enhancer"
 }
-لو type مش "recommendation"، خلي "recommendation" = null. لو type مش "fallback"، خلي "fallback_action" = null.`;
+لو type مش "recommendation"، خلي "recommendation" = null. لو type مش "fallback"، خلي "fallback_action" = null.
+مهم جدًا: الـ"slug" حقل تقني داخلي للنظام فقط — ممنوع تمامًا ذكره أو كتابته (بالإنجليزي أو بين علامتي اقتباس) داخل "message_ar" أو أي نص بيشوفه المستخدم. لما تتكلم عن البرومبت في "message_ar"، استخدم اسمه بالعربي (title_ar) أو وصف طبيعي بس.`;
 
   const parsed = (await callGroqJson(instructions)) as Partial<AssistantReply>;
 

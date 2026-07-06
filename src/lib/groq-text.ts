@@ -57,7 +57,7 @@ export type AssistantPromptIndexEntry = {
 };
 
 export type AssistantReply = {
-  type: "question" | "recommendation" | "fallback";
+  type: "question" | "recommendation" | "fallback" | "explanation";
   message_ar: string;
   quick_replies: string[];
   recommendation: {
@@ -70,9 +70,27 @@ export type AssistantReply = {
   fallback_action: "enhancer" | null;
 };
 
-// Conversational recommendation engine for the "assistant" feature — picks
-// an existing published prompt (by slug) from the index it's given, rather
-// than inventing one. Callers MUST re-verify the returned slug against the
+// Kept in code (not the admin-editable system_prompt) since it's a factual
+// description of what the site actually has — an admin free-typing this
+// would drift out of sync with real features over time.
+const SITE_FEATURES_AR = `
+- المكتبة (الصفحة الرئيسية): تصفح وابحث عن برومبتات صور جاهزة، فلترة حسب الفئة/الستايل/النموذج، اضغط على أي برومبت وخصّص متغيراته وولّد صورة حقيقية.
+- محسّن البرومبت (في الصفحة الرئيسية): اكتب فكرة بسيطة بالعربي وهو يحوّلها لبرومبت احترافي بالعربي والإنجليزي.
+- صورة لبرومبت (من القائمة العلوية): ارفع أي صورة عجبتك وهو يرجّعلك برومبت جاهز يوصفها.
+- هويتي / Brand Kit (من القائمة العلوية): احفظ ألوان وشعار علامتك التجارية عشان تتعبّى تلقائيًا في أي برومبت فيه متغيّر لون.
+- صوري (من القائمة العلوية): كل الصور اللي المستخدم ولّدها قبل كده.
+- مفضلتي (من القائمة العلوية): البرومبتات اللي حفظها المستخدم عشان يرجعلها بسهولة.
+- معرض الإلهام (من القائمة العلوية): صور اتولّدت فعلاً من مستخدمين تانيين للإلهام.
+- دعوة أصدقاء (من القائمة العلوية): رابط دعوة، كل صديق يسجّل بيه يديله رصيد صور إضافي.
+- الحد اليومي: كل مستخدم مسجّل له عدد صور مجانية يوميًا (بيتجدد كل يوم).
+`;
+
+// Conversational engine for the "assistant" feature. Has two jobs it must
+// pick between per message: (1) explain the site/how to use it — general
+// "how does this work" questions get type=explanation, no recommendation;
+// (2) recommend an existing published prompt (by slug) from the index it's
+// given, rather than inventing one, when the user describes a concrete
+// design goal. Callers MUST re-verify any returned slug against the
 // database before trusting it; this only guards against malformed JSON.
 export async function getAssistantReply(
   systemPrompt: string,
@@ -85,15 +103,21 @@ export async function getAssistantReply(
 
   const instructions = `${systemPrompt}
 
-القائمة (JSON، البرومبتات المنشورة المتاحة فقط — اختر slug من هنا حصريًا، ممنوع اختراع slug غير موجود):
+عندك دورين، واختار الصح حسب كلام المستخدم:
+1. لو المستخدم بيسأل سؤال عام عن الموقع نفسه أو إزاي يستخدمه أو إيه الميزات الموجودة (زي "إزاي استخدم الموقع؟"، "إيه اللي أقدر أعمله هنا؟"، "فين ألاقي كذا؟") — رجّع type="explanation"، واشرحله في "message_ar" باستخدام معلومات الموقع دي فقط (ممنوع تخترع ميزات مش موجودة):
+${SITE_FEATURES_AR}
+اقترح في "quick_replies" حاجات هو ممكن يحب يجرّبها بعد كده.
+
+2. لو المستخدم بيوصف هدف تصميم محدد (زي "عايز بوست رمضان" أو "لوجو لمتجري") — كمّل بنفس الأسلوب المعتاد: اسأل سؤال توضيحي واحد أو اتنين لو محتاج (type="question")، وبعدين رشّح برومبت واحد فقط من القائمة دي (type="recommendation"، استخدم الـslug كما هو حصريًا، ممنوع اختراع slug غير موجود):
 ${JSON.stringify(promptsIndex)}
+لو مفيش برومبت مناسب إطلاقًا لهدفه، رجّع type="fallback" مع fallback_action="enhancer".
 
 المحادثة حتى الآن:
 ${historyText}
 
 أرجع JSON فقط بالضبط بهذا الشكل، بدون أي نص إضافي أو markdown:
 {
-  "type": "question" | "recommendation" | "fallback",
+  "type": "question" | "recommendation" | "fallback" | "explanation",
   "message_ar": "نص ودّي بالعربي",
   "quick_replies": ["رد سريع 1", "رد سريع 2"],
   "recommendation": { "slug": "...", "title_ar": "...", "category": "...", "variables": { "مفتاح": "قيمة" } },

@@ -212,6 +212,7 @@ export type AssistantReply = {
     slug: string;
     title_ar: string;
     category: string | null;
+    preview_image_url: string | null;
     variables: Record<string, string>;
   } | null;
   fallback_action: "enhancer" | null;

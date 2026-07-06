@@ -132,6 +132,7 @@ export type PromptIndexEntry = {
   title_ar: string;
   description_ar: string | null;
   category: string | null;
+  preview_image_url: string | null;
   variables: ReturnType<typeof parsePromptVariables>;
 };
 
@@ -141,7 +142,7 @@ export async function getPublishedPromptsIndex(): Promise<PromptIndexEntry[]> {
   const supabase = await createSupabaseServerClient();
   const { data } = await supabase
     .from("prompts")
-    .select("slug, title_ar, description_ar, variables, categories(name_ar)")
+    .select("slug, title_ar, description_ar, preview_image_url, variables, categories(name_ar)")
     .eq("status", "published");
 
   return (data ?? []).map((row) => ({
@@ -149,6 +150,7 @@ export async function getPublishedPromptsIndex(): Promise<PromptIndexEntry[]> {
     title_ar: row.title_ar,
     description_ar: row.description_ar,
     category: row.categories?.name_ar ?? null,
+    preview_image_url: row.preview_image_url,
     variables: parsePromptVariables(row.variables),
   }));
 }

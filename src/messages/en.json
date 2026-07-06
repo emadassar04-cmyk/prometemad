@@ -264,5 +264,22 @@
     "loading": "Subscribing...",
     "subscribed": "Subscribed, thank you!",
     "error": "Something went wrong, try again"
+  },
+  "assistant": {
+    "entryTitle": "Not sure where to start? Let us help you ✨",
+    "entryCta": "Start chat",
+    "title": "AI Assistant",
+    "newConversation": "New conversation",
+    "close": "Close",
+    "emptyHint": "Tell me your goal (e.g. an Eid ad for my restaurant) and I'll recommend the best prompt from the library.",
+    "thinking": "Assistant is thinking…",
+    "inputPlaceholder": "Type your goal here…",
+    "send": "Send",
+    "generateNow": "Generate now",
+    "suggestAnother": "Suggest another",
+    "suggestAnotherMessage": "Please suggest another prompt",
+    "fallbackCta": "Try the prompt enhancer instead",
+    "error": "Something went wrong, please try again",
+    "dailyLimitReached": "You've reached the assistant's daily limit, come back tomorrow!"
   }
 }

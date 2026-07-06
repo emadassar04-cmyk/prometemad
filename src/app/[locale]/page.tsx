@@ -7,12 +7,14 @@ import {
 } from "@/lib/data/prompts";
 import { getTotalGenerationCount } from "@/lib/data/showcase";
 import { getSiteSettings, pickSiteSetting, getActiveCampaigns } from "@/lib/data/site-settings";
+import { getAssistantConfig } from "@/lib/data/feature-settings";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 import { Link } from "@/i18n/navigation";
 import { PromptCard } from "@/components/prompt-card";
 import { LibraryFilters } from "@/components/library-filters";
 import { CategoryGrid } from "@/components/category-grid";
 import { PromptEnhancer } from "@/components/prompt-enhancer";
+import { AssistantChat } from "@/components/assistant-chat";
 
 export default async function HomePage({
   params,
@@ -41,6 +43,7 @@ export default async function HomePage({
     totalGenerations,
     siteSettings,
     activeCampaigns,
+    assistantConfig,
   ] = await Promise.all([
     getPrompts(filters),
     getCategories(),
@@ -49,6 +52,7 @@ export default async function HomePage({
     getTotalGenerationCount(),
     getSiteSettings(),
     getActiveCampaigns(),
+    getAssistantConfig(),
   ]);
 
   let favoritedIds = new Set<string>();
@@ -131,7 +135,17 @@ export default async function HomePage({
         </div>
       </section>
 
-      <section className="mb-10">
+      {assistantConfig.is_enabled && (
+        <section className="mb-10">
+          <AssistantChat
+            isSignedIn={!!user}
+            locale={locale}
+            starterSuggestions={assistantConfig.starter_suggestions}
+          />
+        </section>
+      )}
+
+      <section id="enhancer" className="mb-10">
         <PromptEnhancer isSignedIn={!!user} locale={locale} />
       </section>
 

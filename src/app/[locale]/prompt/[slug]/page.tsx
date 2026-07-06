@@ -55,11 +55,20 @@ export async function generateMetadata({
 
 export default async function PromptDetailPage({
   params,
+  searchParams,
 }: {
   params: Promise<{ locale: string; slug: string }>;
+  searchParams: Promise<Record<string, string | string[] | undefined>>;
 }) {
   const { locale, slug } = await params;
+  const resolvedSearchParams = await searchParams;
   setRequestLocale(locale);
+
+  const prefillValues: Record<string, string> = {};
+  for (const [key, value] of Object.entries(resolvedSearchParams)) {
+    if (!key.startsWith("var_") || typeof value !== "string") continue;
+    prefillValues[key.slice("var_".length)] = value;
+  }
 
   const prompt = await getPromptBySlug(slug);
   if (!prompt) notFound();
@@ -119,6 +128,7 @@ export default async function PromptDetailPage({
         ratingAverage={ratingSummary.average}
         ratingCount={ratingSummary.count}
         userRating={userRating}
+        prefillValues={prefillValues}
       />
     </>
   );

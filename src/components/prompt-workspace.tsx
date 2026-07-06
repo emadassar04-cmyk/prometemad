@@ -57,6 +57,7 @@ export function PromptWorkspace({
   ratingAverage,
   ratingCount,
   userRating,
+  prefillValues,
 }: {
   prompt: PromptRow;
   isFavorited: boolean;
@@ -66,6 +67,7 @@ export function PromptWorkspace({
   ratingAverage?: number;
   ratingCount?: number;
   userRating?: number | null;
+  prefillValues?: Record<string, string>;
 }) {
   const t = useTranslations("prompt");
   const locale = useLocale() as "ar" | "en";
@@ -80,9 +82,10 @@ export function PromptWorkspace({
     Object.fromEntries(
       variables.map((v) => [
         v.key,
-        brandColors?.length && v.key.toLowerCase().includes("color")
-          ? brandColors.join(" and ")
-          : (v.default ?? ""),
+        prefillValues?.[v.key] ??
+          (brandColors?.length && v.key.toLowerCase().includes("color")
+            ? brandColors.join(" and ")
+            : (v.default ?? "")),
       ]),
     ),
   );

@@ -89,13 +89,25 @@ export async function POST(request: Request) {
   // The governing rule: never trust a recommended slug without re-checking
   // it against the actual published-prompts index server-side.
   if (reply.type === "recommendation" && reply.recommendation) {
-    const exists = promptsIndex.some((p) => p.slug === reply.recommendation!.slug);
-    if (!exists) {
+    const matched = promptsIndex.find((p) => p.slug === reply.recommendation!.slug);
+    if (!matched) {
       reply = {
         ...reply,
         type: "fallback",
         recommendation: null,
         fallback_action: "enhancer",
+      };
+    } else {
+      // title_ar/category/preview_image_url come from the verified DB row,
+      // not the LLM's own text, so a stale/hallucinated label can't leak through.
+      reply = {
+        ...reply,
+        recommendation: {
+          ...reply.recommendation,
+          title_ar: matched.title_ar,
+          category: matched.category,
+          preview_image_url: matched.preview_image_url,
+        },
       };
     }
   }

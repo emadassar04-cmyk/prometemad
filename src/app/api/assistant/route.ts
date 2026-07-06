@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 import { getAssistantConfig } from "@/lib/data/feature-settings";
 import { getPublishedPromptsIndex } from "@/lib/data/prompts";
-import { getAssistantReply, type AssistantMessage, type AssistantReply } from "@/lib/gemini-text";
+import { getAssistantReply, type AssistantMessage, type AssistantReply } from "@/lib/groq-text";
 
 const MAX_MESSAGE_LENGTH = 500;
 const MAX_HISTORY = 20;

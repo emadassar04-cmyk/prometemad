@@ -57,7 +57,7 @@ export function CategoryGrid({
             }`}
           >
             <div className="accent-gradient-bg flex h-9 w-9 items-center justify-center rounded-full">
-              <Icon className="h-4.5 w-4.5 text-white" />
+              <Icon className="h-4.5 w-4.5 text-navy" />
             </div>
             <div>
               <p className="text-sm font-medium">{name}</p>

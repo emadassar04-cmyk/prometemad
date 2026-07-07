@@ -30,7 +30,7 @@ export function ShareButtons({ url, text }: { url: string; text?: string }) {
       <button
         type="button"
         onClick={() => setOpen((v) => !v)}
-        className="flex h-8 w-8 items-center justify-center rounded-full bg-background/80 text-foreground backdrop-blur transition-colors hover:bg-accent hover:text-white"
+        className="flex h-8 w-8 items-center justify-center rounded-full bg-background/80 text-foreground backdrop-blur transition-colors hover:bg-accent hover:text-navy"
         title={t("share")}
       >
         <Share2 className="h-4 w-4" />

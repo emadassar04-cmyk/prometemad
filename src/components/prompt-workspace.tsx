@@ -228,7 +228,7 @@ export function PromptWorkspace({
                       <button
                         type="button"
                         onClick={() => setEditingImageUrl(result.imageUrl!)}
-                        className="flex h-8 w-8 items-center justify-center rounded-full bg-background/80 text-foreground backdrop-blur transition-colors hover:bg-accent hover:text-white"
+                        className="flex h-8 w-8 items-center justify-center rounded-full bg-background/80 text-foreground backdrop-blur transition-colors hover:bg-accent hover:text-navy"
                         title={t("editImage")}
                       >
                         <Pencil className="h-4 w-4" />
@@ -239,7 +239,7 @@ export function PromptWorkspace({
                         download
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex h-8 w-8 items-center justify-center rounded-full bg-background/80 text-foreground backdrop-blur transition-colors hover:bg-accent hover:text-white"
+                        className="flex h-8 w-8 items-center justify-center rounded-full bg-background/80 text-foreground backdrop-blur transition-colors hover:bg-accent hover:text-navy"
                         title={t("downloadImage")}
                       >
                         <Download className="h-4 w-4" />

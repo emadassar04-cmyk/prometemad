@@ -185,7 +185,7 @@ export function AssistantChat({
                 className={cn(
                   "max-w-[85%] rounded-2xl px-3.5 py-2 text-sm leading-relaxed",
                   m.role === "user"
-                    ? "self-start bg-accent text-white"
+                    ? "self-start bg-accent text-navy"
                     : "self-end bg-surface-elevated text-foreground",
                 )}
               >

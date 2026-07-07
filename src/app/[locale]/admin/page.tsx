@@ -187,7 +187,7 @@ function StatCard({
   return (
     <div className="rounded-2xl border border-border bg-surface p-6">
       <div className="accent-gradient-bg mb-4 flex h-10 w-10 items-center justify-center rounded-full">
-        <Icon className="h-5 w-5 text-white" />
+        <Icon className="h-5 w-5 text-navy" />
       </div>
       <p className="text-sm text-muted">{label}</p>
       <p className="mt-1 text-3xl font-bold">{value}</p>

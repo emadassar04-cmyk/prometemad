@@ -40,28 +40,16 @@ export async function SiteHeader() {
             {t("nav.showcase")}
           </Link>
           <Link
-            href="/my-images"
-            className="transition-colors hover:text-foreground"
-          >
-            {t("nav.myImages")}
-          </Link>
-          <Link
-            href="/favorites"
-            className="transition-colors hover:text-foreground"
-          >
-            {t("nav.favorites")}
-          </Link>
-          <Link
             href="/image-to-prompt"
             className="transition-colors hover:text-foreground"
           >
             {t("nav.imageToPrompt")}
           </Link>
           <Link
-            href="/invite"
+            href="/my-images"
             className="transition-colors hover:text-foreground"
           >
-            {t("nav.invite")}
+            {t("nav.myImages")}
           </Link>
           {isAdmin && (
             <Link

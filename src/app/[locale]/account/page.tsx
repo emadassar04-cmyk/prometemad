@@ -1,7 +1,14 @@
-import { redirect } from "@/i18n/navigation";
+import { redirect, Link } from "@/i18n/navigation";
 import { getTranslations } from "next-intl/server";
+import { Heart, Palette, Users } from "lucide-react";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 import { SignOutButton } from "@/components/sign-out-button";
+
+const QUICK_LINKS = [
+  { href: "/favorites", labelKey: "favorites", icon: Heart },
+  { href: "/brand", labelKey: "brandKit", icon: Palette },
+  { href: "/invite", labelKey: "invite", icon: Users },
+] as const;
 
 export default async function AccountPage({
   params,
@@ -35,6 +42,20 @@ export default async function AccountPage({
           {profile?.username ?? "—"} · {profile?.plan} · {profile?.credits}
         </p>
       </div>
+
+      <div className="flex flex-col gap-2">
+        {QUICK_LINKS.map(({ href, labelKey, icon: Icon }) => (
+          <Link
+            key={href}
+            href={href}
+            className="flex items-center gap-3 rounded-2xl border border-border bg-surface px-5 py-3.5 text-sm transition-colors hover:border-accent"
+          >
+            <Icon className="h-4 w-4 text-navy" />
+            {t(labelKey)}
+          </Link>
+        ))}
+      </div>
+
       <SignOutButton />
     </div>
   );

@@ -4,6 +4,7 @@ import { LocaleSwitcher } from "@/components/locale-switcher";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { HeaderAuth } from "@/components/header-auth";
 import { WhatsAppButton } from "@/components/whatsapp-button";
+import { MobileNav } from "@/components/mobile-nav";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 
 export async function SiteHeader() {
@@ -67,6 +68,7 @@ export async function SiteHeader() {
           <ThemeToggle />
           <LocaleSwitcher />
           <HeaderAuth />
+          <MobileNav isAdmin={isAdmin} />
         </div>
       </div>
     </header>

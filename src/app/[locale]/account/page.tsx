@@ -50,7 +50,7 @@ export default async function AccountPage({
             href={href}
             className="flex items-center gap-3 rounded-2xl border border-border bg-surface px-5 py-3.5 text-sm transition-colors hover:border-accent"
           >
-            <Icon className="h-4 w-4 text-navy" />
+            <Icon className="h-4 w-4 text-brand-text" />
             {t(labelKey)}
           </Link>
         ))}

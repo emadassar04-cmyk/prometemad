@@ -59,6 +59,18 @@ export default async function LocaleLayout({
 
   return (
     <html lang={locale} dir={dir} className={`${ibmPlexSansArabic.variable} ${inter.variable}`}>
+      <head>
+        {/* Applies a saved theme choice before first paint, so an explicit
+            dark/light pick that differs from the OS preference doesn't
+            flash the wrong theme for a frame. No-op when nothing is saved —
+            the CSS `prefers-color-scheme` media query handles that default. */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html:
+              "(function(){try{var t=localStorage.getItem('theme');if(t==='dark'||t==='light'){document.documentElement.setAttribute('data-theme',t);}}catch(e){}})();",
+          }}
+        />
+      </head>
       <body className="flex min-h-screen flex-col antialiased">
         <NextIntlClientProvider>
           <GuestFavoritesSync />

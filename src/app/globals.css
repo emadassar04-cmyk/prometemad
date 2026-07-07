@@ -18,7 +18,16 @@
   --border: oklch(85% 0.012 80);
   --accent: oklch(72% 0.14 70);
   --accent-2: oklch(52% 0.13 70);
+  /* Fixed dark "ink" — used only where text/icons sit directly on the gold
+     accent (buttons, badges) or inside the solid navy section below, so it
+     must stay dark regardless of theme (gold's lightness doesn't change
+     between light/dark mode). Not theme-dependent — see --brand-text for
+     the token that actually flips. */
   --navy: oklch(28% 0.09 265);
+  /* Brand emphasis text (headings, stat numbers, icons on tinted circles) —
+     sits directly against --background, so it must flip with the theme to
+     keep contrast: dark ink in light mode, light blue in dark mode. */
+  --brand-text: oklch(28% 0.09 265);
   --radius: 0.875rem;
 }
 
@@ -32,9 +41,41 @@
   --color-accent: var(--accent);
   --color-accent-2: var(--accent-2);
   --color-navy: var(--navy);
+  --color-brand-text: var(--brand-text);
   --font-sans-ar: var(--font-ibm-plex-arabic);
   --font-sans-en: var(--font-inter);
   --radius-lg: var(--radius);
+}
+
+/* Dark mode — same hues as light mode (80 neutral, 70 gold, 265 blue), just
+   re-balanced lightness. Applies automatically by system preference unless
+   the user has explicitly picked a theme (data-theme), which always wins. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --background: oklch(17% 0.012 80);
+    --surface: oklch(23% 0.014 80);
+    --surface-elevated: oklch(28% 0.016 80);
+    --foreground: oklch(93% 0.01 80);
+    --muted: oklch(65% 0.02 80);
+    --border: oklch(34% 0.018 80);
+    --accent: oklch(74% 0.15 70);
+    --accent-2: oklch(72% 0.14 70);
+    --brand-text: oklch(78% 0.1 265);
+    color-scheme: dark;
+  }
+}
+
+:root[data-theme="dark"] {
+  --background: oklch(17% 0.012 80);
+  --surface: oklch(23% 0.014 80);
+  --surface-elevated: oklch(28% 0.016 80);
+  --foreground: oklch(93% 0.01 80);
+  --muted: oklch(65% 0.02 80);
+  --border: oklch(34% 0.018 80);
+  --accent: oklch(74% 0.15 70);
+  --accent-2: oklch(72% 0.14 70);
+  --brand-text: oklch(78% 0.1 265);
+  color-scheme: dark;
 }
 
 html {
@@ -60,7 +101,7 @@ html[lang="en"] body {
    screen, so it never doubles as a decorative text color. Class name kept
    for now to avoid touching every consuming component. */
 .accent-gradient-text {
-  color: var(--navy);
+  color: var(--brand-text);
 }
 
 /* Primary CTA fill: solid warm gold with navy text (not white) for

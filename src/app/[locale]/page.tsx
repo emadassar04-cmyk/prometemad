@@ -29,7 +29,7 @@ function StatCard({
 }) {
   return (
     <div className="rounded-2xl border border-border bg-surface p-5 text-center sm:text-start">
-      <div className="mx-auto flex h-9 w-9 items-center justify-center rounded-full bg-navy/10 text-navy sm:mx-0">
+      <div className="mx-auto flex h-9 w-9 items-center justify-center rounded-full bg-brand-text/10 text-brand-text sm:mx-0">
         <Icon className="h-4.5 w-4.5" />
       </div>
       <p className="accent-gradient-text mt-3 text-2xl font-bold">{value}</p>

@@ -1,8 +1,10 @@
+import { Heart } from "lucide-react";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 import { getUserFavoritePrompts } from "@/lib/data/user";
 import { PromptCard } from "@/components/prompt-card";
 import { GuestFavoritesList } from "@/components/guest-favorites-list";
+import { EmptyState } from "@/components/empty-state";
 
 export default async function FavoritesPage({
   params,
@@ -35,7 +37,7 @@ export default async function FavoritesPage({
       <h1 className="mb-6 text-2xl font-bold">{t("title")}</h1>
 
       {prompts.length === 0 ? (
-        <p className="py-20 text-center text-muted">{t("empty")}</p>
+        <EmptyState icon={Heart} message={t("empty")} ctaLabel={t("browseLibrary")} />
       ) : (
         <div className="columns-1 gap-4 sm:columns-2 lg:columns-3 xl:columns-4">
           {prompts.map((prompt) => (

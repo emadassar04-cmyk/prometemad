@@ -25,6 +25,7 @@ export function ImageToPromptTool({
   const [generating, setGenerating] = useState(false);
   const [generateError, setGenerateError] = useState<string | null>(null);
   const [generatedImageUrl, setGeneratedImageUrl] = useState<string | null>(null);
+  const [isDraggingOver, setIsDraggingOver] = useState(false);
 
   function handleFileChange(selected: File | null) {
     setFile(selected);
@@ -117,16 +118,31 @@ export function ImageToPromptTool({
       <button
         type="button"
         onClick={() => fileInputRef.current?.click()}
-        className="flex w-full items-center justify-center gap-2 rounded-lg border border-dashed border-border px-4 py-8 text-sm text-muted transition-colors hover:border-accent hover:text-foreground"
+        onDragOver={(e) => {
+          e.preventDefault();
+          setIsDraggingOver(true);
+        }}
+        onDragLeave={() => setIsDraggingOver(false)}
+        onDrop={(e) => {
+          e.preventDefault();
+          setIsDraggingOver(false);
+          handleFileChange(e.dataTransfer.files?.[0] ?? null);
+        }}
+        className={`flex w-full flex-col items-center justify-center gap-2 rounded-lg border-2 border-dashed px-4 py-10 text-sm transition-colors ${
+          isDraggingOver
+            ? "border-accent bg-accent/5 text-foreground"
+            : "border-border text-muted hover:border-accent hover:text-foreground"
+        }`}
       >
         {previewUrl ? (
           <span className="relative h-24 w-24 overflow-hidden rounded-lg bg-background">
             <Image src={previewUrl} alt="" fill sizes="96px" className="object-contain" />
           </span>
         ) : (
-          <ImageUp className="h-5 w-5" />
+          <ImageUp className="h-6 w-6" />
         )}
-        {t("chooseImage")}
+        <span className="font-medium">{t("chooseImage")}</span>
+        <span className="text-xs text-muted">{t("dragDropHint")}</span>
       </button>
 
       <button

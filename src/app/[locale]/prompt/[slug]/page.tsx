@@ -4,11 +4,14 @@ import { setRequestLocale } from "next-intl/server";
 import {
   getPromptBySlug,
   getPromptRatingSummary,
+  getSimilarPrompts,
   getUserRatingForPrompt,
 } from "@/lib/data/prompts";
 import { getUserBrandKit } from "@/lib/data/user";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 import { PromptWorkspace } from "@/components/prompt-workspace";
+import { PromptCard } from "@/components/prompt-card";
+import { getTranslations } from "next-intl/server";
 import { SITE_URL } from "@/lib/site-url";
 
 export async function generateMetadata({
@@ -102,7 +105,22 @@ export default async function PromptDetailPage({
   }
 
   const ratingSummary = await getPromptRatingSummary(prompt.id);
+  const similarPrompts = await getSimilarPrompts(prompt.category_id, prompt.id);
 
+  let similarFavoritedIds = new Set<string>();
+  if (user && similarPrompts.length > 0) {
+    const { data } = await supabase
+      .from("favorites")
+      .select("prompt_id")
+      .eq("user_id", user.id)
+      .in(
+        "prompt_id",
+        similarPrompts.map((p) => p.id),
+      );
+    similarFavoritedIds = new Set((data ?? []).map((f) => f.prompt_id));
+  }
+
+  const t = await getTranslations("prompt");
   const title = locale === "ar" ? prompt.title_ar : prompt.title_en;
   const description = locale === "ar" ? prompt.description_ar : prompt.description_en;
   const jsonLd = {
@@ -133,6 +151,24 @@ export default async function PromptDetailPage({
         prefillValues={prefillValues}
         assistantSessionId={assistantSessionId}
       />
+
+      {similarPrompts.length > 0 && (
+        <section className="mx-auto max-w-5xl px-4 pb-16 sm:px-6">
+          <h2 className="mb-4 text-sm font-semibold text-muted">
+            {t("similarPrompts")}
+          </h2>
+          <div className="columns-2 gap-4 sm:columns-3 lg:columns-4">
+            {similarPrompts.map((similar) => (
+              <PromptCard
+                key={similar.id}
+                prompt={similar}
+                isFavorited={similarFavoritedIds.has(similar.id)}
+                isSignedIn={!!user}
+              />
+            ))}
+          </div>
+        </section>
+      )}
     </>
   );
 }

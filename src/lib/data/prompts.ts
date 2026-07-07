@@ -127,6 +127,27 @@ export async function getPromptsByTag(tag: string) {
   return data ?? [];
 }
 
+// "Similar prompts" row on the prompt detail page — same category,
+// published, excluding the prompt being viewed.
+export async function getSimilarPrompts(
+  categoryId: string | null,
+  excludeId: string,
+  limit = 4,
+) {
+  if (!categoryId) return [];
+  const supabase = await createSupabaseServerClient();
+  const { data } = await supabase
+    .from("prompts")
+    .select("*, categories(slug, name_ar, name_en)")
+    .eq("status", "published")
+    .eq("category_id", categoryId)
+    .neq("id", excludeId)
+    .order("is_featured", { ascending: false })
+    .order("created_at", { ascending: false })
+    .limit(limit);
+  return data ?? [];
+}
+
 export type PromptIndexEntry = {
   slug: string;
   title_ar: string;

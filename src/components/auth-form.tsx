@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useTranslations, useLocale } from "next-intl";
 import { createSupabaseBrowserClient } from "@/lib/supabase/client";
 
-export function AuthForm() {
+export function AuthForm({ totalGenerations }: { totalGenerations?: number }) {
   const t = useTranslations("auth");
   const locale = useLocale();
   const supabase = createSupabaseBrowserClient();
@@ -54,10 +54,16 @@ export function AuthForm() {
         {mode === "sign-in" ? t("signInTitle") : t("signUpTitle")}
       </h1>
 
+      {!!totalGenerations && totalGenerations > 0 && (
+        <p className="-mt-3 text-sm text-muted">
+          {t("trustCopy", { count: totalGenerations })}
+        </p>
+      )}
+
       <button
         type="button"
         onClick={handleGoogle}
-        className="flex items-center justify-center gap-2 rounded-full border border-border bg-surface-elevated px-4 py-2.5 text-sm font-medium transition-colors hover:border-accent"
+        className="accent-gradient-bg flex items-center justify-center gap-2 rounded-full px-4 py-3 text-sm font-semibold transition-opacity hover:opacity-90"
       >
         {t("continueWithGoogle")}
       </button>
@@ -68,14 +74,14 @@ export function AuthForm() {
         <span className="h-px flex-1 bg-border" />
       </div>
 
-      <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+      <form onSubmit={handleSubmit} className="flex flex-col gap-3">
         <input
           type="email"
           required
           placeholder={t("email")}
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          className="rounded-lg border border-border bg-background px-4 py-2.5 text-sm outline-none focus:border-accent"
+          className="rounded-lg border border-border bg-background px-4 py-2 text-sm outline-none focus:border-accent"
         />
         <input
           type="password"
@@ -84,7 +90,7 @@ export function AuthForm() {
           placeholder={t("password")}
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          className="rounded-lg border border-border bg-background px-4 py-2.5 text-sm outline-none focus:border-accent"
+          className="rounded-lg border border-border bg-background px-4 py-2 text-sm outline-none focus:border-accent"
         />
 
         {message && <p className="text-sm text-red-400">{message}</p>}
@@ -92,7 +98,7 @@ export function AuthForm() {
         <button
           type="submit"
           disabled={pending}
-          className="accent-gradient-bg rounded-full px-4 py-2.5 text-sm font-medium text-white transition-opacity hover:opacity-90 disabled:opacity-50"
+          className="rounded-full border border-border px-4 py-2 text-sm font-medium transition-colors hover:border-accent disabled:opacity-50"
         >
           {t("submit")}
         </button>

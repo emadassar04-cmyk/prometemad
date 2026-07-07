@@ -1,9 +1,11 @@
 import Image from "next/image";
+import { ImageIcon } from "lucide-react";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { redirect, Link } from "@/i18n/navigation";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 import { getUserGenerations } from "@/lib/data/user";
 import { ShowcaseToggle } from "@/components/showcase-toggle";
+import { EmptyState } from "@/components/empty-state";
 
 export default async function MyImagesPage({
   params,
@@ -28,15 +30,11 @@ export default async function MyImagesPage({
       <h1 className="mb-6 text-2xl font-bold">{t("title")}</h1>
 
       {generations.length === 0 ? (
-        <div className="flex flex-col items-center gap-4 py-20 text-center text-muted">
-          <p>{t("empty")}</p>
-          <Link
-            href="/"
-            className="accent-gradient-bg rounded-full px-5 py-2.5 text-sm font-medium text-white"
-          >
-            {t("browseLibrary")}
-          </Link>
-        </div>
+        <EmptyState
+          icon={ImageIcon}
+          message={t("empty")}
+          ctaLabel={t("browseLibrary")}
+        />
       ) : (
         <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
           {generations.map((generation) => (

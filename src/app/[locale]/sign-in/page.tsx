@@ -1,9 +1,12 @@
 import { AuthForm } from "@/components/auth-form";
+import { getTotalGenerationCount } from "@/lib/data/showcase";
 
-export default function SignInPage() {
+export default async function SignInPage() {
+  const totalGenerations = await getTotalGenerationCount();
+
   return (
     <div className="flex justify-center px-4 py-16">
-      <AuthForm />
+      <AuthForm totalGenerations={totalGenerations} />
     </div>
   );
 }

@@ -62,6 +62,7 @@
     "removeFromFavorites": "Remove from favorites",
     "relatedPrompts": "Related prompts",
     "usedCount": "Used {count} times",
+    "similarPrompts": "Similar prompts",
     "aspectRatio": "Size",
     "aspectRatioInstagram": "Instagram Post (1:1)",
     "aspectRatioStory": "Story / Reels (9:16)",
@@ -94,6 +95,7 @@
   "favorites": {
     "title": "Favorites",
     "empty": "You haven't favorited any prompts yet",
+    "browseLibrary": "Browse the library",
     "loading": "Loading…",
     "guestNote": "These favorites are saved on this device only. Sign in to keep them permanently."
   },
@@ -106,7 +108,8 @@
     "orEmail": "or with email",
     "submit": "Continue",
     "switchToSignUp": "Don't have an account? Sign up",
-    "switchToSignIn": "Already have an account? Sign in"
+    "switchToSignIn": "Already have an account? Sign in",
+    "trustCopy": "Join more than {count}+ images generated on the platform"
   },
   "admin": {
     "title": "Admin Panel",
@@ -228,6 +231,7 @@
     "title": "Image to Prompt",
     "subtitle": "Upload any image you like and get a ready-to-use prompt in Arabic and English — no one else offers this",
     "chooseImage": "Choose an image",
+    "dragDropHint": "or drag and drop the image here",
     "analyze": "Extract Prompt",
     "analyzing": "Analyzing…",
     "error": "Couldn't analyze the image, please try again",

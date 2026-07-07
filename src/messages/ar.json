@@ -8,7 +8,6 @@
     "myImages": "صوري",
     "favorites": "مفضلتي",
     "showcase": "معرض الإلهام",
-    "brandKit": "هويتي",
     "imageToPrompt": "صورة لبرومبت",
     "invite": "دعوة أصدقاء",
     "admin": "الإدارة",
@@ -80,7 +79,6 @@
     "variationsPartial": "اتولّدت {count} من {requested} بس — وصلت للحد اليومي",
     "downloadImage": "تحميل",
     "editImage": "أضف نص/لوجو",
-    "fromBrandKit": "من هويتك",
     "noRatingsYet": "لسه مفيش تقييمات"
   },
   "myImages": {
@@ -175,23 +173,6 @@
     "error": "حدث خطأ ما",
     "back": "رجوع",
     "language": "English"
-  },
-  "brandKit": {
-    "title": "هوية علامتك التجارية",
-    "subtitle": "احفظ شعارك وألوانك مرة واحدة، وهتتطبق تلقائيًا في البرومبتات اللي فيها متغير ألوان",
-    "businessName": "اسم النشاط التجاري",
-    "businessNamePlaceholder": "مثال: قهوة الوسام",
-    "logo": "الشعار",
-    "chooseLogo": "اختر شعار",
-    "colors": "الألوان",
-    "addColor": "إضافة لون",
-    "font": "الخط",
-    "save": "حفظ",
-    "saving": "جارٍ الحفظ…",
-    "saved": "تم الحفظ",
-    "saveError": "تعذّر الحفظ، حاول مرة أخرى",
-    "resultsTitle": "نتائج الهوية",
-    "resultsEmpty": "الصور اللي هتولّدها بألوان هويتك التجارية هتظهر هنا"
   },
   "showcase": {
     "title": "معرض الإلهام",

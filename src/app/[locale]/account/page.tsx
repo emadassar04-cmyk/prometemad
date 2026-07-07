@@ -1,12 +1,11 @@
 import { redirect, Link } from "@/i18n/navigation";
 import { getTranslations } from "next-intl/server";
-import { Heart, Palette, Users } from "lucide-react";
+import { Heart, Users } from "lucide-react";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 import { SignOutButton } from "@/components/sign-out-button";
 
 const QUICK_LINKS = [
   { href: "/favorites", labelKey: "favorites", icon: Heart },
-  { href: "/brand", labelKey: "brandKit", icon: Palette },
   { href: "/invite", labelKey: "invite", icon: Users },
 ] as const;
 

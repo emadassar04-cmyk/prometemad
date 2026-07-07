@@ -52,8 +52,6 @@ export function PromptWorkspace({
   prompt,
   isFavorited,
   isSignedIn,
-  brandColors,
-  brandLogoUrl,
   ratingAverage,
   ratingCount,
   userRating,
@@ -63,8 +61,6 @@ export function PromptWorkspace({
   prompt: PromptRow;
   isFavorited: boolean;
   isSignedIn: boolean;
-  brandColors?: string[] | null;
-  brandLogoUrl?: string | null;
   ratingAverage?: number;
   ratingCount?: number;
   userRating?: number | null;
@@ -82,13 +78,7 @@ export function PromptWorkspace({
 
   const [values, setValues] = useState<Record<string, string>>(() =>
     Object.fromEntries(
-      variables.map((v) => [
-        v.key,
-        prefillValues?.[v.key] ??
-          (brandColors?.length && v.key.toLowerCase().includes("color")
-            ? brandColors.join(" and ")
-            : (v.default ?? "")),
-      ]),
+      variables.map((v) => [v.key, prefillValues?.[v.key] ?? (v.default ?? "")]),
     ),
   );
   const [copied, setCopied] = useState(false);
@@ -359,11 +349,6 @@ export function PromptWorkspace({
               <div key={variable.key} className="flex flex-col gap-1.5">
                 <label className="flex items-center gap-1.5 text-sm">
                   {locale === "ar" ? variable.label_ar : variable.label_en}
-                  {brandColors?.length && variable.key.toLowerCase().includes("color") && (
-                    <span className="rounded-full bg-accent/10 px-2 py-0.5 text-xs text-accent-2">
-                      {t("fromBrandKit")}
-                    </span>
-                  )}
                 </label>
                 {variable.type === "select" && variable.options ? (
                   <select
@@ -480,7 +465,6 @@ export function PromptWorkspace({
       {editingImageUrl && (
         <ImageEditorModal
           imageUrl={editingImageUrl}
-          logoUrl={brandLogoUrl}
           onClose={() => setEditingImageUrl(null)}
         />
       )}

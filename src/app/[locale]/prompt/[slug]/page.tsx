@@ -7,7 +7,6 @@ import {
   getSimilarPrompts,
   getUserRatingForPrompt,
 } from "@/lib/data/prompts";
-import { getUserBrandKit } from "@/lib/data/user";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 import { PromptWorkspace } from "@/components/prompt-workspace";
 import { PromptCard } from "@/components/prompt-card";
@@ -84,8 +83,6 @@ export default async function PromptDetailPage({
   } = await supabase.auth.getUser();
 
   let isFavorited = false;
-  let brandColors: string[] | null = null;
-  let brandLogoUrl: string | null = null;
   let userRating: number | null = null;
   if (user) {
     const { data } = await supabase
@@ -95,11 +92,6 @@ export default async function PromptDetailPage({
       .eq("prompt_id", prompt.id)
       .maybeSingle();
     isFavorited = !!data;
-
-    const brandKit = await getUserBrandKit(user.id);
-    const colors = Array.isArray(brandKit?.colors) ? brandKit.colors : [];
-    if (colors.length > 0) brandColors = colors as string[];
-    brandLogoUrl = brandKit?.logo_url ?? null;
 
     userRating = await getUserRatingForPrompt(user.id, prompt.id);
   }
@@ -143,8 +135,6 @@ export default async function PromptDetailPage({
         prompt={prompt}
         isFavorited={isFavorited}
         isSignedIn={!!user}
-        brandColors={brandColors}
-        brandLogoUrl={brandLogoUrl}
         ratingAverage={ratingSummary.average}
         ratingCount={ratingSummary.count}
         userRating={userRating}

@@ -8,7 +8,6 @@
     "myImages": "My Images",
     "favorites": "Favorites",
     "showcase": "Showcase",
-    "brandKit": "My Brand",
     "imageToPrompt": "Image to Prompt",
     "invite": "Invite Friends",
     "admin": "Admin",
@@ -80,7 +79,6 @@
     "variationsPartial": "Generated {count} of {requested} — daily limit reached",
     "downloadImage": "Download",
     "editImage": "Add text/logo",
-    "fromBrandKit": "From your brand",
     "noRatingsYet": "No ratings yet"
   },
   "myImages": {
@@ -175,23 +173,6 @@
     "error": "Something went wrong",
     "back": "Back",
     "language": "العربية"
-  },
-  "brandKit": {
-    "title": "Your Brand Kit",
-    "subtitle": "Save your logo and colors once — they'll auto-apply to prompts with a color variable",
-    "businessName": "Business name",
-    "businessNamePlaceholder": "e.g. Wisam Coffee",
-    "logo": "Logo",
-    "chooseLogo": "Choose a logo",
-    "colors": "Colors",
-    "addColor": "Add color",
-    "font": "Font",
-    "save": "Save",
-    "saving": "Saving…",
-    "saved": "Saved",
-    "saveError": "Couldn't save, please try again",
-    "resultsTitle": "Brand Kit Results",
-    "resultsEmpty": "Images you generate with your brand colors will show up here"
   },
   "showcase": {
     "title": "Showcase",

@@ -24,16 +24,6 @@ export async function getUserFavoritePrompts(userId: string) {
     .filter((prompt): prompt is NonNullable<typeof prompt> => !!prompt);
 }
 
-export async function getUserBrandKit(userId: string) {
-  const supabase = await createSupabaseServerClient();
-  const { data } = await supabase
-    .from("brand_kits")
-    .select("*")
-    .eq("user_id", userId)
-    .maybeSingle();
-  return data;
-}
-
 export async function getUserReferralInfo(userId: string) {
   const supabase = await createSupabaseServerClient();
   const [{ data: profile }, { count }] = await Promise.all([
@@ -48,16 +38,4 @@ export async function getUserReferralInfo(userId: string) {
     referralCode: profile?.referral_code ?? null,
     referralCount: count ?? 0,
   };
-}
-
-export async function getUserBrandKitGenerations(userId: string) {
-  const supabase = await createSupabaseServerClient();
-  const { data } = await supabase
-    .from("generations")
-    .select("*, prompts(slug, title_ar, title_en)")
-    .eq("user_id", userId)
-    .eq("status", "succeeded")
-    .eq("used_brand_kit", true)
-    .order("created_at", { ascending: false });
-  return data ?? [];
 }

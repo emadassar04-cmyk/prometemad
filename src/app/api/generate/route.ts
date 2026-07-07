@@ -115,22 +115,6 @@ export async function POST(request: Request) {
     sanitizedVariables,
   );
 
-  const { data: brandKit } = await supabase
-    .from("brand_kits")
-    .select("colors")
-    .eq("user_id", user.id)
-    .maybeSingle();
-  const brandColors = Array.isArray(brandKit?.colors)
-    ? (brandKit.colors as string[])
-    : [];
-  const usedBrandKit =
-    brandColors.length > 0 &&
-    Object.entries(sanitizedVariables).some(
-      ([key, value]) =>
-        key.toLowerCase().includes("color") &&
-        value === brandColors.join(" and "),
-    );
-
   // Each variation counts as one image against the daily quota — call the
   // atomic check+increment once per requested variation and stop as soon as
   // the limit is hit, so a partial batch is still possible near the cap.
@@ -173,7 +157,6 @@ export async function POST(request: Request) {
         height,
         model,
         seed,
-        used_brand_kit: usedBrandKit,
       })
       .select("id")
       .single();

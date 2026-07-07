@@ -205,7 +205,7 @@
     "loadError": "Couldn't load the image for editing"
   },
   "enhancer": {
-    "title": "✨ Write your idea, we'll turn it into a professional prompt",
+    "title": "Write your idea, we'll turn it into a professional prompt",
     "placeholder": "e.g. a summer orange juice ad",
     "enhance": "Enhance Prompt",
     "loading": "Enhancing…",

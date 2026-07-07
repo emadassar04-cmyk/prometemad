@@ -15,12 +15,12 @@ insert into public.prompts (
   slug, title_ar, title_en, description_ar, description_en,
   prompt_text_en, prompt_display_ar, variables, category_id, style, model, tags, status
 ) values (
-  'studio-product-white-bg', 'منتج على خلفية بيضاء احترافية', 'Product on a Clean White Studio Background',
-  'صورة منتج نظيفة لصفحات المتجر والكتالوجات', 'Clean e-commerce style product photo for store listings',
-  'professional studio product photography of {{product}}, centered composition following the rule of thirds, pure white seamless backdrop, three-point studio lighting with a large softbox key light and subtle fill, gentle contact shadow beneath the product, macro-level surface detail, sharp focus throughout, photorealistic, commercial e-commerce quality, 8k resolution', 'تصوير منتج احترافي في استوديو لـ {{product}}، تكوين مركزي وفق قاعدة الأثلاث، خلفية بيضاء ناصعة متصلة بلا حواف، إضاءة استوديو ثلاثية الاتجاه بمصدر رئيسي softbox كبير وإضاءة تعبئة خفيفة، ظل تلامس ناعم أسفل المنتج، تفاصيل سطحية دقيقة جداً، تركيز حاد بالكامل، واقعية فوتوغرافية، جودة تجارية للمتاجر الإلكترونية، دقة 8K',
+  'amazon-listing-white-bg', 'صورة منتج لمنصات البيع (أمازون ونون)', 'Marketplace Listing Photo (Amazon-Style)',
+  'صورة المنتج الأساسية الأكثر طلباً لأي متجر إلكتروني — خلفية بيضاء نقية تطابق شروط منصات البيع', 'The single most-requested product shot for online sellers — pure white background matching marketplace listing requirements',
+  'professional e-commerce product photography of {{product}}, centered composition filling 85% of frame, pure seamless white background (RGB 255,255,255), even three-point studio lighting eliminating harsh shadows, soft contact shadow directly beneath the product only, tack-sharp focus with crisp edge definition, true-to-life color accuracy, marketplace-listing-ready quality, 8k resolution', 'تصوير منتج احترافي لمنصات البيع الإلكتروني لـ{{product}}، تكوين مركزي يملأ 85% من الإطار، خلفية بيضاء نقية متصلة (أبيض كامل)، إضاءة استوديو ثلاثية متساوية بلا ظلال قاسية، ظل تلامس خفيف أسفل المنتج فقط، تركيز حاد جداً مع حواف واضحة، دقة ألوان مطابقة للواقع، جودة جاهزة لإدراج المنتج في المتاجر الإلكترونية، دقة 8K',
   '[{"key":"product","label_ar":"المنتج","label_en":"Product","default":"a glass perfume bottle"}]'::jsonb,
   (select id from public.categories where slug = 'product-shots'),
-  'studio', 'flux-schnell', ARRAY['منتجات', 'متجر', 'product']::text[], 'published'
+  'studio', 'flux-schnell', ARRAY['منتجات', 'متجر إلكتروني', 'أمازون']::text[], 'published'
 )
 on conflict (slug) do update set
   title_ar = excluded.title_ar, title_en = excluded.title_en,
@@ -33,9 +33,9 @@ insert into public.prompts (
   slug, title_ar, title_en, description_ar, description_en,
   prompt_text_en, prompt_display_ar, variables, category_id, style, model, tags, status
 ) values (
-  'product-lifestyle-scene', 'منتج في مشهد حياتي طبيعي', 'Product in a Lifestyle Scene',
-  'منتج ضمن بيئة واقعية تعكس استخدامه اليومي', 'Product placed in a realistic everyday setting',
-  'lifestyle product photography, {{product}} placed naturally on a {{surface}}, soft directional natural window light with gentle falloff, warm cozy color grading, shallow depth of field with creamy bokeh, 50mm lens perspective, editorial commercial photography, true-to-life textures and materials, magazine-quality composition', 'تصوير منتج بأسلوب حياتي، {{product}} موضوع بشكل طبيعي على {{surface}}، إضاءة نافذة طبيعية موجهة بتلاشٍ ناعم، تدرج ألوان دافئ ومريح، عمق ميدان ضحل مع بوكيه ناعم، منظور عدسة 50 مم، تصوير تجاري تحريري، خامات وملمس واقعي تماماً، تكوين بجودة المجلات',
+  'lifestyle-in-use-scene', 'منتج في مشهد استخدام حقيقي', 'Product in a Real-Life Usage Scene',
+  'المنتج وهو يُستخدم فعلياً ضمن بيئة يومية واقعية — يرفع الثقة ومعدل التحويل', 'The product actively in use within an authentic everyday setting — boosts trust and conversion',
+  'lifestyle product photography, {{product}} placed naturally in active use on a {{surface}}, soft directional window light with gentle falloff, warm inviting color grading, shallow depth of field with creamy bokeh, 50mm lens perspective, editorial commercial photography, true-to-life textures, magazine-quality composition, authentic everyday moment', 'تصوير منتج بأسلوب حياتي، {{product}} موضوع بشكل طبيعي أثناء الاستخدام الفعلي على {{surface}}، إضاءة نافذة موجهة ناعمة بتلاشٍ تدريجي، تدرج ألوان دافئ وجذاب، عمق ميدان ضحل مع بوكيه ناعم، منظور عدسة 50 مم، تصوير تجاري تحريري، خامات وملمس واقعي، تكوين بجودة المجلات، لحظة يومية أصيلة',
   '[{"key":"product","label_ar":"المنتج","label_en":"Product","default":"a ceramic coffee cup"},{"key":"surface","label_ar":"السطح","label_en":"Surface","default":"wooden breakfast table"}]'::jsonb,
   (select id from public.categories where slug = 'product-shots'),
   'lifestyle', 'flux-schnell', ARRAY['منتجات', 'lifestyle']::text[], 'published'
@@ -51,8 +51,8 @@ insert into public.prompts (
   slug, title_ar, title_en, description_ar, description_en,
   prompt_text_en, prompt_display_ar, variables, category_id, style, model, tags, status
 ) values (
-  'product-floating-levitation', 'منتج عائم بتأثير الجاذبية الصفرية', 'Levitating Product Shot',
-  'منتج يطفو في الهواء بتأثير بصري جذاب للإعلانات', 'Eye-catching floating product effect for ads',
+  'levitating-hero-ad-shot', 'منتج عائم بتأثير جاذبية صفرية', 'Levitating Hero Ad Shot',
+  'أكثر تأثير بصري طلباً في إعلانات المنتجات — يوقف التمرير فوراً على السوشيال ميديا', 'The most-requested visual effect in product ads — an instant scroll-stopper on social media',
   '{{product}} levitating in mid-air frozen at the peak of motion, zero gravity effect, dynamic scattered elements orbiting around it, dramatic multi-point studio lighting with rim light separation, smooth gradient {{background_color}} background, high-end advertising photography, crisp sharp focus on the product, motion-frozen precision, premium campaign quality', '{{product}} يطفو في الهواء متجمداً في ذروة الحركة، تأثير انعدام الجاذبية، عناصر متناثرة ديناميكية تدور حوله، إضاءة استوديو درامية متعددة الاتجاهات مع فصل بضوء حافة (rim light)، خلفية متدرجة ناعمة باللون {{background_color}}، تصوير إعلاني راقٍ، تركيز حاد جداً على المنتج، دقة تجميد الحركة، جودة حملة إعلانية فاخرة',
   '[{"key":"product","label_ar":"المنتج","label_en":"Product","default":"a sneaker"},{"key":"background_color","label_ar":"لون الخلفية","label_en":"Background color","default":"deep purple"}]'::jsonb,
   (select id from public.categories where slug = 'product-shots'),
@@ -69,12 +69,12 @@ insert into public.prompts (
   slug, title_ar, title_en, description_ar, description_en,
   prompt_text_en, prompt_display_ar, variables, category_id, style, model, tags, status
 ) values (
-  'product-flatlay-top-down', 'تنسيق منتجات من الأعلى (Flat Lay)', 'Top-Down Flat Lay Arrangement',
-  'تنسيق أنيق للمنتجات من زاوية علوية لمنشورات السوشيال ميديا', 'Elegant top-down arrangement for social media posts',
+  'flatlay-instagram-grid', 'تنسيق منتجات من الأعلى لإنستغرام', 'Top-Down Flat Lay for Instagram',
+  'التنسيق الأعلى طلباً لمنشورات الفيد والريلز — ترتيب أنيق من زاوية علوية', 'The top-requested layout for feed and Reels posts — elegant top-down arrangement',
   'flat lay photography shot directly from above at 90 degrees, {{product}} arranged neatly alongside {{props}}, soft {{background_color}} surface, diffused natural light with no harsh shadows, minimal balanced aesthetic, precise symmetrical composition with generous negative space, high resolution, styled editorial flat lay quality', 'تصوير من الأعلى مباشرة بزاوية 90 درجة (Flat Lay)، {{product}} مرتب بعناية مع {{props}}، سطح بلون {{background_color}}، إضاءة طبيعية موزعة بلا ظلال قاسية، تصميم بسيط متوازن، تكوين متماثل دقيق مع مساحات فارغة كافية، دقة عالية، جودة تحريرية منسقة',
   '[{"key":"product","label_ar":"المنتج","label_en":"Product","default":"skincare bottles"},{"key":"props","label_ar":"إكسسوارات مرافقة","label_en":"Props","default":"dried flowers and a linen towel"},{"key":"background_color","label_ar":"لون الخلفية","label_en":"Background color","default":"beige"}]'::jsonb,
   (select id from public.categories where slug = 'product-shots'),
-  'minimal', 'flux-schnell', ARRAY['منتجات', 'flatlay']::text[], 'published'
+  'minimal', 'flux-schnell', ARRAY['منتجات', 'flatlay', 'إنستغرام']::text[], 'published'
 )
 on conflict (slug) do update set
   title_ar = excluded.title_ar, title_en = excluded.title_en,
@@ -87,8 +87,8 @@ insert into public.prompts (
   slug, title_ar, title_en, description_ar, description_en,
   prompt_text_en, prompt_display_ar, variables, category_id, style, model, tags, status
 ) values (
-  'product-hand-holding', 'منتج ممسوك باليد', 'Product Held in Hand',
-  'لقطة قريبة تُظهر حجم المنتج وملمسه بشكل واقعي', 'Close-up shot showing the product''s scale and texture',
+  'unboxing-hand-hold-shot', 'منتج ممسوك باليد (لحظة فتح الصندوق)', 'Unboxing Hand-Hold Shot',
+  'لقطة قريبة تُظهر حجم المنتج وملمسه — من أكثر أنماط تسويق المحتوى طلباً', 'A close-up showing the product''s true scale and texture — one of the most-requested content-marketing styles',
   'close-up macro photo of a hand naturally holding {{product}}, realistic skin texture and natural tones, soft diffused daylight, gently blurred background with shallow depth of field, authentic unboxing moment, fine surface detail on both hand and product, sharp focal point, high-end lifestyle commercial quality', 'لقطة قريبة ماكرو ليد تمسك {{product}} بشكل طبيعي، ملمس بشرة واقعي وألوان طبيعية، ضوء نهار ناعم موزع، خلفية ضبابية خفيفة بعمق ميدان ضحل، لحظة فتح صندوق أصيلة، تفاصيل سطحية دقيقة لليد والمنتج معاً، نقطة تركيز حادة، جودة تجارية حياتية راقية',
   '[{"key":"product","label_ar":"المنتج","label_en":"Product","default":"a smartphone box"}]'::jsonb,
   (select id from public.categories where slug = 'product-shots'),
@@ -105,8 +105,8 @@ insert into public.prompts (
   slug, title_ar, title_en, description_ar, description_en,
   prompt_text_en, prompt_display_ar, variables, category_id, style, model, tags, status
 ) values (
-  'product-splash-liquid', 'منتج مع تناثر سائل', 'Product with Liquid Splash',
-  'تأثير بصري قوي لمنتجات المشروبات ومستحضرات التجميل', 'Dramatic splash effect for beverages and cosmetics',
+  'dynamic-liquid-splash-shot', 'منتج مع تناثر سائل ديناميكي', 'Dynamic Liquid Splash Shot',
+  'تأثير قوي ومطلوب بكثرة لمنتجات المشروبات ومستحضرات التجميل والعناية', 'A high-demand dramatic effect for beverages, cosmetics, and skincare products',
   '{{product}} with dynamic {{liquid}} splash frozen at 1/8000th of a second, dramatic dark studio background, high-contrast rim lighting sculpting the droplets, ultra high speed photography, crisp crystal-clear droplets with realistic refraction, commercial beverage/cosmetics campaign quality, tack-sharp focus', '{{product}} مع تناثر {{liquid}} متجمد بسرعة تصوير فائقة (1/8000 ثانية)، خلفية استوديو داكنة درامية، إضاءة حافة عالية التباين تُبرز شكل القطرات، تصوير عالي السرعة احترافي، قطرات واضحة تماماً كالكريستال مع انكسار ضوئي واقعي، جودة حملة تجارية للمشروبات ومستحضرات التجميل، تركيز حاد جداً',
   '[{"key":"product","label_ar":"المنتج","label_en":"Product","default":"a cosmetic jar"},{"key":"liquid","label_ar":"السائل","label_en":"Liquid","default":"milk"}]'::jsonb,
   (select id from public.categories where slug = 'product-shots'),
@@ -123,8 +123,8 @@ insert into public.prompts (
   slug, title_ar, title_en, description_ar, description_en,
   prompt_text_en, prompt_display_ar, variables, category_id, style, model, tags, status
 ) values (
-  'product-packaging-mockup', 'موك أب تغليف المنتج', 'Product Packaging Mockup',
-  'عرض واقعي لعلبة أو تغليف المنتج قبل الطباعة', 'Realistic mockup of product packaging before printing',
+  'packaging-mockup-3d-render', 'موك أب تغليف ثلاثي الأبعاد', '3D Packaging Mockup',
+  'معاينة واقعية للتغليف قبل الطباعة — أساسي لأي علامة تجارية جديدة تطلق منتجاً', 'A realistic packaging preview before print — essential for any brand launching a new product',
   'photorealistic 3D packaging mockup of a {{product}} box, {{color}} label design with clean typography space, resting on a neutral matte surface, soft studio lighting with a subtle reflection below, precise front-facing angle, physically accurate materials and print texture, high resolution product render, retail-ready presentation quality', 'موك أب ثلاثي الأبعاد واقعي لعلبة تغليف {{product}}، تصميم ملصق بلون {{color}} مع مساحة خط واضحة، موضوعة على سطح مطفي محايد، إضاءة استوديو ناعمة مع انعكاس خفيف أسفلها، زاوية أمامية دقيقة، خامات وطباعة واقعية فيزيائياً، عرض منتج بدقة عالية، جودة عرض جاهزة للتجزئة',
   '[{"key":"product","label_ar":"المنتج","label_en":"Product","default":"a snack"},{"key":"color","label_ar":"اللون الأساسي","label_en":"Primary color","default":"green and gold"}]'::jsonb,
   (select id from public.categories where slug = 'product-shots'),
@@ -141,8 +141,44 @@ insert into public.prompts (
   slug, title_ar, title_en, description_ar, description_en,
   prompt_text_en, prompt_display_ar, variables, category_id, style, model, tags, status
 ) values (
-  'product-outdoor-natural', 'منتج في بيئة خارجية طبيعية', 'Product in an Outdoor Natural Setting',
-  'منتج بمظهر طبيعي خارجي يناسب منتجات العناية والطبيعة', 'Natural outdoor look, suited for organic and wellness products',
+  'macro-texture-detail-shot', 'لقطة ماكرو لتفاصيل جودة المنتج', 'Macro Quality-Detail Shot',
+  'لقطة قريبة جداً تُبرز الخامة والجودة — الأكثر طلباً لمنتجات الفخامة والعناية والمجوهرات', 'An extreme close-up highlighting material and craftsmanship — the top request for luxury, skincare, and jewelry brands',
+  'extreme macro close-up photograph of {{product}}, revealing fine surface texture, material grain, and craftsmanship detail, single dramatic directional light source with a soft reflector fill, razor-thin depth of field with silky bokeh falloff, luxury product photography quality, hyper-detailed and tack-sharp on the focal point', 'تصوير ماكرو شديد القرب لـ{{product}}، يُظهر الملمس السطحي الدقيق وتفاصيل الخامة والحرفية، مصدر ضوء واحد درامي موجه مع عاكس تعبئة ناعم، عمق ميدان شديد الضحالة ببوكيه حريري، جودة تصوير منتجات فاخرة، دقة فائقة التفاصيل وحدة تركيز على النقطة المحورية',
+  '[{"key":"product","label_ar":"المنتج","label_en":"Product","default":"a gold watch clasp"}]'::jsonb,
+  (select id from public.categories where slug = 'product-shots'),
+  'macro', 'flux-schnell', ARRAY['منتجات', 'فخامة', 'ماكرو']::text[], 'published'
+)
+on conflict (slug) do update set
+  title_ar = excluded.title_ar, title_en = excluded.title_en,
+  description_ar = excluded.description_ar, description_en = excluded.description_en,
+  prompt_text_en = excluded.prompt_text_en, prompt_display_ar = excluded.prompt_display_ar,
+  variables = excluded.variables, category_id = excluded.category_id,
+  style = excluded.style, model = excluded.model, tags = excluded.tags;
+
+insert into public.prompts (
+  slug, title_ar, title_en, description_ar, description_en,
+  prompt_text_en, prompt_display_ar, variables, category_id, style, model, tags, status
+) values (
+  'model-wearing-demo-shot', 'منتج على عارض/عارضة أثناء الاستخدام', 'Product Demo on a Model',
+  'المنتج معروض على شخص حقيقي أثناء الاستخدام — الأكثر طلباً لإعلانات الأزياء والعناية والإكسسوارات', 'The product shown worn or used by a real person — the top request for fashion, beauty, and accessory ads',
+  'commercial advertising photograph of a {{model_type}} wearing/using {{product}}, natural confident pose, soft flattering studio lighting with a gentle rim light, clean {{background_color}} backdrop, sharp focus on the product with the model in complementary soft focus, high-end fashion-campaign quality, authentic skin and fabric texture', 'صورة إعلانية تجارية لـ{{model_type}} يرتدي/يستخدم {{product}}، وضعية واثقة طبيعية، إضاءة استوديو ناعمة مُجملة مع ضوء حافة خفيف، خلفية نظيفة بلون {{background_color}}، تركيز حاد على المنتج مع تركيز ناعم مكمّل على العارض، جودة حملة أزياء راقية، ملمس بشرة وقماش أصيل',
+  '[{"key":"model_type","label_ar":"نوع العارض","label_en":"Model type","default":"a young woman"},{"key":"product","label_ar":"المنتج","label_en":"Product","default":"gold hoop earrings"},{"key":"background_color","label_ar":"لون الخلفية","label_en":"Background color","default":"soft cream"}]'::jsonb,
+  (select id from public.categories where slug = 'product-shots'),
+  'editorial', 'flux-schnell', ARRAY['منتجات', 'أزياء', 'إعلان']::text[], 'published'
+)
+on conflict (slug) do update set
+  title_ar = excluded.title_ar, title_en = excluded.title_en,
+  description_ar = excluded.description_ar, description_en = excluded.description_en,
+  prompt_text_en = excluded.prompt_text_en, prompt_display_ar = excluded.prompt_display_ar,
+  variables = excluded.variables, category_id = excluded.category_id,
+  style = excluded.style, model = excluded.model, tags = excluded.tags;
+
+insert into public.prompts (
+  slug, title_ar, title_en, description_ar, description_en,
+  prompt_text_en, prompt_display_ar, variables, category_id, style, model, tags, status
+) values (
+  'outdoor-golden-hour-shot', 'منتج بإضاءة الساعة الذهبية الخارجية', 'Outdoor Golden Hour Product Shot',
+  'مظهر طبيعي دافئ خارجي — الأكثر طلباً لمنتجات العناية الطبيعية والصحة والطعام', 'A warm natural outdoor look — the top request for organic, wellness, and food products',
   '{{product}} placed among natural elements like weathered stones, moss, and green leaves, warm outdoor golden hour side lighting, organic earthy color palette, shallow depth of field with a softly blurred natural backdrop, editorial nature photography, authentic textures, serene wellness-brand mood', '{{product}} موضوع وسط عناصر طبيعية كحجارة متآكلة، طحالب، وأوراق شجر خضراء، إضاءة جانبية دافئة من الساعة الذهبية الخارجية، لوحة ألوان ترابية عضوية، عمق ميدان ضحل مع خلفية طبيعية ضبابية ناعمة، تصوير طبيعي تحريري، خامات أصيلة، أجواء هادئة تناسب علامات العناية والصحة',
   '[{"key":"product","label_ar":"المنتج","label_en":"Product","default":"an organic soap bar"}]'::jsonb,
   (select id from public.categories where slug = 'product-shots'),
@@ -159,45 +195,9 @@ insert into public.prompts (
   slug, title_ar, title_en, description_ar, description_en,
   prompt_text_en, prompt_display_ar, variables, category_id, style, model, tags, status
 ) values (
-  'product-360-catalog', 'منتج بزاوية ثلاثة أرباع للكتالوج', 'Three-Quarter Angle Catalog Shot',
-  'زاوية كتالوجية كلاسيكية تُظهر أبعاد المنتج', 'Classic catalog angle showing the product''s dimensions',
-  'three-quarter angle product photo of {{product}}, light gray seamless gradient background, even soft-box studio lighting eliminating harsh shadows, tack-sharp focus with crisp edge definition, professional retouching, color-accurate rendering, catalog-ready commercial quality, consistent with multi-angle product sets', 'صورة منتج بزاوية ثلاثة أرباع لـ {{product}}، خلفية متدرجة رمادية فاتحة متصلة، إضاءة استوديو softbox متساوية تلغي الظلال القاسية، تركيز حاد جداً مع حواف واضحة، معالجة احترافية، ألوان دقيقة، جودة تجارية جاهزة للكتالوج، متسقة مع مجموعات الزوايا المتعددة',
-  '[{"key":"product","label_ar":"المنتج","label_en":"Product","default":"a leather handbag"}]'::jsonb,
-  (select id from public.categories where slug = 'product-shots'),
-  'studio', 'flux-schnell', ARRAY['منتجات', 'كتالوج']::text[], 'published'
-)
-on conflict (slug) do update set
-  title_ar = excluded.title_ar, title_en = excluded.title_en,
-  description_ar = excluded.description_ar, description_en = excluded.description_en,
-  prompt_text_en = excluded.prompt_text_en, prompt_display_ar = excluded.prompt_display_ar,
-  variables = excluded.variables, category_id = excluded.category_id,
-  style = excluded.style, model = excluded.model, tags = excluded.tags;
-
-insert into public.prompts (
-  slug, title_ar, title_en, description_ar, description_en,
-  prompt_text_en, prompt_display_ar, variables, category_id, style, model, tags, status
-) values (
-  'product-color-variants-grid', 'شبكة تدرجات ألوان المنتج', 'Product Color Variants Grid',
-  'عرض منظم لتدرجات ألوان المنتج المتوفرة', 'Organized display of the product''s available color options',
-  'clean grid layout showing {{product}} in three distinct color variants, consistent identical studio lighting across all three, plain seamless white background, evenly spaced precise arrangement, sharp product-level detail on each variant, e-commerce variant showcase style, high resolution catalog quality', 'تخطيط شبكي نظيف يعرض {{product}} بثلاثة تدرجات ألوان مختلفة، إضاءة استوديو متطابقة تماماً على الثلاثة، خلفية بيضاء بسيطة متصلة، ترتيب متساوي المسافات دقيق، تفاصيل واضحة على مستوى المنتج لكل تدرج، أسلوب عرض خيارات المتجر الإلكتروني، جودة كتالوج بدقة عالية',
-  '[{"key":"product","label_ar":"المنتج","label_en":"Product","default":"a wireless earbuds case"}]'::jsonb,
-  (select id from public.categories where slug = 'product-shots'),
-  'studio', 'flux-schnell', ARRAY['منتجات', 'متغيرات']::text[], 'published'
-)
-on conflict (slug) do update set
-  title_ar = excluded.title_ar, title_en = excluded.title_en,
-  description_ar = excluded.description_ar, description_en = excluded.description_en,
-  prompt_text_en = excluded.prompt_text_en, prompt_display_ar = excluded.prompt_display_ar,
-  variables = excluded.variables, category_id = excluded.category_id,
-  style = excluded.style, model = excluded.model, tags = excluded.tags;
-
-insert into public.prompts (
-  slug, title_ar, title_en, description_ar, description_en,
-  prompt_text_en, prompt_display_ar, variables, category_id, style, model, tags, status
-) values (
-  'instagram-square-promo', 'منشور ترويجي مربع لإنستغرام', 'Square Instagram Promo Post',
-  'تصميم إعلاني جذاب بمقاس مربع لمنشورات إنستغرام', 'Bold square-format ad visual for Instagram feed',
-  'square 1:1 format social media advertisement for {{business}}, bold {{color}} color scheme with strong visual hierarchy, generous empty space reserved for text overlay, modern flat design, high contrast, scroll-stopping composition, clean vector-quality shapes, marketing poster precision, crisp print-ready resolution', 'إعلان سوشيال ميديا بمقاس مربع 1:1 لـ {{business}}، ألوان جريئة بدرجة {{color}} مع تسلسل بصري واضح، مساحة فارغة واسعة مخصصة للنص، تصميم مسطح عصري، تباين عالٍ، تكوين يوقف التمرير فوراً، أشكال بجودة فيكتور نظيفة، دقة بوستر تسويقي، دقة طباعة عالية',
+  'instagram-square-promo-post', 'منشور ترويجي مربع لإنستغرام', 'Square Instagram Promo Post',
+  'المقاس والتصميم الأكثر طلباً لأي حملة ترويجية على إنستغرام وفيسبوك', 'The most-requested format and layout for any Instagram or Facebook promo campaign',
+  'square 1:1 format social media advertisement for {{business}}, bold {{color}} color scheme with strong visual hierarchy, generous empty space reserved for text overlay, modern flat design, high contrast, scroll-stopping composition, clean vector-quality shapes, marketing poster precision, crisp print-ready resolution', 'إعلان سوشيال ميديا بمقاس مربع 1:1 لـ{{business}}، ألوان جريئة بدرجة {{color}} مع تسلسل بصري واضح، مساحة فارغة واسعة مخصصة للنص، تصميم مسطح عصري، تباين عالٍ، تكوين يوقف التمرير فوراً، أشكال بجودة فيكتور نظيفة، دقة بوستر تسويقي، دقة طباعة عالية',
   '[{"key":"business","label_ar":"النشاط التجاري","label_en":"Business","default":"a coffee shop"},{"key":"color","label_ar":"اللون الأساسي","label_en":"Primary color","default":"orange and cream"}]'::jsonb,
   (select id from public.categories where slug = 'social-ads'),
   'flat design', 'flux-schnell', ARRAY['إعلان', 'سوشيال ميديا']::text[], 'published'
@@ -213,8 +213,8 @@ insert into public.prompts (
   slug, title_ar, title_en, description_ar, description_en,
   prompt_text_en, prompt_display_ar, variables, category_id, style, model, tags, status
 ) values (
-  'sale-discount-banner', 'بانر تخفيضات وعروض', 'Sale & Discount Banner',
-  'بانر إعلاني حماسي لعروض التخفيضات الموسمية', 'Energetic banner design for seasonal discount campaigns',
+  'flash-sale-discount-banner', 'بانر تخفيضات فلاش سيل', 'Flash Sale Discount Banner',
+  'بانر حماسي عالي التحويل لعروض التخفيضات المحدودة — من أعلى التصاميم طلباً في مواسم البيع', 'A high-conversion, high-energy banner for limited-time discounts — one of the most-requested designs during sale seasons',
   'vibrant sale banner design, large bold ''{{discount}}'' text placeholder as the clear focal point, dynamic diagonal shapes guiding the eye, smooth {{color}} gradient background, confetti and motion-burst elements, exciting high-energy retail promotion style, crisp vector precision, print and digital-ready quality', 'تصميم بانر تخفيضات نابض بالحياة، مساحة نصية كبيرة وجريئة لنسبة الخصم ''{{discount}}'' كنقطة تركيز واضحة، أشكال قطرية ديناميكية توجّه النظر، خلفية متدرجة ناعمة بلون {{color}}، عناصر قصاصات ورقية وانفجار حركي، أسلوب ترويجي عالي الطاقة للتجزئة، دقة فيكتور نظيفة، جودة جاهزة للطباعة والرقمي',
   '[{"key":"discount","label_ar":"نسبة الخصم","label_en":"Discount","default":"50% OFF"},{"key":"color","label_ar":"لون الخلفية","label_en":"Background color","default":"red and yellow"}]'::jsonb,
   (select id from public.categories where slug = 'social-ads'),
@@ -231,8 +231,8 @@ insert into public.prompts (
   slug, title_ar, title_en, description_ar, description_en,
   prompt_text_en, prompt_display_ar, variables, category_id, style, model, tags, status
 ) values (
-  'app-feature-mockup', 'عرض ميزة تطبيق على جهاز', 'App Feature Mockup on Device',
-  'عرض واجهة تطبيق على شاشة هاتف بأسلوب تسويقي أنيق', 'Elegant marketing display of an app screen on a phone mockup',
+  'app-feature-phone-mockup-ad', 'إعلان ميزة تطبيق على موك أب هاتف', 'App Feature Mockup Ad',
+  'أساسي لكل تطبيق يريد الترويج لميزة جديدة بشكل احترافي على المتاجر ومنصات الإعلانات', 'Essential for any app promoting a new feature professionally on app stores and ad platforms',
   'modern smartphone mockup floating at a slight 3D angle, displaying a pixel-precise clean {{app_type}} app interface, soft smooth gradient {{color}} background, realistic drop shadow beneath the device, premium tech marketing style, minimal and polished, product-launch quality render', 'موك أب هاتف ذكي عصري معلق بزاوية ثلاثية أبعاد خفيفة، يعرض واجهة تطبيق {{app_type}} نظيفة ودقيقة البكسل، خلفية متدرجة ناعمة بلون {{color}}، ظل واقعي أسفل الجهاز، أسلوب تسويقي تقني فاخر، بسيط ومصقول، جودة رندر إطلاق منتج',
   '[{"key":"app_type","label_ar":"نوع التطبيق","label_en":"App type","default":"food delivery"},{"key":"color","label_ar":"لون الخلفية","label_en":"Background color","default":"blue and white"}]'::jsonb,
   (select id from public.categories where slug = 'social-ads'),
@@ -249,8 +249,8 @@ insert into public.prompts (
   slug, title_ar, title_en, description_ar, description_en,
   prompt_text_en, prompt_display_ar, variables, category_id, style, model, tags, status
 ) values (
-  'before-after-split', 'مقارنة قبل وبعد', 'Before & After Split Visual',
-  'تصميم مقسوم يعرض نتائج الخدمة أو المنتج بوضوح', 'Split-screen design clearly showcasing service or product results',
+  'before-after-comparison-ad', 'مقارنة قبل وبعد', 'Before & After Comparison Ad',
+  'من أقوى تصاميم الإقناع في السوق — يُثبت النتيجة بصرياً بشكل مباشر', 'One of the most persuasive ad formats on the market — proves the result visually, instantly',
   'clean split-screen comparison image, left half showing {{before}}, right half showing {{after}}, sharp precise dividing line, bright even lighting matched identically on both sides, professional before-and-after marketing layout, high-detail realism on both halves, trustworthy commercial quality', 'صورة مقارنة نظيفة مقسومة الشاشة، النصف الأيسر يُظهر {{before}}، النصف الأيمن يُظهر {{after}}، خط فاصل دقيق وحاد، إضاءة ساطعة متطابقة تماماً في الجانبين، تخطيط تسويقي احترافي لقبل وبعد، واقعية عالية التفاصيل في الجانبين، جودة تجارية موثوقة',
   '[{"key":"before","label_ar":"الحالة قبل","label_en":"Before state","default":"a dull faded car exterior"},{"key":"after","label_ar":"الحالة بعد","label_en":"After state","default":"the same car, polished and glossy"}]'::jsonb,
   (select id from public.categories where slug = 'social-ads'),
@@ -267,12 +267,12 @@ insert into public.prompts (
   slug, title_ar, title_en, description_ar, description_en,
   prompt_text_en, prompt_display_ar, variables, category_id, style, model, tags, status
 ) values (
-  'testimonial-quote-card', 'بطاقة رأي عميل', 'Customer Testimonial Card',
-  'بطاقة أنيقة لعرض تقييمات وآراء العملاء', 'Elegant card layout for displaying customer reviews',
-  'elegant testimonial card background design, soft {{color}} pastel gradient, large refined quotation mark graphic, five gold star rating icons, minimal clean layout with clearly reserved space for text, professional social-proof marketing style, crisp vector precision, premium finish', 'خلفية بطاقة تقييم عملاء أنيقة، تدرج لوني ناعم {{color}} باستيل، رمز علامة اقتباس كبيرة وراقية، خمس نجوم تقييم ذهبية، تخطيط بسيط ونظيف مع مساحة محجوزة بوضوح للنص، أسلوب احترافي لعرض الثقة الاجتماعية، دقة فيكتور نظيفة، لمسة نهائية فاخرة',
-  '[{"key":"color","label_ar":"اللون","label_en":"Color","default":"soft blue"}]'::jsonb,
+  'ugc-style-testimonial-selfie', 'سيلفي تقييم بأسلوب محتوى المستخدمين (UGC)', 'UGC-Style Testimonial Selfie',
+  'الاتجاه الأعلى طلباً عالمياً حالياً — يبدو كصورة حقيقية من عميل حقيقي، يرفع الثقة أكثر من أي إعلان مصمم', 'The single hottest global ad trend right now — looks like a genuine customer photo, and out-converts polished studio ads',
+  'authentic UGC-style selfie photo of a {{person}} holding {{product}} casually, shot on a phone camera with natural imperfect framing, everyday home or car interior background, soft ambient indoor lighting, genuine happy candid expression, slightly grainy realistic phone-camera quality, unpolished authentic social-proof aesthetic, no studio lighting look', 'صورة سيلفي أصيلة بأسلوب محتوى المستخدمين (UGC) لـ{{person}} يمسك {{product}} بشكل عفوي، ملتقطة بكاميرا هاتف بتأطير طبيعي غير مثالي، خلفية منزل أو سيارة يومية، إضاءة داخلية محيطة ناعمة، تعبير سعيد عفوي صادق، جودة كاميرا هاتف واقعية بحبيبات خفيفة، طابع غير مصقول يعكس مصداقية اجتماعية حقيقية، بلا مظهر إضاءة استوديو',
+  '[{"key":"person","label_ar":"الشخص","label_en":"Person","default":"a young woman"},{"key":"product","label_ar":"المنتج","label_en":"Product","default":"a skincare serum bottle"}]'::jsonb,
   (select id from public.categories where slug = 'social-ads'),
-  'minimal', 'flux-schnell', ARRAY['إعلان', 'تقييمات']::text[], 'published'
+  'ugc', 'flux-schnell', ARRAY['إعلان', 'UGC', 'ترند']::text[], 'published'
 )
 on conflict (slug) do update set
   title_ar = excluded.title_ar, title_en = excluded.title_en,
@@ -285,7 +285,7 @@ insert into public.prompts (
   slug, title_ar, title_en, description_ar, description_en,
   prompt_text_en, prompt_display_ar, variables, category_id, style, model, tags, status
 ) values (
-  'story-countdown-launch', 'ستوري عد تنازلي لإطلاق منتج', 'Countdown Story for Product Launch',
+  'story-countdown-launch-teaser', 'ستوري عد تنازلي لإطلاق منتج', 'Countdown Story for Product Launch',
   'تصميم ستوري رأسي مثير يعلن عن اقتراب إطلاق جديد', 'Vertical story design building excitement for a new launch',
   'vertical 9:16 story format design, dramatic glowing countdown timer graphic as the centerpiece, dark {{color}} background with softly glowing particle bokeh, clear teaser text space, futuristic launch-announcement style, high-energy anticipation mood, crisp premium render quality', 'تصميم ستوري بصيغة رأسية 9:16، رسم عداد تنازلي متوهج درامي كنقطة مركزية، خلفية داكنة بلون {{color}} مع جزيئات بوكيه متوهجة ناعمة، مساحة نص تشويقي واضحة، أسلوب إعلان إطلاق مستقبلي، أجواء ترقب عالية الطاقة، جودة رندر فاخرة نظيفة',
   '[{"key":"color","label_ar":"لون الخلفية","label_en":"Background color","default":"midnight blue"}]'::jsonb,
@@ -303,8 +303,8 @@ insert into public.prompts (
   slug, title_ar, title_en, description_ar, description_en,
   prompt_text_en, prompt_display_ar, variables, category_id, style, model, tags, status
 ) values (
-  'carousel-tips-slide', 'شريحة كاروسيل نصائح', 'Carousel Tips Slide',
-  'تصميم شريحة موحدة لمنشورات الكاروسيل التعليمية', 'Cohesive slide design for educational carousel posts',
+  'carousel-tips-infographic-slide', 'شريحة كاروسيل نصائح تعليمية', 'Educational Carousel Tips Slide',
+  'تنسيق المحتوى التعليمي الأعلى طلباً على إنستغرام ولينكدإن لجذب المتابعين', 'The most-requested educational content format on Instagram and LinkedIn for growing an audience',
   'clean educational carousel slide design, bold oversized number ''{{number}}'' as the dominant graphic element, {{color}} background with soft geometric accent shapes, generous clearly organized text space, modern infographic style with strong visual hierarchy, crisp flat-design precision', 'تصميم شريحة كاروسيل تعليمية نظيفة، رقم ''{{number}}'' كبير وبارز كعنصر رسومي مهيمن، خلفية بلون {{color}} مع أشكال هندسية ناعمة مساندة، مساحة نص واسعة ومنظمة بوضوح، أسلوب إنفوجرافيك عصري بتسلسل بصري قوي، دقة تصميم مسطح نظيفة',
   '[{"key":"number","label_ar":"الرقم","label_en":"Number","default":"1"},{"key":"color","label_ar":"لون الخلفية","label_en":"Background color","default":"teal"}]'::jsonb,
   (select id from public.categories where slug = 'social-ads'),
@@ -321,8 +321,8 @@ insert into public.prompts (
   slug, title_ar, title_en, description_ar, description_en,
   prompt_text_en, prompt_display_ar, variables, category_id, style, model, tags, status
 ) values (
-  'limited-stock-urgency', 'تصميم إلحاح الكمية المحدودة', 'Limited Stock Urgency Design',
-  'تصميم يحفّز الشراء الفوري بشعور الندرة', 'Design that drives urgency and immediate purchase action',
+  'limited-stock-urgency-design', 'تصميم إلحاح الكمية المحدودة', 'Limited Stock Urgency Design',
+  'تصميم يحفّز الشراء الفوري بشعور الندرة — يرفع معدل التحويل في الحملات المدفوعة', 'A design that drives urgency and immediate purchase action — boosts conversion in paid campaigns',
   'urgent retail promotion design, bold ''{{message}}'' typography placeholder as the dominant focal point, sharp warning-stripe pattern accents, high-alert {{color}} color scheme, dynamic energetic diagonal composition, scroll-stopping impact, crisp print and digital-ready precision', 'تصميم ترويجي عاجل للتجزئة، مساحة نصية بارزة ومهيمنة لعبارة ''{{message}}''، لمسات نمط خطوط تحذيرية حادة، تدرج ألوان {{color}} عالي التنبيه، تكوين قطري ديناميكي حيوي، تأثير يوقف التمرير فوراً، دقة نظيفة جاهزة للطباعة والرقمي',
   '[{"key":"message","label_ar":"الرسالة","label_en":"Message","default":"LAST CHANCE"},{"key":"color","label_ar":"اللون","label_en":"Color","default":"red and black"}]'::jsonb,
   (select id from public.categories where slug = 'social-ads'),
@@ -339,26 +339,8 @@ insert into public.prompts (
   slug, title_ar, title_en, description_ar, description_en,
   prompt_text_en, prompt_display_ar, variables, category_id, style, model, tags, status
 ) values (
-  'gift-guide-ad', 'إعلان دليل هدايا', 'Gift Guide Ad',
-  'تصميم دافئ يعرض تشكيلة هدايا لمناسبة معينة', 'Warm design showcasing a curated gift collection',
-  'cozy gift guide advertisement featuring {{items}} arranged elegantly with intentional visual balance, warm {{color}} festive palette, soft ribbon and wrapping paper texture detail, inviting shopping campaign style, gentle natural lighting, premium seasonal retail quality', 'إعلان دليل هدايا دافئ يعرض {{items}} مرتبة بأناقة وتوازن بصري مدروس، لوحة ألوان احتفالية دافئة {{color}}، تفاصيل ملمس شرائط وورق تغليف ناعمة، أسلوب حملة تسوق جذابة، إضاءة طبيعية لطيفة، جودة تجارية موسمية فاخرة',
-  '[{"key":"items","label_ar":"الهدايا","label_en":"Gift items","default":"perfume bottles and gift boxes"},{"key":"color","label_ar":"الألوان","label_en":"Colors","default":"burgundy and gold"}]'::jsonb,
-  (select id from public.categories where slug = 'social-ads'),
-  'festive', 'flux-schnell', ARRAY['إعلان', 'هدايا']::text[], 'published'
-)
-on conflict (slug) do update set
-  title_ar = excluded.title_ar, title_en = excluded.title_en,
-  description_ar = excluded.description_ar, description_en = excluded.description_en,
-  prompt_text_en = excluded.prompt_text_en, prompt_display_ar = excluded.prompt_display_ar,
-  variables = excluded.variables, category_id = excluded.category_id,
-  style = excluded.style, model = excluded.model, tags = excluded.tags;
-
-insert into public.prompts (
-  slug, title_ar, title_en, description_ar, description_en,
-  prompt_text_en, prompt_display_ar, variables, category_id, style, model, tags, status
-) values (
-  'review-highlight-card', 'بطاقة إبراز تقييم مميز', 'Review Highlight Card',
-  'تصميم يبرز تقييماً بارزاً لبناء الثقة', 'Design highlighting a standout review to build trust',
+  'five-star-review-highlight-ad', 'إعلان إبراز تقييم خمس نجوم', 'Five-Star Review Highlight Ad',
+  'من أكثر الإعلانات طلباً لبناء الثقة السريعة قبل الشراء', 'One of the most-requested ad types for building instant pre-purchase trust',
   'eye-catching review highlight card design, five prominent gold stars as the visual anchor, soft {{color}} background, refined quotation accent graphic, clean modern layout with clearly defined space for review text, trust-building commercial polish', 'تصميم بطاقة إبراز تقييم لافت، خمس نجوم ذهبية بارزة كنقطة ارتكاز بصرية، خلفية ناعمة بلون {{color}}، لمسة رسومية راقية لعلامة اقتباس، تخطيط عصري نظيف مع مساحة محددة بوضوح لنص التقييم، لمسة تجارية تبني الثقة',
   '[{"key":"color","label_ar":"لون الخلفية","label_en":"Background color","default":"mint green"}]'::jsonb,
   (select id from public.categories where slug = 'social-ads'),
@@ -375,8 +357,26 @@ insert into public.prompts (
   slug, title_ar, title_en, description_ar, description_en,
   prompt_text_en, prompt_display_ar, variables, category_id, style, model, tags, status
 ) values (
-  'minimal-lettermark-logo', 'لوجو حرفي بسيط', 'Minimal Lettermark Logo',
-  'شعار أنيق مبني على الحرف الأول من اسم العلامة', 'Elegant logo built around the brand''s initial letter',
+  'meta-feed-ad-cta-cover', 'غلاف إعلان فيسبوك/إنستغرام بزر دعوة لإجراء', 'Meta Feed Ad Cover with CTA Button',
+  'التصميم القياسي الأكثر استخداماً في حملات فيسبوك وإنستغرام الممولة', 'The standard, most-used layout in paid Facebook and Instagram ad campaigns',
+  'polished paid social feed ad cover for {{business}}, bold headline text space at the top, {{product}} as the clear hero visual in the center, rounded call-to-action button graphic at the bottom reading ''{{cta}}'', clean brand-safe {{color}} palette, high-contrast professional ad-platform-ready composition', 'غلاف إعلان فيد مدفوع مصقول لـ{{business}}، مساحة عنوان بارز في الأعلى، {{product}} كعنصر بصري مركزي واضح، زر دعوة لإجراء بحواف دائرية أسفل التصميم يحمل نص ''{{cta}}''، لوحة ألوان {{color}} نظيفة وآمنة للعلامة التجارية، تكوين عالي التباين جاهز لمنصات الإعلانات',
+  '[{"key":"business","label_ar":"النشاط التجاري","label_en":"Business","default":"an online store"},{"key":"product","label_ar":"المنتج","label_en":"Product","default":"a leather wallet"},{"key":"cta","label_ar":"نص الزر","label_en":"Button text","default":"SHOP NOW"},{"key":"color","label_ar":"الألوان","label_en":"Colors","default":"black and gold"}]'::jsonb,
+  (select id from public.categories where slug = 'social-ads'),
+  'clean', 'flux-schnell', ARRAY['إعلان', 'فيسبوك', 'إنستغرام']::text[], 'published'
+)
+on conflict (slug) do update set
+  title_ar = excluded.title_ar, title_en = excluded.title_en,
+  description_ar = excluded.description_ar, description_en = excluded.description_en,
+  prompt_text_en = excluded.prompt_text_en, prompt_display_ar = excluded.prompt_display_ar,
+  variables = excluded.variables, category_id = excluded.category_id,
+  style = excluded.style, model = excluded.model, tags = excluded.tags;
+
+insert into public.prompts (
+  slug, title_ar, title_en, description_ar, description_en,
+  prompt_text_en, prompt_display_ar, variables, category_id, style, model, tags, status
+) values (
+  'minimal-lettermark-logo-design', 'لوجو حرفي بسيط', 'Minimal Lettermark Logo',
+  'أسلوب اللوجو الأكثر طلباً للشركات الناشئة — أنيق وقابل للتحجيم على كل الوسائط', 'The most-requested logo style for startups — elegant and scalable across every medium',
   'minimal lettermark logo design featuring the letter ''{{letter}}'', precise geometric clean lines with perfect symmetry, refined {{color}} color palette, flat scalable vector style, centered on a plain white background, modern timeless brand identity, print and app-icon ready quality', 'تصميم لوجو حرفي بسيط يعتمد على الحرف ''{{letter}}''، خطوط هندسية دقيقة بتناظر مثالي، لوحة ألوان راقية {{color}}، أسلوب فيكتور مسطح قابل للتحجيم، في وسط خلفية بيضاء بسيطة، هوية علامة تجارية عصرية خالدة، جودة جاهزة للطباعة وأيقونات التطبيقات',
   '[{"key":"letter","label_ar":"الحرف","label_en":"Letter","default":"N"},{"key":"color","label_ar":"الألوان","label_en":"Colors","default":"navy and gold"}]'::jsonb,
   (select id from public.categories where slug = 'branding-logos'),
@@ -393,8 +393,8 @@ insert into public.prompts (
   slug, title_ar, title_en, description_ar, description_en,
   prompt_text_en, prompt_display_ar, variables, category_id, style, model, tags, status
 ) values (
-  'abstract-mark-logo', 'شعار رمزي تجريدي', 'Abstract Symbol Mark',
-  'رمز تجريدي يعكس مفهوم النشاط التجاري', 'Abstract symbol representing the brand''s concept',
+  'abstract-geometric-mark-logo', 'شعار رمزي تجريدي', 'Abstract Symbol Mark',
+  'رمز تجريدي يعكس مفهوم النشاط التجاري بأسلوب عالمي عصري', 'Abstract symbol representing the brand''s concept in a modern global style',
   'abstract geometric logo mark representing {{concept}}, minimal flat vector shapes with precise clean lines, smooth {{color}} gradient, deliberately balanced negative space, professional scalable brand mark on a plain white background, timeless modern identity quality', 'شعار هندسي تجريدي يمثل مفهوم {{concept}}، أشكال فيكتور مسطحة بخطوط دقيقة ونظيفة، تدرج لوني ناعم {{color}}، توازن مدروس في المساحات الفارغة، علامة تجارية احترافية قابلة للتحجيم على خلفية بيضاء، جودة هوية عصرية خالدة',
   '[{"key":"concept","label_ar":"المفهوم","label_en":"Concept","default":"growth and connection"},{"key":"color","label_ar":"التدرج اللوني","label_en":"Gradient","default":"green to blue"}]'::jsonb,
   (select id from public.categories where slug = 'branding-logos'),
@@ -411,8 +411,8 @@ insert into public.prompts (
   slug, title_ar, title_en, description_ar, description_en,
   prompt_text_en, prompt_display_ar, variables, category_id, style, model, tags, status
 ) values (
-  'mascot-character-logo', 'شعار شخصية كرتونية (ماسكوت)', 'Mascot Character Logo',
-  'شخصية ودودة تمثل العلامة التجارية بأسلوب كرتوني', 'Friendly character representing the brand in cartoon style',
+  'friendly-mascot-character-logo', 'شعار شخصية كرتونية (ماسكوت)', 'Mascot Character Logo',
+  'شخصية ودودة تمثل العلامة التجارية — الأكثر طلباً للعلامات الموجهة للعائلات والأطفال', 'A friendly character representing the brand — the top request for family- and kid-facing brands',
   'friendly cartoon mascot logo of a {{animal}}, bold clean outlines, flat vibrant {{color}} colors, warm playful expression, centered vector illustration on a plain white background, scalable brand mascot style, polished professional finish', 'شعار ماسكوت كرتوني ودود على شكل {{animal}}، خطوط خارجية بارزة ونظيفة، ألوان مسطحة زاهية {{color}}، تعبير مرح ودافئ، رسم فيكتور مركزي على خلفية بيضاء، أسلوب ماسكوت قابل للتحجيم، لمسة نهائية احترافية مصقولة',
   '[{"key":"animal","label_ar":"الحيوان","label_en":"Animal","default":"a fox"},{"key":"color","label_ar":"الألوان","label_en":"Colors","default":"orange and white"}]'::jsonb,
   (select id from public.categories where slug = 'branding-logos'),
@@ -429,9 +429,9 @@ insert into public.prompts (
   slug, title_ar, title_en, description_ar, description_en,
   prompt_text_en, prompt_display_ar, variables, category_id, style, model, tags, status
 ) values (
-  'emblem-badge-logo', 'شعار شارة تقليدية (إمبلم)', 'Classic Emblem Badge Logo',
-  'شعار دائري كلاسيكي يوحي بالثقة والتراث', 'Classic circular badge conveying trust and heritage',
-  'vintage emblem badge logo design for {{business}}, precise circular border with fine ornamental detailing, {{color}} monochrome palette, centered icon of {{icon}}, flat scalable vector illustration on a plain white background, heritage-quality craftsmanship feel', 'تصميم شعار شارة كلاسيكية (إمبلم) لـ {{business}}، حدود دائرية دقيقة بتفاصيل زخرفية أنيقة، لوحة ألوان أحادية {{color}}، أيقونة مركزية لـ {{icon}}، رسم فيكتور مسطح قابل للتحجيم على خلفية بيضاء، إحساس حرفي تراثي عالي الجودة',
+  'vintage-emblem-badge-logo', 'شعار شارة تقليدية (إمبلم)', 'Classic Emblem Badge Logo',
+  'شعار دائري كلاسيكي يوحي بالثقة والتراث — مطلوب كثيراً لمحمصات القهوة والمطاعم التراثية', 'A classic circular badge conveying trust and heritage — heavily requested for coffee roasteries and heritage restaurants',
+  'vintage emblem badge logo design for {{business}}, precise circular border with fine ornamental detailing, {{color}} monochrome palette, centered icon of {{icon}}, flat scalable vector illustration on a plain white background, heritage-quality craftsmanship feel', 'تصميم شعار شارة كلاسيكية (إمبلم) لـ{{business}}، حدود دائرية دقيقة بتفاصيل زخرفية أنيقة، لوحة ألوان أحادية {{color}}، أيقونة مركزية لـ{{icon}}، رسم فيكتور مسطح قابل للتحجيم على خلفية بيضاء، إحساس حرفي تراثي عالي الجودة',
   '[{"key":"business","label_ar":"النشاط التجاري","label_en":"Business","default":"a coffee roastery"},{"key":"icon","label_ar":"الرمز المركزي","label_en":"Central icon","default":"a coffee bean"},{"key":"color","label_ar":"اللون","label_en":"Color","default":"dark brown"}]'::jsonb,
   (select id from public.categories where slug = 'branding-logos'),
   'emblem', 'flux-schnell', ARRAY['لوجو', 'شارة']::text[], 'published'
@@ -447,26 +447,8 @@ insert into public.prompts (
   slug, title_ar, title_en, description_ar, description_en,
   prompt_text_en, prompt_display_ar, variables, category_id, style, model, tags, status
 ) values (
-  'brand-color-palette-board', 'لوحة ألوان الهوية البصرية', 'Brand Color Palette Board',
-  'عرض منظم لألوان الهوية البصرية للعلامة', 'Organized presentation of the brand''s color identity',
-  'clean brand style guide color palette board, five precisely arranged color swatches in {{color}} tones, minimal refined typography labels, professional branding presentation layout, plain white background, print-ready design-system quality', 'لوحة عرض ألوان دليل الهوية البصرية بتصميم نظيف، خمس عينات ألوان مرتبة بدقة بدرجات {{color}}، تسميات نصية أنيقة بسيطة، تخطيط عرض احترافي للهوية، خلفية بيضاء، جودة نظام تصميم جاهزة للطباعة',
-  '[{"key":"color","label_ar":"الدرجات اللونية","label_en":"Color tones","default":"warm earthy"}]'::jsonb,
-  (select id from public.categories where slug = 'branding-logos'),
-  'presentation', 'flux-schnell', ARRAY['هوية', 'ألوان']::text[], 'published'
-)
-on conflict (slug) do update set
-  title_ar = excluded.title_ar, title_en = excluded.title_en,
-  description_ar = excluded.description_ar, description_en = excluded.description_en,
-  prompt_text_en = excluded.prompt_text_en, prompt_display_ar = excluded.prompt_display_ar,
-  variables = excluded.variables, category_id = excluded.category_id,
-  style = excluded.style, model = excluded.model, tags = excluded.tags;
-
-insert into public.prompts (
-  slug, title_ar, title_en, description_ar, description_en,
-  prompt_text_en, prompt_display_ar, variables, category_id, style, model, tags, status
-) values (
-  'business-card-mockup', 'موك أب بطاقة عمل', 'Business Card Mockup',
-  'عرض واقعي لتصميم بطاقة العمل على سطح أنيق', 'Realistic mockup of a business card design on an elegant surface',
+  'business-card-mockup-scene', 'موك أب بطاقة عمل', 'Business Card Mockup',
+  'عرض واقعي لتصميم بطاقة العمل — ضروري لكل عرض هوية بصرية أمام العميل', 'A realistic mockup of a business card design — essential for every brand-identity presentation',
   'photorealistic business card mockup, two cards featuring a {{color}} minimal design, placed on a {{surface}}, soft natural directional lighting, shallow depth of field with a softly blurred background, professional branding photography, physically accurate paper texture and print finish', 'موك أب واقعي لبطاقة عمل، بطاقتان بتصميم بسيط بلون {{color}}، موضوعتان على {{surface}}، إضاءة طبيعية موجهة ناعمة، عمق ميدان ضحل مع خلفية ضبابية ناعمة، تصوير هوية بصرية احترافي، خامة ورق ولمسة طباعة واقعية فيزيائياً',
   '[{"key":"color","label_ar":"اللون","label_en":"Color","default":"black and gold"},{"key":"surface","label_ar":"السطح","label_en":"Surface","default":"a marble table"}]'::jsonb,
   (select id from public.categories where slug = 'branding-logos'),
@@ -483,26 +465,8 @@ insert into public.prompts (
   slug, title_ar, title_en, description_ar, description_en,
   prompt_text_en, prompt_display_ar, variables, category_id, style, model, tags, status
 ) values (
-  'storefront-signage-mockup', 'موك أب لافتة واجهة متجر', 'Storefront Signage Mockup',
-  'عرض الشعار على واجهة متجر واقعية', 'Logo displayed on a realistic store front',
-  'photorealistic storefront signage mockup for {{business}}, modern architectural shop exterior, clean {{color}} signage board with clear logo placement space, natural daytime lighting with accurate shadows, architectural photography style, high-detail realistic materials', 'موك أب واقعي للافتة واجهة متجر لـ {{business}}، واجهة محل معمارية عصرية، لوحة لافتة نظيفة بلون {{color}} مع مساحة واضحة لوضع الشعار، إضاءة نهارية طبيعية بظلال دقيقة، أسلوب تصوير معماري، خامات واقعية عالية التفاصيل',
-  '[{"key":"business","label_ar":"النشاط التجاري","label_en":"Business","default":"a bakery"},{"key":"color","label_ar":"لون اللافتة","label_en":"Signage color","default":"warm cream and wood"}]'::jsonb,
-  (select id from public.categories where slug = 'branding-logos'),
-  'mockup', 'flux-schnell', ARRAY['هوية', 'واجهة متجر']::text[], 'published'
-)
-on conflict (slug) do update set
-  title_ar = excluded.title_ar, title_en = excluded.title_en,
-  description_ar = excluded.description_ar, description_en = excluded.description_en,
-  prompt_text_en = excluded.prompt_text_en, prompt_display_ar = excluded.prompt_display_ar,
-  variables = excluded.variables, category_id = excluded.category_id,
-  style = excluded.style, model = excluded.model, tags = excluded.tags;
-
-insert into public.prompts (
-  slug, title_ar, title_en, description_ar, description_en,
-  prompt_text_en, prompt_display_ar, variables, category_id, style, model, tags, status
-) values (
-  'app-icon-design', 'تصميم أيقونة تطبيق', 'App Icon Design',
-  'أيقونة تطبيق حديثة بزوايا دائرية وألوان متدرجة', 'Modern rounded app icon with gradient colors',
+  'modern-app-icon-design', 'تصميم أيقونة تطبيق', 'Modern App Icon Design',
+  'أيقونة تطبيق حديثة بزوايا دائرية وألوان متدرجة — مطلوبة لكل إطلاق تطبيق جديد', 'A modern rounded app icon with gradient colors — required for every new app launch',
   'modern mobile app icon design, rounded square superellipse shape, simple {{symbol}} symbol precisely centered, smooth {{color}} gradient background, flat minimal style, pixel-perfect edges, iOS/Android app store submission quality', 'تصميم أيقونة تطبيق جوال عصرية، شكل مربع بزوايا دائرية (superellipse)، رمز {{symbol}} بسيط في المنتصف بدقة، خلفية متدرجة ناعمة بلون {{color}}، أسلوب مسطح بسيط، حواف دقيقة بالبكسل، جودة جاهزة لمتاجر iOS وAndroid',
   '[{"key":"symbol","label_ar":"الرمز","label_en":"Symbol","default":"a chat bubble"},{"key":"color","label_ar":"التدرج اللوني","label_en":"Gradient","default":"purple to pink"}]'::jsonb,
   (select id from public.categories where slug = 'branding-logos'),
@@ -519,12 +483,12 @@ insert into public.prompts (
   slug, title_ar, title_en, description_ar, description_en,
   prompt_text_en, prompt_display_ar, variables, category_id, style, model, tags, status
 ) values (
-  'letterhead-mockup', 'موك أب ورق رسمي (Letterhead)', 'Letterhead Mockup',
-  'عرض واقعي لتصميم الورق الرسمي للمراسلات', 'Realistic mockup of official correspondence stationery',
-  'photorealistic letterhead mockup for {{business}}, minimal {{color}} header design with clear logo placement space, clean textured paper, top-down flat lay photography with soft even lighting, professional stationery presentation, print-accurate detail', 'موك أب واقعي لورق رسمي لـ{{business}}، تصميم ترويسة بسيط بلون {{color}} مع مساحة واضحة للشعار، خامة ورق نظيفة، تصوير من الأعلى بإضاءة ناعمة متساوية، عرض قرطاسية احترافي، تفاصيل دقيقة مطابقة للطباعة',
-  '[{"key":"business","label_ar":"النشاط التجاري","label_en":"Business","default":"a law firm"},{"key":"color","label_ar":"اللون","label_en":"Color","default":"navy blue"}]'::jsonb,
+  'storefront-signage-mockup-scene', 'موك أب لافتة واجهة متجر', 'Storefront Signage Mockup',
+  'عرض الشعار على واجهة متجر واقعية — من أقوى الطرق لبيع الهوية البصرية لصاحب النشاط', 'The logo displayed on a realistic storefront — one of the most persuasive ways to sell a brand identity to a business owner',
+  'photorealistic storefront signage mockup for {{business}}, modern architectural shop exterior, clean {{color}} signage board with clear logo placement space, natural daytime lighting with accurate shadows, architectural photography style, high-detail realistic materials', 'موك أب واقعي للافتة واجهة متجر لـ{{business}}، واجهة محل معمارية عصرية، لوحة لافتة نظيفة بلون {{color}} مع مساحة واضحة لوضع الشعار، إضاءة نهارية طبيعية بظلال دقيقة، أسلوب تصوير معماري، خامات واقعية عالية التفاصيل',
+  '[{"key":"business","label_ar":"النشاط التجاري","label_en":"Business","default":"a bakery"},{"key":"color","label_ar":"لون اللافتة","label_en":"Signage color","default":"warm cream and wood"}]'::jsonb,
   (select id from public.categories where slug = 'branding-logos'),
-  'mockup', 'flux-schnell', ARRAY['هوية', 'قرطاسية']::text[], 'published'
+  'mockup', 'flux-schnell', ARRAY['هوية', 'واجهة متجر']::text[], 'published'
 )
 on conflict (slug) do update set
   title_ar = excluded.title_ar, title_en = excluded.title_en,
@@ -537,12 +501,66 @@ insert into public.prompts (
   slug, title_ar, title_en, description_ar, description_en,
   prompt_text_en, prompt_display_ar, variables, category_id, style, model, tags, status
 ) values (
-  'corporate-headshot', 'صورة شخصية احترافية للأعمال', 'Professional Corporate Headshot',
-  'صورة بورتريه رسمية تناسب الملفات الشخصية المهنية', 'Formal portrait suited for professional profiles',
+  'brand-color-palette-board', 'لوحة ألوان الهوية البصرية', 'Brand Color Palette Board',
+  'عرض منظم لألوان الهوية البصرية — عنصر أساسي في أي دليل هوية احترافي', 'An organized presentation of the brand''s color identity — a core piece of any professional brand guideline',
+  'clean brand style guide color palette board, five precisely arranged color swatches in {{color}} tones, minimal refined typography labels, professional branding presentation layout, plain white background, print-ready design-system quality', 'لوحة عرض ألوان دليل الهوية البصرية بتصميم نظيف، خمس عينات ألوان مرتبة بدقة بدرجات {{color}}، تسميات نصية أنيقة بسيطة، تخطيط عرض احترافي للهوية، خلفية بيضاء، جودة نظام تصميم جاهزة للطباعة',
+  '[{"key":"color","label_ar":"الدرجات اللونية","label_en":"Color tones","default":"warm earthy"}]'::jsonb,
+  (select id from public.categories where slug = 'branding-logos'),
+  'presentation', 'flux-schnell', ARRAY['هوية', 'ألوان']::text[], 'published'
+)
+on conflict (slug) do update set
+  title_ar = excluded.title_ar, title_en = excluded.title_en,
+  description_ar = excluded.description_ar, description_en = excluded.description_en,
+  prompt_text_en = excluded.prompt_text_en, prompt_display_ar = excluded.prompt_display_ar,
+  variables = excluded.variables, category_id = excluded.category_id,
+  style = excluded.style, model = excluded.model, tags = excluded.tags;
+
+insert into public.prompts (
+  slug, title_ar, title_en, description_ar, description_en,
+  prompt_text_en, prompt_display_ar, variables, category_id, style, model, tags, status
+) values (
+  'social-profile-avatar-logo', 'لوجو صورة بروفايل للسوشيال ميديا', 'Social Media Profile Avatar Logo',
+  'لوجو دائري مصغّر مصمم خصيصاً ليبدو واضحاً كصورة بروفايل — من أعلى الطلبات بحثاً على جوجل', 'A compact circular logo designed specifically to read clearly as a tiny profile picture — one of the highest-searched requests on Google',
+  'simple bold circular profile picture logo design for {{business}}, high contrast {{color}} palette that stays legible at small sizes, single clean centered icon or initial, no fine details that disappear when scaled down, flat vector style, plain background, optimized for Instagram/TikTok/WhatsApp avatar use', 'تصميم لوجو دائري بسيط وجريء لصورة البروفايل لـ{{business}}، لوحة ألوان {{color}} عالية التباين تبقى واضحة بالأحجام الصغيرة، أيقونة أو حرف مركزي واحد نظيف، بلا تفاصيل دقيقة تختفي عند التصغير، أسلوب فيكتور مسطح، خلفية بسيطة، محسّن للاستخدام كصورة بروفايل على إنستغرام وتيك توك وواتساب',
+  '[{"key":"business","label_ar":"النشاط التجاري","label_en":"Business","default":"a fitness studio"},{"key":"color","label_ar":"الألوان","label_en":"Colors","default":"black and lime green"}]'::jsonb,
+  (select id from public.categories where slug = 'branding-logos'),
+  'flat vector', 'flux-schnell', ARRAY['لوجو', 'بروفايل', 'سوشيال ميديا']::text[], 'published'
+)
+on conflict (slug) do update set
+  title_ar = excluded.title_ar, title_en = excluded.title_en,
+  description_ar = excluded.description_ar, description_en = excluded.description_en,
+  prompt_text_en = excluded.prompt_text_en, prompt_display_ar = excluded.prompt_display_ar,
+  variables = excluded.variables, category_id = excluded.category_id,
+  style = excluded.style, model = excluded.model, tags = excluded.tags;
+
+insert into public.prompts (
+  slug, title_ar, title_en, description_ar, description_en,
+  prompt_text_en, prompt_display_ar, variables, category_id, style, model, tags, status
+) values (
+  'branded-tshirt-merch-mockup', 'موك أب تيشيرت بالهوية التجارية', 'Branded T-Shirt Merch Mockup',
+  'عرض الشعار على منتج ملبوس واقعي — ترند صاعد قوي في تصميم البضائع الترويجية (ميرتش)', 'The logo shown on a realistic wearable product — a strongly rising trend in branded merch design',
+  'photorealistic t-shirt mockup, a {{color}} shirt worn on a person with the {{business}} logo printed cleanly centered on the chest, natural fabric folds and texture, soft studio lighting, plain neutral background, realistic screen-print finish, apparel-branding presentation quality', 'موك أب واقعي لتيشيرت، قميص بلون {{color}} يرتديه شخص مع طباعة شعار {{business}} بوضوح في المنتصف على الصدر، طيات قماش وملمس طبيعي، إضاءة استوديو ناعمة، خلفية محايدة بسيطة، لمسة طباعة سيلك سكرين واقعية، جودة عرض ملابس بالهوية التجارية',
+  '[{"key":"business","label_ar":"النشاط التجاري","label_en":"Business","default":"a streetwear brand"},{"key":"color","label_ar":"لون القميص","label_en":"Shirt color","default":"black"}]'::jsonb,
+  (select id from public.categories where slug = 'branding-logos'),
+  'mockup', 'flux-schnell', ARRAY['هوية', 'ميرتش', 'تيشيرت']::text[], 'published'
+)
+on conflict (slug) do update set
+  title_ar = excluded.title_ar, title_en = excluded.title_en,
+  description_ar = excluded.description_ar, description_en = excluded.description_en,
+  prompt_text_en = excluded.prompt_text_en, prompt_display_ar = excluded.prompt_display_ar,
+  variables = excluded.variables, category_id = excluded.category_id,
+  style = excluded.style, model = excluded.model, tags = excluded.tags;
+
+insert into public.prompts (
+  slug, title_ar, title_en, description_ar, description_en,
+  prompt_text_en, prompt_display_ar, variables, category_id, style, model, tags, status
+) values (
+  'ai-linkedin-headshot', 'صورة شخصية احترافية لينكدإن (هيدشوت بالذكاء الاصطناعي)', 'AI LinkedIn Professional Headshot',
+  'الأكثر بحثاً على جوجل عالمياً في فئة البورتريه — بديل فوري لجلسة تصوير احترافية مكلفة', 'The single most globally Google-searched portrait category — an instant substitute for an expensive professional photo session',
   'professional corporate headshot portrait of a {{person}}, wearing {{outfit}}, neutral gray studio background, soft even three-point lighting, 85mm portrait lens with subtle background compression, confident authentic expression, natural skin texture with no over-smoothing, sharp eye focus, high-end LinkedIn-quality photography', 'صورة بورتريه احترافية لـ{{person}}، يرتدي {{outfit}}، خلفية استوديو رمادية محايدة، إضاءة ثلاثية الاتجاه ناعمة متساوية، عدسة بورتريه 85 مم مع ضغط خلفية خفيف، تعبير واثق وأصيل، ملمس بشرة طبيعي بلا تنعيم مفرط، تركيز حاد على العينين، تصوير بجودة LinkedIn الاحترافية',
   '[{"key":"person","label_ar":"الشخص","label_en":"Person","default":"a businesswoman"},{"key":"outfit","label_ar":"الزي","label_en":"Outfit","default":"a tailored navy blazer"}]'::jsonb,
   (select id from public.categories where slug = 'portraits'),
-  'corporate', 'flux-schnell', ARRAY['بورتريه', 'أعمال']::text[], 'published'
+  'corporate', 'flux-schnell', ARRAY['بورتريه', 'أعمال', 'هيدشوت']::text[], 'published'
 )
 on conflict (slug) do update set
   title_ar = excluded.title_ar, title_en = excluded.title_en,
@@ -555,8 +573,8 @@ insert into public.prompts (
   slug, title_ar, title_en, description_ar, description_en,
   prompt_text_en, prompt_display_ar, variables, category_id, style, model, tags, status
 ) values (
-  'cinematic-outdoor-portrait', 'بورتريه سينمائي خارجي', 'Cinematic Outdoor Portrait',
-  'بورتريه بإضاءة الغروب وأجواء سينمائية', 'Portrait with golden hour lighting and cinematic mood',
+  'cinematic-golden-hour-portrait', 'بورتريه سينمائي بإضاءة الغروب', 'Cinematic Golden Hour Portrait',
+  'بورتريه بإضاءة الغروب وأجواء سينمائية — من أكثر أنماط البورتريه بحثاً للمحتوى الشخصي', 'A portrait with golden hour lighting and cinematic mood — one of the most-searched portrait styles for personal content',
   'cinematic portrait of a {{person}}, golden hour sunset lighting, warm rim light separating the subject from the background, shallow depth of field with a smoothly blurred outdoor background, subtle film grain, teal-and-orange inspired color grading, moody atmospheric mood, professional 85mm lens photography', 'بورتريه سينمائي لـ{{person}}، إضاءة غروب الشمس الذهبية، ضوء حافة دافئ يفصل الشخص عن الخلفية، عمق ميدان ضحل مع خلفية خارجية ضبابية ناعمة، حبيبات فيلم خفيفة، تدرج ألوان مستوحى من السماوي والبرتقالي، أجواء درامية غامضة، تصوير احترافي بعدسة 85 مم',
   '[{"key":"person","label_ar":"الشخص","label_en":"Person","default":"a young man"}]'::jsonb,
   (select id from public.categories where slug = 'portraits'),
@@ -573,8 +591,8 @@ insert into public.prompts (
   slug, title_ar, title_en, description_ar, description_en,
   prompt_text_en, prompt_display_ar, variables, category_id, style, model, tags, status
 ) values (
-  'studio-beauty-portrait', 'بورتريه تجميلي في الاستوديو', 'Studio Beauty Portrait',
-  'بورتريه ناعم يبرز نضارة البشرة لإعلانات التجميل', 'Soft glowing portrait highlighting skin, ideal for beauty ads',
+  'studio-beauty-glow-portrait', 'بورتريه تجميلي في الاستوديو', 'Studio Beauty Portrait',
+  'بورتريه ناعم يبرز نضارة البشرة — أساسي لإعلانات التجميل والعناية بالبشرة', 'A soft glowing portrait highlighting skin — essential for beauty and skincare advertising',
   'beauty studio portrait of a {{person}}, flawless naturally glowing skin, soft beauty-dish lighting with a gentle catchlight in the eyes, clean {{background_color}} background, minimal fresh makeup, sharp macro-level facial detail, cosmetics advertising quality, color-accurate skin tones', 'بورتريه تجميلي في الاستوديو لـ{{person}}، بشرة متوهجة طبيعياً وخالية من العيوب، إضاءة طبق تجميل ناعمة مع بريق خفيف في العينين، خلفية نظيفة بلون {{background_color}}، مكياج بسيط منعش، تفاصيل وجه دقيقة جداً، جودة إعلانات مستحضرات التجميل، دقة ألوان بشرة واقعية',
   '[{"key":"person","label_ar":"الشخص","label_en":"Person","default":"a woman"},{"key":"background_color","label_ar":"لون الخلفية","label_en":"Background color","default":"soft pink"}]'::jsonb,
   (select id from public.categories where slug = 'portraits'),
@@ -591,8 +609,8 @@ insert into public.prompts (
   slug, title_ar, title_en, description_ar, description_en,
   prompt_text_en, prompt_display_ar, variables, category_id, style, model, tags, status
 ) values (
-  'traditional-attire-portrait', 'بورتريه بالزي التراثي', 'Traditional Attire Portrait',
-  'بورتريه يبرز الزي التراثي الخليجي بإضاءة فاخرة', 'Portrait highlighting traditional Gulf attire with elegant lighting',
+  'traditional-gulf-attire-portrait', 'بورتريه بالزي التراثي الخليجي', 'Traditional Gulf Attire Portrait',
+  'بورتريه يبرز الزي التراثي بإضاءة فاخرة — الأكثر طلباً محلياً في مناسبات اليوم الوطني والأعياد', 'A portrait highlighting traditional attire with elegant lighting — the top local request for National Day and holiday occasions',
   'elegant portrait of a {{person}} wearing traditional {{attire}}, rich warm directional lighting, ornate patterned background, richly detailed fabric texture and embroidery, cultural heritage photography, high production quality, dignified composed posture', 'بورتريه أنيق لـ{{person}} يرتدي {{attire}} التراثي، إضاءة موجهة دافئة وفاخرة، خلفية بزخارف مزركشة، تفاصيل قماش وتطريز دقيقة جداً، تصوير تراثي ثقافي، جودة إنتاج عالية، وقفة متزنة ووقورة',
   '[{"key":"person","label_ar":"الشخص","label_en":"Person","default":"a man"},{"key":"attire","label_ar":"الزي","label_en":"Attire","default":"a bisht over a white thobe"}]'::jsonb,
   (select id from public.categories where slug = 'portraits'),
@@ -609,12 +627,30 @@ insert into public.prompts (
   slug, title_ar, title_en, description_ar, description_en,
   prompt_text_en, prompt_display_ar, variables, category_id, style, model, tags, status
 ) values (
-  'candid-lifestyle-portrait', 'بورتريه عفوي بأسلوب حياتي', 'Candid Lifestyle Portrait',
-  'لحظة طبيعية غير مصطنعة تناسب المحتوى الشخصي', 'A natural unposed moment, great for personal content',
-  'candid lifestyle portrait of a {{person}} laughing naturally at {{location}}, soft natural daylight, genuinely unposed authentic moment, warm film-inspired color grading, documentary photography style, natural motion blur on background elements, real emotion captured mid-moment', 'بورتريه عفوي بأسلوب حياتي لـ{{person}} يضحك بشكل طبيعي في {{location}}، ضوء نهار طبيعي ناعم، لحظة أصيلة غير مصطنعة تماماً، تدرج ألوان دافئ مستوحى من الأفلام، أسلوب تصوير وثائقي، ضبابية حركة طبيعية في عناصر الخلفية، مشاعر حقيقية ملتقطة في لحظتها',
-  '[{"key":"person","label_ar":"الشخص","label_en":"Person","default":"a young woman"},{"key":"location","label_ar":"المكان","label_en":"Location","default":"a busy souq"}]'::jsonb,
+  'graduation-cap-gown-portrait', 'بورتريه تخرج بقبعة وردائه', 'Graduation Cap & Gown Portrait',
+  'بورتريه احتفالي موسمي عالي الطلب مع كل موسم تخرج جامعي', 'A celebratory seasonal portrait in high demand every university graduation season',
+  'joyful graduation portrait of a {{person}} wearing a cap and gown, confidently holding a rolled diploma, soft golden hour outdoor lighting on a university campus backdrop, genuine proud smile, shallow depth of field with warm bokeh, authentic celebratory documentary photography quality', 'بورتريه تخرج مفعم بالفرح لـ{{person}} يرتدي قبعة ورداء التخرج، يحمل شهادة ملفوفة بثقة، إضاءة ذهبية خارجية ناعمة أمام خلفية حرم جامعي، ابتسامة فخر صادقة، عمق ميدان ضحل ببوكيه دافئ، جودة تصوير وثائقي احتفالي أصيل',
+  '[{"key":"person","label_ar":"الشخص","label_en":"Person","default":"a young graduate"}]'::jsonb,
   (select id from public.categories where slug = 'portraits'),
-  'candid', 'flux-schnell', ARRAY['بورتريه', 'حياتي']::text[], 'published'
+  'candid', 'flux-schnell', ARRAY['بورتريه', 'تخرج']::text[], 'published'
+)
+on conflict (slug) do update set
+  title_ar = excluded.title_ar, title_en = excluded.title_en,
+  description_ar = excluded.description_ar, description_en = excluded.description_en,
+  prompt_text_en = excluded.prompt_text_en, prompt_display_ar = excluded.prompt_display_ar,
+  variables = excluded.variables, category_id = excluded.category_id,
+  style = excluded.style, model = excluded.model, tags = excluded.tags;
+
+insert into public.prompts (
+  slug, title_ar, title_en, description_ar, description_en,
+  prompt_text_en, prompt_display_ar, variables, category_id, style, model, tags, status
+) values (
+  'wedding-engagement-couple-portrait', 'بورتريه زفاف/خطوبة رومانسي', 'Wedding & Engagement Couple Portrait',
+  'أحد أعلى فئات البورتريه طلباً وقيمة سوقية — سوق ضخم على مدار السنة', 'One of the highest-demand and highest-value portrait categories — a massive year-round market',
+  'romantic wedding-style portrait of a {{couple}}, soft golden hour outdoor lighting, gentle intimate pose, elegant {{outfit}} attire, dreamy shallow depth of field with warm glowing bokeh, fine-art wedding photography quality, tender authentic emotion, cinematic color grading', 'بورتريه رومانسي بأسلوب الزفاف لـ{{couple}}، إضاءة ذهبية خارجية ناعمة، وضعية حميمة رقيقة، زي أنيق {{outfit}}، عمق ميدان حالم ضحل مع بوكيه دافئ متوهج، جودة تصوير زفاف فني راقٍ، مشاعر أصيلة رقيقة، تدرج ألوان سينمائي',
+  '[{"key":"couple","label_ar":"الثنائي","label_en":"Couple","default":"a bride and groom"},{"key":"outfit","label_ar":"الزي","label_en":"Attire","default":"a white wedding dress and a black tuxedo"}]'::jsonb,
+  (select id from public.categories where slug = 'portraits'),
+  'romantic', 'flux-schnell', ARRAY['بورتريه', 'زفاف']::text[], 'published'
 )
 on conflict (slug) do update set
   title_ar = excluded.title_ar, title_en = excluded.title_en,
@@ -628,7 +664,7 @@ insert into public.prompts (
   prompt_text_en, prompt_display_ar, variables, category_id, style, model, tags, status
 ) values (
   'dramatic-black-white-portrait', 'بورتريه درامي بالأبيض والأسود', 'Dramatic Black & White Portrait',
-  'بورتريه فني كلاسيكي بتباين قوي وظلال درامية', 'Classic artistic portrait with strong contrast and dramatic shadows',
+  'بورتريه فني كلاسيكي بتباين قوي وظلال درامية', 'A classic artistic portrait with strong contrast and dramatic shadows',
   'dramatic black and white portrait of a {{person}}, strong directional side lighting (Rembrandt style), deep rich shadows, high tonal contrast, fine-art photography quality, tack-sharp detailed eyes, timeless classic mood, full dynamic range from pure black to bright highlight', 'بورتريه درامي بالأبيض والأسود لـ{{person}}، إضاءة جانبية قوية موجهة (أسلوب رامبرانت)، ظلال عميقة وغنية، تباين لوني عالٍ، جودة تصوير فني كلاسيكي، عينان حادتا التفاصيل جداً، أجواء خالدة كلاسيكية، مدى ديناميكي كامل من الأسود التام للإضاءة الساطعة',
   '[{"key":"person","label_ar":"الشخص","label_en":"Person","default":"an elderly man"}]'::jsonb,
   (select id from public.categories where slug = 'portraits'),
@@ -645,8 +681,8 @@ insert into public.prompts (
   slug, title_ar, title_en, description_ar, description_en,
   prompt_text_en, prompt_display_ar, variables, category_id, style, model, tags, status
 ) values (
-  'family-group-portrait', 'بورتريه عائلي جماعي', 'Family Group Portrait',
-  'صورة جماعية دافئة تناسب المناسبات العائلية', 'Warm group photo suited for family occasions',
+  'warm-family-group-portrait', 'بورتريه عائلي جماعي دافئ', 'Warm Family Group Portrait',
+  'صورة جماعية دافئة تناسب المناسبات العائلية والاحتفالات الموسمية', 'A warm group photo suited for family occasions and seasonal celebrations',
   'warm family group portrait of {{group}}, soft golden hour outdoor lighting, natural genuine smiles and relaxed poses, coordinated {{color}} outfit tones, professional family photography style, gentle bokeh background, heartfelt authentic connection captured', 'بورتريه عائلي جماعي دافئ لـ{{group}}، إضاءة خارجية ذهبية ناعمة، ابتسامات طبيعية صادقة ووضعيات مريحة، ألوان ملابس منسقة {{color}}، أسلوب تصوير عائلي احترافي، خلفية بوكيه ناعمة، ترابط أصيل ملموس',
   '[{"key":"group","label_ar":"أفراد العائلة","label_en":"Family members","default":"a family of four"},{"key":"color","label_ar":"ألوان الملابس","label_en":"Outfit colors","default":"beige and white"}]'::jsonb,
   (select id from public.categories where slug = 'portraits'),
@@ -663,8 +699,8 @@ insert into public.prompts (
   slug, title_ar, title_en, description_ar, description_en,
   prompt_text_en, prompt_display_ar, variables, category_id, style, model, tags, status
 ) values (
-  'team-corporate-portrait', 'بورتريه فريق العمل', 'Corporate Team Portrait',
-  'صورة جماعية احترافية لفريق العمل داخل المكتب', 'Professional group photo of a team inside the office',
+  'corporate-team-office-portrait', 'بورتريه فريق العمل داخل المكتب', 'Corporate Team Portrait',
+  'صورة جماعية احترافية للموقع الإلكتروني وصفحة "من نحن"', 'A professional group photo for the company website and "About Us" page',
   'professional corporate team portrait of {{team_size}} colleagues, modern office background with soft depth blur, bright even lighting, confident friendly poses, business casual attire, high-end corporate photography, natural group composition with clear individual detail', 'بورتريه احترافي لفريق عمل مكوّن من {{team_size}}، خلفية مكتب عصري بضبابية ناعمة، إضاءة ساطعة متساوية، وضعيات واثقة وودية، زي عمل غير رسمي، تصوير مؤسسي راقٍ، تكوين جماعي طبيعي مع وضوح تفاصيل كل فرد',
   '[{"key":"team_size","label_ar":"عدد أفراد الفريق","label_en":"Team size","default":"five"}]'::jsonb,
   (select id from public.categories where slug = 'portraits'),
@@ -681,8 +717,44 @@ insert into public.prompts (
   slug, title_ar, title_en, description_ar, description_en,
   prompt_text_en, prompt_display_ar, variables, category_id, style, model, tags, status
 ) values (
-  '3d-render-character', 'شخصية برندر ثلاثي الأبعاد', '3D Rendered Character',
-  'شخصية بأسلوب رندر ثلاثي الأبعاد ناعم وحديث', 'Character in a smooth modern 3D render style',
+  'candid-lifestyle-street-portrait', 'بورتريه عفوي بأسلوب حياتي في الشارع', 'Candid Lifestyle Street Portrait',
+  'لحظة طبيعية غير مصطنعة تناسب المحتوى الشخصي والإنفلونسر', 'A natural unposed moment, great for personal and influencer content',
+  'candid lifestyle portrait of a {{person}} laughing naturally at {{location}}, soft natural daylight, genuinely unposed authentic moment, warm film-inspired color grading, documentary photography style, natural motion blur on background elements, real emotion captured mid-moment', 'بورتريه عفوي بأسلوب حياتي لـ{{person}} يضحك بشكل طبيعي في {{location}}، ضوء نهار طبيعي ناعم، لحظة أصيلة غير مصطنعة تماماً، تدرج ألوان دافئ مستوحى من الأفلام، أسلوب تصوير وثائقي، ضبابية حركة طبيعية في عناصر الخلفية، مشاعر حقيقية ملتقطة في لحظتها',
+  '[{"key":"person","label_ar":"الشخص","label_en":"Person","default":"a young woman"},{"key":"location","label_ar":"المكان","label_en":"Location","default":"a busy souq"}]'::jsonb,
+  (select id from public.categories where slug = 'portraits'),
+  'candid', 'flux-schnell', ARRAY['بورتريه', 'حياتي']::text[], 'published'
+)
+on conflict (slug) do update set
+  title_ar = excluded.title_ar, title_en = excluded.title_en,
+  description_ar = excluded.description_ar, description_en = excluded.description_en,
+  prompt_text_en = excluded.prompt_text_en, prompt_display_ar = excluded.prompt_display_ar,
+  variables = excluded.variables, category_id = excluded.category_id,
+  style = excluded.style, model = excluded.model, tags = excluded.tags;
+
+insert into public.prompts (
+  slug, title_ar, title_en, description_ar, description_en,
+  prompt_text_en, prompt_display_ar, variables, category_id, style, model, tags, status
+) values (
+  'studio-ghibli-style-illustration', 'رسمة بأسلوب استوديو جيبلي', 'Studio Ghibli-Style Illustration',
+  'الأسلوب الفني الأعلى بحثاً وترنداً في العالم حالياً — تحويل أي مشهد أو شخص لرسمة حالمة بأسلوب الأنمي الياباني الكلاسيكي', 'The single most globally trending and searched art style right now — turning any scene or person into a dreamy classic Japanese-anime-inspired illustration',
+  'hand-painted Studio Ghibli-inspired illustration of {{subject}}, soft painterly watercolor-textured backgrounds, warm nostalgic lighting, whimsical dreamlike atmosphere, gentle rounded character design, lush detailed nature elements, vibrant yet soft color palette, iconic Japanese animation film aesthetic, high-quality frame-worthy composition', 'رسمة مرسومة يدوياً مستوحاة من أسلوب استوديو جيبلي لـ{{subject}}، خلفيات ناعمة بخامة ألوان مائية، إضاءة دافئة حنينية، أجواء حالمة خيالية، تصميم شخصيات ناعم مستدير، عناصر طبيعة غنية بالتفاصيل، لوحة ألوان زاهية وناعمة في آن واحد، جمالية أفلام الأنمي الياباني الشهيرة، تكوين بجودة عالية تستحق التأطير',
+  '[{"key":"subject","label_ar":"الموضوع","label_en":"Subject","default":"a girl standing in a sunlit meadow with a cat"}]'::jsonb,
+  (select id from public.categories where slug = 'art-styles'),
+  'ghibli', 'flux-schnell', ARRAY['فني', 'جيبلي', 'ترند']::text[], 'published'
+)
+on conflict (slug) do update set
+  title_ar = excluded.title_ar, title_en = excluded.title_en,
+  description_ar = excluded.description_ar, description_en = excluded.description_en,
+  prompt_text_en = excluded.prompt_text_en, prompt_display_ar = excluded.prompt_display_ar,
+  variables = excluded.variables, category_id = excluded.category_id,
+  style = excluded.style, model = excluded.model, tags = excluded.tags;
+
+insert into public.prompts (
+  slug, title_ar, title_en, description_ar, description_en,
+  prompt_text_en, prompt_display_ar, variables, category_id, style, model, tags, status
+) values (
+  '3d-pixar-style-character', 'شخصية برندر ثلاثي الأبعاد بأسلوب بيكسار', '3D Pixar-Style Rendered Character',
+  'شخصية بأسلوب رندر ثلاثي الأبعاد ناعم وحديث — من أعلى الأنماط طلباً لمحتوى الأطفال والماسكوت', 'A character in a smooth modern 3D render style — one of the top-requested styles for kids'' content and mascots',
   'cute 3D rendered character of {{subject}}, smooth clay-like subsurface-scattering material, soft three-point studio lighting, vibrant {{color}} colors, Pixar/Disney-inspired stylized render, centered composition, ultra high quality octane-style render, crisp clean edges', 'شخصية برندر ثلاثي الأبعاد لطيفة لـ{{subject}}، خامة ناعمة شبيهة بالصلصال مع تشتت ضوئي تحت السطح، إضاءة استوديو ثلاثية الاتجاه ناعمة، ألوان زاهية {{color}}، أسلوب مستوحى من بيكسار وديزني، تكوين مركزي، رندر فائق الجودة، حواف نظيفة حادة',
   '[{"key":"subject","label_ar":"الموضوع","label_en":"Subject","default":"a small robot"},{"key":"color","label_ar":"الألوان","label_en":"Colors","default":"orange and teal"}]'::jsonb,
   (select id from public.categories where slug = 'art-styles'),
@@ -699,8 +771,8 @@ insert into public.prompts (
   slug, title_ar, title_en, description_ar, description_en,
   prompt_text_en, prompt_display_ar, variables, category_id, style, model, tags, status
 ) values (
-  'anime-style-scene', 'مشهد بأسلوب الأنمي', 'Anime Style Scene',
-  'مشهد ملون بأسلوب رسوم الأنمي الياباني', 'Colorful scene drawn in Japanese anime art style',
+  'anime-dramatic-scene-art', 'مشهد درامي بأسلوب الأنمي', 'Dramatic Anime Style Scene',
+  'مشهد ملون بأسلوب رسوم الأنمي الياباني — قاعدة جماهيرية ضخمة عالمياً', 'A colorful scene drawn in Japanese anime art style — a massive global fanbase',
   'high-quality anime style illustration of {{subject}}, vibrant cel-shaded colors with clean line art, dramatic {{lighting}} lighting with strong rim highlights, Japanese animation aesthetic, dynamic dramatic composition, crisp detailed background art, studio-quality frame', 'رسمة عالية الجودة بأسلوب الأنمي لـ{{subject}}، ألوان زاهية بتظليل خلوي ورسم خطوط نظيف، إضاءة {{lighting}} درامية بإبرازات حافة قوية، جمالية الرسوم المتحركة اليابانية، تكوين درامي ديناميكي، خلفية دقيقة التفاصيل، جودة استوديو احترافية',
   '[{"key":"subject","label_ar":"الموضوع","label_en":"Subject","default":"a warrior standing on a rooftop"},{"key":"lighting","label_ar":"الإضاءة","label_en":"Lighting","default":"sunset"}]'::jsonb,
   (select id from public.categories where slug = 'art-styles'),
@@ -717,8 +789,8 @@ insert into public.prompts (
   slug, title_ar, title_en, description_ar, description_en,
   prompt_text_en, prompt_display_ar, variables, category_id, style, model, tags, status
 ) values (
-  'cinematic-movie-still', 'لقطة سينمائية بأسلوب الأفلام', 'Cinematic Movie Still',
-  'مشهد بجودة وأجواء لقطة فيلم سينمائي', 'Scene with the quality and mood of a film still',
+  'cinematic-movie-still-frame', 'لقطة سينمائية بأسلوب الأفلام', 'Cinematic Movie Still',
+  'مشهد بجودة وأجواء لقطة فيلم سينمائي هوليوودي', 'A scene with the quality and mood of a Hollywood film still',
   'cinematic movie still of {{scene}}, anamorphic lens flare, rich teal-and-orange color grading, dramatic atmospheric haze, wide 2.39:1 aspect ratio composition, subtle film grain, blockbuster production quality, sharp focal subject with soft background falloff', 'لقطة سينمائية من {{scene}}، توهج عدسة أنامورفيك، تدرج ألوان غني بين السماوي والبرتقالي، ضباب جوي درامي، تكوين بنسبة عرض سينمائية 2.39:1، حبيبات فيلم خفيفة، جودة إنتاج أفلام هوليوود، موضوع محوري حاد مع تلاشي خلفية ناعم',
   '[{"key":"scene","label_ar":"المشهد","label_en":"Scene","default":"a lone figure walking through a rainy city street at night"}]'::jsonb,
   (select id from public.categories where slug = 'art-styles'),
@@ -735,8 +807,8 @@ insert into public.prompts (
   slug, title_ar, title_en, description_ar, description_en,
   prompt_text_en, prompt_display_ar, variables, category_id, style, model, tags, status
 ) values (
-  'watercolor-illustration', 'رسمة بألوان مائية', 'Watercolor Illustration',
-  'رسمة ناعمة بأسلوب الألوان المائية اليدوية', 'Soft handmade-feel illustration in watercolor style',
+  'delicate-watercolor-illustration', 'رسمة بألوان مائية', 'Watercolor Illustration',
+  'رسمة ناعمة بأسلوب الألوان المائية اليدوية — مطلوبة جداً لبطاقات المعايدة والمنتجات الفنية', 'A soft handmade-feel illustration in watercolor style — heavily requested for greeting cards and art prints',
   'delicate watercolor illustration of {{subject}}, soft flowing color bleeds with natural pigment granulation, visible textured paper grain, pastel {{color}} tones, authentic hand-painted artistic style, light airy composition, gallery-quality fine art finish', 'رسمة ألوان مائية رقيقة لـ{{subject}}، سيولة ألوان ناعمة متداخلة مع تحبب صبغي طبيعي، خامة ورق ظاهرة بوضوح، درجات {{color}} باستيل، أسلوب فني مرسوم يدوياً أصيل، تكوين خفيف وهوائي، لمسة نهائية بجودة معرض فني',
   '[{"key":"subject","label_ar":"الموضوع","label_en":"Subject","default":"a bouquet of desert flowers"},{"key":"color","label_ar":"الألوان","label_en":"Colors","default":"warm terracotta"}]'::jsonb,
   (select id from public.categories where slug = 'art-styles'),
@@ -753,12 +825,12 @@ insert into public.prompts (
   slug, title_ar, title_en, description_ar, description_en,
   prompt_text_en, prompt_display_ar, variables, category_id, style, model, tags, status
 ) values (
-  'isometric-illustration', 'رسمة إيزومترية', 'Isometric Illustration',
-  'تصميم إيزومتري نظيف يناسب الشرح البصري والتقني', 'Clean isometric design great for tech and explainer visuals',
-  'isometric illustration of {{scene}}, precise clean geometric shapes at true 30-degree isometric angles, flat vibrant colors, soft consistent shadows, miniature diorama feel, modern tech illustration style, crisp vector-quality edges, polished product-explainer quality', 'رسمة إيزومترية لـ{{scene}}، أشكال هندسية نظيفة بزاوية إيزومترية دقيقة 30 درجة، ألوان مسطحة زاهية، ظلال ناعمة متسقة، طابع الديوراما المصغرة، أسلوب رسم تقني عصري، حواف بجودة فيكتور نظيفة، جودة شرح منتج مصقولة',
-  '[{"key":"scene","label_ar":"المشهد","label_en":"Scene","default":"a small coffee shop interior"}]'::jsonb,
+  'classic-oil-painting-portrait', 'لوحة زيتية كلاسيكية', 'Classic Oil Painting Portrait',
+  'أسلوب اللوحات الزيتية الكلاسيكي الخالد — طلب متجدد دائماً للهدايا الفاخرة واللوحات الشخصية', 'The timeless classic oil-painting style — an evergreen request for premium gifts and personal portraits',
+  'classic oil painting portrait of {{subject}}, rich visible brushstroke texture, warm museum-quality color palette, dramatic chiaroscuro lighting with deep shadows, ornate gilded frame feel, Renaissance-master-inspired composition, fine-art gallery quality, canvas texture detail', 'لوحة زيتية كلاسيكية لـ{{subject}}، ملمس فرشاة غني وواضح، لوحة ألوان دافئة بجودة المتاحف، إضاءة درامية بتباين ظل وضوء قوي (كياروسكورو)، إحساس إطار ذهبي مزخرف، تكوين مستوحى من أساتذة عصر النهضة، جودة معرض فني راقٍ، تفاصيل خامة القماش',
+  '[{"key":"subject","label_ar":"الموضوع","label_en":"Subject","default":"an elegant woman in a red gown"}]'::jsonb,
   (select id from public.categories where slug = 'art-styles'),
-  'isometric', 'flux-schnell', ARRAY['فني', 'إيزومتري']::text[], 'published'
+  'oil painting', 'flux-schnell', ARRAY['فني', 'لوحة زيتية']::text[], 'published'
 )
 on conflict (slug) do update set
   title_ar = excluded.title_ar, title_en = excluded.title_en,
@@ -771,26 +843,8 @@ insert into public.prompts (
   slug, title_ar, title_en, description_ar, description_en,
   prompt_text_en, prompt_display_ar, variables, category_id, style, model, tags, status
 ) values (
-  'arabic-calligraphy-art', 'لوحة خط عربي فني', 'Arabic Calligraphy Art',
-  'تكوين فني معاصر مبني على الخط العربي', 'Contemporary artistic composition built on Arabic calligraphy',
-  'artistic Arabic calligraphy composition of the word ''{{word}}'', elegant flowing thuluth-inspired script, refined gold ink accents on a richly textured {{color}} background, modern Islamic art style, intricate fine detail, gallery-quality fine art finish', 'لوحة خط عربي فنية لكلمة ''{{word}}''، خط انسيابي أنيق مستوحى من خط الثلث، لمسات حبر ذهبي راقية على خلفية بخامة غنية {{color}}، أسلوب فني إسلامي معاصر، تفاصيل دقيقة ومتقنة، لمسة نهائية بجودة معرض فني',
-  '[{"key":"word","label_ar":"الكلمة","label_en":"Word","default":"بسم الله"},{"key":"color","label_ar":"لون الخلفية","label_en":"Background color","default":"deep emerald green"}]'::jsonb,
-  (select id from public.categories where slug = 'art-styles'),
-  'calligraphy', 'flux-schnell', ARRAY['فني', 'خط عربي']::text[], 'published'
-)
-on conflict (slug) do update set
-  title_ar = excluded.title_ar, title_en = excluded.title_en,
-  description_ar = excluded.description_ar, description_en = excluded.description_en,
-  prompt_text_en = excluded.prompt_text_en, prompt_display_ar = excluded.prompt_display_ar,
-  variables = excluded.variables, category_id = excluded.category_id,
-  style = excluded.style, model = excluded.model, tags = excluded.tags;
-
-insert into public.prompts (
-  slug, title_ar, title_en, description_ar, description_en,
-  prompt_text_en, prompt_display_ar, variables, category_id, style, model, tags, status
-) values (
-  'pop-art-portrait', 'بورتريه بأسلوب البوب آرت', 'Pop Art Style Portrait',
-  'بورتريه ملون بأسلوب البوب آرت الجريء', 'Bold colorful portrait in the pop art style',
+  'bold-pop-art-portrait', 'بورتريه بأسلوب البوب آرت', 'Pop Art Style Portrait',
+  'بورتريه ملون بأسلوب البوب آرت الجريء — شائع جداً كهدية شخصية ومطبوعات جدارية', 'A bold colorful portrait in the pop art style — very popular as a personalized gift and wall print',
   'pop art style portrait of {{subject}}, bold flat {{color}} color blocks with precise registration, thick clean black outlines, classic halftone dot pattern, Andy Warhol inspired aesthetic, high contrast graphic style, crisp screen-print quality finish', 'بورتريه بأسلوب البوب آرت لـ{{subject}}، كتل ألوان مسطحة جريئة {{color}} بمحاذاة دقيقة، خطوط خارجية سوداء سميكة ونظيفة، نمط نقاط هالفتون كلاسيكي، جمالية مستوحاة من آندي وارهول، أسلوب رسومي عالي التباين، لمسة نهائية بجودة طباعة الشاشة الحريرية',
   '[{"key":"subject","label_ar":"الموضوع","label_en":"Subject","default":"a woman"},{"key":"color","label_ar":"الألوان","label_en":"Colors","default":"hot pink and yellow"}]'::jsonb,
   (select id from public.categories where slug = 'art-styles'),
@@ -807,8 +861,8 @@ insert into public.prompts (
   slug, title_ar, title_en, description_ar, description_en,
   prompt_text_en, prompt_display_ar, variables, category_id, style, model, tags, status
 ) values (
-  'cyberpunk-scene', 'مشهد سايبربانك مستقبلي', 'Cyberpunk Futuristic Scene',
-  'مشهد مدينة مستقبلية بأضواء نيون ساطعة', 'A futuristic city scene lit with vivid neon lights',
+  'neon-cyberpunk-city-scene', 'مشهد سايبربانك مستقبلي بأضواء نيون', 'Neon Cyberpunk City Scene',
+  'مشهد مدينة مستقبلية بأضواء نيون ساطعة — من أشهر الأنماط الفنية طلباً لخلفيات الشاشات والألعاب', 'A futuristic city scene lit with vivid neon lights — one of the most-requested art styles for wallpapers and gaming content',
   'cyberpunk futuristic scene of {{scene}}, glowing neon {{color}} lights reflected on rain-soaked streets, towering holographic signage, moody atmospheric fog with volumetric light rays, highly detailed digital concept-art quality, cinematic wide composition', 'مشهد سايبربانك مستقبلي لـ{{scene}}، أضواء نيون متوهجة {{color}} منعكسة على شوارع مبللة، لافتات هولوغرافية شاهقة، ضباب جوي غامض بأشعة ضوئية حجمية، فن رقمي عالي التفاصيل بجودة concept art، تكوين سينمائي واسع',
   '[{"key":"scene","label_ar":"المشهد","label_en":"Scene","default":"a busy night street market"},{"key":"color","label_ar":"لون الأضواء","label_en":"Light color","default":"cyan and magenta"}]'::jsonb,
   (select id from public.categories where slug = 'art-styles'),
@@ -825,12 +879,12 @@ insert into public.prompts (
   slug, title_ar, title_en, description_ar, description_en,
   prompt_text_en, prompt_display_ar, variables, category_id, style, model, tags, status
 ) values (
-  'podcast-cover-art', 'غلاف بودكاست', 'Podcast Cover Art',
-  'غلاف مربع جذاب يناسب منصات البودكاست', 'Eye-catching square cover suited for podcast platforms',
-  'modern podcast cover art design, bold {{color}} color scheme with strong visual identity, abstract sound-wave graphic element, large clearly reserved space for title text, professional audio-branding style, square 3000x3000 format, crisp streaming-platform-ready quality', 'تصميم غلاف بودكاست عصري، ألوان جريئة بدرجة {{color}} بهوية بصرية قوية، عنصر رسومي لموجات صوتية تجريدية، مساحة كبيرة محجوزة بوضوح لعنوان الحلقة، أسلوب هوية صوتية احترافي، مقاس مربع 3000×3000، جودة جاهزة لمنصات البث',
-  '[{"key":"color","label_ar":"اللون","label_en":"Color","default":"deep purple and orange"}]'::jsonb,
-  (select id from public.categories where slug = 'covers-posts'),
-  'modern', 'flux-schnell', ARRAY['غلاف', 'بودكاست']::text[], 'published'
+  'epic-fantasy-concept-art', 'لوحة فانتازيا ملحمية (كونسبت آرت)', 'Epic Fantasy Concept Art',
+  'أسلوب مطلوب بقوة من عشاق الألعاب والروايات والعوالم الخيالية', 'A style in strong demand from gaming, fantasy-novel, and world-building fans',
+  'epic fantasy concept art of {{scene}}, dramatic god-rays breaking through storm clouds, richly detailed environment with a strong sense of scale, painterly digital art style, cinematic color grading, intricate atmospheric depth, blockbuster video-game-quality illustration', 'لوحة كونسبت آرت فانتازيا ملحمية لـ{{scene}}، أشعة ضوئية درامية تخترق سحب العاصفة، بيئة غنية بالتفاصيل بإحساس ضخامة قوي، أسلوب فن رقمي أقرب للوحة مرسومة، تدرج ألوان سينمائي، عمق جوي معقد، جودة رسم ألعاب فيديو ضخمة الإنتاج',
+  '[{"key":"scene","label_ar":"المشهد","label_en":"Scene","default":"a floating castle above the clouds"}]'::jsonb,
+  (select id from public.categories where slug = 'art-styles'),
+  'fantasy', 'flux-schnell', ARRAY['فني', 'فانتازيا']::text[], 'published'
 )
 on conflict (slug) do update set
   title_ar = excluded.title_ar, title_en = excluded.title_en,
@@ -843,12 +897,12 @@ insert into public.prompts (
   slug, title_ar, title_en, description_ar, description_en,
   prompt_text_en, prompt_display_ar, variables, category_id, style, model, tags, status
 ) values (
-  'ebook-cover-design', 'غلاف كتاب إلكتروني', 'Ebook Cover Design',
-  'غلاف احترافي لكتاب رقمي أو دليل إرشادي', 'Professional cover for a digital book or guide',
-  'professional ebook cover design about {{topic}}, minimal modern layout with clear typographic hierarchy, refined {{color}} color palette, large reserved title text space, subtle abstract background graphic, publishing-house quality, crisp print-and-digital-ready resolution', 'تصميم غلاف كتاب إلكتروني عن {{topic}}، تخطيط عصري بسيط بتسلسل نصي واضح، لوحة ألوان راقية {{color}}، مساحة نص عنوان كبيرة محجوزة، رسم خلفية تجريدي خفيف، جودة دار نشر احترافية، دقة جاهزة للطباعة والرقمي',
-  '[{"key":"topic","label_ar":"الموضوع","label_en":"Topic","default":"digital marketing"},{"key":"color","label_ar":"الألوان","label_en":"Colors","default":"navy and gold"}]'::jsonb,
-  (select id from public.categories where slug = 'covers-posts'),
-  'editorial', 'flux-schnell', ARRAY['غلاف', 'كتاب']::text[], 'published'
+  'modern-arabic-calligraphy-art', 'لوحة خط عربي فني معاصر', 'Modern Arabic Calligraphy Art',
+  'تكوين فني معاصر مبني على الخط العربي — طلب محلي مستمر وقوي للديكور والهدايا', 'A contemporary artistic composition built on Arabic calligraphy — a strong, steady local request for decor and gifts',
+  'artistic Arabic calligraphy composition of the word ''{{word}}'', elegant flowing thuluth-inspired script, refined gold ink accents on a richly textured {{color}} background, modern Islamic art style, intricate fine detail, gallery-quality fine art finish', 'لوحة خط عربي فنية لكلمة ''{{word}}''، خط انسيابي أنيق مستوحى من خط الثلث، لمسات حبر ذهبي راقية على خلفية بخامة غنية {{color}}، أسلوب فني إسلامي معاصر، تفاصيل دقيقة ومتقنة، لمسة نهائية بجودة معرض فني',
+  '[{"key":"word","label_ar":"الكلمة","label_en":"Word","default":"بسم الله"},{"key":"color","label_ar":"لون الخلفية","label_en":"Background color","default":"deep emerald green"}]'::jsonb,
+  (select id from public.categories where slug = 'art-styles'),
+  'calligraphy', 'flux-schnell', ARRAY['فني', 'خط عربي']::text[], 'published'
 )
 on conflict (slug) do update set
   title_ar = excluded.title_ar, title_en = excluded.title_en,
@@ -861,8 +915,8 @@ insert into public.prompts (
   slug, title_ar, title_en, description_ar, description_en,
   prompt_text_en, prompt_display_ar, variables, category_id, style, model, tags, status
 ) values (
-  'youtube-thumbnail', 'صورة مصغرة ليوتيوب', 'YouTube Thumbnail',
-  'صورة مصغرة لافتة تزيد نسبة النقر على الفيديو', 'Attention-grabbing thumbnail to boost video click-through',
+  'high-ctr-youtube-thumbnail', 'صورة مصغرة ليوتيوب عالية النقر', 'High-CTR YouTube Thumbnail',
+  'الأكثر طلباً وبحثاً على جوجل لصناع المحتوى — تصميم مصغّرة تزيد نسبة مشاهدات الفيديو', 'The single most Google-searched request from content creators — a thumbnail design that boosts video views',
   'high contrast YouTube thumbnail design about {{topic}}, bold expressive focal subject with exaggerated emotion, bright {{color}} background, large clearly readable text space, exciting energetic composition, scroll-stopping click-through optimized design', 'تصميم صورة مصغرة ليوتيوب عالي التباين عن {{topic}}، عنصر محوري تعبيري بارز بمشاعر مبالغ فيها بقصد الجذب، خلفية زاهية بلون {{color}}، مساحة نص كبيرة وواضحة القراءة، تكوين حيوي ومثير، تصميم محسّن لزيادة نسبة النقر',
   '[{"key":"topic","label_ar":"الموضوع","label_en":"Topic","default":"a tech review"},{"key":"color","label_ar":"لون الخلفية","label_en":"Background color","default":"bright yellow"}]'::jsonb,
   (select id from public.categories where slug = 'covers-posts'),
@@ -879,8 +933,44 @@ insert into public.prompts (
   slug, title_ar, title_en, description_ar, description_en,
   prompt_text_en, prompt_display_ar, variables, category_id, style, model, tags, status
 ) values (
-  'linkedin-banner', 'بانر لينكدإن احترافي', 'Professional LinkedIn Banner',
-  'بانر بروفايل يعكس هوية احترافية على لينكدإن', 'Profile banner reflecting a professional identity on LinkedIn',
+  'podcast-cover-art-square', 'غلاف بودكاست', 'Podcast Cover Art',
+  'غلاف مربع جذاب يناسب منصات البودكاست — سوق متنامٍ بسرعة', 'An eye-catching square cover suited for podcast platforms — a fast-growing market',
+  'modern podcast cover art design, bold {{color}} color scheme with strong visual identity, abstract sound-wave graphic element, large clearly reserved space for title text, professional audio-branding style, square 3000x3000 format, crisp streaming-platform-ready quality', 'تصميم غلاف بودكاست عصري، ألوان جريئة بدرجة {{color}} بهوية بصرية قوية، عنصر رسومي لموجات صوتية تجريدية، مساحة كبيرة محجوزة بوضوح لعنوان الحلقة، أسلوب هوية صوتية احترافي، مقاس مربع 3000×3000، جودة جاهزة لمنصات البث',
+  '[{"key":"color","label_ar":"اللون","label_en":"Color","default":"deep purple and orange"}]'::jsonb,
+  (select id from public.categories where slug = 'covers-posts'),
+  'modern', 'flux-schnell', ARRAY['غلاف', 'بودكاست']::text[], 'published'
+)
+on conflict (slug) do update set
+  title_ar = excluded.title_ar, title_en = excluded.title_en,
+  description_ar = excluded.description_ar, description_en = excluded.description_en,
+  prompt_text_en = excluded.prompt_text_en, prompt_display_ar = excluded.prompt_display_ar,
+  variables = excluded.variables, category_id = excluded.category_id,
+  style = excluded.style, model = excluded.model, tags = excluded.tags;
+
+insert into public.prompts (
+  slug, title_ar, title_en, description_ar, description_en,
+  prompt_text_en, prompt_display_ar, variables, category_id, style, model, tags, status
+) values (
+  'ebook-guide-cover-design', 'غلاف كتاب إلكتروني إرشادي', 'Ebook Guide Cover Design',
+  'غلاف احترافي لكتاب رقمي أو دليل إرشادي — أساسي لكل من يبيع منتجاً رقمياً', 'A professional cover for a digital book or guide — essential for anyone selling a digital product',
+  'professional ebook cover design about {{topic}}, minimal modern layout with clear typographic hierarchy, refined {{color}} color palette, large reserved title text space, subtle abstract background graphic, publishing-house quality, crisp print-and-digital-ready resolution', 'تصميم غلاف كتاب إلكتروني عن {{topic}}، تخطيط عصري بسيط بتسلسل نصي واضح، لوحة ألوان راقية {{color}}، مساحة نص عنوان كبيرة محجوزة، رسم خلفية تجريدي خفيف، جودة دار نشر احترافية، دقة جاهزة للطباعة والرقمي',
+  '[{"key":"topic","label_ar":"الموضوع","label_en":"Topic","default":"digital marketing"},{"key":"color","label_ar":"الألوان","label_en":"Colors","default":"navy and gold"}]'::jsonb,
+  (select id from public.categories where slug = 'covers-posts'),
+  'editorial', 'flux-schnell', ARRAY['غلاف', 'كتاب']::text[], 'published'
+)
+on conflict (slug) do update set
+  title_ar = excluded.title_ar, title_en = excluded.title_en,
+  description_ar = excluded.description_ar, description_en = excluded.description_en,
+  prompt_text_en = excluded.prompt_text_en, prompt_display_ar = excluded.prompt_display_ar,
+  variables = excluded.variables, category_id = excluded.category_id,
+  style = excluded.style, model = excluded.model, tags = excluded.tags;
+
+insert into public.prompts (
+  slug, title_ar, title_en, description_ar, description_en,
+  prompt_text_en, prompt_display_ar, variables, category_id, style, model, tags, status
+) values (
+  'professional-linkedin-banner', 'بانر لينكدإن احترافي', 'Professional LinkedIn Banner',
+  'بانر بروفايل يعكس هوية احترافية على لينكدإن — طلب متكرر لكل باحث عمل ورائد أعمال', 'A profile banner reflecting a professional identity on LinkedIn — a recurring request from every job seeker and entrepreneur',
   'professional LinkedIn banner design, wide 1584x396 format, clean corporate {{color}} palette, subtle geometric background pattern, elegant clearly reserved space for name and title text, business networking style, crisp polished finish', 'تصميم بانر لينكدإن احترافي، مقاس عريض 1584×396، لوحة ألوان مؤسسية نظيفة {{color}}، نمط هندسي خفيف في الخلفية، مساحة أنيقة محجوزة للاسم والمسمى الوظيفي، أسلوب تواصل مهني، لمسة نهائية نظيفة مصقولة',
   '[{"key":"color","label_ar":"الألوان","label_en":"Colors","default":"navy blue"}]'::jsonb,
   (select id from public.categories where slug = 'covers-posts'),
@@ -897,8 +987,26 @@ insert into public.prompts (
   slug, title_ar, title_en, description_ar, description_en,
   prompt_text_en, prompt_display_ar, variables, category_id, style, model, tags, status
 ) values (
-  'event-poster-design', 'بوستر فعالية', 'Event Poster Design',
-  'بوستر إعلاني جذاب للفعاليات والمؤتمرات', 'Eye-catching poster design for events and conferences',
+  'motivational-quote-instagram-post', 'منشور اقتباس تحفيزي لإنستغرام', 'Motivational Quote Instagram Post',
+  'من أعلى أنواع المنشورات طلباً وانتشاراً على الإطلاق — محتوى يُعاد نشره ومشاركته باستمرار', 'One of the most-requested and most-shared post types ever — content that gets endlessly reposted',
+  'elegant motivational quote background design, soft {{color}} gradient or textured backdrop, tasteful minimal decorative accents like fine line art or subtle botanical elements, large clean central space reserved for quote text, calm inspiring aesthetic, square Instagram-ready composition, premium polished finish', 'خلفية تصميم اقتباس تحفيزي أنيقة، تدرج أو خامة ناعمة بلون {{color}}، لمسات زخرفية بسيطة أنيقة مثل خطوط فنية دقيقة أو عناصر نباتية خفيفة، مساحة مركزية كبيرة ونظيفة محجوزة لنص الاقتباس، طابع ملهم هادئ، تكوين مربع جاهز لإنستغرام، لمسة نهائية فاخرة',
+  '[{"key":"color","label_ar":"لون الخلفية","label_en":"Background color","default":"sage green"}]'::jsonb,
+  (select id from public.categories where slug = 'covers-posts'),
+  'minimal', 'flux-schnell', ARRAY['منشور', 'اقتباس', 'إنستغرام']::text[], 'published'
+)
+on conflict (slug) do update set
+  title_ar = excluded.title_ar, title_en = excluded.title_en,
+  description_ar = excluded.description_ar, description_en = excluded.description_en,
+  prompt_text_en = excluded.prompt_text_en, prompt_display_ar = excluded.prompt_display_ar,
+  variables = excluded.variables, category_id = excluded.category_id,
+  style = excluded.style, model = excluded.model, tags = excluded.tags;
+
+insert into public.prompts (
+  slug, title_ar, title_en, description_ar, description_en,
+  prompt_text_en, prompt_display_ar, variables, category_id, style, model, tags, status
+) values (
+  'conference-event-poster', 'بوستر فعالية أو مؤتمر', 'Event & Conference Poster',
+  'بوستر إعلاني جذاب للفعاليات والمؤتمرات', 'An eye-catching poster design for events and conferences',
   'vibrant event poster design for {{event}}, dynamic layered composition with clear visual hierarchy, bold {{color}} color scheme, large clearly reserved space for event details text, modern festival poster style, crisp print-ready resolution', 'تصميم بوستر فعالية نابض بالحياة لـ{{event}}، تكوين طبقات ديناميكي بتسلسل بصري واضح، ألوان جريئة {{color}}، مساحة كبيرة محجوزة لتفاصيل الفعالية، أسلوب بوستر مهرجانات عصري، دقة جاهزة للطباعة',
   '[{"key":"event","label_ar":"الفعالية","label_en":"Event","default":"a tech conference"},{"key":"color","label_ar":"الألوان","label_en":"Colors","default":"electric blue and purple"}]'::jsonb,
   (select id from public.categories where slug = 'covers-posts'),
@@ -915,8 +1023,8 @@ insert into public.prompts (
   slug, title_ar, title_en, description_ar, description_en,
   prompt_text_en, prompt_display_ar, variables, category_id, style, model, tags, status
 ) values (
-  'playlist-cover-art', 'غلاف قائمة تشغيل موسيقية', 'Music Playlist Cover Art',
-  'غلاف مربع نابض بالحياة لقوائم التشغيل الموسيقية', 'Vibrant square cover art for music playlists',
+  'music-playlist-cover-art', 'غلاف قائمة تشغيل موسيقية', 'Music Playlist Cover Art',
+  'غلاف مربع نابض بالحياة لقوائم التشغيل الموسيقية', 'A vibrant square cover art for music playlists',
   'vibrant music playlist cover art for a {{genre}} playlist, abstract flowing color shapes with organic motion, smooth {{color}} gradient palette, dynamic energetic composition, square streaming-platform format, crisp modern digital-art finish', 'غلاف قائمة تشغيل موسيقية نابض بالحياة لموسيقى {{genre}}، أشكال لونية متدفقة بحركة عضوية، لوحة تدرج ناعمة {{color}}، تكوين ديناميكي حيوي، مقاس مربع لمنصات البث، لمسة نهائية رقمية عصرية نظيفة',
   '[{"key":"genre","label_ar":"نوع الموسيقى","label_en":"Music genre","default":"chill lofi"},{"key":"color","label_ar":"التدرج اللوني","label_en":"Gradient","default":"purple to blue"}]'::jsonb,
   (select id from public.categories where slug = 'covers-posts'),
@@ -933,8 +1041,44 @@ insert into public.prompts (
   slug, title_ar, title_en, description_ar, description_en,
   prompt_text_en, prompt_display_ar, variables, category_id, style, model, tags, status
 ) values (
-  'social-profile-header', 'غلاف بروفايل تويتر/إكس', 'Twitter/X Profile Header',
-  'غلاف بروفايل عريض يعكس هوية العلامة', 'Wide profile header reflecting the brand''s identity',
+  'music-single-album-cover', 'غلاف أغنية/ألبوم موسيقي', 'Music Single/Album Cover',
+  'غلاف فني مطلوب بقوة من كل فنان أو منتج موسيقي مستقل', 'An artistic cover heavily requested by every independent artist and music producer',
+  'striking album cover artwork for a {{genre}} release titled ''{{title}}'', bold artistic visual concept with strong mood and atmosphere, {{color}} dominant color palette, professional record-label quality composition, clearly reserved space for artist name and title typography, square high-resolution streaming-ready format', 'غلاف ألبوم فني لافت لإصدار موسيقى {{genre}} بعنوان ''{{title}}''، مفهوم بصري فني جريء بمزاج وأجواء قوية، لوحة ألوان مهيمنة {{color}}، تكوين بجودة شركات الإنتاج الموسيقي، مساحة محجوزة بوضوح لاسم الفنان والعنوان، مقاس مربع عالي الدقة جاهز لمنصات البث',
+  '[{"key":"genre","label_ar":"نوع الموسيقى","label_en":"Music genre","default":"R&B"},{"key":"title","label_ar":"عنوان الأغنية","label_en":"Track title","default":"Midnight"},{"key":"color","label_ar":"الألوان","label_en":"Colors","default":"deep red and black"}]'::jsonb,
+  (select id from public.categories where slug = 'covers-posts'),
+  'artistic', 'flux-schnell', ARRAY['غلاف', 'موسيقى', 'ألبوم']::text[], 'published'
+)
+on conflict (slug) do update set
+  title_ar = excluded.title_ar, title_en = excluded.title_en,
+  description_ar = excluded.description_ar, description_en = excluded.description_en,
+  prompt_text_en = excluded.prompt_text_en, prompt_display_ar = excluded.prompt_display_ar,
+  variables = excluded.variables, category_id = excluded.category_id,
+  style = excluded.style, model = excluded.model, tags = excluded.tags;
+
+insert into public.prompts (
+  slug, title_ar, title_en, description_ar, description_en,
+  prompt_text_en, prompt_display_ar, variables, category_id, style, model, tags, status
+) values (
+  'novel-book-cover-design', 'غلاف رواية', 'Novel Book Cover Design',
+  'غلاف روائي جذاب يُباع به الكتاب من النظرة الأولى — طلب دائم من الكتّاب المستقلين', 'An eye-catching novel cover that sells the book at first glance — a constant request from independent authors',
+  'professional novel book cover design for a {{genre}} story, evocative atmospheric scene capturing the story''s mood, dramatic {{color}} color grading, elegant title typography space at the top and author name space at the bottom, traditional publishing-house quality, print-and-ebook-ready resolution', 'تصميم غلاف رواية احترافي لقصة من نوع {{genre}}، مشهد جوي معبّر يجسّد مزاج القصة، تدرج ألوان درامي {{color}}، مساحة عنوان أنيقة في الأعلى ومساحة اسم المؤلف في الأسفل، جودة دور النشر التقليدية، دقة جاهزة للطباعة والنسخة الرقمية',
+  '[{"key":"genre","label_ar":"نوع الرواية","label_en":"Genre","default":"fantasy"},{"key":"color","label_ar":"الألوان","label_en":"Colors","default":"deep blue and silver"}]'::jsonb,
+  (select id from public.categories where slug = 'covers-posts'),
+  'editorial', 'flux-schnell', ARRAY['غلاف', 'كتاب', 'رواية']::text[], 'published'
+)
+on conflict (slug) do update set
+  title_ar = excluded.title_ar, title_en = excluded.title_en,
+  description_ar = excluded.description_ar, description_en = excluded.description_en,
+  prompt_text_en = excluded.prompt_text_en, prompt_display_ar = excluded.prompt_display_ar,
+  variables = excluded.variables, category_id = excluded.category_id,
+  style = excluded.style, model = excluded.model, tags = excluded.tags;
+
+insert into public.prompts (
+  slug, title_ar, title_en, description_ar, description_en,
+  prompt_text_en, prompt_display_ar, variables, category_id, style, model, tags, status
+) values (
+  'brand-social-profile-header', 'غلاف بروفايل تويتر/إكس', 'Twitter/X Profile Header',
+  'غلاف بروفايل عريض يعكس هوية العلامة', 'A wide profile header reflecting the brand''s identity',
   'wide social media profile header design about {{topic}}, minimal modern {{color}} background, subtle brand pattern, clean composition with clearly reserved space for profile photo overlay, professional polished look, crisp digital-ready resolution', 'تصميم غلاف بروفايل عريض لمنصة تواصل عن {{topic}}، خلفية عصرية بسيطة بلون {{color}}، نمط علامة تجارية خفيف، تكوين نظيف مع مساحة محجوزة بوضوح لصورة البروفايل، مظهر احترافي مصقول، دقة رقمية جاهزة',
   '[{"key":"topic","label_ar":"الموضوع","label_en":"Topic","default":"a design studio"},{"key":"color","label_ar":"لون الخلفية","label_en":"Background color","default":"charcoal and teal"}]'::jsonb,
   (select id from public.categories where slug = 'covers-posts'),
@@ -951,8 +1095,8 @@ insert into public.prompts (
   slug, title_ar, title_en, description_ar, description_en,
   prompt_text_en, prompt_display_ar, variables, category_id, style, model, tags, status
 ) values (
-  'ramadan-greeting-post', 'منشور تهنئة رمضانية', 'Ramadan Greeting Post',
-  'تصميم احتفالي بأجواء رمضان للمتاجر والعلامات', 'Festive Ramadan-themed design for stores and brands',
+  'elegant-ramadan-greeting-post', 'منشور تهنئة رمضانية أنيقة', 'Elegant Ramadan Greeting Post',
+  'أعلى تصميم موسمي طلباً في السوق العربي — كل متجر وعلامة تحتاجه سنوياً', 'The highest-demand seasonal design in the Arabic market — every store and brand needs one every year',
   'elegant Ramadan greeting design, intricately ornate crescent moon and lantern illustration, warm {{color}} tones with fine gold-leaf accents, detailed arabesque pattern work, festive Islamic aesthetic, clearly reserved space for greeting text, premium print-quality finish', 'تصميم تهنئة رمضانية أنيق، رسم هلال وفانوس مزخرف بدقة متقنة، درجات {{color}} دافئة مع لمسات ذهبية دقيقة، زخرفة عربية مفصلة، طابع احتفالي إسلامي، مساحة محجوزة بوضوح لنص التهنئة، لمسة نهائية فاخرة بجودة الطباعة',
   '[{"key":"color","label_ar":"اللون","label_en":"Color","default":"deep purple"}]'::jsonb,
   (select id from public.categories where slug = 'occasions'),
@@ -969,8 +1113,8 @@ insert into public.prompts (
   slug, title_ar, title_en, description_ar, description_en,
   prompt_text_en, prompt_display_ar, variables, category_id, style, model, tags, status
 ) values (
-  'eid-celebration-banner', 'بانر احتفال العيد', 'Eid Celebration Banner',
-  'بانر مبهج للاحتفال بالعيد ومناسبات العروض', 'Cheerful banner for Eid celebrations and related promotions',
+  'joyful-eid-celebration-banner', 'بانر احتفال العيد', 'Eid Celebration Banner',
+  'بانر مبهج للاحتفال بالعيد ومناسبات العروض المرتبطة به', 'A cheerful banner for Eid celebrations and related promotions',
   'joyful Eid celebration banner design, intricate decorative geometric Islamic patterns, bright {{color}} festive colors, detailed fireworks and lantern illustrations, clearly reserved space for greeting message, high production quality, premium festive finish', 'تصميم بانر احتفال بالعيد مفعم بالبهجة، زخارف إسلامية هندسية متقنة، ألوان احتفالية زاهية {{color}}، رسومات ألعاب نارية وفوانيس دقيقة، مساحة محجوزة بوضوح لرسالة التهنئة، جودة إنتاج عالية، لمسة احتفالية فاخرة',
   '[{"key":"color","label_ar":"الألوان","label_en":"Colors","default":"gold and green"}]'::jsonb,
   (select id from public.categories where slug = 'occasions'),
@@ -987,8 +1131,8 @@ insert into public.prompts (
   slug, title_ar, title_en, description_ar, description_en,
   prompt_text_en, prompt_display_ar, variables, category_id, style, model, tags, status
 ) values (
-  'national-day-poster', 'بوستر اليوم الوطني', 'National Day Poster',
-  'تصميم فخم يحتفي بمناسبة اليوم الوطني', 'A proud design celebrating National Day',
+  'patriotic-national-day-poster', 'بوستر اليوم الوطني', 'National Day Poster',
+  'تصميم فخم يحتفي بمناسبة اليوم الوطني — طلب سنوي ثابت وقوي في كل دول الخليج', 'A proud design celebrating National Day — a strong, steady annual request across the Gulf',
   'patriotic national day poster design, flag-inspired {{color}} color palette, detailed falcon silhouette and heritage pattern work, fireworks bursting in the sky, dramatic sunset background with rich color grading, celebratory composition true to the occasion''s spirit, premium print-ready finish', 'تصميم بوستر وطني فخم، لوحة ألوان مستوحاة من العلم {{color}}، ظلال صقر وزخارف تراثية دقيقة، ألعاب نارية منفجرة في السماء، خلفية غروب درامية بتدرج ألوان غني، تكوين احتفالي بروح المناسبة، لمسة نهائية فاخرة جاهزة للطباعة',
   '[{"key":"color","label_ar":"ألوان العلم","label_en":"Flag colors","default":"green and white"}]'::jsonb,
   (select id from public.categories where slug = 'occasions'),
@@ -1005,8 +1149,8 @@ insert into public.prompts (
   slug, title_ar, title_en, description_ar, description_en,
   prompt_text_en, prompt_display_ar, variables, category_id, style, model, tags, status
 ) values (
-  'seasonal-sale-occasion', 'تصميم عروض موسم التخفيضات', 'Seasonal Sale Occasion Design',
-  'تصميم موسمي حماسي لحملات التخفيضات الكبرى', 'Energetic seasonal design for major sale campaigns',
+  'seasonal-sale-campaign-design', 'تصميم عروض موسم التخفيضات', 'Seasonal Sale Campaign Design',
+  'تصميم موسمي حماسي لحملات التخفيضات الكبرى (الجمعة البيضاء ونهاية الموسم)', 'An energetic seasonal design for major sale campaigns (Black Friday, end-of-season)',
   'high energy seasonal sale campaign design for {{season}}, bold ''{{discount}}'' text placeholder as the clear focal point, dynamic burst shapes radiating outward, vibrant {{color}} color scheme, exciting retail promotion aesthetic, scroll-stopping crisp finish', 'تصميم حملة تخفيضات موسمية حماسي لـ{{season}}، مساحة نصية بارزة وواضحة لعبارة ''{{discount}}'' كنقطة تركيز، أشكال انفجارية ديناميكية منطلقة للخارج، ألوان زاهية {{color}}، طابع ترويجي مثير للتجزئة، لمسة نهائية نظيفة توقف التمرير',
   '[{"key":"season","label_ar":"الموسم","label_en":"Season","default":"end of season sale"},{"key":"discount","label_ar":"نسبة الخصم","label_en":"Discount","default":"UP TO 70%"},{"key":"color","label_ar":"الألوان","label_en":"Colors","default":"red and gold"}]'::jsonb,
   (select id from public.categories where slug = 'occasions'),
@@ -1023,8 +1167,8 @@ insert into public.prompts (
   slug, title_ar, title_en, description_ar, description_en,
   prompt_text_en, prompt_display_ar, variables, category_id, style, model, tags, status
 ) values (
-  'graduation-announcement', 'تصميم تهنئة تخرج', 'Graduation Announcement Design',
-  'تصميم أنيق للاحتفال بمناسبة التخرج', 'Elegant design celebrating a graduation milestone',
+  'graduation-announcement-poster', 'تصميم تهنئة تخرج', 'Graduation Announcement Poster',
+  'تصميم أنيق للاحتفال بمناسبة التخرج — طلب موسمي متكرر لكل عائلة وجامعة', 'An elegant design celebrating a graduation milestone — a recurring seasonal request for every family and university',
   'elegant graduation celebration design, detailed graduation cap and diploma illustration, fine confetti details, soft {{color}} festive palette, clearly reserved space for congratulatory text, joyful academic milestone style, premium polished finish', 'تصميم احتفالي أنيق بمناسبة التخرج، رسم قبعة تخرج وشهادة دقيق، تفاصيل قصاصات احتفالية ناعمة، لوحة ألوان ناعمة {{color}}، مساحة محجوزة بوضوح لنص التهنئة، طابع بهيج لإنجاز أكاديمي، لمسة نهائية فاخرة مصقولة',
   '[{"key":"color","label_ar":"الألوان","label_en":"Colors","default":"navy and gold"}]'::jsonb,
   (select id from public.categories where slug = 'occasions'),
@@ -1041,8 +1185,8 @@ insert into public.prompts (
   slug, title_ar, title_en, description_ar, description_en,
   prompt_text_en, prompt_display_ar, variables, category_id, style, model, tags, status
 ) values (
-  'wedding-invitation-design', 'تصميم دعوة زفاف', 'Wedding Invitation Design',
-  'تصميم دعوة زفاف راقٍ بلمسة عربية', 'Refined wedding invitation with an Arabic touch',
+  'wedding-invitation-elegant-design', 'تصميم دعوة زفاف راقية', 'Elegant Wedding Invitation Design',
+  'تصميم دعوة زفاف راقٍ بلمسة عربية — سوق كبير ومستمر على مدار العام', 'A refined wedding invitation with an Arabic touch — a large, year-round market',
   'luxurious wedding invitation design, delicate botanically-accurate floral {{color}} illustrations, elegant fine-line ornamental border, soft romantic color palette, clearly reserved space for names and date text, premium stationery finish, gallery-quality fine detail', 'تصميم دعوة زفاف فاخرة، رسومات زهور دقيقة ونباتياً واقعية بلون {{color}}، إطار زخرفي أنيق بخطوط رفيعة، لوحة ألوان رومانسية ناعمة، مساحة محجوزة بوضوح لاسمي العروسين والتاريخ، لمسة نهائية فاخرة بجودة القرطاسية الراقية',
   '[{"key":"color","label_ar":"لون الزهور","label_en":"Floral color","default":"blush pink and gold"}]'::jsonb,
   (select id from public.categories where slug = 'occasions'),
@@ -1059,8 +1203,8 @@ insert into public.prompts (
   slug, title_ar, title_en, description_ar, description_en,
   prompt_text_en, prompt_display_ar, variables, category_id, style, model, tags, status
 ) values (
-  'new-year-celebration', 'تصميم احتفال رأس السنة', 'New Year Celebration Design',
-  'تصميم احتفالي متلألئ لمناسبة رأس السنة الميلادية', 'Sparkling festive design for New Year celebrations',
+  'sparkling-new-year-design', 'تصميم احتفال رأس السنة', 'New Year Celebration Design',
+  'تصميم احتفالي متلألئ لمناسبة رأس السنة الميلادية — طلب سنوي ثابت لكل نشاط تجاري', 'A sparkling festive design for New Year celebrations — a steady annual request for every business',
   'festive New Year celebration design, glittering fireworks and fine confetti detail, bold ''{{year}}'' number typography as the centerpiece, dark {{color}} background with sparkling bokeh light, celebratory countdown atmosphere, premium crisp finish', 'تصميم احتفالي برأس السنة، ألعاب نارية وقصاصات متلألئة دقيقة، خط بارز لرقم السنة ''{{year}}'' كنقطة مركزية، خلفية داكنة بلون {{color}} مع إضاءة بوكيه متلألئة، أجواء عد تنازلي احتفالية، لمسة نهائية فاخرة نظيفة',
   '[{"key":"year","label_ar":"السنة","label_en":"Year","default":"2027"},{"key":"color","label_ar":"لون الخلفية","label_en":"Background color","default":"midnight blue and gold"}]'::jsonb,
   (select id from public.categories where slug = 'occasions'),
@@ -1077,8 +1221,8 @@ insert into public.prompts (
   slug, title_ar, title_en, description_ar, description_en,
   prompt_text_en, prompt_display_ar, variables, category_id, style, model, tags, status
 ) values (
-  'mothers-day-design', 'تصميم عيد الأم', 'Mother''s Day Design',
-  'تصميم دافئ ورقيق للاحتفاء بعيد الأم', 'Warm gentle design celebrating Mother''s Day',
+  'gentle-mothers-day-design', 'تصميم عيد الأم', 'Mother''s Day Design',
+  'تصميم دافئ ورقيق للاحتفاء بعيد الأم', 'A warm, gentle design celebrating Mother''s Day',
   'gentle Mother''s Day celebration design, soft blooming {{flower}} flowers with delicate botanical detail, warm pastel {{color}} palette, tender hand-drawn illustration style, clearly reserved space for a heartfelt message, premium gentle finish', 'تصميم رقيق للاحتفاء بعيد الأم، زهور {{flower}} متفتحة ناعمة بتفاصيل نباتية دقيقة، لوحة ألوان باستيل دافئة {{color}}، أسلوب رسم يدوي رقيق حنون، مساحة محجوزة بوضوح لرسالة من القلب، لمسة نهائية فاخرة رقيقة',
   '[{"key":"flower","label_ar":"نوع الزهور","label_en":"Flower type","default":"roses"},{"key":"color","label_ar":"الألوان","label_en":"Colors","default":"blush pink and cream"}]'::jsonb,
   (select id from public.categories where slug = 'occasions'),
@@ -1091,4 +1235,40 @@ on conflict (slug) do update set
   variables = excluded.variables, category_id = excluded.category_id,
   style = excluded.style, model = excluded.model, tags = excluded.tags;
 
-update public.prompts set is_featured = true where slug in ('studio-product-white-bg', 'instagram-square-promo', 'minimal-lettermark-logo', 'corporate-headshot', '3d-render-character', 'podcast-cover-art', 'ramadan-greeting-post');
+insert into public.prompts (
+  slug, title_ar, title_en, description_ar, description_en,
+  prompt_text_en, prompt_display_ar, variables, category_id, style, model, tags, status
+) values (
+  'grand-opening-launch-announcement', 'إعلان افتتاح كبير لنشاط تجاري', 'Grand Opening Launch Announcement',
+  'أول انطباع يراه العملاء عن نشاط جديد — طلب أساسي لكل متجر أو مطعم أو صالون عند الافتتاح', 'The first impression customers see of a new business — a core request for every store, restaurant, or salon opening',
+  'exciting grand opening announcement design for {{business}}, bold ribbon-cutting or sparkle-burst centerpiece graphic, vibrant {{color}} color scheme, celebratory confetti details, large clearly reserved space for opening date and address text, high-energy retail launch aesthetic, crisp print-ready finish', 'تصميم إعلان افتتاح كبير مثير لـ{{business}}، رسم مركزي بارز لقص الشريط أو انفجار بريق احتفالي، ألوان زاهية {{color}}، تفاصيل قصاصات احتفالية، مساحة كبيرة محجوزة بوضوح لتاريخ الافتتاح والعنوان، طابع إطلاق تجاري عالي الطاقة، لمسة نهائية نظيفة جاهزة للطباعة',
+  '[{"key":"business","label_ar":"النشاط التجاري","label_en":"Business","default":"a new restaurant"},{"key":"color","label_ar":"الألوان","label_en":"Colors","default":"red and gold"}]'::jsonb,
+  (select id from public.categories where slug = 'occasions'),
+  'festive', 'flux-schnell', ARRAY['مناسبات', 'افتتاح']::text[], 'published'
+)
+on conflict (slug) do update set
+  title_ar = excluded.title_ar, title_en = excluded.title_en,
+  description_ar = excluded.description_ar, description_en = excluded.description_en,
+  prompt_text_en = excluded.prompt_text_en, prompt_display_ar = excluded.prompt_display_ar,
+  variables = excluded.variables, category_id = excluded.category_id,
+  style = excluded.style, model = excluded.model, tags = excluded.tags;
+
+insert into public.prompts (
+  slug, title_ar, title_en, description_ar, description_en,
+  prompt_text_en, prompt_display_ar, variables, category_id, style, model, tags, status
+) values (
+  'back-to-school-promo-design', 'تصميم عروض العودة للمدارس', 'Back-to-School Promo Design',
+  'أحد أقوى المواسم التجارية طلباً كل عام — تصميم عائلي مرح ومحفّز للشراء', 'One of the strongest recurring commercial seasons every year — a fun, family-friendly design that drives purchases',
+  'cheerful back-to-school promotion design, playful illustrated school supplies like {{items}} arranged dynamically, bright {{color}} color scheme, bold ''{{discount}}'' text placeholder as the focal point, energetic family-friendly retail aesthetic, crisp print-and-digital-ready finish', 'تصميم ترويجي مرح لموسم العودة للمدارس، رسومات مرحة للوازم مدرسية مثل {{items}} مرتبة بشكل حيوي، ألوان زاهية {{color}}، مساحة نصية بارزة لعبارة ''{{discount}}'' كنقطة تركيز، طابع ترويجي عائلي حيوي، لمسة نهائية نظيفة جاهزة للطباعة والرقمي',
+  '[{"key":"items","label_ar":"اللوازم المدرسية","label_en":"School items","default":"backpacks and notebooks"},{"key":"discount","label_ar":"نسبة الخصم","label_en":"Discount","default":"30% OFF"},{"key":"color","label_ar":"الألوان","label_en":"Colors","default":"yellow and blue"}]'::jsonb,
+  (select id from public.categories where slug = 'occasions'),
+  'playful', 'flux-schnell', ARRAY['مناسبات', 'عودة المدارس']::text[], 'published'
+)
+on conflict (slug) do update set
+  title_ar = excluded.title_ar, title_en = excluded.title_en,
+  description_ar = excluded.description_ar, description_en = excluded.description_en,
+  prompt_text_en = excluded.prompt_text_en, prompt_display_ar = excluded.prompt_display_ar,
+  variables = excluded.variables, category_id = excluded.category_id,
+  style = excluded.style, model = excluded.model, tags = excluded.tags;
+
+update public.prompts set is_featured = true where slug in ('amazon-listing-white-bg', 'instagram-square-promo-post', 'ugc-style-testimonial-selfie', 'minimal-lettermark-logo-design', 'social-profile-avatar-logo', 'ai-linkedin-headshot', 'wedding-engagement-couple-portrait', 'studio-ghibli-style-illustration', 'high-ctr-youtube-thumbnail', 'motivational-quote-instagram-post', 'elegant-ramadan-greeting-post');

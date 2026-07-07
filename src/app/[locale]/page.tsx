@@ -92,7 +92,10 @@ export default async function HomePage({
     favoritedIds = new Set((data ?? []).map((f) => f.prompt_id));
   }
 
-  const heroPreviewImage = prompts.find((p) => p.preview_image_url)?.preview_image_url ?? null;
+  const heroPreviewImage =
+    siteSettings.hero_image_url?.value_ar ||
+    prompts.find((p) => p.preview_image_url)?.preview_image_url ||
+    null;
 
   return (
     <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6">

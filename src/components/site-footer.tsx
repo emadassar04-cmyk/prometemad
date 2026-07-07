@@ -2,6 +2,7 @@ import { getLocale, getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { getCategories } from "@/lib/data/prompts";
 import { NewsletterForm } from "@/components/newsletter-form";
+import { WhatsAppButton } from "@/components/whatsapp-button";
 
 export async function SiteFooter() {
   const t = await getTranslations();
@@ -11,38 +12,24 @@ export async function SiteFooter() {
 
   return (
     <footer className="mt-20 border-t border-border">
-      <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6">
-        <div className="flex flex-col items-center justify-between gap-6 sm:flex-row sm:items-start">
-          <div className="flex flex-col items-center gap-2 sm:items-start">
+      <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6">
+        <div className="grid grid-cols-2 gap-8 sm:grid-cols-4">
+          <div className="col-span-2 flex flex-col gap-2 sm:col-span-1">
             <span className="accent-gradient-text text-lg font-bold">
               {t("brand.name")}
             </span>
-            <p className="max-w-xs text-center text-sm text-muted sm:text-start">
-              {t("brand.tagline")}
-            </p>
+            <p className="max-w-xs text-sm text-muted">{t("brand.tagline")}</p>
           </div>
 
-          <nav className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-sm text-muted">
+          <div className="flex flex-col gap-2.5 text-sm text-muted">
+            <span className="text-xs font-semibold text-foreground">
+              {t("footer.product")}
+            </span>
             <Link href="/" className="transition-colors hover:text-foreground">
               {t("nav.library")}
             </Link>
-            <Link
-              href="/showcase"
-              className="transition-colors hover:text-foreground"
-            >
+            <Link href="/showcase" className="transition-colors hover:text-foreground">
               {t("nav.showcase")}
-            </Link>
-            <Link
-              href="/my-images"
-              className="transition-colors hover:text-foreground"
-            >
-              {t("nav.myImages")}
-            </Link>
-            <Link
-              href="/favorites"
-              className="transition-colors hover:text-foreground"
-            >
-              {t("nav.favorites")}
             </Link>
             <Link
               href="/image-to-prompt"
@@ -50,35 +37,45 @@ export async function SiteFooter() {
             >
               {t("nav.imageToPrompt")}
             </Link>
-            <Link
-              href="/nano-banana"
-              className="transition-colors hover:text-foreground"
-            >
-              🍌 Nano Banana
+            <Link href="/nano-banana" className="transition-colors hover:text-foreground">
+              Nano Banana
             </Link>
-          </nav>
+          </div>
+
+          {categories.length > 0 && (
+            <div className="flex flex-col gap-2.5 text-sm text-muted">
+              <span className="text-xs font-semibold text-foreground">
+                {t("footer.categories")}
+              </span>
+              {categories.slice(0, 5).map((category) => (
+                <Link
+                  key={category.slug}
+                  href={`/prompts/${category.slug}`}
+                  className="transition-colors hover:text-foreground"
+                >
+                  {locale === "ar" ? category.name_ar : category.name_en}
+                </Link>
+              ))}
+            </div>
+          )}
+
+          <div className="flex flex-col gap-2.5 text-sm text-muted">
+            <span className="text-xs font-semibold text-foreground">
+              {t("footer.contact")}
+            </span>
+            <div className="flex items-center gap-2">
+              <WhatsAppButton label={t("nav.whatsapp")} />
+              <span>{t("nav.whatsapp")}</span>
+            </div>
+          </div>
         </div>
 
-        <div className="mt-6 flex flex-col items-center gap-2 border-t border-border pt-6 sm:items-start">
+        <div className="mt-8 flex flex-col items-center gap-2 border-t border-border pt-8 sm:items-start">
           <span className="text-xs font-semibold text-muted">
             {t("newsletter.title")}
           </span>
           <NewsletterForm />
         </div>
-
-        {categories.length > 0 && (
-          <nav className="mt-6 flex flex-wrap items-center justify-center gap-x-5 gap-y-2 border-t border-border pt-6 text-xs text-muted sm:justify-start">
-            {categories.map((category) => (
-              <Link
-                key={category.slug}
-                href={`/prompts/${category.slug}`}
-                className="transition-colors hover:text-foreground"
-              >
-                {locale === "ar" ? category.name_ar : category.name_en}
-              </Link>
-            ))}
-          </nav>
-        )}
 
         <div className="mt-8 border-t border-border pt-6 text-center text-xs text-muted">
           © {year} {t("brand.name")}

@@ -144,6 +144,7 @@ export default async function HomePage({
               src={heroPreviewImage}
               alt=""
               fill
+              priority
               sizes="(max-width: 1024px) 100vw, 480px"
               className="object-cover"
             />

@@ -4,7 +4,8 @@ import { useState, useTransition } from "react";
 import { useTranslations } from "next-intl";
 import { useRouter, usePathname } from "@/i18n/navigation";
 import { useSearchParams } from "next/navigation";
-import { Search } from "lucide-react";
+import { Loader2, Search } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 export function LibraryFilters({
   categories,
@@ -19,7 +20,7 @@ export function LibraryFilters({
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
-  const [, startTransition] = useTransition();
+  const [isPending, startTransition] = useTransition();
   const [q, setQ] = useState(searchParams.get("q") ?? "");
 
   function updateParam(key: string, value: string) {
@@ -32,9 +33,18 @@ export function LibraryFilters({
   }
 
   return (
-    <div className="flex flex-col gap-4 sm:flex-row sm:items-center">
+    <div
+      className={cn(
+        "flex flex-col gap-4 transition-opacity sm:flex-row sm:items-center",
+        isPending && "opacity-60",
+      )}
+    >
       <div className="relative flex-1">
-        <Search className="pointer-events-none absolute start-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted" />
+        {isPending ? (
+          <Loader2 className="pointer-events-none absolute start-3 top-1/2 h-4 w-4 -translate-y-1/2 animate-spin text-muted" />
+        ) : (
+          <Search className="pointer-events-none absolute start-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted" />
+        )}
         <input
           value={q}
           onChange={(e) => setQ(e.target.value)}

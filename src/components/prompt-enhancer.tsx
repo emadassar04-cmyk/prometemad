@@ -72,7 +72,7 @@ export function PromptEnhancer({
   }
 
   return (
-    <div className="rounded-2xl border border-border bg-surface p-5">
+    <div className="rounded-2xl border border-border bg-surface p-5 text-foreground">
       <h2 className="mb-3 flex items-center gap-2 text-sm font-semibold text-muted">
         <Sparkles className="h-4 w-4 text-accent" />
         {t("title")}

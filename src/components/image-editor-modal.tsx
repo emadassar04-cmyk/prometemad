@@ -14,12 +14,16 @@ import {
 
 const EDIT_CANVAS_MAX_WIDTH = 480;
 
+// Concrete font-family names, not CSS custom properties: canvas 2D's `font`
+// property can't resolve var(--...) references at all (unlike regular DOM
+// styles), so a Fabric text object given "var(--font-amiri)" silently falls
+// back to the browser default font every time, with no error.
 const FONT_OPTIONS = [
-  { id: "ibm-plex", family: "var(--font-ibm-plex-arabic), sans-serif" },
-  { id: "amiri", family: "var(--font-amiri), serif" },
-  { id: "lalezar", family: "var(--font-lalezar), sans-serif" },
-  { id: "aref-ruqaa", family: "var(--font-aref-ruqaa), serif" },
-  { id: "reem-kufi", family: "var(--font-reem-kufi), sans-serif" },
+  { id: "ibm-plex", family: "IBM Plex Sans Arabic, sans-serif" },
+  { id: "amiri", family: "Amiri, serif" },
+  { id: "lalezar", family: "Lalezar, sans-serif" },
+  { id: "aref-ruqaa", family: "Aref Ruqaa, serif" },
+  { id: "reem-kufi", family: "Reem Kufi, sans-serif" },
 ] as const;
 
 const STYLE_PRESETS = [
@@ -73,6 +77,7 @@ export function ImageEditorModal({
   onClose: () => void;
 }) {
   const t = useTranslations("editor");
+  const canvasContainerRef = useRef<HTMLDivElement>(null);
   const canvasElRef = useRef<HTMLCanvasElement>(null);
   const fabricCanvasRef = useRef<Canvas | null>(null);
   const exportScaleRef = useRef(1);
@@ -93,8 +98,14 @@ export function ImageEditorModal({
         });
         if (disposed || !canvasElRef.current) return;
 
-        const originalWidth = bgImage.width || EDIT_CANVAS_MAX_WIDTH;
-        const scale = Math.min(1, EDIT_CANVAS_MAX_WIDTH / originalWidth);
+        // The container's real width can be much narrower than
+        // EDIT_CANVAS_MAX_WIDTH on mobile — sizing the canvas off the fixed
+        // constant alone let it overflow the container and get clipped by
+        // its overflow-hidden instead of shrinking to fit.
+        const containerWidth = canvasContainerRef.current?.clientWidth || EDIT_CANVAS_MAX_WIDTH;
+        const maxWidth = Math.min(EDIT_CANVAS_MAX_WIDTH, containerWidth);
+        const originalWidth = bgImage.width || maxWidth;
+        const scale = Math.min(1, maxWidth / originalWidth);
         const displayWidth = originalWidth * scale;
         const displayHeight = (bgImage.height || originalWidth) * scale;
 
@@ -105,6 +116,13 @@ export function ImageEditorModal({
         fabricCanvasRef.current = canvas;
         exportScaleRef.current = scale > 0 ? 1 / scale : 1;
 
+        // Fabric v6+ defaults new objects to originX/originY "center"
+        // instead of the old "left"/"top" — left at (0,0) with the default
+        // origin anchors the image's *center* there, so only its
+        // bottom-right quarter ever fell inside the canvas. Anchoring
+        // explicitly by the top-left corner is what "left:0, top:0" is
+        // actually meant to mean here.
+        bgImage.set({ originX: "left", originY: "top", left: 0, top: 0 });
         bgImage.scaleToWidth(displayWidth);
         canvas.backgroundImage = bgImage;
         canvas.renderAll();
@@ -115,6 +133,29 @@ export function ImageEditorModal({
         canvas.on("selection:created", (e) => syncActiveText(e.selected?.[0]));
         canvas.on("selection:updated", (e) => syncActiveText(e.selected?.[0]));
         canvas.on("selection:cleared", () => setActiveText(null));
+
+        // IText's built-in "enter editing" trigger is a native browser
+        // dblclick event, which mobile touchscreens don't synthesize from
+        // two taps — typing silently did nothing on phones. Detect the
+        // double-tap ourselves and drive edit mode manually.
+        let lastTapTarget: FabricObject | null = null;
+        let lastTapTime = 0;
+        canvas.on("mouse:down", (e) => {
+          const target = e.target;
+          const now = Date.now();
+          if (
+            target instanceof IText &&
+            target === lastTapTarget &&
+            now - lastTapTime < 400 &&
+            !target.isEditing
+          ) {
+            target.enterEditing();
+            target.selectAll();
+            canvas?.renderAll();
+          }
+          lastTapTarget = target ?? null;
+          lastTapTime = now;
+        });
 
         setLoading(false);
       } catch {
@@ -138,18 +179,31 @@ export function ImageEditorModal({
     const text = new IText(content, {
       left: 30,
       top: 30,
+      originX: "left",
+      originY: "top",
       fontFamily: FONT_OPTIONS[0].family,
       fontSize: 28,
       fill: "#ffffff",
       stroke: "#000000",
       strokeWidth: 0.5,
       textAlign: "right",
-      originX: "left",
     });
     canvas.add(text);
     canvas.setActiveObject(text);
     canvas.renderAll();
     setActiveText(text);
+
+    // Custom web fonts (curated Arabic display fonts, loaded via next/font)
+    // may still be downloading when the text object first measures itself,
+    // leaving it sized for a fallback font — visually it repaints correctly
+    // once the real font swaps in, but its stored hit-box/width never gets
+    // recalculated, so clicks and drags on the text silently miss it.
+    // Re-measuring once the font is confirmed loaded fixes both up.
+    document.fonts.ready.then(() => {
+      if (fabricCanvasRef.current !== canvas) return;
+      text.initDimensions();
+      canvas.requestRenderAll();
+    });
   }
 
   function handleAddText() {
@@ -159,8 +213,17 @@ export function ImageEditorModal({
   function handleSetFont(family: string) {
     const canvas = fabricCanvasRef.current;
     if (!canvas || !activeText) return;
-    activeText.set({ fontFamily: family });
+    const text = activeText;
+    text.set({ fontFamily: family });
     canvas.renderAll();
+
+    // Same fallback-font hit-box issue as addText() — re-measure once the
+    // newly-picked font is actually loaded.
+    document.fonts.ready.then(() => {
+      if (fabricCanvasRef.current !== canvas) return;
+      text.initDimensions();
+      canvas.requestRenderAll();
+    });
   }
 
   function handleSetStyle(style: (typeof STYLE_PRESETS)[number]["style"]) {
@@ -174,8 +237,8 @@ export function ImageEditorModal({
     const canvas = fabricCanvasRef.current;
     if (!canvas || !logoUrl) return;
     const logo = await FabricImage.fromURL(logoUrl, { crossOrigin: "anonymous" });
+    logo.set({ originX: "left", originY: "top", left: 20, top: 20 });
     logo.scaleToWidth(80);
-    logo.set({ left: 20, top: 20 });
     canvas.add(logo);
     canvas.setActiveObject(logo);
     canvas.renderAll();
@@ -218,14 +281,28 @@ export function ImageEditorModal({
           </button>
         </div>
 
-        <div className="flex min-h-32 items-center justify-center overflow-hidden rounded-lg border border-border bg-background">
+        <div
+          ref={canvasContainerRef}
+          className="flex min-h-32 items-center justify-center overflow-hidden rounded-lg border border-border bg-background"
+        >
           {loading && !loadError && (
             <Loader2 className="h-6 w-6 animate-spin text-accent" />
           )}
           {loadError && (
             <p className="p-6 text-sm text-red-400">{t("loadError")}</p>
           )}
-          <canvas ref={canvasElRef} className={loading || loadError ? "hidden" : ""} />
+          {/*
+            Fabric clones this canvas element's className onto the
+            interactive "upper-canvas" layer it creates internally, at the
+            moment the Canvas is constructed — putting a conditional
+            "hidden" class directly on the canvas itself got permanently
+            baked into that clone (construction happens while still
+            loading), leaving the whole interactive layer non-clickable
+            forever after. Hiding via a wrapper div sidesteps that.
+          */}
+          <div className={loading || loadError ? "hidden" : ""}>
+            <canvas ref={canvasElRef} />
+          </div>
         </div>
 
         {!loading && !loadError && (

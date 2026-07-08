@@ -191,9 +191,9 @@ export const seedCategories: SeedCategory[] = [
         description_ar: "المنتج معروض على شخص حقيقي أثناء الاستخدام — الأكثر طلباً لإعلانات الأزياء والعناية والإكسسوارات",
         description_en: "The product shown worn or used by a real person — the top request for fashion, beauty, and accessory ads",
         prompt_text_en:
-          "commercial advertising photograph of a {{model_type}} wearing/using {{product}}, natural confident pose, soft flattering studio lighting with a gentle rim light, clean {{background_color}} backdrop, sharp focus on the product with the model in complementary soft focus, high-end fashion-campaign quality, authentic skin and fabric texture",
+          "commercial advertising photograph of a {{model_type}} wearing/using {{product}}, shot on a real DSLR camera, natural confident pose with subtle asymmetry, soft flattering studio lighting with a gentle rim light, visible skin texture with natural pores, individual hair strands, clean {{background_color}} backdrop, sharp focus on the product with the model in complementary soft focus, unretouched real-photo quality, no airbrushing, no cgi, no plastic skin, high-end fashion-campaign quality, authentic skin and fabric texture",
         prompt_display_ar:
-          "صورة إعلانية تجارية لـ{{model_type}} يرتدي/يستخدم {{product}}، وضعية واثقة طبيعية، إضاءة استوديو ناعمة مُجملة مع ضوء حافة خفيف، خلفية نظيفة بلون {{background_color}}، تركيز حاد على المنتج مع تركيز ناعم مكمّل على العارض، جودة حملة أزياء راقية، ملمس بشرة وقماش أصيل",
+          "صورة إعلانية تجارية لـ{{model_type}} يرتدي/يستخدم {{product}}، مصورة بكاميرا DSLR حقيقية، وضعية واثقة طبيعية بعدم تناظر خفيف، إضاءة استوديو ناعمة مُجملة مع ضوء حافة خفيف، ملمس بشرة طبيعي بمسام ظاهرة، خصل شعر فردية، خلفية نظيفة بلون {{background_color}}، تركيز حاد على المنتج مع تركيز ناعم مكمّل على العارض، جودة صورة حقيقية غير مُنعّمة، بدون تنعيم مصطنع، بدون CGI، بدون مظهر بلاستيكي، جودة حملة أزياء راقية، ملمس بشرة وقماش أصيل",
         variables: [
           { key: "model_type", label_ar: "نوع العارض", label_en: "Model type", default: "a young woman" },
           { key: "product", label_ar: "المنتج", label_en: "Product", default: "gold hoop earrings" },
@@ -618,9 +618,9 @@ export const seedCategories: SeedCategory[] = [
         description_ar: "الأكثر بحثاً على جوجل عالمياً في فئة البورتريه — بديل فوري لجلسة تصوير احترافية مكلفة",
         description_en: "The single most globally Google-searched portrait category — an instant substitute for an expensive professional photo session",
         prompt_text_en:
-          "professional corporate headshot portrait of a {{person}}, wearing {{outfit}}, neutral gray studio background, soft even three-point lighting, 85mm portrait lens with subtle background compression, confident authentic expression, natural skin texture with no over-smoothing, sharp eye focus, high-end LinkedIn-quality photography",
+          "professional corporate headshot portrait of a {{person}}, wearing {{outfit}}, neutral gray studio background, soft even three-point lighting, shot on a Canon EOS R5 with an 85mm f1.4 lens, confident authentic expression with natural facial asymmetry, visible skin pores and subtle texture, individual hair strands, unretouched real-photo quality, sharp eye focus, no airbrushing, no cgi, no plastic skin, high-end LinkedIn-quality photography",
         prompt_display_ar:
-          "صورة بورتريه احترافية لـ{{person}}، يرتدي {{outfit}}، خلفية استوديو رمادية محايدة، إضاءة ثلاثية الاتجاه ناعمة متساوية، عدسة بورتريه 85 مم مع ضغط خلفية خفيف، تعبير واثق وأصيل، ملمس بشرة طبيعي بلا تنعيم مفرط، تركيز حاد على العينين، تصوير بجودة LinkedIn الاحترافية",
+          "صورة بورتريه احترافية لـ{{person}}، يرتدي {{outfit}}، خلفية استوديو رمادية محايدة، إضاءة ثلاثية الاتجاه ناعمة متساوية، مصورة بكاميرا Canon EOS R5 وعدسة 85 مم f1.4، تعبير واثق وأصيل بعدم تناظر طبيعي في الوجه، مسام بشرة ظاهرة وملمس دقيق، خصل شعر فردية واضحة، جودة صورة حقيقية غير مُنعّمة، تركيز حاد على العينين، بدون تنعيم مصطنع، بدون رندر CGI، بدون مظهر بلاستيكي، تصوير بجودة LinkedIn الاحترافية",
         variables: [
           { key: "person", label_ar: "الشخص", label_en: "Person", default: "a businesswoman" },
           { key: "outfit", label_ar: "الزي", label_en: "Outfit", default: "a tailored navy blazer" },
@@ -637,9 +637,9 @@ export const seedCategories: SeedCategory[] = [
         description_ar: "بورتريه بإضاءة الغروب وأجواء سينمائية — من أكثر أنماط البورتريه بحثاً للمحتوى الشخصي",
         description_en: "A portrait with golden hour lighting and cinematic mood — one of the most-searched portrait styles for personal content",
         prompt_text_en:
-          "cinematic portrait of a {{person}}, golden hour sunset lighting, warm rim light separating the subject from the background, shallow depth of field with a smoothly blurred outdoor background, subtle film grain, teal-and-orange inspired color grading, moody atmospheric mood, professional 85mm lens photography",
+          "cinematic portrait of a {{person}}, golden hour sunset lighting, warm rim light separating the subject from the background, shallow depth of field with a smoothly blurred outdoor background, shot on a real DSLR camera, visible skin pores and natural texture, realistic flyaway hair strands catching the light, subtle film grain, unretouched candid authenticity, no airbrushing, no cgi, no plastic skin, teal-and-orange inspired color grading, moody atmospheric mood, professional 85mm lens photography",
         prompt_display_ar:
-          "بورتريه سينمائي لـ{{person}}، إضاءة غروب الشمس الذهبية، ضوء حافة دافئ يفصل الشخص عن الخلفية، عمق ميدان ضحل مع خلفية خارجية ضبابية ناعمة، حبيبات فيلم خفيفة، تدرج ألوان مستوحى من السماوي والبرتقالي، أجواء درامية غامضة، تصوير احترافي بعدسة 85 مم",
+          "بورتريه سينمائي لـ{{person}}، إضاءة غروب الشمس الذهبية، ضوء حافة دافئ يفصل الشخص عن الخلفية، عمق ميدان ضحل مع خلفية خارجية ضبابية ناعمة، مصورة بكاميرا DSLR حقيقية، مسام بشرة ظاهرة وملمس طبيعي، خصل شعر طائرة واقعية يلمعها الضوء، حبيبات فيلم خفيفة، أصالة عفوية غير مُنعّمة، بدون تنعيم مصطنع، بدون CGI، بدون مظهر بلاستيكي، تدرج ألوان مستوحى من السماوي والبرتقالي، أجواء درامية غامضة، تصوير احترافي بعدسة 85 مم",
         variables: [
           { key: "person", label_ar: "الشخص", label_en: "Person", default: "a young man" },
         ],
@@ -654,9 +654,9 @@ export const seedCategories: SeedCategory[] = [
         description_ar: "بورتريه ناعم يبرز نضارة البشرة — أساسي لإعلانات التجميل والعناية بالبشرة",
         description_en: "A soft glowing portrait highlighting skin — essential for beauty and skincare advertising",
         prompt_text_en:
-          "beauty studio portrait of a {{person}}, flawless naturally glowing skin, soft beauty-dish lighting with a gentle catchlight in the eyes, clean {{background_color}} background, minimal fresh makeup, sharp macro-level facial detail, cosmetics advertising quality, color-accurate skin tones",
+          "beauty studio portrait of a {{person}}, shot on a real camera with a soft beauty-dish light, naturally glowing skin with realistic subsurface scattering and fine visible pores, gentle catchlight in the eyes, individual hair strands, clean {{background_color}} background, minimal fresh makeup, sharp macro-level facial detail, no waxy or plastic texture, no cgi, high-end real cosmetics-advertising photography, color-accurate skin tones",
         prompt_display_ar:
-          "بورتريه تجميلي في الاستوديو لـ{{person}}، بشرة متوهجة طبيعياً وخالية من العيوب، إضاءة طبق تجميل ناعمة مع بريق خفيف في العينين، خلفية نظيفة بلون {{background_color}}، مكياج بسيط منعش، تفاصيل وجه دقيقة جداً، جودة إعلانات مستحضرات التجميل، دقة ألوان بشرة واقعية",
+          "بورتريه تجميلي في الاستوديو لـ{{person}}، مصورة بكاميرا حقيقية بإضاءة طبق تجميل ناعمة، بشرة متوهجة طبيعياً بملمس واقعي ومسام دقيقة ظاهرة، بريق خفيف في العينين، خصل شعر فردية واضحة، خلفية نظيفة بلون {{background_color}}، مكياج بسيط منعش، تفاصيل وجه دقيقة جداً، بدون ملمس شمعي أو بلاستيكي، بدون CGI، تصوير إعلاني حقيقي راقٍ لمستحضرات التجميل، دقة ألوان بشرة واقعية",
         variables: [
           { key: "person", label_ar: "الشخص", label_en: "Person", default: "a woman" },
           { key: "background_color", label_ar: "لون الخلفية", label_en: "Background color", default: "soft pink" },
@@ -672,9 +672,9 @@ export const seedCategories: SeedCategory[] = [
         description_ar: "بورتريه يبرز الزي التراثي بإضاءة فاخرة — الأكثر طلباً محلياً في مناسبات اليوم الوطني والأعياد",
         description_en: "A portrait highlighting traditional attire with elegant lighting — the top local request for National Day and holiday occasions",
         prompt_text_en:
-          "elegant portrait of a {{person}} wearing traditional {{attire}}, rich warm directional lighting, ornate patterned background, richly detailed fabric texture and embroidery, cultural heritage photography, high production quality, dignified composed posture",
+          "elegant portrait of a {{person}} wearing traditional {{attire}}, shot on a real DSLR camera, rich warm directional lighting, natural skin texture with visible pores and tone variation, individual hair and beard strand detail, ornate patterned background, richly detailed fabric texture and embroidery, unretouched authentic photography, no cgi, no plastic skin, cultural heritage photography, high production quality, dignified composed posture",
         prompt_display_ar:
-          "بورتريه أنيق لـ{{person}} يرتدي {{attire}} التراثي، إضاءة موجهة دافئة وفاخرة، خلفية بزخارف مزركشة، تفاصيل قماش وتطريز دقيقة جداً، تصوير تراثي ثقافي، جودة إنتاج عالية، وقفة متزنة ووقورة",
+          "بورتريه أنيق لـ{{person}} يرتدي {{attire}} التراثي، مصورة بكاميرا DSLR حقيقية، إضاءة موجهة دافئة وفاخرة، ملمس بشرة طبيعي بمسام ظاهرة وتدرج لوني واقعي، تفاصيل شعر ولحية فردية، خلفية بزخارف مزركشة، تفاصيل قماش وتطريز دقيقة جداً، تصوير أصيل غير مُنعّم، بدون CGI، بدون مظهر بلاستيكي، تصوير تراثي ثقافي، جودة إنتاج عالية، وقفة متزنة ووقورة",
         variables: [
           { key: "person", label_ar: "الشخص", label_en: "Person", default: "a man" },
           { key: "attire", label_ar: "الزي", label_en: "Attire", default: "a bisht over a white thobe" },
@@ -690,9 +690,9 @@ export const seedCategories: SeedCategory[] = [
         description_ar: "بورتريه احتفالي موسمي عالي الطلب مع كل موسم تخرج جامعي",
         description_en: "A celebratory seasonal portrait in high demand every university graduation season",
         prompt_text_en:
-          "joyful graduation portrait of a {{person}} wearing a cap and gown, confidently holding a rolled diploma, soft golden hour outdoor lighting on a university campus backdrop, genuine proud smile, shallow depth of field with warm bokeh, authentic celebratory documentary photography quality",
+          "joyful graduation portrait of a {{person}} wearing a cap and gown, confidently holding a rolled diploma, shot on a real DSLR camera, soft golden hour outdoor lighting on a university campus backdrop, natural skin texture with visible pores, authentic asymmetric proud smile, individual hair strands, genuine unretouched candid moment, no airbrushing, no cgi, shallow depth of field with warm bokeh, authentic celebratory documentary photography quality",
         prompt_display_ar:
-          "بورتريه تخرج مفعم بالفرح لـ{{person}} يرتدي قبعة ورداء التخرج، يحمل شهادة ملفوفة بثقة، إضاءة ذهبية خارجية ناعمة أمام خلفية حرم جامعي، ابتسامة فخر صادقة، عمق ميدان ضحل ببوكيه دافئ، جودة تصوير وثائقي احتفالي أصيل",
+          "بورتريه تخرج مفعم بالفرح لـ{{person}} يرتدي قبعة ورداء التخرج، يحمل شهادة ملفوفة بثقة، مصورة بكاميرا DSLR حقيقية، إضاءة ذهبية خارجية ناعمة أمام خلفية حرم جامعي، ملمس بشرة طبيعي بمسام ظاهرة، ابتسامة فخر عفوية غير متناظرة تماماً، خصل شعر فردية، لحظة عفوية غير مُنعّمة، بدون تنعيم مصطنع، بدون CGI، عمق ميدان ضحل ببوكيه دافئ، جودة تصوير وثائقي احتفالي أصيل",
         variables: [
           { key: "person", label_ar: "الشخص", label_en: "Person", default: "a young graduate" },
         ],
@@ -707,9 +707,9 @@ export const seedCategories: SeedCategory[] = [
         description_ar: "أحد أعلى فئات البورتريه طلباً وقيمة سوقية — سوق ضخم على مدار السنة",
         description_en: "One of the highest-demand and highest-value portrait categories — a massive year-round market",
         prompt_text_en:
-          "romantic wedding-style portrait of a {{couple}}, soft golden hour outdoor lighting, gentle intimate pose, elegant {{outfit}} attire, dreamy shallow depth of field with warm glowing bokeh, fine-art wedding photography quality, tender authentic emotion, cinematic color grading",
+          "romantic wedding-style portrait of a {{couple}}, shot on a real DSLR camera with a fast prime lens, soft golden hour outdoor lighting, gentle intimate pose, natural skin texture with visible pores and subtle imperfections, realistic hair strands catching backlight, elegant {{outfit}} attire, dreamy shallow depth of field with warm glowing bokeh, unretouched candid authenticity, no airbrushing, no cgi, no plastic skin, fine-art wedding photography quality, tender authentic emotion, cinematic color grading",
         prompt_display_ar:
-          "بورتريه رومانسي بأسلوب الزفاف لـ{{couple}}، إضاءة ذهبية خارجية ناعمة، وضعية حميمة رقيقة، زي أنيق {{outfit}}، عمق ميدان حالم ضحل مع بوكيه دافئ متوهج، جودة تصوير زفاف فني راقٍ، مشاعر أصيلة رقيقة، تدرج ألوان سينمائي",
+          "بورتريه رومانسي بأسلوب الزفاف لـ{{couple}}، مصورة بكاميرا DSLR حقيقية وعدسة سريعة، إضاءة ذهبية خارجية ناعمة، وضعية حميمة رقيقة، ملمس بشرة طبيعي بمسام ظاهرة وعيوب دقيقة طبيعية، خصل شعر واقعية يلمعها الضوء الخلفي، زي أنيق {{outfit}}، عمق ميدان حالم ضحل مع بوكيه دافئ متوهج، أصالة عفوية غير مُنعّمة، بدون تنعيم مصطنع، بدون CGI، بدون مظهر بلاستيكي، جودة تصوير زفاف فني راقٍ، مشاعر أصيلة رقيقة، تدرج ألوان سينمائي",
         variables: [
           { key: "couple", label_ar: "الثنائي", label_en: "Couple", default: "a bride and groom" },
           { key: "outfit", label_ar: "الزي", label_en: "Attire", default: "a white wedding dress and a black tuxedo" },
@@ -726,9 +726,9 @@ export const seedCategories: SeedCategory[] = [
         description_ar: "بورتريه فني كلاسيكي بتباين قوي وظلال درامية",
         description_en: "A classic artistic portrait with strong contrast and dramatic shadows",
         prompt_text_en:
-          "dramatic black and white portrait of a {{person}}, strong directional side lighting (Rembrandt style), deep rich shadows, high tonal contrast, fine-art photography quality, tack-sharp detailed eyes, timeless classic mood, full dynamic range from pure black to bright highlight",
+          "dramatic black and white portrait of a {{person}}, shot on a real camera with natural film grain, strong directional side lighting (Rembrandt style), visible skin texture and natural pores, authentic facial asymmetry, individual hair strands, deep rich shadows, high tonal contrast, no airbrushing, no cgi, no plastic skin, fine-art photography quality, tack-sharp detailed eyes, timeless classic mood, full dynamic range from pure black to bright highlight",
         prompt_display_ar:
-          "بورتريه درامي بالأبيض والأسود لـ{{person}}، إضاءة جانبية قوية موجهة (أسلوب رامبرانت)، ظلال عميقة وغنية، تباين لوني عالٍ، جودة تصوير فني كلاسيكي، عينان حادتا التفاصيل جداً، أجواء خالدة كلاسيكية، مدى ديناميكي كامل من الأسود التام للإضاءة الساطعة",
+          "بورتريه درامي بالأبيض والأسود لـ{{person}}، مصورة بكاميرا حقيقية بحبيبات فيلم طبيعية، إضاءة جانبية قوية موجهة (أسلوب رامبرانت)، ملمس بشرة طبيعي ومسام ظاهرة، عدم تناظر طبيعي في الوجه، خصل شعر فردية، ظلال عميقة وغنية، تباين لوني عالٍ، بدون تنعيم مصطنع، بدون CGI، بدون مظهر بلاستيكي، جودة تصوير فني كلاسيكي، عينان حادتا التفاصيل جداً، أجواء خالدة كلاسيكية، مدى ديناميكي كامل من الأسود التام للإضاءة الساطعة",
         variables: [
           { key: "person", label_ar: "الشخص", label_en: "Person", default: "an elderly man" },
         ],
@@ -743,9 +743,9 @@ export const seedCategories: SeedCategory[] = [
         description_ar: "صورة جماعية دافئة تناسب المناسبات العائلية والاحتفالات الموسمية",
         description_en: "A warm group photo suited for family occasions and seasonal celebrations",
         prompt_text_en:
-          "warm family group portrait of {{group}}, soft golden hour outdoor lighting, natural genuine smiles and relaxed poses, coordinated {{color}} outfit tones, professional family photography style, gentle bokeh background, heartfelt authentic connection captured",
+          "warm family group portrait of {{group}}, shot on a real DSLR camera with a fast prime lens, soft golden hour outdoor lighting, natural asymmetric smiles and relaxed poses, visible skin texture with pores and subtle imperfections, realistic hair flyaways catching the light, coordinated {{color}} outfit tones, unretouched candid authentic family snapshot feel, subtle film grain, no airbrushing, no cgi, no illustration, professional family photography style, gentle bokeh background, heartfelt authentic connection captured",
         prompt_display_ar:
-          "بورتريه عائلي جماعي دافئ لـ{{group}}، إضاءة خارجية ذهبية ناعمة، ابتسامات طبيعية صادقة ووضعيات مريحة، ألوان ملابس منسقة {{color}}، أسلوب تصوير عائلي احترافي، خلفية بوكيه ناعمة، ترابط أصيل ملموس",
+          "بورتريه عائلي جماعي دافئ لـ{{group}}، مصورة بكاميرا DSLR حقيقية وعدسة سريعة، إضاءة خارجية ذهبية ناعمة، ابتسامات عفوية غير متناظرة تماماً ووضعيات مريحة، ملمس بشرة طبيعي بمسام وعيوب دقيقة، خصل شعر طائرة واقعية يلمعها الضوء، ألوان ملابس منسقة {{color}}، طابع لقطة عائلية عفوية غير مُنعّمة، حبيبات فيلم خفيفة، بدون تنعيم مصطنع، بدون CGI، بدون رسم توضيحي، أسلوب تصوير عائلي احترافي، خلفية بوكيه ناعمة، ترابط أصيل ملموس",
         variables: [
           { key: "group", label_ar: "أفراد العائلة", label_en: "Family members", default: "a family of four" },
           { key: "color", label_ar: "ألوان الملابس", label_en: "Outfit colors", default: "beige and white" },
@@ -761,9 +761,9 @@ export const seedCategories: SeedCategory[] = [
         description_ar: "صورة جماعية احترافية للموقع الإلكتروني وصفحة \"من نحن\"",
         description_en: "A professional group photo for the company website and \"About Us\" page",
         prompt_text_en:
-          "professional corporate team portrait of {{team_size}} colleagues, modern office background with soft depth blur, bright even lighting, confident friendly poses, business casual attire, high-end corporate photography, natural group composition with clear individual detail",
+          "professional corporate team portrait of {{team_size}} colleagues, shot on a real DSLR camera, modern office background with soft depth blur, bright even lighting, natural skin texture with visible pores, authentic asymmetric expressions, individual hair strands, confident friendly poses, unretouched real-photo quality, no airbrushing, no cgi, no plastic skin, business casual attire, high-end corporate photography, natural group composition with clear individual detail",
         prompt_display_ar:
-          "بورتريه احترافي لفريق عمل مكوّن من {{team_size}}، خلفية مكتب عصري بضبابية ناعمة، إضاءة ساطعة متساوية، وضعيات واثقة وودية، زي عمل غير رسمي، تصوير مؤسسي راقٍ، تكوين جماعي طبيعي مع وضوح تفاصيل كل فرد",
+          "بورتريه احترافي لفريق عمل مكوّن من {{team_size}}، مصورة بكاميرا DSLR حقيقية، خلفية مكتب عصري بضبابية ناعمة، إضاءة ساطعة متساوية، ملمس بشرة طبيعي بمسام ظاهرة، تعبيرات عفوية غير متناظرة تماماً، خصل شعر فردية، وضعيات واثقة وودية، جودة صورة حقيقية غير مُنعّمة، بدون تنعيم مصطنع، بدون CGI، بدون مظهر بلاستيكي، زي عمل غير رسمي، تصوير مؤسسي راقٍ، تكوين جماعي طبيعي مع وضوح تفاصيل كل فرد",
         variables: [
           { key: "team_size", label_ar: "عدد أفراد الفريق", label_en: "Team size", default: "five" },
         ],
@@ -778,9 +778,9 @@ export const seedCategories: SeedCategory[] = [
         description_ar: "لحظة طبيعية غير مصطنعة تناسب المحتوى الشخصي والإنفلونسر",
         description_en: "A natural unposed moment, great for personal and influencer content",
         prompt_text_en:
-          "candid lifestyle portrait of a {{person}} laughing naturally at {{location}}, soft natural daylight, genuinely unposed authentic moment, warm film-inspired color grading, documentary photography style, natural motion blur on background elements, real emotion captured mid-moment",
+          "candid lifestyle portrait of a {{person}} laughing naturally at {{location}}, shot on a real camera, soft natural daylight, visible skin texture with natural pores, realistic hair strand detail, genuinely unposed authentic moment, unretouched street photography, no airbrushing, no cgi, no plastic skin, warm film-inspired color grading, documentary photography style, natural motion blur on background elements, real emotion captured mid-moment",
         prompt_display_ar:
-          "بورتريه عفوي بأسلوب حياتي لـ{{person}} يضحك بشكل طبيعي في {{location}}، ضوء نهار طبيعي ناعم، لحظة أصيلة غير مصطنعة تماماً، تدرج ألوان دافئ مستوحى من الأفلام، أسلوب تصوير وثائقي، ضبابية حركة طبيعية في عناصر الخلفية، مشاعر حقيقية ملتقطة في لحظتها",
+          "بورتريه عفوي بأسلوب حياتي لـ{{person}} يضحك بشكل طبيعي في {{location}}، مصورة بكاميرا حقيقية، ضوء نهار طبيعي ناعم، ملمس بشرة طبيعي بمسام ظاهرة، تفاصيل شعر واقعية، لحظة أصيلة غير مصطنعة تماماً، تصوير شارع غير مُنعّم، بدون تنعيم مصطنع، بدون CGI، بدون مظهر بلاستيكي، تدرج ألوان دافئ مستوحى من الأفلام، أسلوب تصوير وثائقي، ضبابية حركة طبيعية في عناصر الخلفية، مشاعر حقيقية ملتقطة في لحظتها",
         variables: [
           { key: "person", label_ar: "الشخص", label_en: "Person", default: "a young woman" },
           { key: "location", label_ar: "المكان", label_en: "Location", default: "a busy souq" },

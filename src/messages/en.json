@@ -203,7 +203,18 @@
     "deleteSelected": "Delete Selected",
     "export": "Download PNG",
     "defaultText": "Type here",
-    "loadError": "Couldn't load the image for editing"
+    "loadError": "Couldn't load the image for editing",
+    "fontLabel": "Font",
+    "styleLabel": "Style",
+    "stylePreset_classic": "Classic White",
+    "stylePreset_gold": "Luxury Gold",
+    "stylePreset_neon": "Neon",
+    "stylePreset_ink": "Ink Black",
+    "phraseSpecialOffer": "عرض خاص",
+    "phraseDiscount": "خصم اليوم",
+    "phraseNewLaunch": "افتتاح جديد",
+    "phraseEidMubarak": "عيد مبارك",
+    "phraseCongrats": "كل عام وأنتم بخير"
   },
   "enhancer": {
     "title": "Write your idea, we'll turn it into a professional prompt",

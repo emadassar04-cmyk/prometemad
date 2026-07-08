@@ -1,5 +1,12 @@
 import type { Metadata } from "next";
-import { IBM_Plex_Sans_Arabic, Inter } from "next/font/google";
+import {
+  IBM_Plex_Sans_Arabic,
+  Inter,
+  Amiri,
+  Lalezar,
+  Aref_Ruqaa,
+  Reem_Kufi,
+} from "next/font/google";
 import { NextIntlClientProvider, hasLocale } from "next-intl";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
@@ -21,6 +28,37 @@ const ibmPlexSansArabic = IBM_Plex_Sans_Arabic({
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-inter",
+  display: "swap",
+});
+
+// Curated Arabic display fonts for the post-generation editor's text
+// overlay tool — picked for greeting-card/poster use, distinct from the
+// site's own UI font (IBM Plex Sans Arabic above).
+const amiri = Amiri({
+  subsets: ["arabic"],
+  weight: ["400", "700"],
+  variable: "--font-amiri",
+  display: "swap",
+});
+
+const lalezar = Lalezar({
+  subsets: ["arabic"],
+  weight: ["400"],
+  variable: "--font-lalezar",
+  display: "swap",
+});
+
+const arefRuqaa = Aref_Ruqaa({
+  subsets: ["arabic"],
+  weight: ["400", "700"],
+  variable: "--font-aref-ruqaa",
+  display: "swap",
+});
+
+const reemKufi = Reem_Kufi({
+  subsets: ["arabic"],
+  weight: ["400", "700"],
+  variable: "--font-reem-kufi",
   display: "swap",
 });
 
@@ -58,7 +96,11 @@ export default async function LocaleLayout({
   const dir = locale === "ar" ? "rtl" : "ltr";
 
   return (
-    <html lang={locale} dir={dir} className={`${ibmPlexSansArabic.variable} ${inter.variable}`}>
+    <html
+      lang={locale}
+      dir={dir}
+      className={`${ibmPlexSansArabic.variable} ${inter.variable} ${amiri.variable} ${lalezar.variable} ${arefRuqaa.variable} ${reemKufi.variable}`}
+    >
       <head>
         {/* Applies a saved theme choice before first paint, so an explicit
             dark/light pick that differs from the OS preference doesn't

@@ -203,7 +203,18 @@
     "deleteSelected": "حذف المحدد",
     "export": "تحميل PNG",
     "defaultText": "اكتب هنا",
-    "loadError": "تعذّر تحميل الصورة للتعديل"
+    "loadError": "تعذّر تحميل الصورة للتعديل",
+    "fontLabel": "الخط",
+    "styleLabel": "التنسيق",
+    "stylePreset_classic": "كلاسيك أبيض",
+    "stylePreset_gold": "ذهبي فاخر",
+    "stylePreset_neon": "نيون",
+    "stylePreset_ink": "حبر أسود",
+    "phraseSpecialOffer": "عرض خاص",
+    "phraseDiscount": "خصم اليوم",
+    "phraseNewLaunch": "افتتاح جديد",
+    "phraseEidMubarak": "عيد مبارك",
+    "phraseCongrats": "كل عام وأنتم بخير"
   },
   "enhancer": {
     "title": "اكتب فكرتك، وهنحوّلها لبرومبت احترافي",

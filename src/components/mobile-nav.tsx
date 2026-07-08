@@ -9,13 +9,14 @@ export function MobileNav({ isAdmin }: { isAdmin: boolean }) {
   const t = useTranslations("nav");
   const [open, setOpen] = useState(false);
 
-  const links: { href: "/" | "/showcase" | "/image-to-prompt" | "/my-images" | "/favorites" | "/invite" | "/admin"; label: string }[] = [
+  const links: { href: "/" | "/showcase" | "/image-to-prompt" | "/my-images" | "/favorites" | "/invite" | "/workspace" | "/admin"; label: string }[] = [
     { href: "/", label: t("library") },
     { href: "/showcase", label: t("showcase") },
     { href: "/image-to-prompt", label: t("imageToPrompt") },
     { href: "/my-images", label: t("myImages") },
     { href: "/favorites", label: t("favorites") },
     { href: "/invite", label: t("invite") },
+    { href: "/workspace", label: t("workspace") },
     ...(isAdmin ? [{ href: "/admin" as const, label: t("admin") }] : []),
   ];
 

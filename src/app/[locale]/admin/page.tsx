@@ -48,6 +48,12 @@ export default async function AdminDashboardPage({
             {t("moderation")}
           </Link>
           <Link
+            href="/admin/workspaces"
+            className="rounded-full border border-border px-4 py-2 text-sm font-medium hover:border-accent"
+          >
+            {t("workspaces")}
+          </Link>
+          <Link
             href="/admin/users"
             className="rounded-full border border-border px-4 py-2 text-sm font-medium hover:border-accent"
           >

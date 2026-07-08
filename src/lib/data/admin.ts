@@ -132,6 +132,18 @@ export async function getRecentGenerationsForCuration(limit = 30) {
   return data ?? [];
 }
 
+// Relies on the "admins can read all workspaces"/"...profiles" RLS policies
+// (no RPC needed — same reasoning as getPendingModerationGenerations).
+export async function getPendingWorkspaceRequests() {
+  const supabase = await createSupabaseServerClient();
+  const { data } = await supabase
+    .from("workspaces")
+    .select("id, name, status, created_at, owner_id, profiles(username)")
+    .eq("status", "pending")
+    .order("created_at", { ascending: true });
+  return data ?? [];
+}
+
 export async function getAllCampaigns() {
   const supabase = await createSupabaseServerClient();
   const { data } = await supabase

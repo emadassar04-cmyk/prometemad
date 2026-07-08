@@ -654,6 +654,106 @@ export type Database = {
         }
         Relationships: []
       }
+      workspace_daily_usage: {
+        Row: {
+          generations_count: number
+          usage_date: string
+          workspace_id: string
+        }
+        Insert: {
+          generations_count?: number
+          usage_date?: string
+          workspace_id: string
+        }
+        Update: {
+          generations_count?: number
+          usage_date?: string
+          workspace_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "workspace_daily_usage_workspace_id_fkey"
+            columns: ["workspace_id"]
+            isOneToOne: false
+            referencedRelation: "workspaces"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      workspace_members: {
+        Row: {
+          joined_at: string
+          role: string
+          user_id: string
+          workspace_id: string
+        }
+        Insert: {
+          joined_at?: string
+          role?: string
+          user_id: string
+          workspace_id: string
+        }
+        Update: {
+          joined_at?: string
+          role?: string
+          user_id?: string
+          workspace_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "workspace_members_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: true
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "workspace_members_workspace_id_fkey"
+            columns: ["workspace_id"]
+            isOneToOne: false
+            referencedRelation: "workspaces"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      workspaces: {
+        Row: {
+          created_at: string
+          decided_at: string | null
+          id: string
+          invite_code: string
+          name: string
+          owner_id: string
+          status: string
+        }
+        Insert: {
+          created_at?: string
+          decided_at?: string | null
+          id?: string
+          invite_code?: string
+          name: string
+          owner_id: string
+          status?: string
+        }
+        Update: {
+          created_at?: string
+          decided_at?: string | null
+          id?: string
+          invite_code?: string
+          name?: string
+          owner_id?: string
+          status?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "workspaces_owner_id_fkey"
+            columns: ["owner_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never
@@ -661,6 +761,8 @@ export type Database = {
     Functions: {
       admin_dashboard_stats: { Args: never; Returns: Json }
       admin_list_users: { Args: never; Returns: Json }
+      approve_workspace: { Args: { p_workspace_id: string }; Returns: boolean }
+      current_workspace_id: { Args: never; Returns: string }
       get_total_generation_count: { Args: never; Returns: number }
       increment_prompt_copy_count: {
         Args: { p_prompt_id: string }
@@ -671,6 +773,8 @@ export type Database = {
         Returns: undefined
       }
       is_admin: { Args: never; Returns: boolean }
+      join_workspace: { Args: { p_invite_code: string }; Returns: boolean }
+      leave_workspace: { Args: never; Returns: boolean }
       match_documents: {
         Args: { filter?: Json; match_count?: number; query_embedding: string }
         Returns: {
@@ -681,6 +785,8 @@ export type Database = {
         }[]
       }
       redeem_referral: { Args: { p_referral_code: string }; Returns: boolean }
+      reject_workspace: { Args: { p_workspace_id: string }; Returns: boolean }
+      request_workspace: { Args: { p_name: string }; Returns: string }
       toggle_generation_like: {
         Args: { p_anon_id: string; p_generation_id: string }
         Returns: {
@@ -846,3 +952,9 @@ export type CompositeTypes<
   : PublicCompositeTypeNameOrOptions extends keyof DefaultSchema["CompositeTypes"]
     ? DefaultSchema["CompositeTypes"][PublicCompositeTypeNameOrOptions]
     : never
+
+export const Constants = {
+  public: {
+    Enums: {},
+  },
+} as const

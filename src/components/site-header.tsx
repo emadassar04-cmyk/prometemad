@@ -48,6 +48,15 @@ export async function SiteHeader() {
             {t("nav.imageToPrompt")}
           </Link>
           <Link
+            href="/personal-photos"
+            className="flex items-center gap-1.5 transition-colors hover:text-foreground"
+          >
+            {t("nav.personalPhotos")}
+            <span className="accent-gradient-bg rounded-full px-1.5 py-0.5 text-[10px] font-medium leading-none text-white">
+              {t("personalPhotos.badgeNew")}
+            </span>
+          </Link>
+          <Link
             href="/my-images"
             className="transition-colors hover:text-foreground"
           >

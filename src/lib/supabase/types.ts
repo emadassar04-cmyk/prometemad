@@ -83,15 +83,7 @@ export type Database = {
           usage_date?: string
           user_id?: string
         }
-        Relationships: [
-          {
-            foreignKeyName: "assistant_usage_user_id_fkey"
-            columns: ["user_id"]
-            isOneToOne: false
-            referencedRelation: "profiles"
-            referencedColumns: ["id"]
-          },
-        ]
+        Relationships: []
       }
       brand_kits: {
         Row: {
@@ -401,6 +393,120 @@ export type Database = {
           usage_count?: number
           usage_date?: string
           user_id?: string
+        }
+        Relationships: []
+      }
+      personal_generations: {
+        Row: {
+          created_at: string
+          id: string
+          result_image_path: string | null
+          source_image_path: string
+          status: string
+          style_id: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          result_image_path?: string | null
+          source_image_path: string
+          status?: string
+          style_id: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          result_image_path?: string | null
+          source_image_path?: string
+          status?: string
+          style_id?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "personal_generations_style_id_fkey"
+            columns: ["style_id"]
+            isOneToOne: false
+            referencedRelation: "personal_styles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "personal_generations_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      personal_photos_daily_usage: {
+        Row: {
+          generations_count: number
+          usage_date: string
+          user_id: string
+        }
+        Insert: {
+          generations_count?: number
+          usage_date?: string
+          user_id: string
+        }
+        Update: {
+          generations_count?: number
+          usage_date?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      personal_styles: {
+        Row: {
+          category: string
+          created_at: string
+          example_after_url: string | null
+          example_before_url: string | null
+          id: string
+          is_active: boolean
+          prompt_body: string
+          share_text_ar: string
+          slug: string
+          sort_order: number
+          tagline_ar: string
+          title_ar: string
+          title_en: string
+          usage_count: number
+        }
+        Insert: {
+          category: string
+          created_at?: string
+          example_after_url?: string | null
+          example_before_url?: string | null
+          id?: string
+          is_active?: boolean
+          prompt_body: string
+          share_text_ar: string
+          slug: string
+          sort_order?: number
+          tagline_ar: string
+          title_ar: string
+          title_en: string
+          usage_count?: number
+        }
+        Update: {
+          category?: string
+          created_at?: string
+          example_after_url?: string | null
+          example_before_url?: string | null
+          id?: string
+          is_active?: boolean
+          prompt_body?: string
+          share_text_ar?: string
+          slug?: string
+          sort_order?: number
+          tagline_ar?: string
+          title_ar?: string
+          title_en?: string
+          usage_count?: number
         }
         Relationships: []
       }
@@ -764,6 +870,10 @@ export type Database = {
       approve_workspace: { Args: { p_workspace_id: string }; Returns: boolean }
       current_workspace_id: { Args: never; Returns: string }
       get_total_generation_count: { Args: never; Returns: number }
+      increment_personal_style_usage: {
+        Args: { p_style_id: string }
+        Returns: undefined
+      }
       increment_prompt_copy_count: {
         Args: { p_prompt_id: string }
         Returns: undefined
@@ -815,6 +925,10 @@ export type Database = {
         Returns: boolean
       }
       try_increment_image_to_prompt_usage: {
+        Args: { p_daily_limit?: number; p_user_id: string }
+        Returns: boolean
+      }
+      try_increment_personal_photos_daily_usage: {
         Args: { p_daily_limit?: number; p_user_id: string }
         Returns: boolean
       }

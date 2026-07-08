@@ -37,6 +37,12 @@ export async function SiteFooter() {
             >
               {t("nav.imageToPrompt")}
             </Link>
+            <Link
+              href="/personal-photos"
+              className="transition-colors hover:text-foreground"
+            >
+              {t("nav.personalPhotos")}
+            </Link>
             <Link href="/nano-banana" className="transition-colors hover:text-foreground">
               Nano Banana
             </Link>

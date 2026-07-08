@@ -4,6 +4,7 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { getShowcaseGenerations } from "@/lib/data/showcase";
 import { ShareButtons } from "@/components/share-buttons";
+import { ShowcaseLikeButton } from "@/components/showcase-like-button";
 import { SITE_URL } from "@/lib/site-url";
 
 export async function generateMetadata({
@@ -82,7 +83,13 @@ export default async function ShowcasePage({
                 )}
                 <div className="flex items-center justify-between gap-2 p-3">
                   <span className="truncate text-sm">{title}</span>
-                  <ShareButtons url={promptUrl} text={title} />
+                  <div className="flex items-center gap-2">
+                    <ShowcaseLikeButton
+                      generationId={generation.id}
+                      initialLikeCount={generation.like_count}
+                    />
+                    <ShareButtons url={promptUrl} text={title} />
+                  </div>
                 </div>
               </div>
             );

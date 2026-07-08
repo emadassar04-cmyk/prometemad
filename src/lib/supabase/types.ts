@@ -14,6 +14,24 @@ export type Database = {
   }
   public: {
     Tables: {
+      anon_rate_limit_windows: {
+        Row: {
+          rate_key: string
+          request_count: number
+          window_start: string
+        }
+        Insert: {
+          rate_key: string
+          request_count?: number
+          window_start: string
+        }
+        Update: {
+          rate_key?: string
+          request_count?: number
+          window_start?: string
+        }
+        Relationships: []
+      }
       assistant_sessions: {
         Row: {
           created_at: string
@@ -271,6 +289,32 @@ export type Database = {
         }
         Relationships: []
       }
+      generation_likes: {
+        Row: {
+          anon_id: string
+          created_at: string
+          generation_id: string
+        }
+        Insert: {
+          anon_id: string
+          created_at?: string
+          generation_id: string
+        }
+        Update: {
+          anon_id?: string
+          created_at?: string
+          generation_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "generation_likes_generation_id_fkey"
+            columns: ["generation_id"]
+            isOneToOne: false
+            referencedRelation: "generations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       generations: {
         Row: {
           created_at: string
@@ -279,7 +323,9 @@ export type Database = {
           height: number | null
           id: string
           image_url: string | null
+          is_curated: boolean
           is_public: boolean
+          like_count: number
           model: string | null
           moderation_status: string
           prompt_id: string | null
@@ -297,7 +343,9 @@ export type Database = {
           height?: number | null
           id?: string
           image_url?: string | null
+          is_curated?: boolean
           is_public?: boolean
+          like_count?: number
           model?: string | null
           moderation_status?: string
           prompt_id?: string | null
@@ -315,7 +363,9 @@ export type Database = {
           height?: number | null
           id?: string
           image_url?: string | null
+          is_curated?: boolean
           is_public?: boolean
+          like_count?: number
           model?: string | null
           moderation_status?: string
           prompt_id?: string | null
@@ -609,18 +659,9 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      admin_dashboard_stats: {
-        Args: Record<PropertyKey, never>
-        Returns: Json
-      }
-      admin_list_users: {
-        Args: Record<PropertyKey, never>
-        Returns: Json
-      }
-      get_total_generation_count: {
-        Args: Record<PropertyKey, never>
-        Returns: number
-      }
+      admin_dashboard_stats: { Args: never; Returns: Json }
+      admin_list_users: { Args: never; Returns: Json }
+      get_total_generation_count: { Args: never; Returns: number }
       increment_prompt_copy_count: {
         Args: { p_prompt_id: string }
         Returns: undefined
@@ -629,10 +670,7 @@ export type Database = {
         Args: { p_prompt_id: string }
         Returns: undefined
       }
-      is_admin: {
-        Args: Record<PropertyKey, never>
-        Returns: boolean
-      }
+      is_admin: { Args: never; Returns: boolean }
       match_documents: {
         Args: { filter?: Json; match_count?: number; query_embedding: string }
         Returns: {
@@ -642,8 +680,20 @@ export type Database = {
           similarity: number
         }[]
       }
-      redeem_referral: {
-        Args: { p_referral_code: string }
+      redeem_referral: { Args: { p_referral_code: string }; Returns: boolean }
+      toggle_generation_like: {
+        Args: { p_anon_id: string; p_generation_id: string }
+        Returns: {
+          like_count: number
+          liked: boolean
+        }[]
+      }
+      try_increment_anon_rate_limit: {
+        Args: {
+          p_key: string
+          p_max_requests?: number
+          p_window_seconds?: number
+        }
         Returns: boolean
       }
       try_increment_assistant_usage: {
@@ -796,9 +846,3 @@ export type CompositeTypes<
   : PublicCompositeTypeNameOrOptions extends keyof DefaultSchema["CompositeTypes"]
     ? DefaultSchema["CompositeTypes"][PublicCompositeTypeNameOrOptions]
     : never
-
-export const Constants = {
-  public: {
-    Enums: {},
-  },
-} as const

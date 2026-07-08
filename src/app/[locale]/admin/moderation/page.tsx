@@ -1,8 +1,16 @@
 import Image from "next/image";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
-import { requireAdmin, getPendingModerationGenerations } from "@/lib/data/admin";
-import { approveGenerationAction, rejectGenerationAction } from "./actions";
+import {
+  requireAdmin,
+  getPendingModerationGenerations,
+  getRecentGenerationsForCuration,
+} from "@/lib/data/admin";
+import {
+  approveGenerationAction,
+  rejectGenerationAction,
+  setGenerationCuratedAction,
+} from "./actions";
 
 export default async function AdminModerationPage({
   params,
@@ -14,6 +22,7 @@ export default async function AdminModerationPage({
   await requireAdmin(locale);
 
   const pending = await getPendingModerationGenerations();
+  const recent = await getRecentGenerationsForCuration();
   const t = await getTranslations("admin");
   const isAr = locale === "ar";
 
@@ -78,6 +87,54 @@ export default async function AdminModerationPage({
           ))}
         </div>
       )}
+
+      <div className="mt-12">
+        <h2 className="mb-2 text-xl font-bold">{t("curationTitle")}</h2>
+        <p className="mb-6 text-sm text-muted">{t("curationSubtitle")}</p>
+
+        {recent.length === 0 ? (
+          <p className="py-10 text-center text-muted">{t("moderationEmpty")}</p>
+        ) : (
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {recent.map((g) => (
+              <div
+                key={g.id}
+                className="flex flex-col gap-3 rounded-2xl border border-border bg-surface p-4"
+              >
+                <div className="relative aspect-square overflow-hidden rounded-lg">
+                  {g.image_url && (
+                    <Image
+                      src={g.image_url}
+                      alt=""
+                      fill
+                      sizes="(max-width: 768px) 100vw, 33vw"
+                      className="object-cover"
+                    />
+                  )}
+                </div>
+                <p className="text-sm text-muted">
+                  {g.prompts ? (isAr ? g.prompts.title_ar : g.prompts.title_en) : "—"}
+                </p>
+                <form action={setGenerationCuratedAction}>
+                  <input type="hidden" name="locale" value={locale} />
+                  <input type="hidden" name="id" value={g.id} />
+                  <input type="hidden" name="curated" value={(!g.is_curated).toString()} />
+                  <button
+                    type="submit"
+                    className={
+                      g.is_curated
+                        ? "w-full rounded-full border border-red-400 px-4 py-2 text-sm font-medium text-red-400"
+                        : "w-full rounded-full bg-accent px-4 py-2 text-sm font-medium text-navy"
+                    }
+                  >
+                    {g.is_curated ? t("curationUnfeature") : t("curationFeature")}
+                  </button>
+                </form>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
     </div>
   );
 }

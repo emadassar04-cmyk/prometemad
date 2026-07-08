@@ -119,6 +119,19 @@ export async function getPendingModerationGenerations() {
   return data ?? [];
 }
 
+// Lets the admin feature any succeeded generation directly, independent of
+// whether the owner ever submitted it for moderation.
+export async function getRecentGenerationsForCuration(limit = 30) {
+  const supabase = await createSupabaseServerClient();
+  const { data } = await supabase
+    .from("generations")
+    .select("id, image_url, is_curated, created_at, prompts(slug, title_ar, title_en)")
+    .eq("status", "succeeded")
+    .order("created_at", { ascending: false })
+    .limit(limit);
+  return data ?? [];
+}
+
 export async function getAllCampaigns() {
   const supabase = await createSupabaseServerClient();
   const { data } = await supabase

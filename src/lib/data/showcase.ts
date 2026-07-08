@@ -4,9 +4,9 @@ export async function getShowcaseGenerations(limit = 60) {
   const supabase = await createSupabaseServerClient();
   const { data } = await supabase
     .from("generations")
-    .select("id, image_url, created_at, prompts(slug, title_ar, title_en)")
+    .select("id, image_url, like_count, created_at, prompts(slug, title_ar, title_en)")
     .eq("status", "succeeded")
-    .eq("is_public", true)
+    .or("is_public.eq.true,is_curated.eq.true")
     .order("created_at", { ascending: false })
     .limit(limit);
   return data ?? [];

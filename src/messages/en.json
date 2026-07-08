@@ -148,6 +148,10 @@
     "moderationEmpty": "Nothing pending review",
     "moderationApprove": "Approve",
     "moderationReject": "Reject",
+    "curationTitle": "Feature images in the showcase",
+    "curationSubtitle": "Feature any successful image in the showcase directly, regardless of whether its owner shared it",
+    "curationFeature": "Feature in showcase",
+    "curationUnfeature": "Remove from showcase",
     "content": "Content",
     "campaigns": "Campaigns",
     "newCampaign": "New campaign",
@@ -177,7 +181,9 @@
   "showcase": {
     "title": "Showcase",
     "subtitle": "The best images users have generated and shared",
-    "empty": "No shared images yet — be the first from your \"My Images\" page"
+    "empty": "No shared images yet — be the first from your \"My Images\" page",
+    "like": "Like",
+    "unlike": "Unlike"
   },
   "share": {
     "share": "Share",

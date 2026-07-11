@@ -132,7 +132,6 @@ function PersonalStyleCard({
   const [expanded, setExpanded] = useState(false);
   const [copied, setCopied] = useState(false);
   const [geminiToast, setGeminiToast] = useState(false);
-  const [showingBefore, setShowingBefore] = useState(false);
 
   const title = locale === "ar" ? style.title_ar : style.title_en;
   const fullPrompt = `${style.prompt_body}\n\n${IDENTITY_GUARDRAIL}`;
@@ -171,7 +170,7 @@ function PersonalStyleCard({
         {style.example_after_url ? (
           <>
             <Image
-              src={showingBefore && style.example_before_url ? style.example_before_url : style.example_after_url}
+              src={style.example_after_url}
               alt={title}
               fill
               sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
@@ -182,18 +181,6 @@ function PersonalStyleCard({
               <span className="absolute top-2 start-2 rounded-full bg-navy/80 px-2 py-0.5 text-[11px] font-medium text-white">
                 🔥
               </span>
-            )}
-            {style.example_before_url && (
-              <button
-                type="button"
-                onMouseEnter={() => setShowingBefore(true)}
-                onMouseLeave={() => setShowingBefore(false)}
-                onClick={() => setShowingBefore((v) => !v)}
-                className="absolute bottom-2 end-2 h-11 w-11 overflow-hidden rounded-full border-2 border-white shadow-lg"
-                title={t("showPrompt")}
-              >
-                <Image src={style.example_before_url} alt="" fill sizes="44px" className="object-cover" />
-              </button>
             )}
           </>
         ) : (

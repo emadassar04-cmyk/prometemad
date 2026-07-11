@@ -140,11 +140,6 @@ function PersonalStyleCard({
             loading="lazy"
           />
         )}
-        {style.example_before_url && (
-          <span className="absolute bottom-2 h-12 w-12 overflow-hidden rounded-full border-2 border-white shadow-lg end-2">
-            <Image src={style.example_before_url} alt="" fill sizes="48px" className="object-cover" />
-          </span>
-        )}
       </div>
 
       <div className="flex flex-col gap-2 p-3">

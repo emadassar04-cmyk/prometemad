@@ -11,7 +11,7 @@ import { BeforeAfterSlider } from "@/components/before-after-slider";
 import { SITE_URL } from "@/lib/site-url";
 
 const OWNER_PHOTO_URL =
-  "https://ocbexnlvopobemvzqsjd.supabase.co/storage/v1/object/public/personal-style-examples/before.jpg";
+  "https://ocbexnlvopobemvzqsjd.supabase.co/storage/v1/object/public/personal-style-examples/before-v2.jpg";
 const HERO_AFTER_URL =
   "https://ocbexnlvopobemvzqsjd.supabase.co/storage/v1/object/public/personal-style-examples/old-money-after.png";
 

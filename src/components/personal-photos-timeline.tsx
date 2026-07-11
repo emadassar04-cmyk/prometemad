@@ -3,7 +3,7 @@ import { useTranslations } from "next-intl";
 import { ShareButtons } from "@/components/share-buttons";
 
 const OWNER_PHOTO_URL =
-  "https://ocbexnlvopobemvzqsjd.supabase.co/storage/v1/object/public/personal-style-examples/before.jpg";
+  "https://ocbexnlvopobemvzqsjd.supabase.co/storage/v1/object/public/personal-style-examples/before-v2.jpg";
 
 const ERAS = [
   {

@@ -463,6 +463,7 @@ export type Database = {
         Row: {
           category: string
           created_at: string
+          custom_note_ar: string | null
           example_after_url: string | null
           example_before_url: string | null
           id: string
@@ -479,6 +480,7 @@ export type Database = {
         Insert: {
           category: string
           created_at?: string
+          custom_note_ar?: string | null
           example_after_url?: string | null
           example_before_url?: string | null
           id?: string
@@ -495,6 +497,7 @@ export type Database = {
         Update: {
           category?: string
           created_at?: string
+          custom_note_ar?: string | null
           example_after_url?: string | null
           example_before_url?: string | null
           id?: string

@@ -38,12 +38,28 @@ export default async function PersonalPhotosPage({
   ]);
 
   const t = await getTranslations("personalPhotos");
-  const referralLink = referralInfo
-    ? `${SITE_URL}/${locale}?ref=${referralInfo.referralCode}`
-    : `${SITE_URL}/${locale}`;
+  // Falls back to the platform owner's own referral code for signed-out
+  // visitors, matching the invite system's default elsewhere in the app.
+  const referralCode = referralInfo?.referralCode ?? "3B91BA7C";
+  const referralLink = `${SITE_URL}/${locale}?ref=${referralCode}`;
+
+  const howToJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "HowTo",
+    name: t("title"),
+    step: [
+      { "@type": "HowToStep", text: t("howItWorksStep1") },
+      { "@type": "HowToStep", text: t("howItWorksStep2") },
+      { "@type": "HowToStep", text: t("howItWorksStep3") },
+    ],
+  };
 
   return (
     <div className="mx-auto max-w-5xl px-4 py-10 sm:px-6">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(howToJsonLd) }}
+      />
       <div className="mb-2 flex items-center gap-2">
         <h1 className="text-2xl font-bold">{t("title")}</h1>
         <span className="accent-gradient-bg rounded-full px-2.5 py-0.5 text-xs font-medium text-white">
@@ -51,12 +67,7 @@ export default async function PersonalPhotosPage({
         </span>
       </div>
       <p className="mb-6 text-muted">{t("subtitle")}</p>
-      <PersonalPhotosTool
-        isSignedIn={!!user}
-        locale={locale}
-        styles={styles}
-        referralLink={referralLink}
-      />
+      <PersonalPhotosTool locale={locale} styles={styles} referralLink={referralLink} />
     </div>
   );
 }

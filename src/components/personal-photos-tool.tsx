@@ -166,7 +166,7 @@ export function PersonalPhotosTool({
         <div className="flex flex-col gap-4">
           <div className="flex items-center gap-3 rounded-2xl border border-border bg-surface p-3">
             <span className="relative h-14 w-14 shrink-0 overflow-hidden rounded-lg bg-background">
-              <Image src={previewUrl} alt="" fill sizes="56px" className="object-cover" />
+              <Image src={previewUrl} alt="" fill sizes="56px" className="object-cover" unoptimized />
             </span>
             <button
               type="button"
@@ -273,7 +273,7 @@ export function PersonalPhotosTool({
                 <div className="flex flex-col gap-1.5">
                   <span className="text-xs text-muted">{t("before")}</span>
                   <span className="relative aspect-square w-full overflow-hidden rounded-xl bg-background">
-                    <Image src={previewUrl} alt="" fill sizes="50vw" className="object-cover" />
+                    <Image src={previewUrl} alt="" fill sizes="50vw" className="object-cover" unoptimized />
                   </span>
                 </div>
                 <div className="flex flex-col gap-1.5">

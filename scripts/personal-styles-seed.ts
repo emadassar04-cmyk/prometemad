@@ -605,7 +605,7 @@ export const PERSONAL_STYLES: PersonalStyleSeed[] = [
     title_en: "Funko Pop Figure",
     tagline_ar: "رأس كبير وعيون كرتونية… نسختك المجسّمة الشهيرة.",
     prompt_body:
-      "Create a Funko Pop style vinyl figure of the person from the uploaded photo inside its collector box: oversized head with signature style, matching hairstyle, beard and outfit, box window showing the figure, name printed on the box, product photography on a shelf, recognizable stylized face.",
+      "Using the uploaded photo as the strict identity reference, create a collectible chibi vinyl figure of this person displayed inside its retail collector box. The figure has the signature oversized head, large round black eyes, and tiny body — but the hairstyle, beard shape, skin tone and outfit must clearly match the person in the photo so the figure is instantly recognizable. The box: premium cardboard with a large transparent window, the person's silhouette icon and a name plate on the front, subtle geometric pattern. Scene: the boxed figure standing on a wooden collector's shelf, soft diffused product-photography lighting, shallow depth of field, blurred shelf of other boxes behind. Ultra sharp render, vertical 3:4 format, no real brand logos anywhere.",
     share_text_ar: GENERIC_SHARE("فانكو بوب بالعلبة"),
     category: "fun",
     sort_order: 53,
@@ -617,7 +617,7 @@ export const PERSONAL_STYLES: PersonalStyleSeed[] = [
     title_en: "Claymation Character",
     tagline_ar: "كأنك خرجت من فيلم أنيميشن صلصال.",
     prompt_body:
-      "Turn the person from the uploaded photo into a claymation stop-motion character: smooth clay texture with subtle fingerprint impressions, handcrafted miniature set background, warm playful studio lighting, Aardman-style charm, keep recognizable facial likeness.",
+      "Using the uploaded photo as the strict identity reference, sculpt this person as a handcrafted stop-motion clay character. Preserve the exact face structure, hairstyle, beard and skin tone translated into smooth modeling clay with subtle fingerprint impressions and tiny tool marks. Outfit: a miniature fabric-textured version of casual clothes. Set: a charming handbuilt miniature diorama room with cardboard furniture and painted backdrop, warm tungsten studio lighting with soft shadows, gentle depth of field like a real stop-motion film frame. Whimsical, warm and instantly recognizable as the same person. Vertical 3:4 format.",
     share_text_ar: GENERIC_SHARE("شخصية صلصال (كلايميشن)"),
     category: "art",
     sort_order: 54,
@@ -628,7 +628,7 @@ export const PERSONAL_STYLES: PersonalStyleSeed[] = [
     title_en: "Chibi Sticker Pack",
     tagline_ar: "ستيكراتك الخاصة للواتساب — 6 انفعالات بوجهك.",
     prompt_body:
-      "Create a sticker pack sheet of 6 chibi versions of the person from the uploaded photo: big expressive eyes, different emotions (laughing, angry, crying, in love, thumbs up, sleepy), white outline around each sticker, flat pastel background, keep recognizable facial features and hairstyle.",
+      "Using the uploaded photo as the strict identity reference, design a sticker pack sheet of six chibi cartoon versions of this person arranged in a 2x3 grid. Each sticker keeps the same recognizable hairstyle, beard shape, eyebrows and skin tone, with big expressive eyes. Six distinct emotions: laughing hard, angry with steam, crying dramatically, heart eyes in love, confident thumbs up, sleepy with a yawn. Style: clean 2D digital illustration, bold thick white outline around every sticker, soft flat pastel background, consistent character design across all six. High resolution, vertical 3:4 sheet.",
     share_text_ar: GENERIC_SHARE("حزمة ستيكرات تشيبي"),
     category: "fun",
     sort_order: 55,
@@ -640,7 +640,7 @@ export const PERSONAL_STYLES: PersonalStyleSeed[] = [
     title_en: "70s Disco",
     tagline_ar: "بنطال شارلستون وكرة الديسكو تلمع فوقك.",
     prompt_body:
-      "Transform the person from the uploaded photo into a 1970s disco scene: bell-bottom suit with wide collar, platform shoes, mirror ball reflections and colorful dance floor lights, retro film colors and grain, confident dance pose, keep exact facial likeness.",
+      "Using the uploaded photo as the strict identity reference, transport this person into a 1970s disco club — same exact face, hairstyle, beard and skin tone, do not alter identity. Wardrobe: tailored bell-bottom suit in deep burgundy with a wide-collar patterned silk shirt and platform shoes. Scene: mid-dance confident pose under a spinning mirror ball, colorful light beams in pink, orange and teal sweeping across a glowing dance floor, blurred dancers behind. Authentic 1970s film photography look: Kodak-style warm colors, visible grain, slight halation on lights. Shot on 50mm, waist-up composition, vertical 3:4 format.",
     share_text_ar: GENERIC_SHARE("ديسكو السبعينات"),
     category: "cinematic",
     sort_order: 56,
@@ -651,7 +651,7 @@ export const PERSONAL_STYLES: PersonalStyleSeed[] = [
     title_en: "Victorian London",
     tagline_ar: "سافر لعام 1890… معطف طويل وشوارع مبللة وفوانيس غاز.",
     prompt_body:
-      "Place the person from the uploaded photo in a Victorian London street at night, 1890s: long dark overcoat and top hat, gas lamps glowing through fog, wet cobblestones, horse carriage silhouette behind, moody sepia-toned cinematic realism, keep exact facial likeness.",
+      "Using the uploaded photo as the strict identity reference, place this person in a Victorian London street at night, 1890s — same exact face, beard and features, do not change identity or age. Wardrobe: long dark wool overcoat, waistcoat with a silver pocket-watch chain, black top hat held or worn naturally. Scene: fog rolling between gas lamps, wet cobblestones reflecting warm lamplight, a horse carriage silhouette and iron railings in the misty background. Cinematic period-drama realism: moody sepia-leaning grade, soft volumetric light through fog, sharp facial detail against atmospheric depth. 85mm portrait lens look, vertical 3:4 format.",
     share_text_ar: GENERIC_SHARE("شوارع لندن الفيكتورية"),
     category: "heritage",
     sort_order: 57,
@@ -662,7 +662,7 @@ export const PERSONAL_STYLES: PersonalStyleSeed[] = [
     title_en: "Year 2090",
     tagline_ar: "كيف ستبدو صورتك بعد 65 سنة من التكنولوجيا؟",
     prompt_body:
-      "Show the person from the uploaded photo as a citizen of year 2090: sleek futuristic clothing with soft glowing seams, holographic interfaces floating around, gleaming utopian city with flying vehicles behind, clean sci-fi photography, keep exact facial likeness.",
+      "Using the uploaded photo as the strict identity reference, portray this person as a citizen of the year 2090 — identical face, hairstyle, beard and skin tone, no identity change. Wardrobe: minimalist high-tech jacket with subtle glowing seams in cool white-blue, matte smart fabric. Scene: standing on an elevated walkway of a gleaming utopian city at dusk — flying vehicles streaking light trails, translucent holographic interfaces floating near his hand, soft reflections on glass towers. Clean cinematic sci-fi photography: crisp detail, cool color palette with warm skin tones preserved, gentle rim light from holograms. Vertical 3:4 format.",
     share_text_ar: GENERIC_SHARE("نسختك من عام 2090"),
     category: "cinematic",
     sort_order: 58,
@@ -674,7 +674,7 @@ export const PERSONAL_STYLES: PersonalStyleSeed[] = [
     title_en: "Film Noir Detective",
     tagline_ar: "دخان، ظلال، وقضية غامضة تنتظرك.",
     prompt_body:
-      "Classic 1940s film noir portrait of the person from the uploaded photo as a detective: trench coat and fedora, dramatic venetian blind shadows across the face, cigarette smoke curling in a beam of light, high contrast black and white, keep exact facial likeness.",
+      "Using the uploaded photo as the strict identity reference, create a classic 1940s film noir portrait of this person as a private detective — exact same face and features, no beautifying. Wardrobe: belted trench coat with raised collar, fedora tilted low but keeping the face clearly visible and lit. Scene: dark office at night, dramatic venetian-blind shadow stripes falling across the face and wall, thin smoke curling through a hard beam of light from the side. High-contrast black and white, deep blacks and glowing highlights, sharp skin texture, large-format vintage photography feel. Chest-up composition, vertical 3:4 format.",
     share_text_ar: GENERIC_SHARE("المحقق نوار"),
     category: "cinematic",
     sort_order: 59,
@@ -685,7 +685,7 @@ export const PERSONAL_STYLES: PersonalStyleSeed[] = [
     title_en: "Underwater Portrait",
     tagline_ar: "لقطة سريالية تحبس الأنفاس… حرفياً.",
     prompt_body:
-      "Surreal underwater portrait of the person from the uploaded photo: calm expression, sun rays piercing turquoise water, tiny air bubbles, floating fabric of an elegant shirt, soft caustic light patterns on the face, dreamy fine-art photography, keep exact facial likeness.",
+      "Using the uploaded photo as the strict identity reference, create a surreal fine-art underwater portrait of this person — identical facial features, calm serene expression, eyes open. Scene: suspended in clear turquoise water, golden sun rays piercing down from the surface, tiny air bubbles rising, an elegant white shirt floating and rippling with the current, soft caustic light patterns dancing across the face. Dreamy ethereal mood, realistic water physics, natural skin tones with a subtle cool cast, professional underwater photography with sharp focus on the face. Vertical 3:4 format.",
     share_text_ar: GENERIC_SHARE("بورتريه تحت الماء"),
     category: "art",
     sort_order: 60,
@@ -696,7 +696,7 @@ export const PERSONAL_STYLES: PersonalStyleSeed[] = [
     title_en: "Artistic Double Exposure",
     tagline_ar: "صورتك تحكي قصتين في لقطة واحدة.",
     prompt_body:
-      "Create an artistic double exposure: the silhouette profile of the person from the uploaded photo blended with a misty pine forest and flying birds inside the silhouette, minimal white background, fine art poster style, keep the facial profile recognizable.",
+      "Using the uploaded photo as the strict identity reference, create a fine-art double exposure poster. The sharp side profile silhouette of this person — recognizable nose, beard and hairline — filled with a second exposure: a misty pine forest at dawn, low fog between trees, a flock of birds flying toward the top of the silhouette where the image dissolves into scattered particles. Background: clean minimal off-white with generous negative space. Muted cinematic palette of deep greens and soft grays, gallery-print quality, elegant and emotional. Vertical 3:4 format.",
     share_text_ar: GENERIC_SHARE("دبل إكسبوجر فني"),
     category: "art",
     sort_order: 61,
@@ -707,7 +707,7 @@ export const PERSONAL_STYLES: PersonalStyleSeed[] = [
     title_en: "Retro Pixel Art",
     tagline_ar: "نسختك من أتاري وسيغا.",
     prompt_body:
-      "Convert the person from the uploaded photo into detailed 16-bit pixel art: retro video game character style, matching hairstyle, beard and outfit, arcade game background with health bar and score UI, vibrant limited color palette, recognizable stylized face.",
+      'Using the uploaded photo as the strict identity reference, convert this person into a detailed 16-bit pixel art game character — the pixel face must clearly echo his real hairstyle, beard shape and skin tone. Composition: character select screen of a retro arcade fighting game — the character in a confident idle pose on the left, a pixelated portrait frame of his face on the right, health bar, score counter and "PLAYER 1 — READY" text as UI elements. Vibrant limited retro palette, crisp clean pixels with no blur, subtle CRT scanline effect. Vertical 3:4 format.',
     share_text_ar: GENERIC_SHARE("بكسل آرت الألعاب القديمة"),
     category: "art",
     sort_order: 62,
@@ -719,7 +719,7 @@ export const PERSONAL_STYLES: PersonalStyleSeed[] = [
     title_en: "Streetwear Editorial",
     tagline_ar: "إطلالة مجلات الموضة الشبابية.",
     prompt_body:
-      "Urban streetwear editorial photo of the person from the uploaded photo: oversized designer hoodie and cargo pants, standing in a graffiti alley with dramatic sunlight and long shadows, magazine fashion pose, sharp high-fashion retouching, keep exact facial likeness.",
+      "Using the uploaded photo as the strict identity reference, shoot a high-fashion streetwear editorial of this person — identical face, beard and hairstyle, confident relaxed expression. Wardrobe: oversized heavyweight hoodie in washed neutral tone, wide cargo pants, clean sneakers, no visible brand logos. Scene: narrow urban alley with colorful graffiti walls, late-afternoon hard sunlight cutting diagonal shadows, light haze in the air. Magazine-quality fashion photography: strong pose, 35mm lens, rich contrast with lifted blacks, sharp fabric texture, editorial color grade. Full-body or three-quarter composition, vertical 3:4 format.",
     share_text_ar: GENERIC_SHARE("ستريت وير إديتوريال"),
     category: "professional",
     sort_order: 63,
@@ -730,7 +730,7 @@ export const PERSONAL_STYLES: PersonalStyleSeed[] = [
     title_en: "Pirate Captain",
     tagline_ar: "سفينتك وكنزك وبحر غاضب خلفك.",
     prompt_body:
-      "Turn the person from the uploaded photo into a pirate captain: weathered leather tricorn hat and long coat, standing on a ship deck in a storm, ropes and sails behind, gold coins in hand, dramatic cinematic lighting, ultra realistic, keep exact facial likeness.",
+      "Using the uploaded photo as the strict identity reference, transform this person into a legendary pirate captain — exact same facial features and beard, weathered but recognizable. Wardrobe: aged leather tricorn hat, long dark captain's coat with brass buttons, loose linen shirt, leather gloves gripping the ship's wheel. Scene: deck of a wooden galleon in a dramatic storm — rain streaks, torn sails and ropes whipping in the wind, huge waves and lightning on the horizon, lantern glow warming one side of the face. Epic cinematic realism, movie-still quality, dramatic low angle. Vertical 3:4 format.",
     share_text_ar: GENERIC_SHARE("قبطان القراصنة"),
     category: "fun",
     sort_order: 64,
@@ -741,7 +741,7 @@ export const PERSONAL_STYLES: PersonalStyleSeed[] = [
     title_en: "F1 Driver",
     tagline_ar: "خوذتك تحت إبطك وسيارة السباق خلفك.",
     prompt_body:
-      "Portray the person from the uploaded photo as a Formula 1 driver: racing suit with sponsor patches, helmet under one arm, standing in the pit lane beside a race car, blurred crowd and track behind, golden afternoon light, sports magazine photography, keep exact facial likeness.",
+      "Using the uploaded photo as the strict identity reference, portray this person as a professional race driver — identical face, hairstyle and beard, focused confident look. Wardrobe: fitted racing suit in deep red and white with generic geometric patches (no real sponsor or team logos), holding a glossy helmet under one arm. Scene: pit lane at golden hour, a sleek formula race car blurred behind him, heat shimmer over the asphalt, grandstand crowd out of focus in warm light. Sports-magazine photography: 85mm lens, shallow depth of field, crisp detail on the face and suit, dynamic warm grade. Vertical 3:4 format.",
     share_text_ar: GENERIC_SHARE("سائق فورمولا 1"),
     category: "fun",
     sort_order: 65,
@@ -752,7 +752,7 @@ export const PERSONAL_STYLES: PersonalStyleSeed[] = [
     title_en: "Red Carpet Premiere",
     tagline_ar: "فلاشات المصورين كلها عليك.",
     prompt_body:
-      "Show the person from the uploaded photo on a movie premiere red carpet: elegant midnight-blue tuxedo, paparazzi camera flashes from all sides, step-and-repeat backdrop with blurred logos, confident celebrity pose, glamorous editorial lighting, keep exact facial likeness.",
+      "Using the uploaded photo as the strict identity reference, capture this person at a glamorous movie premiere — exact same face and features, confident subtle smile. Wardrobe: impeccably tailored midnight-blue tuxedo with black satin lapels, crisp white shirt, black bow tie, luxury watch. Scene: walking the red carpet, dozens of paparazzi camera flashes freezing the moment from both sides, elegant blurred step-and-repeat backdrop with abstract patterns (no real logos), velvet ropes. Celebrity editorial photography: sharp flash-lit look with glowing highlights, rich contrast, star-quality retouching that keeps real skin texture. Vertical 3:4 format.",
     share_text_ar: GENERIC_SHARE("السجادة الحمراء"),
     category: "cinematic",
     sort_order: 66,

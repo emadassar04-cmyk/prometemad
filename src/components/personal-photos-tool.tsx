@@ -1,9 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
-import { Check, ChevronDown, ChevronUp, Copy, ExternalLink } from "lucide-react";
+import { Check, ChevronDown, ChevronUp, Copy, ExternalLink, Sparkles } from "lucide-react";
 import { ShareButtons } from "@/components/share-buttons";
 
 type PersonalStyle = {
@@ -20,6 +20,7 @@ type PersonalStyle = {
   example_after_url: string | null;
   usage_count: number;
   sort_order: number;
+  is_trending: boolean;
 };
 
 const CATEGORIES = ["trending", "professional", "cinematic", "heritage", "art", "fun"] as const;
@@ -51,9 +52,24 @@ export function PersonalPhotosTool({
   const filteredStyles =
     categoryFilter === "all" ? styles : styles.filter((s) => s.category === categoryFilter);
 
+  const counts = new Map<string, number>();
+  for (const s of styles) counts.set(s.category, (counts.get(s.category) ?? 0) + 1);
+
+  useEffect(() => {
+    const hash = window.location.hash.replace("#", "");
+    if (!hash) return;
+    const el = document.getElementById(`style-${hash}`);
+    if (!el) return;
+    setTimeout(() => {
+      el.scrollIntoView({ behavior: "smooth", block: "center" });
+      el.classList.add("ring-highlight");
+      setTimeout(() => el.classList.remove("ring-highlight"), 1600);
+    }, 300);
+  }, []);
+
   return (
-    <div className="flex flex-col gap-6">
-      <div className="flex flex-col gap-2 rounded-2xl border border-border bg-surface p-4 text-center text-sm sm:flex-row sm:items-center sm:justify-center sm:gap-4">
+    <div id="grid" className="scroll-mt-24 flex flex-col gap-6">
+      <div className="sticky top-16 z-20 flex flex-col gap-2 rounded-2xl border border-border bg-surface/95 p-4 text-center text-sm shadow-sm backdrop-blur sm:flex-row sm:items-center sm:justify-center sm:gap-4">
         <span>{t("howItWorksStep1")}</span>
         <span className="text-muted">←</span>
         <span>{t("howItWorksStep2")}</span>
@@ -74,15 +90,31 @@ export function PersonalPhotosTool({
             }`}
           >
             {t(categoryLabelKey(category) as Parameters<typeof t>[0])}
+            <span className="ms-1 text-xs text-muted">
+              ({category === "all" ? styles.length : (counts.get(category) ?? 0)})
+            </span>
           </button>
         ))}
       </div>
 
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        {filteredStyles.map((style) => (
-          <PersonalStyleCard key={style.id} style={style} locale={locale} referralLink={referralLink} />
-        ))}
-      </div>
+      {filteredStyles.length === 0 ? (
+        <div className="flex flex-col items-center gap-3 rounded-2xl border border-dashed border-border p-10 text-center">
+          <p className="text-muted">{t("noResultsTitle")}</p>
+          <button
+            type="button"
+            onClick={() => setCategoryFilter("all")}
+            className="accent-gradient-bg rounded-full px-4 py-2 text-sm font-medium"
+          >
+            {t("noResultsCta")}
+          </button>
+        </div>
+      ) : (
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {filteredStyles.map((style) => (
+            <PersonalStyleCard key={style.id} style={style} locale={locale} referralLink={referralLink} />
+          ))}
+        </div>
+      )}
     </div>
   );
 }
@@ -100,6 +132,7 @@ function PersonalStyleCard({
   const [expanded, setExpanded] = useState(false);
   const [copied, setCopied] = useState(false);
   const [geminiToast, setGeminiToast] = useState(false);
+  const [showingBefore, setShowingBefore] = useState(false);
 
   const title = locale === "ar" ? style.title_ar : style.title_en;
   const fullPrompt = `${style.prompt_body}\n\n${IDENTITY_GUARDRAIL}`;
@@ -127,18 +160,47 @@ function PersonalStyleCard({
     window.open("https://gemini.google.com/app", "_blank", "noopener,noreferrer");
   }
 
+  const shareUrl = `${referralLink}#${style.slug}`;
+
   return (
-    <article className="flex flex-col overflow-hidden rounded-2xl border border-border bg-surface">
+    <article
+      id={`style-${style.slug}`}
+      className="scroll-mt-32 flex flex-col overflow-hidden rounded-2xl border border-border bg-surface transition-transform hover:-translate-y-1 hover:shadow-lg"
+    >
       <div className="relative aspect-[3/4] w-full overflow-hidden bg-background">
-        {style.example_after_url && (
-          <Image
-            src={style.example_after_url}
-            alt={title}
-            fill
-            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-            className="object-cover"
-            loading="lazy"
-          />
+        {style.example_after_url ? (
+          <>
+            <Image
+              src={showingBefore && style.example_before_url ? style.example_before_url : style.example_after_url}
+              alt={title}
+              fill
+              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+              className="object-cover"
+              loading="lazy"
+            />
+            {style.is_trending && (
+              <span className="absolute top-2 start-2 rounded-full bg-navy/80 px-2 py-0.5 text-[11px] font-medium text-white">
+                🔥
+              </span>
+            )}
+            {style.example_before_url && (
+              <button
+                type="button"
+                onMouseEnter={() => setShowingBefore(true)}
+                onMouseLeave={() => setShowingBefore(false)}
+                onClick={() => setShowingBefore((v) => !v)}
+                className="absolute bottom-2 end-2 h-11 w-11 overflow-hidden rounded-full border-2 border-white shadow-lg"
+                title={t("showPrompt")}
+              >
+                <Image src={style.example_before_url} alt="" fill sizes="44px" className="object-cover" />
+              </button>
+            )}
+          </>
+        ) : (
+          <div className="flex h-full w-full flex-col items-center justify-center gap-2 bg-gradient-to-br from-surface-elevated to-background p-4 text-center">
+            <Sparkles className="h-6 w-6 text-accent" />
+            <span className="text-sm font-medium">{title}</span>
+          </div>
         )}
       </div>
 
@@ -158,7 +220,7 @@ function PersonalStyleCard({
           </span>
         </div>
 
-        {style.usage_count > 0 && (
+        {style.usage_count > 5 && (
           <span className="text-xs text-muted">{t("usedCount", { count: style.usage_count })}</span>
         )}
 
@@ -191,7 +253,7 @@ function PersonalStyleCard({
           <button
             type="button"
             onClick={handleCopy}
-            className="accent-gradient-bg flex items-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-medium text-white transition-opacity hover:opacity-90"
+            className="accent-gradient-bg flex min-h-[44px] items-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-medium transition-opacity hover:opacity-90"
           >
             {copied ? <Check className="h-3.5 w-3.5" /> : <Copy className="h-3.5 w-3.5" />}
             {copied ? t("promptCopied") : t("copyPrompt")}
@@ -199,12 +261,12 @@ function PersonalStyleCard({
           <button
             type="button"
             onClick={handleTryInGemini}
-            className="flex items-center gap-1.5 rounded-full border border-border px-3 py-1.5 text-xs font-medium transition-colors hover:border-accent"
+            className="flex min-h-[44px] items-center gap-1.5 rounded-full border border-border px-3 py-1.5 text-xs font-medium transition-colors hover:border-accent"
           >
             <ExternalLink className="h-3.5 w-3.5" />
             {t("tryInGemini")}
           </button>
-          <ShareButtons url={referralLink} text={style.share_text_ar} />
+          <ShareButtons url={shareUrl} text={style.share_text_ar} />
         </div>
 
         {geminiToast && <p className="text-[11px] text-accent-2">{t("geminiCopyToast")}</p>}

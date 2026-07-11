@@ -121,3 +121,35 @@ html[lang="en"] body {
   background: var(--accent);
   color: var(--navy);
 }
+
+@keyframes marquee-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  animation: marquee-scroll 40s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee {
+    animation: none;
+  }
+}
+
+.ring-highlight {
+  animation: ring-highlight-flash 1.6s ease-out;
+}
+
+@keyframes ring-highlight-flash {
+  0% {
+    box-shadow: 0 0 0 4px var(--accent);
+  }
+  100% {
+    box-shadow: 0 0 0 0 transparent;
+  }
+}

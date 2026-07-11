@@ -83,7 +83,15 @@ export type Database = {
           usage_date?: string
           user_id?: string
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "assistant_usage_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       brand_kits: {
         Row: {
@@ -468,6 +476,7 @@ export type Database = {
           example_before_url: string | null
           id: string
           is_active: boolean
+          is_trending: boolean
           prompt_body: string
           share_text_ar: string
           slug: string
@@ -485,6 +494,7 @@ export type Database = {
           example_before_url?: string | null
           id?: string
           is_active?: boolean
+          is_trending?: boolean
           prompt_body: string
           share_text_ar: string
           slug: string
@@ -502,6 +512,7 @@ export type Database = {
           example_before_url?: string | null
           id?: string
           is_active?: boolean
+          is_trending?: boolean
           prompt_body?: string
           share_text_ar?: string
           slug?: string

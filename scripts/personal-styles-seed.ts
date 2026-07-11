@@ -11,6 +11,7 @@ export type PersonalStyleSeed = {
   share_text_ar: string;
   category: "professional" | "cinematic" | "heritage" | "art" | "fun" | "trending";
   sort_order: number;
+  is_trending?: boolean;
 };
 
 const GENERIC_SHARE = (titleAr: string) =>
@@ -309,6 +310,7 @@ export const PERSONAL_STYLES: PersonalStyleSeed[] = [
     share_text_ar: GENERIC_SHARE("بولارويد الفلاش الليلي"),
     category: "trending",
     sort_order: 26,
+    is_trending: true,
   },
   {
     slug: "old-money",
@@ -595,5 +597,164 @@ export const PERSONAL_STYLES: PersonalStyleSeed[] = [
     share_text_ar: GENERIC_SHARE("مع السيارة الفاخرة"),
     category: "fun",
     sort_order: 52,
+  },
+  // Batch 4 — July 2026 trends (49-62 in the source planning doc).
+  {
+    slug: "funko-pop",
+    title_ar: "فانكو بوب بالعلبة",
+    title_en: "Funko Pop Figure",
+    tagline_ar: "رأس كبير وعيون كرتونية… نسختك المجسّمة الشهيرة.",
+    prompt_body:
+      "Create a Funko Pop style vinyl figure of the person from the uploaded photo inside its collector box: oversized head with signature style, matching hairstyle, beard and outfit, box window showing the figure, name printed on the box, product photography on a shelf, recognizable stylized face.",
+    share_text_ar: GENERIC_SHARE("فانكو بوب بالعلبة"),
+    category: "fun",
+    sort_order: 53,
+    is_trending: true,
+  },
+  {
+    slug: "claymation",
+    title_ar: "شخصية صلصال (كلايميشن)",
+    title_en: "Claymation Character",
+    tagline_ar: "كأنك خرجت من فيلم أنيميشن صلصال.",
+    prompt_body:
+      "Turn the person from the uploaded photo into a claymation stop-motion character: smooth clay texture with subtle fingerprint impressions, handcrafted miniature set background, warm playful studio lighting, Aardman-style charm, keep recognizable facial likeness.",
+    share_text_ar: GENERIC_SHARE("شخصية صلصال (كلايميشن)"),
+    category: "art",
+    sort_order: 54,
+  },
+  {
+    slug: "sticker-pack",
+    title_ar: "حزمة ستيكرات تشيبي",
+    title_en: "Chibi Sticker Pack",
+    tagline_ar: "ستيكراتك الخاصة للواتساب — 6 انفعالات بوجهك.",
+    prompt_body:
+      "Create a sticker pack sheet of 6 chibi versions of the person from the uploaded photo: big expressive eyes, different emotions (laughing, angry, crying, in love, thumbs up, sleepy), white outline around each sticker, flat pastel background, keep recognizable facial features and hairstyle.",
+    share_text_ar: GENERIC_SHARE("حزمة ستيكرات تشيبي"),
+    category: "fun",
+    sort_order: 55,
+    is_trending: true,
+  },
+  {
+    slug: "disco-70s",
+    title_ar: "ديسكو السبعينات",
+    title_en: "70s Disco",
+    tagline_ar: "بنطال شارلستون وكرة الديسكو تلمع فوقك.",
+    prompt_body:
+      "Transform the person from the uploaded photo into a 1970s disco scene: bell-bottom suit with wide collar, platform shoes, mirror ball reflections and colorful dance floor lights, retro film colors and grain, confident dance pose, keep exact facial likeness.",
+    share_text_ar: GENERIC_SHARE("ديسكو السبعينات"),
+    category: "cinematic",
+    sort_order: 56,
+  },
+  {
+    slug: "victorian",
+    title_ar: "شوارع لندن الفيكتورية",
+    title_en: "Victorian London",
+    tagline_ar: "سافر لعام 1890… معطف طويل وشوارع مبللة وفوانيس غاز.",
+    prompt_body:
+      "Place the person from the uploaded photo in a Victorian London street at night, 1890s: long dark overcoat and top hat, gas lamps glowing through fog, wet cobblestones, horse carriage silhouette behind, moody sepia-toned cinematic realism, keep exact facial likeness.",
+    share_text_ar: GENERIC_SHARE("شوارع لندن الفيكتورية"),
+    category: "heritage",
+    sort_order: 57,
+  },
+  {
+    slug: "future-2090",
+    title_ar: "نسختك من عام 2090",
+    title_en: "Year 2090",
+    tagline_ar: "كيف ستبدو صورتك بعد 65 سنة من التكنولوجيا؟",
+    prompt_body:
+      "Show the person from the uploaded photo as a citizen of year 2090: sleek futuristic clothing with soft glowing seams, holographic interfaces floating around, gleaming utopian city with flying vehicles behind, clean sci-fi photography, keep exact facial likeness.",
+    share_text_ar: GENERIC_SHARE("نسختك من عام 2090"),
+    category: "cinematic",
+    sort_order: 58,
+    is_trending: true,
+  },
+  {
+    slug: "film-noir",
+    title_ar: "المحقق نوار",
+    title_en: "Film Noir Detective",
+    tagline_ar: "دخان، ظلال، وقضية غامضة تنتظرك.",
+    prompt_body:
+      "Classic 1940s film noir portrait of the person from the uploaded photo as a detective: trench coat and fedora, dramatic venetian blind shadows across the face, cigarette smoke curling in a beam of light, high contrast black and white, keep exact facial likeness.",
+    share_text_ar: GENERIC_SHARE("المحقق نوار"),
+    category: "cinematic",
+    sort_order: 59,
+  },
+  {
+    slug: "underwater",
+    title_ar: "بورتريه تحت الماء",
+    title_en: "Underwater Portrait",
+    tagline_ar: "لقطة سريالية تحبس الأنفاس… حرفياً.",
+    prompt_body:
+      "Surreal underwater portrait of the person from the uploaded photo: calm expression, sun rays piercing turquoise water, tiny air bubbles, floating fabric of an elegant shirt, soft caustic light patterns on the face, dreamy fine-art photography, keep exact facial likeness.",
+    share_text_ar: GENERIC_SHARE("بورتريه تحت الماء"),
+    category: "art",
+    sort_order: 60,
+  },
+  {
+    slug: "double-exposure",
+    title_ar: "دبل إكسبوجر فني",
+    title_en: "Artistic Double Exposure",
+    tagline_ar: "صورتك تحكي قصتين في لقطة واحدة.",
+    prompt_body:
+      "Create an artistic double exposure: the silhouette profile of the person from the uploaded photo blended with a misty pine forest and flying birds inside the silhouette, minimal white background, fine art poster style, keep the facial profile recognizable.",
+    share_text_ar: GENERIC_SHARE("دبل إكسبوجر فني"),
+    category: "art",
+    sort_order: 61,
+  },
+  {
+    slug: "pixel-art",
+    title_ar: "بكسل آرت الألعاب القديمة",
+    title_en: "Retro Pixel Art",
+    tagline_ar: "نسختك من أتاري وسيغا.",
+    prompt_body:
+      "Convert the person from the uploaded photo into detailed 16-bit pixel art: retro video game character style, matching hairstyle, beard and outfit, arcade game background with health bar and score UI, vibrant limited color palette, recognizable stylized face.",
+    share_text_ar: GENERIC_SHARE("بكسل آرت الألعاب القديمة"),
+    category: "art",
+    sort_order: 62,
+    is_trending: true,
+  },
+  {
+    slug: "streetwear",
+    title_ar: "ستريت وير إديتوريال",
+    title_en: "Streetwear Editorial",
+    tagline_ar: "إطلالة مجلات الموضة الشبابية.",
+    prompt_body:
+      "Urban streetwear editorial photo of the person from the uploaded photo: oversized designer hoodie and cargo pants, standing in a graffiti alley with dramatic sunlight and long shadows, magazine fashion pose, sharp high-fashion retouching, keep exact facial likeness.",
+    share_text_ar: GENERIC_SHARE("ستريت وير إديتوريال"),
+    category: "professional",
+    sort_order: 63,
+  },
+  {
+    slug: "pirate-captain",
+    title_ar: "قبطان القراصنة",
+    title_en: "Pirate Captain",
+    tagline_ar: "سفينتك وكنزك وبحر غاضب خلفك.",
+    prompt_body:
+      "Turn the person from the uploaded photo into a pirate captain: weathered leather tricorn hat and long coat, standing on a ship deck in a storm, ropes and sails behind, gold coins in hand, dramatic cinematic lighting, ultra realistic, keep exact facial likeness.",
+    share_text_ar: GENERIC_SHARE("قبطان القراصنة"),
+    category: "fun",
+    sort_order: 64,
+  },
+  {
+    slug: "f1-driver",
+    title_ar: "سائق فورمولا 1",
+    title_en: "F1 Driver",
+    tagline_ar: "خوذتك تحت إبطك وسيارة السباق خلفك.",
+    prompt_body:
+      "Portray the person from the uploaded photo as a Formula 1 driver: racing suit with sponsor patches, helmet under one arm, standing in the pit lane beside a race car, blurred crowd and track behind, golden afternoon light, sports magazine photography, keep exact facial likeness.",
+    share_text_ar: GENERIC_SHARE("سائق فورمولا 1"),
+    category: "fun",
+    sort_order: 65,
+  },
+  {
+    slug: "red-carpet",
+    title_ar: "السجادة الحمراء",
+    title_en: "Red Carpet Premiere",
+    tagline_ar: "فلاشات المصورين كلها عليك.",
+    prompt_body:
+      "Show the person from the uploaded photo on a movie premiere red carpet: elegant midnight-blue tuxedo, paparazzi camera flashes from all sides, step-and-repeat backdrop with blurred logos, confident celebrity pose, glamorous editorial lighting, keep exact facial likeness.",
+    share_text_ar: GENERIC_SHARE("السجادة الحمراء"),
+    category: "cinematic",
+    sort_order: 66,
   },
 ];

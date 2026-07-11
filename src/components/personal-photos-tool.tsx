@@ -20,7 +20,7 @@ type PersonalStyle = {
   sort_order: number;
 };
 
-const CATEGORIES = ["professional", "cinematic", "heritage", "art", "fun"] as const;
+const CATEGORIES = ["trending", "professional", "cinematic", "heritage", "art", "fun"] as const;
 
 type Step = "upload" | "styles" | "result";
 

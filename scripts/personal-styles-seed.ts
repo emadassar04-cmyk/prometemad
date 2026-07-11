@@ -9,7 +9,7 @@ export type PersonalStyleSeed = {
   tagline_ar: string;
   prompt_body: string;
   share_text_ar: string;
-  category: "professional" | "cinematic" | "heritage" | "art" | "fun";
+  category: "professional" | "cinematic" | "heritage" | "art" | "fun" | "trending";
   sort_order: number;
 };
 
@@ -295,5 +295,305 @@ export const PERSONAL_STYLES: PersonalStyleSeed[] = [
     share_text_ar: "من سيلفي عادية لنجم منتخب فلسطين 🇵🇸⚽ جرّب صورتك بنفسك 👇",
     category: "fun",
     sort_order: 25,
+  },
+  // "hug-younger-self" from the plan is intentionally omitted — it needs
+  // two source photos (adult + childhood), which the single-file upload
+  // flow and /api/personal-photos/generate don't support yet.
+  {
+    slug: "polaroid-flash",
+    title_ar: "بولارويد الفلاش الليلي",
+    title_en: "Night Flash Polaroid",
+    tagline_ar: "صورة بولارويد كأنها التقطت أمس في التسعينات.",
+    prompt_body:
+      "Turn the uploaded photo into a vintage Polaroid picture: harsh direct flash at night, white Polaroid frame with a handwritten caption space, slight blur and film grain, curtain background, authentic instant-photo look, keep exact facial likeness.",
+    share_text_ar: GENERIC_SHARE("بولارويد الفلاش الليلي"),
+    category: "trending",
+    sort_order: 26,
+  },
+  {
+    slug: "old-money",
+    title_ar: "أولد موني أرستقراطي",
+    title_en: "Old Money Aesthetic",
+    tagline_ar: "فخامة هادئة بلا شعارات… ستايل الطبقة العريقة.",
+    prompt_body:
+      "Restyle the person from the uploaded photo in old money aesthetic: beige cashmere sweater over shoulders, classic country club garden backdrop, soft overcast light, muted editorial color grade, Ralph Lauren campaign vibe, keep exact facial likeness.",
+    share_text_ar: GENERIC_SHARE("أولد موني أرستقراطي"),
+    category: "trending",
+    sort_order: 27,
+  },
+  {
+    slug: "billboard-nyc",
+    title_ar: "وجهك على بيلبورد تايمز سكوير",
+    title_en: "Times Square Billboard",
+    tagline_ar: "إعلانك الخاص وسط نيويورك.",
+    prompt_body:
+      "Show a giant glowing Times Square billboard at night displaying a stylish portrait of the person from the uploaded photo, crowds and yellow cabs below, rain reflections, cinematic wide shot, keep the face on the billboard clearly recognizable.",
+    share_text_ar: GENERIC_SHARE("وجهك على بيلبورد تايمز سكوير"),
+    category: "trending",
+    sort_order: 28,
+  },
+  {
+    slug: "private-jet",
+    title_ar: "لايف ستايل الطائرة الخاصة",
+    title_en: "Private Jet Lifestyle",
+    tagline_ar: "مقعدك في الجيت الخاص جاهز.",
+    prompt_body:
+      "Place the person from the uploaded photo seated in a luxury private jet cabin: cream leather seats, champagne glass on the table, sunset through the oval window, elegant outfit, warm golden light, photorealistic, keep exact facial likeness.",
+    share_text_ar: GENERIC_SHARE("لايف ستايل الطائرة الخاصة"),
+    category: "trending",
+    sort_order: 29,
+  },
+  {
+    slug: "marble-statue",
+    title_ar: "تمثال رخامي في متحف",
+    title_en: "Marble Museum Statue",
+    tagline_ar: "خلّدوك في متحف اللوفر.",
+    prompt_body:
+      "Sculpt the person from the uploaded photo as a classical white marble statue displayed in a grand museum hall: accurate facial features carved in marble, dramatic spotlight, blurred visitors in background, ultra detailed sculpture texture.",
+    share_text_ar: GENERIC_SHARE("تمثال رخامي في متحف"),
+    category: "trending",
+    sort_order: 30,
+  },
+  {
+    slug: "lego-minifig",
+    title_ar: "شخصية ليغو بالعلبة",
+    title_en: "LEGO Minifigure",
+    tagline_ar: "نسختك ليغو رسمية بعلبتها.",
+    prompt_body:
+      "Create a LEGO minifigure version of the person from the uploaded photo inside official LEGO box packaging: matching hairstyle and outfit, fun accessories, bright product photography, box shows the character name, playful colors, recognizable stylized face.",
+    share_text_ar: GENERIC_SHARE("شخصية ليغو بالعلبة"),
+    category: "trending",
+    sort_order: 31,
+  },
+  {
+    slug: "game-cover",
+    title_ar: "غلاف لعبة فيديو",
+    title_en: "Video Game Cover",
+    tagline_ar: "أنت بطل لعبة العام.",
+    prompt_body:
+      "Design a AAA video game cover starring the person from the uploaded photo as the main character: stylized realistic game art, dramatic pose, explosive city background, bold game title space at top, console cover layout, keep facial likeness.",
+    share_text_ar: GENERIC_SHARE("غلاف لعبة فيديو"),
+    category: "trending",
+    sort_order: 32,
+  },
+  {
+    slug: "winter-snow",
+    title_ar: "بورتريه الثلج السينمائي",
+    title_en: "Cinematic Winter Snow",
+    tagline_ar: "أجواء الشتاء الأوروبي… معطف طويل وثلج يتساقط.",
+    prompt_body:
+      "Recreate the uploaded photo as a cinematic winter portrait: long dark wool coat, falling snowflakes, foggy breath, warm street lamps glowing in a European old town at dusk, shallow depth of field, keep exact facial likeness.",
+    share_text_ar: GENERIC_SHARE("بورتريه الثلج السينمائي"),
+    category: "trending",
+    sort_order: 33,
+  },
+  {
+    slug: "lion-portrait",
+    title_ar: "البورتريه الملكي مع الأسد",
+    title_en: "Royal Lion Portrait",
+    tagline_ar: "أنت والأسد… هيبة ما تتكرر.",
+    prompt_body:
+      "Epic portrait of the person from the uploaded photo standing calmly beside a majestic lion: dark smoky studio background, dramatic low-key lighting, elegant dark outfit, both looking at the camera, hyper realistic, keep exact facial likeness.",
+    share_text_ar: GENERIC_SHARE("البورتريه الملكي مع الأسد"),
+    category: "trending",
+    sort_order: 34,
+  },
+  {
+    slug: "paris-film",
+    title_ar: "فيلم 35mm في شوارع باريس",
+    title_en: "Paris 35mm Film",
+    tagline_ar: "لقطة عفوية بكاميرا فيلم من مقهى باريسي.",
+    prompt_body:
+      "Candid 35mm film photo of the person from the uploaded photo at a Parisian café terrace: morning light, croissant and espresso on the table, Haussmann buildings behind, Kodak Gold 200 film colors, natural grain, keep exact facial likeness.",
+    share_text_ar: GENERIC_SHARE("فيلم 35mm في شوارع باريس"),
+    category: "trending",
+    sort_order: 35,
+  },
+  {
+    slug: "restore-old-photo",
+    title_ar: "ترميم صورة قديمة",
+    title_en: "Restore Old Photo",
+    tagline_ar: "أعد الحياة لصور عائلتك القديمة — هدية تبكي أهلك.",
+    prompt_body:
+      "Restore and colorize the uploaded old damaged photo: remove scratches, dust and tears, sharpen facial details, natural realistic skin tones and colors, keep the original faces, clothing and composition exactly the same, museum-quality restoration.",
+    share_text_ar: "رمّمت صورة أبوي القديمة ودمعت عيونه ❤️ جرب صور عائلتك 👇",
+    category: "trending",
+    sort_order: 36,
+  },
+  {
+    slug: "samurai",
+    title_ar: "الساموراي",
+    title_en: "Samurai Warrior",
+    tagline_ar: "محارب من اليابان القديمة… بوجهك.",
+    prompt_body:
+      "Turn the person from the uploaded photo into a samurai warrior: traditional detailed armor with shoulder guards, katana held with both hands, misty bamboo forest at dawn, cinematic rim light, ultra realistic, keep exact facial likeness.",
+    share_text_ar: GENERIC_SHARE("الساموراي"),
+    category: "fun",
+    sort_order: 37,
+  },
+  {
+    slug: "medieval-knight",
+    title_ar: "فارس العصور الوسطى",
+    title_en: "Medieval Knight",
+    tagline_ar: "درع كامل وسيف وقلعة خلفك.",
+    prompt_body:
+      "Dress the person from the uploaded photo as a medieval knight in polished steel plate armor, holding a longsword, stone castle courtyard behind, dramatic torchlight, epic fantasy realism, keep exact facial likeness.",
+    share_text_ar: GENERIC_SHARE("فارس العصور الوسطى"),
+    category: "fun",
+    sort_order: 38,
+  },
+  {
+    slug: "king-throne",
+    title_ar: "الملك على العرش",
+    title_en: "King on the Throne",
+    tagline_ar: "التاج والعرش… جلالتك.",
+    prompt_body:
+      "Portray the person from the uploaded photo as a king seated on an ornate golden throne: royal velvet robe, crown, grand palace hall with columns, dramatic cinematic lighting, oil-painting-level detail but photorealistic, keep exact facial likeness.",
+    share_text_ar: GENERIC_SHARE("الملك على العرش"),
+    category: "fun",
+    sort_order: 39,
+  },
+  {
+    slug: "cowboy",
+    title_ar: "كاوبوي الغرب الأمريكي",
+    title_en: "Western Cowboy",
+    tagline_ar: "غروب، غبار، وحزام مسدس.",
+    prompt_body:
+      "Restyle the person from the uploaded photo as a western cowboy: leather hat and duster coat, dusty frontier town at sunset, warm orange backlight, squinting confident look, cinematic western film still, keep exact facial likeness.",
+    share_text_ar: GENERIC_SHARE("كاوبوي الغرب الأمريكي"),
+    category: "fun",
+    sort_order: 40,
+  },
+  {
+    slug: "gangster-1920s",
+    title_ar: "غانغستر العشرينات",
+    title_en: "1920s Gangster",
+    tagline_ar: "بدلة صوفية وقبعة مسطحة وأجواء غامضة.",
+    prompt_body:
+      "Transform the person from the uploaded photo into a 1920s gangster: tweed three-piece suit, flat cap, pocket watch chain, foggy cobblestone industrial street at night, moody desaturated cinematic grade, keep exact facial likeness.",
+    share_text_ar: GENERIC_SHARE("غانغستر العشرينات"),
+    category: "fun",
+    sort_order: 41,
+  },
+  {
+    slug: "ufc-poster",
+    title_ar: "بوستر نزال UFC",
+    title_en: "UFC Fight Poster",
+    tagline_ar: "اسمك على بوستر النزال الرئيسي.",
+    prompt_body:
+      "Create a dramatic MMA fight event poster starring the person from the uploaded photo: fighter stance, subtle sweat and determination, dark arena spotlights, bold event typography space, sports poster grading, keep exact facial likeness.",
+    share_text_ar: GENERIC_SHARE("بوستر نزال UFC"),
+    category: "fun",
+    sort_order: 42,
+  },
+  {
+    slug: "fighter-pilot",
+    title_ar: "طيار حربي",
+    title_en: "Fighter Pilot",
+    tagline_ar: "توب غن… نسختك.",
+    prompt_body:
+      "Put the person from the uploaded photo in a fighter pilot flight suit and aviator sunglasses, standing on an aircraft carrier deck beside a fighter jet at golden hour, wind-blown, cinematic movie poster style, keep exact facial likeness.",
+    share_text_ar: GENERIC_SHARE("طيار حربي"),
+    category: "fun",
+    sort_order: 43,
+  },
+  {
+    slug: "chef",
+    title_ar: "شيف المطعم الفاخر",
+    title_en: "Executive Chef",
+    tagline_ar: "شيف ميشلان… والمطبخ مملكتك.",
+    prompt_body:
+      "Portray the person from the uploaded photo as an executive chef in a pristine white chef jacket, arms crossed in a high-end restaurant kitchen, flames and steam behind, editorial food-magazine lighting, keep exact facial likeness.",
+    share_text_ar: GENERIC_SHARE("شيف المطعم الفاخر"),
+    category: "professional",
+    sort_order: 44,
+  },
+  {
+    slug: "neon-gel-studio",
+    title_ar: "استوديو نيون ملون",
+    title_en: "Neon Gel Studio",
+    tagline_ar: "جلسة استوديو بإضاءة ملونة تكسر الفيد.",
+    prompt_body:
+      "Studio portrait of the person from the uploaded photo with dual color gel lighting: strong blue light from one side and hot pink from the other, dark background, light haze, fashion editorial pose, sharp details, keep exact facial likeness.",
+    share_text_ar: GENERIC_SHARE("استوديو نيون ملون"),
+    category: "art",
+    sort_order: 45,
+  },
+  {
+    slug: "pencil-sketch",
+    title_ar: "رسم قلم رصاص",
+    title_en: "Pencil Sketch",
+    tagline_ar: "بورتريه مرسوم يدوياً بدقة الفنانين.",
+    prompt_body:
+      "Convert the uploaded photo into a highly detailed graphite pencil sketch: realistic shading and cross-hatching, textured drawing paper, artist's hand and pencil visible at the corner finishing the drawing, keep exact facial likeness.",
+    share_text_ar: GENERIC_SHARE("رسم قلم رصاص"),
+    category: "art",
+    sort_order: 46,
+  },
+  {
+    slug: "caricature",
+    title_ar: "كاريكاتير احترافي",
+    title_en: "Professional Caricature",
+    tagline_ar: "نسختك المضحكة… برأس كبير وابتسامة أكبر.",
+    prompt_body:
+      "Create a friendly professional caricature of the person from the uploaded photo: slightly exaggerated head and features while staying clearly recognizable, vibrant digital painting style, simple color background, fun expression.",
+    share_text_ar: GENERIC_SHARE("كاريكاتير احترافي"),
+    category: "art",
+    sort_order: 47,
+  },
+  {
+    slug: "anime-hero",
+    title_ar: "بطل أنمي شونين",
+    title_en: "Shonen Anime Hero",
+    tagline_ar: "حلقتك الأولى تبدأ الآن.",
+    prompt_body:
+      "Redraw the person from the uploaded photo as a shonen anime hero: dynamic pose, energy aura, spiky highlights in hair keeping original hairstyle recognizable, dramatic action background with speed lines, high quality anime key visual, keep facial likeness.",
+    share_text_ar: GENERIC_SHARE("بطل أنمي شونين"),
+    category: "art",
+    sort_order: 48,
+  },
+  {
+    slug: "passport-pro",
+    title_ar: "صورة رسمية للوثائق",
+    title_en: "Professional Passport Photo",
+    tagline_ar: "صورة جواز/هوية مثالية بدون استوديو.",
+    prompt_body:
+      "Turn the uploaded photo into a professional ID/passport photo: plain white background, even soft studio lighting, neutral expression facing camera, formal shirt, sharp focus, official document photo standards, keep exact facial likeness.",
+    share_text_ar: GENERIC_SHARE("صورة رسمية للوثائق"),
+    category: "professional",
+    sort_order: 49,
+  },
+  {
+    slug: "wedding-groom",
+    title_ar: "العريس يوم الزفاف",
+    title_en: "Wedding Day Groom",
+    tagline_ar: "إطلالة يوم العمر.",
+    prompt_body:
+      "Portray the person from the uploaded photo as an elegant groom on his wedding day: classic black tuxedo with boutonniere, luxurious wedding venue with warm candlelight and floral arch, cinematic romantic mood, keep exact facial likeness.",
+    share_text_ar: GENERIC_SHARE("العريس يوم الزفاف"),
+    category: "cinematic",
+    sort_order: 50,
+  },
+  {
+    slug: "graduation",
+    title_ar: "يوم التخرج",
+    title_en: "Graduation Day",
+    tagline_ar: "القبعة والروب ولحظة الفخر.",
+    prompt_body:
+      "Show the person from the uploaded photo as a university graduate: black cap and gown, holding a diploma, sunlit campus courtyard, confetti in the air, proud smile, warm celebratory tones, keep exact facial likeness.",
+    share_text_ar: GENERIC_SHARE("يوم التخرج"),
+    category: "cinematic",
+    sort_order: 51,
+  },
+  {
+    slug: "luxury-car",
+    title_ar: "مع السيارة الفاخرة",
+    title_en: "Luxury Supercar",
+    tagline_ar: "أنت ومفتاح اللامبو.",
+    prompt_body:
+      "Place the person from the uploaded photo leaning on a matte black luxury supercar at night: city lights bokeh, stylish outfit, low cinematic angle, reflections on the car body, high-end automotive photography, keep exact facial likeness.",
+    share_text_ar: GENERIC_SHARE("مع السيارة الفاخرة"),
+    category: "fun",
+    sort_order: 52,
   },
 ];

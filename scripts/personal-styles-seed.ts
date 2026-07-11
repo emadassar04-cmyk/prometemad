@@ -226,6 +226,10 @@ export const PERSONAL_STYLES: PersonalStyleSeed[] = [
     category: "fun",
     sort_order: 19,
   },
+  // "football-star" (generic, no named team) was superseded by the five
+  // team-specific styles below — it produced an arbitrary kit design since
+  // nothing told the model which team to draw. Deactivated in the DB
+  // rather than removed, so past generations still resolve.
   {
     slug: "football-star",
     title_ar: "لاعب كرة محترف",
@@ -236,5 +240,60 @@ export const PERSONAL_STYLES: PersonalStyleSeed[] = [
     share_text_ar: GENERIC_SHARE("لاعب كرة محترف"),
     category: "fun",
     sort_order: 20,
+  },
+  {
+    slug: "real-madrid-star",
+    title_ar: "نجم ريال مدريد",
+    title_en: "Real Madrid Star",
+    tagline_ar: "قميص الملكي الأبيض... وأنت بطل الملعب.",
+    prompt_body:
+      "Create an official Real Madrid football club player portrait of the person from the uploaded photo: iconic all-white home kit with subtle navy and gold trim, arms crossed, confident pose, stadium tunnel background with dramatic spotlights and blurred crowd, sports magazine retouching, keep exact facial likeness.",
+    share_text_ar: "من سيلفي عادية لنجم ريال مدريد 👑⚽ جرّب صورتك بنفسك 👇",
+    category: "fun",
+    sort_order: 21,
+  },
+  {
+    slug: "barcelona-star",
+    title_ar: "نجم برشلونة",
+    title_en: "Barcelona Star",
+    tagline_ar: "الألوان البرشلونية... وأنت النجم.",
+    prompt_body:
+      "Create an official FC Barcelona football club player portrait of the person from the uploaded photo: iconic blue and garnet striped home kit, arms crossed, confident pose, stadium tunnel background with dramatic spotlights and blurred crowd, sports magazine retouching, keep exact facial likeness.",
+    share_text_ar: "من سيلفي عادية لنجم برشلونة 🔵🔴⚽ جرّب صورتك بنفسك 👇",
+    category: "fun",
+    sort_order: 22,
+  },
+  {
+    slug: "morocco-star",
+    title_ar: "نجم المنتخب المغربي",
+    title_en: "Morocco National Team Star",
+    tagline_ar: "أسود الأطلس... وأنت واحد منهم.",
+    prompt_body:
+      "Create an official Morocco national football team player portrait of the person from the uploaded photo: red kit with green trim, national team crest, arms crossed, confident pose, stadium background with Moroccan flag colors and blurred cheering crowd, sports magazine retouching, keep exact facial likeness.",
+    share_text_ar: "من سيلفي عادية لنجم المنتخب المغربي 🇲🇦⚽ جرّب صورتك بنفسك 👇",
+    category: "fun",
+    sort_order: 23,
+  },
+  {
+    slug: "egypt-star",
+    title_ar: "نجم المنتخب المصري",
+    title_en: "Egypt National Team Star",
+    tagline_ar: "الفراعنة... وأنت نجمهم الجديد.",
+    prompt_body:
+      "Create an official Egypt national football team player portrait of the person from the uploaded photo: red kit with black and white trim, national team crest, arms crossed, confident pose, stadium background with Egyptian flag colors and blurred cheering crowd, sports magazine retouching, keep exact facial likeness.",
+    share_text_ar: "من سيلفي عادية لنجم المنتخب المصري 🇪🇬⚽ جرّب صورتك بنفسك 👇",
+    category: "fun",
+    sort_order: 24,
+  },
+  {
+    slug: "palestine-star",
+    title_ar: "نجم منتخب فلسطين",
+    title_en: "Palestine National Team Star",
+    tagline_ar: "الكوفية والعلم... وأنت نجم المنتخب.",
+    prompt_body:
+      "Create a dignified official Palestine national football team player portrait of the person from the uploaded photo: kit in the colors of the Palestinian flag (black, white, green, red), national team crest, arms crossed, confident proud pose, stadium background with Palestinian flag colors and blurred cheering crowd, sports magazine retouching, keep exact facial likeness.",
+    share_text_ar: "من سيلفي عادية لنجم منتخب فلسطين 🇵🇸⚽ جرّب صورتك بنفسك 👇",
+    category: "fun",
+    sort_order: 25,
   },
 ];

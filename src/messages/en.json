@@ -368,6 +368,8 @@
     "faq4Q": "How long does it take?",
     "faq4A": "About two minutes: copy the prompt, open Gemini, attach your photo, and wait for the result.",
     "noResultsTitle": "No styles in this category yet",
-    "noResultsCta": "Show all styles"
+    "noResultsCta": "Show all styles",
+    "backToStyles": "← All styles",
+    "otherStyles": "Try other styles"
   }
 }

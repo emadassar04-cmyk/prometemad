@@ -2,9 +2,11 @@
 
 import { useEffect, useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { useTranslations } from "next-intl";
 import { Check, ChevronDown, ChevronUp, Copy, ExternalLink, Sparkles } from "lucide-react";
 import { ShareButtons } from "@/components/share-buttons";
+import { IDENTITY_GUARDRAIL, categoryLabelKey } from "@/lib/personal-photos-shared";
 
 type PersonalStyle = {
   id: string;
@@ -25,17 +27,7 @@ type PersonalStyle = {
 
 const CATEGORIES = ["trending", "professional", "cinematic", "heritage", "art", "fun"] as const;
 
-// Appended client-side so it always travels with the copied prompt, even
-// though it isn't stored on the row (keeps prompt_body editable from the
-// admin panel without repeating this boilerplate on every style).
-const IDENTITY_GUARDRAIL =
-  "CRITICAL: Use the uploaded photo as the identity reference. Preserve the exact same face, facial features, skin tone, hairstyle and expression 100% — do not beautify, do not change age or identity. Photorealistic result unless the style says otherwise.";
-
 type CategoryKey = (typeof CATEGORIES)[number];
-
-function categoryLabelKey(category: string) {
-  return `category${category.charAt(0).toUpperCase()}${category.slice(1)}`;
-}
 
 export function PersonalPhotosTool({
   locale,
@@ -192,7 +184,11 @@ function PersonalStyleCard({
       </div>
 
       <div className="flex flex-col gap-2 p-3">
-        <h3 className="font-semibold">{title}</h3>
+        <h3 className="font-semibold">
+          <Link href={`/${locale}/personal-photos/${style.slug}`} className="hover:text-accent-2">
+            {title}
+          </Link>
+        </h3>
         <p className="text-sm text-muted">{style.tagline_ar}</p>
 
         <div className="flex flex-wrap gap-1.5">
